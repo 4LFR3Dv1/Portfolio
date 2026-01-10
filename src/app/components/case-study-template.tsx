@@ -130,7 +130,13 @@ export function CaseStudyTemplate({ projectId, onBack }: CaseStudyTemplateProps)
       },
       securityModel: {
         title: 'Security Model (simple, enterprise-like)',
-        mechanisms: [
+        threats: [
+          'Token leak via browser history/logs',
+          'Replay attacks',
+          'Device spoofing',
+          'Session hijacking'
+        ],
+        mitigations: [
           'state anti-replay (TTL curto)',
           'code one-time (TTL ~60s, single-use)',
           'exchange bound a device + state',
@@ -272,9 +278,9 @@ export function CaseStudyTemplate({ projectId, onBack }: CaseStudyTemplateProps)
           {study.link && (
             <div className="font-mono text-sm mb-2">
               <span style={{ color: 'var(--terminal-muted)' }}>LINK: </span>
-              <a 
-                href={study.link} 
-                target="_blank" 
+              <a
+                href={study.link}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[var(--electric-blue)] transition-colors"
                 style={{ color: 'var(--electric-blue)' }}
@@ -380,7 +386,7 @@ export function CaseStudyTemplate({ projectId, onBack }: CaseStudyTemplateProps)
               </div>
             </div>
           ))}
-          
+
           {/* Guarantees */}
           <div className="pt-4">
             <div className="font-mono text-[10px] uppercase tracking-wider mb-3" style={{ color: 'var(--terminal-muted)' }}>
