@@ -8,6 +8,7 @@ import { ContactSection } from '@/app/components/contact-section';
 import { ArchitectureExplorer } from '@/app/components/architecture-explorer';
 import { CaseStudyTemplate } from '@/app/components/case-study-template';
 import { EvidenceRoom } from '@/app/components/evidence-room';
+import { SystemArchitecture } from '@/app/components/system-architecture';
 import { CommandPalette } from '@/app/components/command-palette';
 
 export default function App() {
@@ -91,7 +92,7 @@ export default function App() {
     if (currentView !== 'landing') {
       setCurrentView('landing');
     }
-    
+
     setTimeout(() => {
       if (section === 'home') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -110,9 +111,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background">
       <TerminalTopBar />
-      
+
       {/* Command Palette */}
-      <CommandPalette 
+      <CommandPalette
         isOpen={isPaletteOpen}
         onClose={() => setIsPaletteOpen(false)}
         onNavigate={handlePaletteNavigate}
@@ -123,31 +124,33 @@ export default function App() {
       {/* Landing View */}
       {currentView === 'landing' && (
         <>
-          <HeroSection 
+          <HeroSection
             onViewProjects={handleViewProjects}
             onArchitecture={handleArchitecture}
             onContact={handleContact}
           />
-          
+
           <TechTicker />
-          
-          <SelectedWorkSection 
+
+          <SelectedWorkSection
             onCaseStudy={handleCaseStudy}
             onDemo={handleDemo}
             onEvidence={handleEvidence}
           />
-          
+
           <EvidenceRoom />
-          
+
+          <SystemArchitecture />
+
           <AboutSection />
-          
+
           <ContactSection />
         </>
       )}
 
       {/* Case Study View */}
       {currentView === 'case-study' && selectedProject && (
-        <CaseStudyTemplate 
+        <CaseStudyTemplate
           projectId={selectedProject}
           onBack={handleBackToLanding}
         />
@@ -172,7 +175,7 @@ export default function App() {
           <span>for commands</span>
         </button>
       </div>
-      
+
       {/* Mobile Command Palette button */}
       <button
         onClick={() => setIsPaletteOpen(true)}
