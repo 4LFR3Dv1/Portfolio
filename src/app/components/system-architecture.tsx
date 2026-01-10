@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { MermaidDiagram } from './mermaid-diagram';
-import { architectureDiagrams, diagramMetadata } from '../data/diagrams';
+import { architectureDiagrams } from '../data/diagrams';
 import { Badge } from './badge';
+import { useLanguage } from '../context/language-context';
 
 export function SystemArchitecture() {
+    const { t } = useLanguage();
     const [selectedDiagram, setSelectedDiagram] = useState<string>('overview');
+
+    const diagramMetadata = [
+        { id: 'overview', titleKey: 'diagram.overview.title', descKey: 'diagram.overview.desc' },
+        { id: 'desktopArchitecture', titleKey: 'diagram.desktop.title', descKey: 'diagram.desktop.desc' },
+        { id: 'landingArchitecture', titleKey: 'diagram.landing.title', descKey: 'diagram.landing.desc' },
+        { id: 'purchaseFlow', titleKey: 'diagram.purchase.title', descKey: 'diagram.purchase.desc' },
+        { id: 'authFlow', titleKey: 'diagram.auth.title', descKey: 'diagram.auth.desc' },
+        { id: 'dataFlow', titleKey: 'diagram.data.title', descKey: 'diagram.data.desc' },
+    ];
 
     const currentDiagram = diagramMetadata.find(d => d.id === selectedDiagram);
 
@@ -13,10 +24,10 @@ export function SystemArchitecture() {
             {/* Header */}
             <div className="mb-12">
                 <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
-                    SYSTEM ARCHITECTURE
+                    {t('architecture.title')}
                 </h2>
                 <p className="text-base" style={{ color: 'var(--terminal-muted)' }}>
-                    Diagramas interativos da arquitetura SNE Radar: Componentes, Fluxos e Integrações.
+                    {t('architecture.subtitle')}
                 </p>
             </div>
 
@@ -35,14 +46,14 @@ export function SystemArchitecture() {
                             <h3 className="font-mono text-sm font-semibold leading-tight" style={{
                                 color: selectedDiagram === diagram.id ? 'var(--electric-blue)' : 'var(--terminal-text)'
                             }}>
-                                {diagram.title}
+                                {t(diagram.titleKey)}
                             </h3>
                             {selectedDiagram === diagram.id && (
-                                <Badge variant="default">ACTIVE</Badge>
+                                <Badge variant="default">{t('architecture.active')}</Badge>
                             )}
                         </div>
                         <p className="text-xs leading-relaxed" style={{ color: 'var(--terminal-muted)' }}>
-                            {diagram.description}
+                            {t(diagram.descKey)}
                         </p>
                     </button>
                 ))}
@@ -54,13 +65,13 @@ export function SystemArchitecture() {
                     <div className="flex items-center justify-between">
                         <div>
                             <h3 className="font-mono text-lg font-bold mb-1" style={{ color: 'var(--electric-blue)' }}>
-                                {currentDiagram.title}
+                                {t(currentDiagram.titleKey)}
                             </h3>
                             <p className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
-                                {currentDiagram.description}
+                                {t(currentDiagram.descKey)}
                             </p>
                         </div>
-                        <Badge variant="green">INTERACTIVE</Badge>
+                        <Badge variant="green">{t('architecture.interactive')}</Badge>
                     </div>
 
                     <MermaidDiagram
@@ -69,9 +80,9 @@ export function SystemArchitecture() {
                     />
 
                     <div className="flex items-center gap-3 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
-                        <span>💡 TIP: Scroll horizontally to see full diagram</span>
+                        <span>💡 {t('architecture.tip')}</span>
                         <span>•</span>
-                        <span>Rendered with Mermaid.js</span>
+                        <span>{t('architecture.rendered')}</span>
                     </div>
                 </div>
             )}

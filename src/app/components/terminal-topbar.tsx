@@ -1,13 +1,16 @@
 import React from 'react';
+import { useLanguage } from '../context/language-context';
+import { LanguageToggle } from './language-toggle';
 
 export function TerminalTopBar() {
+  const { t } = useLanguage();
   const [metrics, setMetrics] = React.useState({ gas: 12, latency: 45 });
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setMetrics({
-        gas: Math.floor(Math.random() * 5) + 10, // 10-15 gwei
-        latency: Math.floor(Math.random() * 20) + 35 // 35-55ms
+        gas: Math.floor(Math.random() * 5) + 10,
+        latency: Math.floor(Math.random() * 20) + 35
       });
     }, 3000);
     return () => clearInterval(interval);
@@ -38,10 +41,13 @@ export function TerminalTopBar() {
 
         {/* Right */}
         <div className="flex items-center gap-3 sm:gap-6">
-          <div className="flex items-center gap-2">
+          {/* Language Toggle */}
+          <LanguageToggle />
+
+          <div className="hidden sm:flex items-center gap-2">
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--status-online)' }}></div>
-            <span className="hidden sm:inline font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--terminal-muted)' }}>
-              SYSTEM: <span style={{ color: 'var(--status-online)' }}>NOMINAL</span>
+            <span className="font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--terminal-muted)' }}>
+              {t('system.status').split(':')[0]}: <span style={{ color: 'var(--status-online)' }}>{t('system.status').split(':')[1]?.trim() || 'NOMINAL'}</span>
             </span>
           </div>
           <span className="hidden lg:block font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--terminal-muted)' }}>
