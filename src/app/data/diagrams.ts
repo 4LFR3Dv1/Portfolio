@@ -1,30 +1,30 @@
 export const architectureDiagrams = {
     overview: `graph TB
-    subgraph "User Touchpoints"
-        USER[("👤 Trader")]
-        TELEGRAM[("📱 Telegram")]
+    subgraph UserTouchpoints["User Touchpoints"]
+        USER["Trader"]
+        TELEGRAM["Telegram"]
     end
     
-    subgraph "Frontend Layer"
-        LANDING["🌐 Landing Page<br/>radar.snelabs.space<br/>(React + Vite)"]
-        DESKTOP["🖥 Desktop App<br/>SNE_Radar.exe<br/>(pywebview + Vue.js)"]
+    subgraph FrontendLayer["Frontend Layer"]
+        LANDING["Landing Page - radar.snelabs.space"]
+        DESKTOP["Desktop App - SNE_Radar.exe"]
     end
     
-    subgraph "Backend Layer"
-        API["⚙ Backend API<br/>api.snelabs.space<br/>(Flask + SocketIO)"]
-        BOT["🤖 Telegram Bot<br/>(python-telegram-bot)"]
+    subgraph BackendLayer["Backend Layer"]
+        API["Backend API - api.snelabs.space"]
+        BOT["Telegram Bot"]
     end
     
-    subgraph "Data Layer"
-        DB[("🗄 PostgreSQL<br/>Cloud DB")]
-        SQLITE[("📁 SQLite<br/>Local (Desktop)")]
+    subgraph DataLayer["Data Layer"]
+        DB[("PostgreSQL Cloud DB")]
+        SQLITE[("SQLite Local")]
     end
     
-    subgraph "External Services"
-        BINANCE["📈 Binance API"]
-        BYBIT["📊 Bybit API"]
-        SCROLL["⛓ Scroll Chain<br/>(NFT Licenses)"]
-        WALLET["🦊 MetaMask"]
+    subgraph ExternalServices["External Services"]
+        BINANCE["Binance API"]
+        BYBIT["Bybit API"]
+        SCROLL["Scroll Chain NFT"]
+        WALLET["MetaMask"]
     end
     
     USER --> LANDING
@@ -48,23 +48,22 @@ export const architectureDiagrams = {
     API --> BYBIT`,
 
     desktopArchitecture: `graph LR
-    subgraph "Desktop Package"
+    subgraph DesktopPackage["Desktop Package"]
         EXE["SNE_Radar.exe"]
         
-        subgraph "Python Backend"
-            FLASK["Flask Server<br/>:9999"]
+        subgraph PythonBackend["Python Backend"]
+            FLASK["Flask Server :9999"]
             SOCKETIO["SocketIO"]
             AUTH["auth_manager.py"]
             MONITORS["monitors/"]
             SERVICES["services/"]
         end
         
-        subgraph "Vue.js Frontend"
+        subgraph VueFrontend["Vue.js Frontend"]
             DASHBOARD["Dashboard.vue"]
             RADAR["WickRadar.vue"]
             ANALYSIS["Analysis.vue"]
             TRADING["AutomatedTrading.vue"]
-            LOCKSCREEN["LockScreen.vue"]
         end
     end
     
@@ -74,27 +73,27 @@ export const architectureDiagrams = {
     FLASK --> MONITORS
     FLASK --> SERVICES
     
-    FLASK -->|"HTTP/WS"| DASHBOARD
+    FLASK --> DASHBOARD
     DASHBOARD --> RADAR
     DASHBOARD --> ANALYSIS
     DASHBOARD --> TRADING`,
 
     landingArchitecture: `graph TB
-    subgraph "Landing Page (Vercel)"
+    subgraph LandingPage["Landing Page - Vercel"]
         APP["App.tsx"]
         
-        subgraph "Auth Flow"
+        subgraph AuthFlow["Auth Flow"]
             SIWE["SIWE Auth"]
-            WAGMI["wagmi (Web3)"]
+            WAGMI["wagmi Web3"]
             WALLET_SEL["WalletSelector"]
         end
         
-        subgraph "License Flow"
+        subgraph LicenseFlow["License Flow"]
             MINT["Mint License"]
             DOWNLOAD["Download Handler"]
         end
         
-        subgraph "UI Components"
+        subgraph UIComponents["UI Components"]
             HERO["Hero Section"]
             PRICING["Pricing Cards"]
             FAQ["FAQ Accordion"]
@@ -121,21 +120,20 @@ export const architectureDiagrams = {
     participant Desktop as Desktop App
     
     User->>Landing: Acessa radar.snelabs.space
-    User->>Landing: Clica "Comprar Licença"
+    User->>Landing: Clica Comprar Licenca
     Landing->>Wallet: Conectar wallet
     Wallet-->>Landing: Wallet conectada
     
-    User->>Landing: Seleciona plano (30D/365D)
+    User->>Landing: Seleciona plano
     Landing->>Scroll: Mint NFT License
     Scroll-->>Landing: TX confirmada
     
-    User->>Landing: Clica "Download"
+    User->>Landing: Clica Download
     Landing->>API: POST /api/download-token
     API-->>Landing: Token one-time
     Landing->>User: Download SNE_Radar_Setup.exe
     
     User->>Desktop: Instala e abre app
-    Desktop->>Desktop: Detecta: não autenticado
     Desktop->>User: Mostra Lock Screen`,
 
     authFlow: `sequenceDiagram
@@ -146,45 +144,45 @@ export const architectureDiagrams = {
     participant Wallet as MetaMask
     participant API as Backend API
     
-    User->>Desktop: Abre app (não autenticado)
+    User->>Desktop: Abre app nao autenticado
     Desktop->>Desktop: Gera state + machine_id
-    Desktop->>Browser: Abre radar.snelabs.space/auth?...
+    Desktop->>Browser: Abre landing/auth
     
-    Browser->>Landing: Carrega página auth
+    Browser->>Landing: Carrega pagina auth
     User->>Wallet: Conecta wallet
     Wallet-->>Landing: Assinatura SIWE
     
     Landing->>API: POST /api/auth/verify
-    API-->>Landing: Sessão criada
+    API-->>Landing: Sessao criada
     
     Landing->>API: POST /api/auth/desktop-link
-    API-->>Landing: code (60s, single-use)
+    API-->>Landing: code 60s single-use
     
-    Landing->>Desktop: sneradar://auth?code=...&state=...
+    Landing->>Desktop: sneradar://auth?code=...
     Desktop->>Desktop: Valida state
     Desktop->>API: POST /api/auth/exchange
     API-->>Desktop: access_token + refresh_token
     
-    Desktop->>Desktop: Armazena tokens (DPAPI)
-    Desktop->>User: App desbloqueado! 🎉`,
+    Desktop->>Desktop: Armazena tokens DPAPI
+    Desktop->>User: App desbloqueado`,
 
     dataFlow: `flowchart LR
-    subgraph "Market Data"
-        BINANCE_API[Binance API]
-        BYBIT_API[Bybit API]
+    subgraph MarketData["Market Data"]
+        BINANCE_API["Binance API"]
+        BYBIT_API["Bybit API"]
     end
     
-    subgraph "Processing"
-        CACHE[(Cache TTL)]
-        INDICATORS[Indicators Engine]
-        ML[ML Predictions]
-        PATTERNS[Pattern Detection]
+    subgraph Processing["Processing"]
+        CACHE[("Cache TTL")]
+        INDICATORS["Indicators Engine"]
+        ML["ML Predictions"]
+        PATTERNS["Pattern Detection"]
     end
     
-    subgraph "Output"
-        DASHBOARD[Dashboard UI]
-        ALERTS[Alert System]
-        TELEGRAM_OUT[Telegram Notifications]
+    subgraph Output["Output"]
+        DASHBOARD["Dashboard UI"]
+        ALERTS["Alert System"]
+        TELEGRAM_OUT["Telegram Notifications"]
     end
     
     BINANCE_API --> CACHE
