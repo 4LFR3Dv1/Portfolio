@@ -93,42 +93,42 @@ export function EvidenceRoom() {
       titleKey: 'evidence.cv.title',
       descKey: 'evidence.cv.desc',
       type: 'pdf',
-      url: '/docs/renan_melo_resume_2025.pdf'
+      url: '/docs/RENAN_MELO_2026_EN.pdf'
     },
     {
       id: 'vault-hardened',
       titleKey: 'evidence.vault.hardened.title',
       descKey: 'evidence.vault.hardened.desc',
       type: 'pdf',
-      url: '/docs/sne_vault_protocol_spec_hardened.pdf'
+      url: '/docs/SNE Vault Protocol - Sovereign Physical Infrastructure (Hardened Specification).pdf'
     },
     {
       id: 'vault-devplan',
       titleKey: 'evidence.vault.devplan.title',
       descKey: 'evidence.vault.devplan.desc',
       type: 'pdf',
-      url: '/docs/sne_vault_dev_plan.pdf'
+      url: '/docs/SNE Vault Protocol - Development Plan.pdf'
     },
     {
       id: 'vault-devlist',
       titleKey: 'evidence.vault.devlist.title',
       descKey: 'evidence.vault.devlist.desc',
       type: 'pdf',
-      url: '/docs/sne_vault_dev_plan_list.pdf'
+      url: '/docs/SNE Vault Protocol - Development Plan List.pdf'
     },
     {
       id: 'vault-overview',
       titleKey: 'evidence.vault.overview.title',
       descKey: 'evidence.vault.overview.desc',
       type: 'pdf',
-      url: '/docs/sne_vault_protocol_overview.pdf'
+      url: '/docs/SNE Labs - SNE Vault Protocol.pdf'
     },
     {
       id: 'vault-infra',
       titleKey: 'evidence.vault.infra.title',
       descKey: 'evidence.vault.infra.desc',
       type: 'pdf',
-      url: '/docs/sne_vault_sovereign_infra.pdf'
+      url: '/docs/SNE Vault Protocol - Sovereign Physical Infrastructure.pdf'
     }
   ];
 
@@ -166,8 +166,8 @@ export function EvidenceRoom() {
             key={filter.id}
             onClick={() => setActiveFilter(filter.id)}
             className={`px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-all ${activeFilter === filter.id
-                ? 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)]'
-                : 'bg-transparent border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]'
+              ? 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)]'
+              : 'bg-transparent border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]'
               }`}
           >
             {t(filter.labelKey)}
