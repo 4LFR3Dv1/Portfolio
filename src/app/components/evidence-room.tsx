@@ -3,30 +3,19 @@ import { Button } from './button';
 import { Badge } from './badge';
 import { CodeVault } from './code-vault';
 import { PDFViewer } from './pdf-viewer';
+import { useLanguage } from '../context/language-context';
 
 interface EvidenceItem {
   id: string;
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
   type: 'pdf' | 'diagram' | 'spec' | 'screenshot' | 'release' | 'code';
   url?: string;
   codeSnippet?: string;
   language?: string;
 }
 
-export function EvidenceRoom() {
-  const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [selectedCode, setSelectedCode] = useState<EvidenceItem | null>(null);
-  const [selectedPDF, setSelectedPDF] = useState<EvidenceItem | null>(null);
-
-  const evidenceItems: EvidenceItem[] = [
-    {
-      id: 'sne-smart-contract',
-      title: 'Solidity // SCROLL L2 LICENSE REGISTRY',
-      description: 'Fonte da verdade para entitlements on-chain.',
-      type: 'code',
-      language: 'solidity',
-      codeSnippet: `// contracts/SNELicenseRegistry.sol
+const SOLIDITY_CODE = `// contracts/SNELicenseRegistry.sol
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -56,15 +45,9 @@ contract SNELicenseRegistry is ERC721 {
         
         return (isValid, license.tier, license.expiresAt);
     }
-}`
-    },
-    {
-      id: 'python-trading-motor',
-      title: 'Python // SNE RADAR MOTOR (CYTHONIZED)',
-      description: 'Lógica de execução de alta frequência (Excertos).',
-      type: 'code',
-      language: 'python',
-      codeSnippet: `class MarketMonitorPro:
+}`;
+
+const PYTHON_CODE = `class MarketMonitorPro:
     def __init__(self, config):
         self.pairs = config.PAIRS
         self.depth_cache = {}
@@ -78,72 +61,83 @@ contract SNELicenseRegistry is ERC721 {
         if volatility > self.THRESHOLD_HIGH:
             return "HIGH_VOLATILITY_BREAKOUT"
             
-        if self.detect_accumulation(volume_profile):
-            return "ACCUMULATION_ZONE"
+        depth_imbalance = self.analyze_order_flow()
+        if abs(depth_imbalance) > 0.7:
+            return "IMBALANCE_DETECTED"
             
-        return "NEUTRAL"
-        
-    def execute_order(self, signal):
-        if not self.session_valid:
-            raise SecurityException("Invalid Session Token")
-            
-        # Direct socket execution
-        self.socket_manager.emit('order_create', {
-            'symbol': signal.pair,
-            'side': signal.side,
-            'size': self.risk_manager.calculate_size()
-        })`
+        return "NORMAL_REGIME"`;
+
+export function EvidenceRoom() {
+  const { t } = useLanguage();
+  const [activeFilter, setActiveFilter] = useState<string>('all');
+  const [selectedCode, setSelectedCode] = useState<EvidenceItem | null>(null);
+  const [selectedPDF, setSelectedPDF] = useState<EvidenceItem | null>(null);
+
+  const evidenceItems: EvidenceItem[] = [
+    {
+      id: 'sne-smart-contract',
+      titleKey: 'evidence.solidity.title',
+      descKey: 'evidence.solidity.desc',
+      type: 'code',
+      language: 'solidity',
+      codeSnippet: SOLIDITY_CODE
     },
     {
-      id: 'cv-renan-melo',
-      title: 'RENAN MELO // CV 2026 (PDF)',
-      description: 'Resumo profissional, stack técnico e projetos.',
-      type: 'pdf',
-      url: '/docs/RENAN_MELO_2026_EN.pdf'
+      id: 'python-trading-motor',
+      titleKey: 'evidence.python.title',
+      descKey: 'evidence.python.desc',
+      type: 'code',
+      language: 'python',
+      codeSnippet: PYTHON_CODE
     },
     {
-      id: 'vault-hardened-spec',
-      title: 'SNE Vault Protocol // Hardened Specification (PDF)',
-      description: 'Especificação técnica completa com modelo de ameaças e garantias de segurança.',
+      id: 'cv-2026',
+      titleKey: 'evidence.cv.title',
+      descKey: 'evidence.cv.desc',
       type: 'pdf',
-      url: '/docs/SNE Vault Protocol - Sovereign Physical Infrastructure (Hardened Specification).pdf'
+      url: '/docs/renan_melo_resume_2025.pdf'
     },
     {
-      id: 'vault-dev-plan',
-      title: 'SNE Vault Protocol // Development Plan (PDF)',
-      description: 'Roadmap técnico incremental e arquitetura de implementação.',
+      id: 'vault-hardened',
+      titleKey: 'evidence.vault.hardened.title',
+      descKey: 'evidence.vault.hardened.desc',
       type: 'pdf',
-      url: '/docs/SNE Vault Protocol - Development Plan.pdf'
+      url: '/docs/sne_vault_protocol_spec_hardened.pdf'
     },
     {
-      id: 'vault-dev-plan-list',
-      title: 'SNE Vault Protocol // Development Plan List (PDF)',
-      description: 'Checklist detalhado de tarefas e milestones do projeto.',
+      id: 'vault-devplan',
+      titleKey: 'evidence.vault.devplan.title',
+      descKey: 'evidence.vault.devplan.desc',
       type: 'pdf',
-      url: '/docs/SNE Vault Protocol - Development Plan List.pdf'
+      url: '/docs/sne_vault_dev_plan.pdf'
+    },
+    {
+      id: 'vault-devlist',
+      titleKey: 'evidence.vault.devlist.title',
+      descKey: 'evidence.vault.devlist.desc',
+      type: 'pdf',
+      url: '/docs/sne_vault_dev_plan_list.pdf'
     },
     {
       id: 'vault-overview',
-      title: 'SNE Labs // SNE Vault Protocol Overview (PDF)',
-      description: 'Visão geral do protocolo e casos de uso.',
+      titleKey: 'evidence.vault.overview.title',
+      descKey: 'evidence.vault.overview.desc',
       type: 'pdf',
-      url: '/docs/SNE Labs - SNE Vault Protocol.pdf'
+      url: '/docs/sne_vault_protocol_overview.pdf'
     },
     {
-      id: 'vault-infrastructure',
-      title: 'SNE Vault Protocol // Sovereign Infrastructure (PDF)',
-      description: 'Arquitetura de infraestrutura física soberana.',
+      id: 'vault-infra',
+      titleKey: 'evidence.vault.infra.title',
+      descKey: 'evidence.vault.infra.desc',
       type: 'pdf',
-      url: '/docs/SNE Vault Protocol - Sovereign Physical Infrastructure.pdf'
+      url: '/docs/sne_vault_sovereign_infra.pdf'
     }
   ];
 
   const filters = [
-    { id: 'all', label: 'ALL' },
-    { id: 'code', label: 'CODE' },
-    { id: 'pdf', label: 'PDFs' },
-    { id: 'diagram', label: 'DIAGRAMS' },
-    { id: 'screenshot', label: 'SCREENSHOTS' }
+    { id: 'all', labelKey: 'evidence.filter.all' },
+    { id: 'code', labelKey: 'evidence.filter.code' },
+    { id: 'pdf', labelKey: 'evidence.filter.pdf' }
   ];
 
   const filteredItems = activeFilter === 'all'
@@ -155,10 +149,10 @@ contract SNELicenseRegistry is ERC721 {
       {/* Header */}
       <div className="mb-12">
         <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
-          EVIDENCE ROOM
+          {t('evidence.title')}
         </h2>
         <p className="text-base" style={{ color: 'var(--terminal-muted)' }}>
-          Code artifacts, smart contracts e documentação técnica. Proof of Work.
+          {t('evidence.subtitle')}
         </p>
       </div>
 
@@ -169,59 +163,50 @@ contract SNELicenseRegistry is ERC721 {
             key={filter.id}
             onClick={() => setActiveFilter(filter.id)}
             className={`px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-all ${activeFilter === filter.id
-              ? 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)]'
-              : 'bg-transparent border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]'
+                ? 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)]'
+                : 'bg-transparent border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]'
               }`}
           >
-            {filter.label}
+            {t(filter.labelKey)}
           </button>
         ))}
       </div>
 
-      {/* Evidence Grid */}
+      {/* Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredItems.map((item) => (
           <div
             key={item.id}
-            className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--electric-blue)] transition-all group flex flex-col h-full"
+            className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--electric-blue)] transition-all group"
           >
-            {/* Header */}
-            <div className="border-b border-[var(--border-default)] px-4 py-3 bg-[var(--surface-2)] flex items-center justify-between">
-              <Badge variant="default">{item.type.toUpperCase()}</Badge>
+            <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)]">
+              <div className="flex items-center justify-between">
+                <h3 className="font-mono text-xs font-semibold" style={{ color: 'var(--electric-blue)' }}>
+                  {t(item.titleKey)}
+                </h3>
+                <Badge variant="default">{item.type.toUpperCase()}</Badge>
+              </div>
             </div>
-
-            {/* Body */}
-            <div className="p-6 space-y-4 flex-1 flex flex-col">
-              <h4 className="font-mono text-sm font-semibold leading-tight flex-1" style={{ color: 'var(--electric-blue)' }}>
-                {item.title}
-              </h4>
+            <div className="p-6 space-y-4">
               <p className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
-                {item.description}
+                {t(item.descKey)}
               </p>
-
-              {item.type === 'code' ? (
+              {item.type === 'code' && (
                 <Button
                   variant="secondary"
-                  className="w-full mt-auto"
                   onClick={() => setSelectedCode(item)}
+                  className="w-full"
                 >
-                  VIEW SOURCE
+                  {t('evidence.cta.viewsource')}
                 </Button>
-              ) : item.type === 'pdf' ? (
+              )}
+              {item.type === 'pdf' && (
                 <Button
-                  variant="primary"
-                  className="w-full mt-auto"
+                  variant="secondary"
                   onClick={() => setSelectedPDF(item)}
+                  className="w-full"
                 >
-                  OPEN PDF
-                </Button>
-              ) : (
-                <Button
-                  variant="ghost"
-                  className="w-full mt-auto"
-                  onClick={() => console.log(`Opening ${item.title}`)}
-                >
-                  VIEW
+                  {t('evidence.cta.openpdf')}
                 </Button>
               )}
             </div>
@@ -229,20 +214,12 @@ contract SNELicenseRegistry is ERC721 {
         ))}
       </div>
 
-      {filteredItems.length === 0 && (
-        <div className="text-center py-12">
-          <p className="font-mono text-sm" style={{ color: 'var(--terminal-muted)' }}>
-            No items found in this section.
-          </p>
-        </div>
-      )}
-
       {/* Code Vault Modal */}
-      {selectedCode && (
+      {selectedCode && selectedCode.codeSnippet && (
         <CodeVault
-          title={selectedCode.title}
-          language={selectedCode.language || 'text'}
-          code={selectedCode.codeSnippet || ''}
+          code={selectedCode.codeSnippet}
+          language={selectedCode.language || 'typescript'}
+          title={t(selectedCode.titleKey)}
           onClose={() => setSelectedCode(null)}
         />
       )}
@@ -250,8 +227,8 @@ contract SNELicenseRegistry is ERC721 {
       {/* PDF Viewer Modal */}
       {selectedPDF && selectedPDF.url && (
         <PDFViewer
-          title={selectedPDF.title}
-          pdfUrl={selectedPDF.url}
+          url={selectedPDF.url}
+          title={t(selectedPDF.titleKey)}
           onClose={() => setSelectedPDF(null)}
         />
       )}
