@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from './button';
 import { Badge } from './badge';
 import { CodeVault } from './code-vault';
+import { PDFViewer } from './pdf-viewer';
 
 interface EvidenceItem {
   id: string;
@@ -16,6 +17,7 @@ interface EvidenceItem {
 export function EvidenceRoom() {
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [selectedCode, setSelectedCode] = useState<EvidenceItem | null>(null);
+  const [selectedPDF, setSelectedPDF] = useState<EvidenceItem | null>(null);
 
   const evidenceItems: EvidenceItem[] = [
     {
@@ -93,32 +95,46 @@ contract SNELicenseRegistry is ERC721 {
         })`
     },
     {
-      id: 'cv',
-      title: 'RENAN MELO // CV (PDF)',
-      description: 'Resumo objetivo de perfil, foco e links.',
+      id: 'cv-renan-melo',
+      title: 'RENAN MELO // CV 2026 (PDF)',
+      description: 'Resumo profissional, stack técnico e projetos.',
       type: 'pdf',
-      url: '#'
+      url: '/docs/RENAN_MELO_2026_EN.pdf'
     },
     {
-      id: 'radar-architecture',
-      title: 'SNE Radar // Architecture Spec (PDF)',
-      description: 'Arquitetura e visão do sistema.',
+      id: 'vault-hardened-spec',
+      title: 'SNE Vault Protocol // Hardened Specification (PDF)',
+      description: 'Especificação técnica completa com modelo de ameaças e garantias de segurança.',
       type: 'pdf',
-      url: '#'
+      url: '/docs/SNE Vault Protocol - Sovereign Physical Infrastructure (Hardened Specification).pdf'
     },
     {
-      id: 'sne-os-diagram',
-      title: 'SNE OS // Architecture Diagram',
-      description: 'Diagrama de arquitetura modular e rotas.',
-      type: 'diagram',
-      url: '#'
+      id: 'vault-dev-plan',
+      title: 'SNE Vault Protocol // Development Plan (PDF)',
+      description: 'Roadmap técnico incremental e arquitetura de implementação.',
+      type: 'pdf',
+      url: '/docs/SNE Vault Protocol - Development Plan.pdf'
     },
     {
-      id: 'desktop-screenshot',
-      title: 'SNE Radar // Desktop UI Screenshot',
-      description: 'Interface do desktop em ação.',
-      type: 'screenshot',
-      url: '#'
+      id: 'vault-dev-plan-list',
+      title: 'SNE Vault Protocol // Development Plan List (PDF)',
+      description: 'Checklist detalhado de tarefas e milestones do projeto.',
+      type: 'pdf',
+      url: '/docs/SNE Vault Protocol - Development Plan List.pdf'
+    },
+    {
+      id: 'vault-overview',
+      title: 'SNE Labs // SNE Vault Protocol Overview (PDF)',
+      description: 'Visão geral do protocolo e casos de uso.',
+      type: 'pdf',
+      url: '/docs/SNE Labs - SNE Vault Protocol.pdf'
+    },
+    {
+      id: 'vault-infrastructure',
+      title: 'SNE Vault Protocol // Sovereign Infrastructure (PDF)',
+      description: 'Arquitetura de infraestrutura física soberana.',
+      type: 'pdf',
+      url: '/docs/SNE Vault Protocol - Sovereign Physical Infrastructure.pdf'
     }
   ];
 
@@ -153,8 +169,8 @@ contract SNELicenseRegistry is ERC721 {
             key={filter.id}
             onClick={() => setActiveFilter(filter.id)}
             className={`px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-all ${activeFilter === filter.id
-                ? 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)]'
-                : 'bg-transparent border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]'
+              ? 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)]'
+              : 'bg-transparent border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]'
               }`}
           >
             {filter.label}
@@ -191,13 +207,21 @@ contract SNELicenseRegistry is ERC721 {
                 >
                   VIEW SOURCE
                 </Button>
+              ) : item.type === 'pdf' ? (
+                <Button
+                  variant="primary"
+                  className="w-full mt-auto"
+                  onClick={() => setSelectedPDF(item)}
+                >
+                  OPEN PDF
+                </Button>
               ) : (
                 <Button
                   variant="ghost"
                   className="w-full mt-auto"
                   onClick={() => console.log(`Opening ${item.title}`)}
                 >
-                  OPEN FILE
+                  VIEW
                 </Button>
               )}
             </div>
@@ -220,6 +244,15 @@ contract SNELicenseRegistry is ERC721 {
           language={selectedCode.language || 'text'}
           code={selectedCode.codeSnippet || ''}
           onClose={() => setSelectedCode(null)}
+        />
+      )}
+
+      {/* PDF Viewer Modal */}
+      {selectedPDF && selectedPDF.url && (
+        <PDFViewer
+          title={selectedPDF.title}
+          pdfUrl={selectedPDF.url}
+          onClose={() => setSelectedPDF(null)}
         />
       )}
     </section>
