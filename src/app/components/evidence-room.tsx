@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button } from './button';
 import { Badge } from './badge';
 import { CodeVault } from './code-vault';
-import { PDFViewer } from './pdf-viewer';
 import { useLanguage } from '../context/language-context';
 
 interface EvidenceItem {
@@ -71,7 +70,6 @@ export function EvidenceRoom() {
   const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [selectedCode, setSelectedCode] = useState<EvidenceItem | null>(null);
-  const [selectedPDF, setSelectedPDF] = useState<EvidenceItem | null>(null);
 
   const evidenceItems: EvidenceItem[] = [
     {
@@ -144,6 +142,11 @@ export function EvidenceRoom() {
     ? evidenceItems
     : evidenceItems.filter(item => item.type === activeFilter);
 
+  const handleOpenPDF = (url: string) => {
+    // Open PDF in new tab - browser's native PDF viewer handles it
+    window.open(url, '_blank');
+  };
+
   return (
     <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24 border-t border-[var(--border-subtle)]" id="evidence">
       {/* Header */}
@@ -200,10 +203,10 @@ export function EvidenceRoom() {
                   {t('evidence.cta.viewsource')}
                 </Button>
               )}
-              {item.type === 'pdf' && (
+              {item.type === 'pdf' && item.url && (
                 <Button
                   variant="secondary"
-                  onClick={() => setSelectedPDF(item)}
+                  onClick={() => handleOpenPDF(item.url!)}
                   className="w-full"
                 >
                   {t('evidence.cta.openpdf')}
@@ -221,15 +224,6 @@ export function EvidenceRoom() {
           language={selectedCode.language || 'typescript'}
           title={t(selectedCode.titleKey)}
           onClose={() => setSelectedCode(null)}
-        />
-      )}
-
-      {/* PDF Viewer Modal */}
-      {selectedPDF && selectedPDF.url && (
-        <PDFViewer
-          url={selectedPDF.url}
-          title={t(selectedPDF.titleKey)}
-          onClose={() => setSelectedPDF(null)}
         />
       )}
     </section>
