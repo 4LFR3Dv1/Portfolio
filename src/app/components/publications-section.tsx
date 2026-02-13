@@ -28,7 +28,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                 <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)] flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl">📚</span>
+                            <span className="font-mono text-lg" style={{ color: '#a855f7' }}>▸</span>
                             <h3 className="font-mono text-lg font-semibold" style={{ color: '#a855f7' }}>
                                 VERIFY SYSTEMS
                             </h3>
@@ -56,16 +56,16 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                                 </div>
                                 <div className="grid grid-cols-2 gap-2">
                                     {[
-                                        { icon: '🔗', label: 'Event Sourcing' },
-                                        { icon: '⚖️', label: 'Truth Hierarchy' },
-                                        { icon: '🔄', label: 'Continuous Reconciliation' },
-                                        { icon: '🛡️', label: 'Operational Modes' },
-                                        { icon: '📊', label: 'State Machines' },
-                                        { icon: '🔐', label: "Don't Trust, Verify" },
+                                        'Event Sourcing',
+                                        'Truth Hierarchy',
+                                        'Continuous Reconciliation',
+                                        'Operational Modes',
+                                        'State Machines',
+                                        "Don't Trust, Verify",
                                     ].map((concept, idx) => (
                                         <div key={idx} className="flex items-center gap-2 text-sm" style={{ color: 'var(--terminal-text)' }}>
-                                            <span>{concept.icon}</span>
-                                            <span>{concept.label}</span>
+                                            <span className="font-mono text-xs" style={{ color: 'var(--electric-green)' }}>◆</span>
+                                            <span>{concept}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -131,7 +131,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                 {/* Production Handbook */}
                 <div className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--border-strong)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)] p-6">
                     <div className="flex items-center gap-3 mb-3">
-                        <span className="text-lg">⚙️</span>
+                        <span className="font-mono" style={{ color: 'var(--electric-blue)' }}>▸</span>
                         <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
                             {t('publications.production.title')}
                         </h4>
@@ -153,7 +153,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                 {/* TypeScript Handbook */}
                 <div className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--border-strong)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)] p-6">
                     <div className="flex items-center gap-3 mb-3">
-                        <span className="text-lg">📘</span>
+                        <span className="font-mono" style={{ color: 'var(--electric-blue)' }}>▸</span>
                         <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
                             {t('publications.typescript.title')}
                         </h4>
