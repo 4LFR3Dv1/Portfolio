@@ -126,34 +126,50 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                 </div>
             </div>
 
-            {/* Future Publications Placeholder */}
+            {/* Other Publications */}
             <div className="grid md:grid-cols-2 gap-6">
-                {/* Coming Soon: Article */}
-                <div className="border border-dashed border-[var(--border-default)] bg-[var(--surface-1)] p-6 opacity-60">
+                {/* Production Handbook */}
+                <div className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--border-strong)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)] p-6">
                     <div className="flex items-center gap-3 mb-3">
-                        <span className="text-lg">📝</span>
-                        <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--terminal-muted)' }}>
-                            {t('publications.upcoming.article')}
+                        <span className="text-lg">⚙️</span>
+                        <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
+                            {t('publications.production.title')}
                         </h4>
-                        <Badge variant="default">COMING SOON</Badge>
+                        <Badge variant="blue">PDF</Badge>
                     </div>
-                    <p className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
-                        {t('publications.upcoming.article.desc')}
+                    <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--terminal-muted)' }}>
+                        {t('publications.production.desc')}
                     </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {['PRODUCTION', 'OPERATIONS', 'DEPLOYMENT'].map((badge, idx) => (
+                            <Badge key={idx} variant="default">{badge}</Badge>
+                        ))}
+                    </div>
+                    <Button variant="secondary" onClick={() => window.open('/docs/Production_By_Renan_Melo.pdf', '_blank')}>
+                        READ PDF
+                    </Button>
                 </div>
 
-                {/* Coming Soon: Talk */}
-                <div className="border border-dashed border-[var(--border-default)] bg-[var(--surface-1)] p-6 opacity-60">
+                {/* TypeScript Handbook */}
+                <div className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--border-strong)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)] p-6">
                     <div className="flex items-center gap-3 mb-3">
-                        <span className="text-lg">🎤</span>
-                        <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--terminal-muted)' }}>
-                            {t('publications.upcoming.talk')}
+                        <span className="text-lg">📘</span>
+                        <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
+                            {t('publications.typescript.title')}
                         </h4>
-                        <Badge variant="default">COMING SOON</Badge>
+                        <Badge variant="blue">PDF</Badge>
                     </div>
-                    <p className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
-                        {t('publications.upcoming.talk.desc')}
+                    <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--terminal-muted)' }}>
+                        {t('publications.typescript.desc')}
                     </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {['TYPESCRIPT', 'BEST PRACTICES', 'TYPE SAFETY'].map((badge, idx) => (
+                            <Badge key={idx} variant="default">{badge}</Badge>
+                        ))}
+                    </div>
+                    <Button variant="secondary" onClick={() => window.open('/docs/TypeScript_Handbook__Renan_Melo.pdf', '_blank')}>
+                        READ PDF
+                    </Button>
                 </div>
             </div>
         </section>

@@ -139,10 +139,10 @@ const translations: Record<Language, Record<string, string>> = {
         'publications.verify.timeline.2': 'Realized Bitcoin\'s patterns are universal.',
         'publications.verify.timeline.3': 'Applied UTXO thinking to fintech systems.',
         'publications.verify.timeline.4': 'Formalized VERIFY SYSTEMS as operational doctrine.',
-        'publications.upcoming.article': 'Reconciliation as Primary Process',
-        'publications.upcoming.article.desc': 'Why treating reconciliation as an afterthought creates silent failures in financial systems.',
-        'publications.upcoming.talk': 'From Bitcoin to Production Systems',
-        'publications.upcoming.talk.desc': 'How first principles from Bitcoin\'s architecture apply to any critical system.',
+        'publications.production.title': 'Production Systems Handbook',
+        'publications.production.desc': 'Operational guide for production-grade systems. Covers deployment strategies, monitoring, incident response, and system reliability patterns.',
+        'publications.typescript.title': 'TypeScript Handbook',
+        'publications.typescript.desc': 'Comprehensive guide to TypeScript best practices, advanced type patterns, and type-safe architecture for scalable applications.',
     },
     pt: {
         // Header
@@ -271,10 +271,10 @@ const translations: Record<Language, Record<string, string>> = {
         'publications.verify.timeline.2': 'Percebeu que padroes do Bitcoin sao universais.',
         'publications.verify.timeline.3': 'Aplicou pensamento UTXO em sistemas fintech.',
         'publications.verify.timeline.4': 'Formalizou VERIFY SYSTEMS como doutrina operacional.',
-        'publications.upcoming.article': 'Reconciliacao como Processo Primario',
-        'publications.upcoming.article.desc': 'Por que tratar reconciliacao como secundaria cria falhas silenciosas em sistemas financeiros.',
-        'publications.upcoming.talk': 'Do Bitcoin a Sistemas de Producao',
-        'publications.upcoming.talk.desc': 'Como principios do Bitcoin se aplicam a qualquer sistema critico.',
+        'publications.production.title': 'Manual de Sistemas em Producao',
+        'publications.production.desc': 'Guia operacional para sistemas production-grade. Cobre estrategias de deploy, monitoramento, resposta a incidentes e padroes de confiabilidade.',
+        'publications.typescript.title': 'Manual de TypeScript',
+        'publications.typescript.desc': 'Guia completo de boas praticas TypeScript, padroes avancados de tipos e arquitetura type-safe para aplicacoes escalaveis.',
     }
 };
 
