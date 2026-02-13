@@ -28,12 +28,37 @@ export function AboutSection() {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-12">
-        {/* Left: Bio */}
-        <div className="lg:col-span-2 space-y-4 text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
-          <p>{t('about.p1')}</p>
-          <p>{t('about.p2')}</p>
-          <p>{t('about.p3')}</p>
-          <p>{t('about.p4')}</p>
+        {/* Left: Photo + Bio */}
+        <div className="lg:col-span-2 space-y-6">
+          {/* Photo */}
+          <div className="flex items-start gap-6 mb-2">
+            <div className="flex-shrink-0 w-28 h-28 border border-[var(--border-default)] bg-[var(--surface-2)] overflow-hidden">
+              <img
+                src="/docs/EDIT RENAN 1.png"
+                alt="Renan Melo"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+            <div className="space-y-2 pt-1">
+              <div className="font-mono text-lg font-semibold" style={{ color: 'var(--electric-blue)' }}>
+                Renan Melo
+              </div>
+              <div className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>
+                Decentralized Systems Architect
+              </div>
+              <div className="font-mono text-xs" style={{ color: '#a855f7' }}>
+                Author of VERIFY SYSTEMS
+              </div>
+            </div>
+          </div>
+
+          {/* Bio */}
+          <div className="space-y-4 text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
+            <p>{t('about.p1')}</p>
+            <p>{t('about.p2')}</p>
+            <p>{t('about.p3')}</p>
+            <p>{t('about.p4')}</p>
+          </div>
         </div>
 
         {/* Right: Skills + Timeline */}

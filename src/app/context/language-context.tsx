@@ -57,10 +57,10 @@ const translations: Record<Language, Record<string, string>> = {
 
         // About
         'about.title': 'ABOUT // OPERATOR NOTES',
-        'about.p1': 'I build products like tools: interfaces that provide clarity, control, and performance.',
-        'about.p2': 'I like distributed systems that need to work in the real world: networks fail, APIs change, users abandon if UX breaks.',
-        'about.p3': 'My background includes systems thinking from first principles. I studied Bitcoin\'s architecture and derived universal patterns for verifiable systems--documented in VERIFY SYSTEMS, an operational doctrine for production environments.',
-        'about.p4': 'My focus is end-to-end ownership: architecture, UX, integration, deploy, diagnostics, and continuous evolution. I prefer high signal: less promise, more evidence.',
+        'about.p1': 'Systems architect with a background in Industrial Design. I think from first principles and build end-to-end: from architecture to deploy.',
+        'about.p2': 'I work with distributed systems that need to survive the real world: networks fail, APIs change, users leave if the UX breaks. My job is to make sure that doesn\'t happen.',
+        'about.p3': 'I studied Bitcoin\'s architecture and derived universal patterns for verifiable systems. The result is VERIFY SYSTEMS: an operational doctrine that turns execution into evidence and state into verifiable knowledge.',
+        'about.p4': 'High signal, low noise. Less promise, more proof.',
         'about.skills': 'SKILLS',
         'about.journey': 'JOURNEY',
         'about.timeline.1': 'Industrial Design background. Systems thinking from first principles.',
@@ -196,10 +196,10 @@ const translations: Record<Language, Record<string, string>> = {
 
         // About
         'about.title': 'SOBRE // NOTAS DO OPERADOR',
-        'about.p1': 'Eu construo produtos como ferramentas: interfaces que dão clareza, controle e performance.',
-        'about.p2': 'Gosto de sistemas distribuídos que precisam funcionar no mundo real: rede falha, APIs mudam, usuários abandonam se a UX quebra.',
-        'about.p3': 'Minha formação inclui pensamento sistêmico a partir de primeiros princípios. Estudei a arquitetura do Bitcoin e derivei padrões universais para sistemas verificáveis--documentados em VERIFY SYSTEMS, uma doutrina operacional para ambientes de produção.',
-        'about.p4': 'Meu foco é end-to-end ownership: arquitetura, UX, integração, deploy, diagnósticos e evolução contínua. Tenho preferência por alto sinal: menos promessa, mais evidência.',
+        'about.p1': 'Arquiteto de sistemas com background em Design Industrial. Penso a partir de primeiros principios e construo end-to-end: da arquitetura ao deploy.',
+        'about.p2': 'Trabalho com sistemas distribuidos que precisam sobreviver ao mundo real: rede falha, APIs mudam, usuarios abandonam se a UX quebra. Meu trabalho e garantir que isso nao aconteca.',
+        'about.p3': 'Estudei a arquitetura do Bitcoin e derivei padroes universais para sistemas verificaveis. O resultado e VERIFY SYSTEMS: uma doutrina operacional que transforma execucao em evidencia e estado em conhecimento verificavel.',
+        'about.p4': 'Alto sinal, baixo ruido. Menos promessa, mais prova.',
         'about.skills': 'HABILIDADES',
         'about.journey': 'JORNADA',
         'about.timeline.1': 'Background em Design Industrial. Pensamento sistemico desde primeiros principios.',
