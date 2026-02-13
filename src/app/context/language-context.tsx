@@ -127,7 +127,22 @@ const translations: Record<Language, Record<string, string>> = {
         'diagram.auth.title': 'User Flow // Desktop Authentication',
         'diagram.auth.desc': 'Deep Link authentication: How desktop authenticates via browser + SIWE.',
         'diagram.data.title': 'Data Flow // Market Analysis Pipeline',
-        'diagram.data.desc': 'Data pipeline: Market APIs → Processing → Dashboard & Alerts.',
+        'diagram.data.desc': 'Data pipeline: Market APIs -> Processing -> Dashboard & Alerts.',
+
+        // Publications
+        'publications.title': 'PUBLICATIONS // WRITING',
+        'publications.subtitle': 'Doctrine, frameworks, and systems thinking. From first principles to production.',
+        'publications.verify.description': 'Operational doctrine for verifiable systems. Derived from Bitcoin principles (UTXO, proof-of-work, consensus), VERIFY SYSTEMS establishes universal patterns for turning execution into evidence and state into verifiable operational knowledge.',
+        'publications.verify.concepts': 'KEY CONCEPTS',
+        'publications.verify.origin': 'ORIGIN STORY',
+        'publications.verify.timeline.1': 'Discovered Bitcoin. Studied the protocol deeply.',
+        'publications.verify.timeline.2': 'Realized Bitcoin\'s patterns are universal.',
+        'publications.verify.timeline.3': 'Applied UTXO thinking to fintech systems.',
+        'publications.verify.timeline.4': 'Formalized VERIFY SYSTEMS as operational doctrine.',
+        'publications.upcoming.article': 'Reconciliation as Primary Process',
+        'publications.upcoming.article.desc': 'Why treating reconciliation as an afterthought creates silent failures in financial systems.',
+        'publications.upcoming.talk': 'From Bitcoin to Production Systems',
+        'publications.upcoming.talk.desc': 'How first principles from Bitcoin\'s architecture apply to any critical system.',
     },
     pt: {
         // Header
@@ -243,8 +258,23 @@ const translations: Record<Language, Record<string, string>> = {
         'diagram.purchase.desc': 'Fluxo completo desde a compra da licença até a primeira execução do app.',
         'diagram.auth.title': 'User Flow // Autenticação Desktop',
         'diagram.auth.desc': 'Deep Link authentication: Como o desktop se autentica via browser + SIWE.',
-        'diagram.data.title': 'Data Flow // Pipeline de Análise de Mercado',
-        'diagram.data.desc': 'Pipeline de dados: Market APIs → Processing → Dashboard & Alerts.',
+        'diagram.data.title': 'Data Flow // Pipeline de Analise de Mercado',
+        'diagram.data.desc': 'Pipeline de dados: Market APIs -> Processing -> Dashboard & Alerts.',
+
+        // Publications
+        'publications.title': 'PUBLICACOES // ESCRITOS',
+        'publications.subtitle': 'Doutrina, frameworks e pensamento sistemico. Dos primeiros principios a producao.',
+        'publications.verify.description': 'Doutrina operacional para sistemas verificaveis. Derivado dos principios do Bitcoin (UTXO, proof-of-work, consenso), VERIFY SYSTEMS estabelece padroes universais para transformar execucao em evidencia e estado em conhecimento operacional verificavel.',
+        'publications.verify.concepts': 'CONCEITOS-CHAVE',
+        'publications.verify.origin': 'HISTORIA DE ORIGEM',
+        'publications.verify.timeline.1': 'Descobriu Bitcoin. Estudou o protocolo a fundo.',
+        'publications.verify.timeline.2': 'Percebeu que padroes do Bitcoin sao universais.',
+        'publications.verify.timeline.3': 'Aplicou pensamento UTXO em sistemas fintech.',
+        'publications.verify.timeline.4': 'Formalizou VERIFY SYSTEMS como doutrina operacional.',
+        'publications.upcoming.article': 'Reconciliacao como Processo Primario',
+        'publications.upcoming.article.desc': 'Por que tratar reconciliacao como secundaria cria falhas silenciosas em sistemas financeiros.',
+        'publications.upcoming.talk': 'Do Bitcoin a Sistemas de Producao',
+        'publications.upcoming.talk.desc': 'Como principios do Bitcoin se aplicam a qualquer sistema critico.',
     }
 };
 

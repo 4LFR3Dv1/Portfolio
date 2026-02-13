@@ -8,6 +8,7 @@ import { ContactSection } from '@/app/components/contact-section';
 import { ArchitectureExplorer } from '@/app/components/architecture-explorer';
 import { CaseStudyTemplate } from '@/app/components/case-study-template';
 import { EvidenceRoom } from '@/app/components/evidence-room';
+import { PublicationsSection } from '@/app/components/publications-section';
 import { SystemArchitecture } from '@/app/components/system-architecture';
 import { CommandPalette } from '@/app/components/command-palette';
 
@@ -139,6 +140,8 @@ export default function App() {
           />
 
           <EvidenceRoom />
+
+          <PublicationsSection onCaseStudy={handleCaseStudy} />
 
           <SystemArchitecture />
 

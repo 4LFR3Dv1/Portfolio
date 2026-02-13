@@ -303,6 +303,31 @@ export function CaseStudyTemplate({ projectId, onBack }: CaseStudyTemplateProps)
         'Separação em 3 planos (Execution, Verify, Control): cada um pode falhar independentemente.',
         'Shadow mode antes de ativação: validar sem impactar produção.'
       ],
+      flows: [
+        {
+          id: 'operational-modes',
+          label: 'OPERATIONAL MODES',
+          steps: [
+            { number: 1, title: 'Normal Mode', description: 'Todos os provedores respondendo. Reconciliação confirma estado. Métricas dentro dos thresholds.' },
+            { number: 2, title: 'Degraded Mode', description: 'Provedor intermitente ou lento. Sistema continua operando com retry strategies e circuit breakers ativados.' },
+            { number: 3, title: 'Reconciling Mode', description: 'Divergência detectada entre estado interno e settlement externo. Reconciliação ativa com prioridade máxima.' },
+            { number: 4, title: 'Safe Mode', description: 'Falha crítica ou divergência irreconciliável. Novas transações pausadas. Apenas leitura e diagnóstico permitidos.' }
+          ],
+          guarantee: 'O sistema nunca silencia falhas. Cada transição entre modos gera evidência e alerta ao operador.'
+        },
+        {
+          id: 'reconciliation-cycle',
+          label: 'RECONCILIATION CYCLE',
+          steps: [
+            { number: 1, title: 'Captura de Estado', description: 'Snapshot do estado interno (eventos processados, saldos, transações pending).' },
+            { number: 2, title: 'Consulta Settlement', description: 'Busca estado externo no provedor de pagamento (fonte de verdade: blockchain, PIX, etc.).' },
+            { number: 3, title: 'Comparação', description: 'Diff entre estado interno e externo. Classifica divergências por tipo e severidade.' },
+            { number: 4, title: 'Resolução', description: 'Aplica correções automáticas (auto-heal) ou escala para operador (manual review).' },
+            { number: 5, title: 'Evidência', description: 'Registra resultado: o que divergiu, o que foi corrigido, tempo de resolução (Unknown Truth Duration).' }
+          ],
+          guarantee: 'Reconciliação contínua elimina "bugs silenciosos": se o provedor rejeitou, o sistema sabe em minutos, não em dias.'
+        }
+      ],
       learnings: [
         'Sistemas financeiros precisam de "hierarquia de verdade" explícita.',
         'O princípio "Don\'t Trust, Verify" do Bitcoin é universal para qualquer sistema crítico.',
@@ -549,11 +574,11 @@ export function CaseStudyTemplate({ projectId, onBack }: CaseStudyTemplateProps)
         </div>
       )}
 
-      {/* Flow Player (Radar only) */}
-      {projectId === 'sne-radar' && study.flows && (
+      {/* Flow Player (Radar + VERIFY) */}
+      {(projectId === 'sne-radar' || projectId === 'verify-systems') && study.flows && (
         <div className="mb-12">
           <h3 className="font-mono text-lg font-semibold mb-6" style={{ color: 'var(--electric-blue)' }}>
-            FLOW PLAYER (Auth / Daily Usage)
+            {projectId === 'verify-systems' ? 'FLOW PLAYER (Operational Modes / Reconciliation)' : 'FLOW PLAYER (Auth / Daily Usage)'}
           </h3>
           <FlowPlayer flows={study.flows} />
         </div>
