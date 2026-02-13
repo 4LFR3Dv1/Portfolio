@@ -46,9 +46,22 @@ export function SelectedWorkSection({ onCaseStudy, onDemo, onEvidence }: Selecte
         'Criptografia e zeroization por tamper'
       ],
       badges: ['SECURITY', 'CRYPTO', 'TPM', 'AEAD', 'THREAT MODEL']
+    },
+    {
+      id: 'verify-systems',
+      title: 'VERIFY SYSTEMS // Operational Doctrine',
+      subtitle: 'Doutrina operacional para sistemas verificáveis: dos princípios do Bitcoin à produção.',
+      impact: 'Framework conceitual para arquitetar sistemas resilientes com reconciliação como processo primário.',
+      highlights: [
+        'Event sourcing + reconciliação contínua',
+        'Hierarquia de verdade (settlement > internal state)',
+        'Modos operacionais: Normal • Degraded • Reconciling • Safe Mode'
+      ],
+      badges: ['SYSTEMS THINKING', 'EVENT SOURCING', 'BITCOIN PRINCIPLES', 'FINTECH', 'RESILIENCE'],
+      demo: '/docs/VERIFY_SYSTEMS.pdf'
     }
   ];
-  
+
   return (
     <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24" id="selected-work">
       {/* Section Header */}
@@ -60,7 +73,7 @@ export function SelectedWorkSection({ onCaseStudy, onDemo, onEvidence }: Selecte
           Sistemas completos. Cada case inclui produto, arquitetura e evidência.
         </p>
       </div>
-      
+
       {/* Project Cards Grid */}
       <div className="grid gap-6 lg:gap-8">
         {projects.map((project, idx) => (
