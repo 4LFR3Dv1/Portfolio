@@ -29,6 +29,8 @@ const translations: Record<Language, Record<string, string>> = {
         'hero.cta.contact': 'CONTACT',
         'hero.cta.architecture': 'ARCHITECTURE',
 
+        'project.verify.spotlight': 'Operational doctrine derived from Bitcoin\'s architecture. Transforms execution into evidence and state into verifiable knowledge. Applied to production fintech systems.',
+
         // Selected Work
         'work.title': 'SELECTED WORK',
         'work.subtitle': 'Production-grade systems. Real users. Measurable impact.',
@@ -167,6 +169,8 @@ const translations: Record<Language, Record<string, string>> = {
         'hero.cta.work': 'VER TRABALHOS',
         'hero.cta.contact': 'CONTATO',
         'hero.cta.architecture': 'ARQUITETURA',
+
+        'project.verify.spotlight': 'Doutrina operacional derivada da arquitetura do Bitcoin. Transforma execução em evidência e estado em conhecimento verificável. Aplicada em sistemas fintech em produção.',
 
         // Selected Work
         'work.title': 'TRABALHOS SELECIONADOS',

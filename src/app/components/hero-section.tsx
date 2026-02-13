@@ -121,11 +121,11 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
         <div className="border border-[var(--border-default)] bg-[var(--surface-1)] lg:sticky lg:top-24">
           {/* Header */}
           <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)]">
-            <div className="font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--electric-blue)' }}>
-              PROJECT SPOTLIGHT // SNE Radar
+            <div className="font-mono text-xs uppercase tracking-wider" style={{ color: '#a855f7' }}>
+              PROJECT SPOTLIGHT // VERIFY SYSTEMS
             </div>
             <div className="font-mono text-[10px] uppercase tracking-wider mt-1" style={{ color: 'var(--terminal-muted)' }}>
-              (Case Study)
+              (Operational Doctrine)
             </div>
           </div>
 
@@ -133,7 +133,7 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
           <div className="p-6 space-y-6">
             <div className="space-y-3">
               <p className="text-sm leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
-                {t('project.sneradar.description')}
+                {t('project.verify.spotlight')}
               </p>
             </div>
 
@@ -145,16 +145,16 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span style={{ color: 'var(--terminal-muted)' }}>MODULES:</span>
-                  <span style={{ color: 'var(--terminal-text)' }}>DESKTOP • LANDING • API • LICENSING</span>
+                  <span style={{ color: 'var(--terminal-muted)' }}>PRINCIPLES:</span>
+                  <span style={{ color: 'var(--terminal-text)' }}>BITCOIN UTXO • EVENT SOURCING</span>
                 </div>
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span style={{ color: 'var(--terminal-muted)' }}>SECURITY:</span>
-                  <span style={{ color: 'var(--terminal-text)' }}>STATE + ONE-TIME CODE + EXCHANGE</span>
+                  <span style={{ color: 'var(--terminal-muted)' }}>PATTERNS:</span>
+                  <span style={{ color: 'var(--terminal-text)' }}>TRUTH HIERARCHY • RECONCILIATION</span>
                 </div>
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span style={{ color: 'var(--terminal-muted)' }}>OPS:</span>
-                  <span style={{ color: 'var(--terminal-text)' }}>DIAGNOSTICS • RECOVERY • GRACE MODE</span>
+                  <span style={{ color: 'var(--terminal-muted)' }}>OUTPUT:</span>
+                  <span style={{ color: 'var(--terminal-text)' }}>EVIDENCE • VERIFIABLE STATE</span>
                 </div>
               </div>
             </div>
