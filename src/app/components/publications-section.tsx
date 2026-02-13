@@ -36,7 +36,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                         <Badge variant="purple">FEATURED</Badge>
                     </div>
                     <div className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>
-                        2024 • PDF • 84 PAGES
+                        2026 • PDF • 84 PAGES
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                                     { year: '2019', event: t('publications.verify.timeline.1') },
                                     { year: '2020', event: t('publications.verify.timeline.2') },
                                     { year: '2022', event: t('publications.verify.timeline.3') },
-                                    { year: '2024', event: t('publications.verify.timeline.4') },
+                                    { year: '2026', event: t('publications.verify.timeline.4') },
                                 ].map((item, idx) => (
                                     <div key={idx} className="flex gap-3">
                                         <span className="font-mono text-xs font-semibold flex-shrink-0 mt-0.5" style={{ color: '#a855f7' }}>
