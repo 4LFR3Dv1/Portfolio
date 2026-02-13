@@ -112,10 +112,24 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
       description: 'byrenanmelo@gmail.com',
       category: 'external',
       action: () => { window.location.href = 'mailto:byrenanmelo@gmail.com'; onClose(); }
-    }
+    },
+    {
+      id: 'nav-publications',
+      label: 'Go to Publications',
+      description: 'View books and written work',
+      category: 'navigation',
+      action: () => { onNavigate('publications'); onClose(); }
+    },
+    {
+      id: 'case-verify',
+      label: 'VERIFY SYSTEMS Case Study',
+      description: 'Operational Doctrine for Verifiable Systems',
+      category: 'case-study',
+      action: () => { onCaseStudy('verify-systems'); onClose(); }
+    },
   ];
 
-  const filteredCommands = commands.filter(cmd => 
+  const filteredCommands = commands.filter(cmd =>
     cmd.label.toLowerCase().includes(query.toLowerCase()) ||
     cmd.description.toLowerCase().includes(query.toLowerCase())
   );
@@ -172,11 +186,11 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
   return (
     <>
       {/* Overlay */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
         onClick={onClose}
       ></div>
-      
+
       {/* Palette */}
       <div className="fixed top-[20vh] left-1/2 -translate-x-1/2 w-full max-w-[600px] z-50 mx-4">
         <div className="border border-[var(--electric-blue)] bg-[var(--terminal-bg)] shadow-[0_0_40px_rgba(0,217,255,0.3)]">
@@ -209,20 +223,19 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
                 {cmds.map((cmd, idx) => {
                   const globalIndex = filteredCommands.indexOf(cmd);
                   const isSelected = globalIndex === selectedIndex;
-                  
+
                   return (
                     <button
                       key={cmd.id}
                       onClick={cmd.action}
-                      className={`w-full text-left px-4 py-3 border-b border-[var(--border-subtle)] transition-colors ${
-                        isSelected
+                      className={`w-full text-left px-4 py-3 border-b border-[var(--border-subtle)] transition-colors ${isSelected
                           ? 'bg-[var(--surface-2)]'
                           : 'hover:bg-[var(--surface-1)]'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <div 
+                          <div
                             className="font-mono text-sm mb-1"
                             style={{ color: isSelected ? 'var(--electric-blue)' : 'var(--terminal-text)' }}
                           >
@@ -241,7 +254,7 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
                 })}
               </div>
             ))}
-            
+
             {filteredCommands.length === 0 && (
               <div className="px-4 py-8 text-center">
                 <p className="font-mono text-sm" style={{ color: 'var(--terminal-muted)' }}>

@@ -19,7 +19,7 @@ export default function App() {
 
   // Set page title
   useEffect(() => {
-    document.title = 'Renan Melo // Portfolio // Systems • Product • Web3';
+    document.title = 'Renan Melo — Decentralized Systems Architect | Author of VERIFY SYSTEMS';
   }, []);
 
   // Command Palette keyboard shortcut
@@ -105,6 +105,8 @@ export default function App() {
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
       } else if (section === 'evidence') {
         document.getElementById('evidence')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (section === 'publications') {
+        document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' });
       }
     }, 100);
   };

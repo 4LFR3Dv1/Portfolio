@@ -24,6 +24,7 @@ const translations: Record<Language, Record<string, string>> = {
         'hero.title': 'RENAN MELO',
         'hero.subtitle': 'Decentralized Systems Architect | Author of VERIFY SYSTEMS',
         'hero.description': 'From Bitcoin principles to production systems. I derive verifiable architectures from first principles and build end-to-end: Platform UX, desktop runtime, backend, and Web3 auth/licensing.',
+        'hero.desc.origin': 'From Bitcoin principles to production systems. I derive verifiable architectures from first principles and build end-to-end.',
         'hero.cta.work': 'VIEW WORK',
         'hero.cta.contact': 'CONTACT',
         'hero.cta.architecture': 'ARCHITECTURE',
@@ -61,6 +62,12 @@ const translations: Record<Language, Record<string, string>> = {
         'about.p3': 'My background includes systems thinking from first principles. I studied Bitcoin\'s architecture and derived universal patterns for verifiable systems--documented in VERIFY SYSTEMS, an operational doctrine for production environments.',
         'about.p4': 'My focus is end-to-end ownership: architecture, UX, integration, deploy, diagnostics, and continuous evolution. I prefer high signal: less promise, more evidence.',
         'about.skills': 'SKILLS',
+        'about.journey': 'JOURNEY',
+        'about.timeline.1': 'Industrial Design background. Systems thinking from first principles.',
+        'about.timeline.2': 'Discovered Bitcoin. Studied protocol architecture deeply.',
+        'about.timeline.3': 'Applied decentralized patterns to fintech and desktop platforms.',
+        'about.timeline.4': 'Built SNE ecosystem: OS, Radar, Vault Protocol.',
+        'about.timeline.5': 'Authored VERIFY SYSTEMS. Formalized operational doctrine.',
 
         // Contact
         'contact.title': 'CONTACT // ROUTING',
@@ -156,6 +163,7 @@ const translations: Record<Language, Record<string, string>> = {
         'hero.title': 'RENAN MELO',
         'hero.subtitle': 'Arquiteto de Sistemas Descentralizados | Autor de VERIFY SYSTEMS',
         'hero.description': 'Dos princípios do Bitcoin a sistemas de produção. Derivo arquiteturas verificáveis a partir de primeiros princípios e construo end-to-end: Platform UX, desktop runtime, backend e Web3 auth/licensing.',
+        'hero.desc.origin': 'Dos princípios do Bitcoin a sistemas de produção. Derivo arquiteturas verificáveis a partir de primeiros princípios e construo end-to-end.',
         'hero.cta.work': 'VER TRABALHOS',
         'hero.cta.contact': 'CONTATO',
         'hero.cta.architecture': 'ARQUITETURA',
@@ -193,6 +201,12 @@ const translations: Record<Language, Record<string, string>> = {
         'about.p3': 'Minha formação inclui pensamento sistêmico a partir de primeiros princípios. Estudei a arquitetura do Bitcoin e derivei padrões universais para sistemas verificáveis--documentados em VERIFY SYSTEMS, uma doutrina operacional para ambientes de produção.',
         'about.p4': 'Meu foco é end-to-end ownership: arquitetura, UX, integração, deploy, diagnósticos e evolução contínua. Tenho preferência por alto sinal: menos promessa, mais evidência.',
         'about.skills': 'HABILIDADES',
+        'about.journey': 'JORNADA',
+        'about.timeline.1': 'Background em Design Industrial. Pensamento sistemico desde primeiros principios.',
+        'about.timeline.2': 'Descobriu Bitcoin. Estudou a arquitetura do protocolo a fundo.',
+        'about.timeline.3': 'Aplicou padroes descentralizados em fintech e plataformas desktop.',
+        'about.timeline.4': 'Construiu ecossistema SNE: OS, Radar, Vault Protocol.',
+        'about.timeline.5': 'Publicou VERIFY SYSTEMS. Formalizou doutrina operacional.',
 
         // Contact
         'contact.title': 'CONTATO // ROTEAMENTO',

@@ -17,16 +17,41 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
       <div className="grid lg:grid-cols-2 gap-12 items-start">
         {/* Left: Main content */}
         <div className="space-y-8">
-          {/* Name */}
-          <h1 className="font-mono font-bold tracking-tight" style={{ color: 'var(--electric-blue)' }}>
-            {t('hero.title')}
-          </h1>
-
-          {/* Subheadline */}
+          {/* Name + Role */}
           <div className="space-y-3">
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
-              {t('hero.subtitle')}. {t('hero.description')}
+            <h1 className="font-mono font-bold tracking-tight text-4xl lg:text-5xl" style={{ color: 'var(--electric-blue)' }}>
+              {t('hero.title')}
+            </h1>
+            <div className="font-mono text-sm lg:text-base tracking-wide flex flex-wrap items-center gap-2">
+              <span style={{ color: 'var(--terminal-text)' }}>Decentralized Systems Architect</span>
+              <span style={{ color: 'var(--border-strong)' }}>|</span>
+              <span style={{ color: '#a855f7' }}>Author of VERIFY SYSTEMS</span>
+            </div>
+          </div>
+
+          {/* Description - structured */}
+          <div className="space-y-3 max-w-xl">
+            <p className="text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
+              {t('hero.desc.origin')}
             </p>
+            <div className="font-mono text-xs space-y-1.5 pl-4 border-l-2 border-[var(--border-default)]">
+              <div className="flex items-center gap-2">
+                <span style={{ color: 'var(--electric-blue)' }}>▸</span>
+                <span style={{ color: 'var(--terminal-muted)' }}>Platform UX</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span style={{ color: 'var(--electric-blue)' }}>▸</span>
+                <span style={{ color: 'var(--terminal-muted)' }}>Desktop Runtime</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span style={{ color: 'var(--electric-blue)' }}>▸</span>
+                <span style={{ color: 'var(--terminal-muted)' }}>Backend + API</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span style={{ color: 'var(--electric-blue)' }}>▸</span>
+                <span style={{ color: 'var(--terminal-muted)' }}>Web3 Auth / Licensing</span>
+              </div>
+            </div>
           </div>
 
           {/* Proof Chips */}
