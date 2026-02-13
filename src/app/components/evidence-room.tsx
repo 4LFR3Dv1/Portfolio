@@ -77,7 +77,7 @@ export function EvidenceRoom() {
       titleKey: 'evidence.verify.title',
       descKey: 'evidence.verify.desc',
       type: 'pdf',
-      url: '/docs/VERIFY_SYSTEMS.pdf'
+      url: '/docs/Verify_By_Renan_Melo.pdf'
     },
     {
       id: 'sne-smart-contract',

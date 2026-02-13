@@ -58,7 +58,7 @@ export function SelectedWorkSection({ onCaseStudy, onDemo, onEvidence }: Selecte
         'Modos operacionais: Normal • Degraded • Reconciling • Safe Mode'
       ],
       badges: ['SYSTEMS THINKING', 'EVENT SOURCING', 'BITCOIN PRINCIPLES', 'FINTECH', 'RESILIENCE'],
-      demo: '/docs/VERIFY_SYSTEMS.pdf'
+      demo: '/docs/Verify_By_Renan_Melo.pdf'
     }
   ];
 

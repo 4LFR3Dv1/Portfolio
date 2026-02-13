@@ -239,6 +239,76 @@ export function CaseStudyTemplate({ projectId, onBack }: CaseStudyTemplateProps)
         'Verificação e governança exigem sinais objetivos, não só políticas.',
         'O valor está na clareza do modelo e nas interfaces de controle.'
       ]
+    },
+    'verify-systems': {
+      title: 'VERIFY SYSTEMS',
+      type: 'Operational Doctrine • Verifiable Systems • Book',
+      link: '/docs/Verify_By_Renan_Melo.pdf',
+      role: 'Renan Melo — autor, arquiteto conceitual',
+      proofChips: ['EVENT SOURCING', 'RECONCILIATION', 'BITCOIN PRINCIPLES', 'STATE MACHINES', 'OPERATIONAL MODES'],
+      summary: {
+        intro: 'Doutrina operacional para sistemas que precisam provar que estão corretos, não apenas parecer corretos.',
+        description: 'Derivado dos princípios do Bitcoin (UTXO, proof-of-work, consenso), VERIFY SYSTEMS documenta padrões universais para transformar execução em evidência e estado em conhecimento operacional verificável.'
+      },
+      problem: {
+        title: 'Sistemas de produção mentem de três formas:',
+        points: [
+          'Estado mutável sem rastro: transações mudam de status sem evidência do porquê.',
+          'Reconciliação como exceção: diferenças entre sistemas são tratadas ad-hoc, não como processo primário.',
+          'Falhas silenciosas: o sistema reporta "sucesso" mas a realidade diverge (pagamento confirmado internamente, rejeitado pelo provedor).'
+        ]
+      },
+      approach: {
+        title: 'Don\'t Trust, Verify — arquitetura que prova ao invés de prometer:',
+        points: [
+          'Event sourcing: toda mudança de estado gera evidência imutável',
+          'Hierarquia de verdade: settlement externo > estado interno > cache',
+          'Reconciliação contínua como processo primário (não batch noturno)',
+          'Modos operacionais explícitos: Normal, Degraded, Reconciling, Safe Mode'
+        ],
+        why: 'Em sistemas financeiros, "o banco de dados diz que pagou" não é verdade. Verdade é o settlement confirmado pelo provedor. VERIFY formaliza essa distinção.'
+      },
+      architecture: {
+        layers: [
+          {
+            name: 'EXECUTION PLANE',
+            items: [
+              'Processa transações e gera evidência de cada operação',
+              'Cada mutação de estado produz um evento imutável',
+              'Idempotência por chave natural (issuedAt + system + address + value)'
+            ]
+          },
+          {
+            name: 'VERIFY PLANE',
+            items: [
+              'Reconcilia estado interno contra fontes externas de verdade',
+              'Detecta divergências e classifica por severidade',
+              'Opera independente do plano de execução'
+            ]
+          },
+          {
+            name: 'CONTROL PLANE',
+            items: [
+              'Monitora métricas de saúde (Reconciliation Lag, Unknown Truth Duration)',
+              'Transiciona entre modos operacionais automaticamente',
+              'Circuit breakers e degradação graceful'
+            ]
+          }
+        ],
+        guarantees: ['VERIFIABLE STATE', 'CONTINUOUS RECONCILIATION', 'GRACEFUL DEGRADATION', 'EVIDENCE-BASED']
+      },
+      keyDecisions: [
+        'Derivar de Bitcoin, não de frameworks tradicionais: UTXO como inspiração para transações verificáveis.',
+        'Reconciliação é processo primário, não secundário: roda continuamente, não em batch.',
+        'Separação em 3 planos (Execution, Verify, Control): cada um pode falhar independentemente.',
+        'Shadow mode antes de ativação: validar sem impactar produção.'
+      ],
+      learnings: [
+        'Sistemas financeiros precisam de "hierarquia de verdade" explícita.',
+        'O princípio "Don\'t Trust, Verify" do Bitcoin é universal para qualquer sistema crítico.',
+        'Documentar a doutrina antes de implementar força clareza arquitetural.',
+        'Reconciliação contínua elimina categorias inteiras de bugs silenciosos.'
+      ]
     }
   };
 
