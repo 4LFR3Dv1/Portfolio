@@ -31,6 +31,7 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
 
           {/* Proof Chips */}
           <div className="flex flex-wrap gap-3">
+            <Badge variant="purple">AUTHOR: VERIFY SYSTEMS</Badge>
             <Badge variant="blue">END-TO-END BUILDER</Badge>
             <Badge variant="green">PRODUCTION SYSTEMS</Badge>
             <Badge variant="amber">WALLET AUTH + LICENSING</Badge>

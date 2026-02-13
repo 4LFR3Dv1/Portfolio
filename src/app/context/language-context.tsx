@@ -22,8 +22,8 @@ const translations: Record<Language, Record<string, string>> = {
 
         // Hero
         'hero.title': 'RENAN MELO',
-        'hero.subtitle': 'Product-first Engineer',
-        'hero.description': 'End-to-end systems in production: Platform UX (OS-like), desktop runtime, backend, and Web3 auth/licensing (SIWE).',
+        'hero.subtitle': 'Decentralized Systems Architect | Author of VERIFY SYSTEMS',
+        'hero.description': 'From Bitcoin principles to production systems. I derive verifiable architectures from first principles and build end-to-end: Platform UX, desktop runtime, backend, and Web3 auth/licensing.',
         'hero.cta.work': 'VIEW WORK',
         'hero.cta.contact': 'CONTACT',
         'hero.cta.architecture': 'ARCHITECTURE',
@@ -58,8 +58,8 @@ const translations: Record<Language, Record<string, string>> = {
         'about.title': 'ABOUT // OPERATOR NOTES',
         'about.p1': 'I build products like tools: interfaces that provide clarity, control, and performance.',
         'about.p2': 'I like distributed systems that need to work in the real world: networks fail, APIs change, users abandon if UX breaks.',
-        'about.p3': 'My focus is end-to-end ownership: architecture, UX, integration, deploy, diagnostics, and continuous evolution.',
-        'about.p4': 'I prefer high signal: less promise, more evidence.',
+        'about.p3': 'My background includes systems thinking from first principles. I studied Bitcoin\'s architecture and derived universal patterns for verifiable systems--documented in VERIFY SYSTEMS, an operational doctrine for production environments.',
+        'about.p4': 'My focus is end-to-end ownership: architecture, UX, integration, deploy, diagnostics, and continuous evolution. I prefer high signal: less promise, more evidence.',
         'about.skills': 'SKILLS',
 
         // Contact
@@ -93,6 +93,8 @@ const translations: Record<Language, Record<string, string>> = {
         'evidence.vault.overview.desc': 'Protocol overview and use cases.',
         'evidence.vault.infra.title': 'SNE Vault Protocol // Sovereign Infrastructure (PDF)',
         'evidence.vault.infra.desc': 'Sovereign physical infrastructure architecture.',
+        'evidence.verify.title': 'VERIFY SYSTEMS // Operational Doctrine (PDF)',
+        'evidence.verify.desc': 'From Bitcoin principles to production systems. Event sourcing, reconciliation, and verifiable state management.',
 
         // Command Palette
         'palette.placeholder': 'Type a command or search...',
@@ -137,8 +139,8 @@ const translations: Record<Language, Record<string, string>> = {
 
         // Hero
         'hero.title': 'RENAN MELO',
-        'hero.subtitle': 'Engenheiro Product-first',
-        'hero.description': 'Sistemas end-to-end em produção: Platform UX (OS-like), desktop runtime, backend e Web3 auth/licensing (SIWE).',
+        'hero.subtitle': 'Arquiteto de Sistemas Descentralizados | Autor de VERIFY SYSTEMS',
+        'hero.description': 'Dos princípios do Bitcoin a sistemas de produção. Derivo arquiteturas verificáveis a partir de primeiros princípios e construo end-to-end: Platform UX, desktop runtime, backend e Web3 auth/licensing.',
         'hero.cta.work': 'VER TRABALHOS',
         'hero.cta.contact': 'CONTATO',
         'hero.cta.architecture': 'ARQUITETURA',
@@ -173,8 +175,8 @@ const translations: Record<Language, Record<string, string>> = {
         'about.title': 'SOBRE // NOTAS DO OPERADOR',
         'about.p1': 'Eu construo produtos como ferramentas: interfaces que dão clareza, controle e performance.',
         'about.p2': 'Gosto de sistemas distribuídos que precisam funcionar no mundo real: rede falha, APIs mudam, usuários abandonam se a UX quebra.',
-        'about.p3': 'Meu foco é end-to-end ownership: arquitetura, UX, integração, deploy, diagnósticos e evolução contínua.',
-        'about.p4': 'Tenho preferência por alto sinal: menos promessa, mais evidência.',
+        'about.p3': 'Minha formação inclui pensamento sistêmico a partir de primeiros princípios. Estudei a arquitetura do Bitcoin e derivei padrões universais para sistemas verificáveis--documentados em VERIFY SYSTEMS, uma doutrina operacional para ambientes de produção.',
+        'about.p4': 'Meu foco é end-to-end ownership: arquitetura, UX, integração, deploy, diagnósticos e evolução contínua. Tenho preferência por alto sinal: menos promessa, mais evidência.',
         'about.skills': 'HABILIDADES',
 
         // Contact
@@ -208,6 +210,8 @@ const translations: Record<Language, Record<string, string>> = {
         'evidence.vault.overview.desc': 'Visão geral do protocolo e casos de uso.',
         'evidence.vault.infra.title': 'SNE Vault Protocol // Infraestrutura Soberana (PDF)',
         'evidence.vault.infra.desc': 'Arquitetura de infraestrutura física soberana.',
+        'evidence.verify.title': 'VERIFY SYSTEMS // Doutrina Operacional (PDF)',
+        'evidence.verify.desc': 'Dos princípios do Bitcoin a sistemas de produção. Event sourcing, reconciliação e gerenciamento de estado verificável.',
 
         // Command Palette
         'palette.placeholder': 'Digite um comando ou pesquise...',

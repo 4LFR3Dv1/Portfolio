@@ -73,6 +73,13 @@ export function EvidenceRoom() {
 
   const evidenceItems: EvidenceItem[] = [
     {
+      id: 'verify-systems',
+      titleKey: 'evidence.verify.title',
+      descKey: 'evidence.verify.desc',
+      type: 'pdf',
+      url: '/docs/VERIFY_SYSTEMS.pdf'
+    },
+    {
       id: 'sne-smart-contract',
       titleKey: 'evidence.solidity.title',
       descKey: 'evidence.solidity.desc',
