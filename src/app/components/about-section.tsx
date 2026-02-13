@@ -20,16 +20,28 @@ export function AboutSection() {
 
   return (
     <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24 border-t border-[var(--border-subtle)]" id="about">
-      {/* Section Header */}
-      <div className="mb-12">
-        <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
-          {t('about.title')}
-        </h2>
+      {/* Header with photo */}
+      <div className="flex items-center gap-5 mb-10">
+        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[var(--border-default)] flex-shrink-0">
+          <img
+            src="/docs/EDIT RENAN 1.png"
+            alt="Renan Melo"
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+        <div>
+          <h2 className="font-mono font-bold" style={{ color: 'var(--electric-blue)' }}>
+            {t('about.title')}
+          </h2>
+          <div className="font-mono text-xs mt-1" style={{ color: 'var(--terminal-muted)' }}>
+            Renan Melo — Decentralized Systems Architect
+          </div>
+        </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-12">
-        {/* Left: Bio */}
-        <div className="lg:col-span-2 space-y-4 text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
+      <div className="grid lg:grid-cols-5 gap-12">
+        {/* Left: Bio (3 cols) */}
+        <div className="lg:col-span-3 space-y-4 text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
           <p>{t('about.p1')}</p>
           <p>{t('about.p2')}</p>
           <p>{t('about.p3')}</p>
@@ -38,32 +50,10 @@ export function AboutSection() {
           </p>
         </div>
 
-        {/* Right: Photo Card + Skills + Timeline */}
-        <div className="space-y-8">
-          {/* Photo ID Card */}
-          <div className="border border-[var(--border-default)] bg-[var(--surface-1)] overflow-hidden">
-            <div className="h-48 overflow-hidden">
-              <img
-                src="/docs/EDIT RENAN 1.png"
-                alt="Renan Melo"
-                className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
-              />
-            </div>
-            <div className="px-4 py-3 bg-[var(--surface-2)] border-t border-[var(--border-default)]">
-              <div className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
-                Renan Melo
-              </div>
-              <div className="font-mono text-[10px] mt-1" style={{ color: 'var(--terminal-muted)' }}>
-                Decentralized Systems Architect
-              </div>
-              <div className="font-mono text-[10px]" style={{ color: '#a855f7' }}>
-                Author of VERIFY SYSTEMS
-              </div>
-            </div>
-          </div>
-
+        {/* Right: Skills + Timeline (2 cols) */}
+        <div className="lg:col-span-2 space-y-8">
           {/* Skills */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="font-mono text-[10px] uppercase tracking-wider" style={{ color: 'var(--terminal-muted)' }}>
               {t('about.skills')}
             </div>
@@ -75,17 +65,17 @@ export function AboutSection() {
           </div>
 
           {/* Career Timeline */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="font-mono text-[10px] uppercase tracking-wider" style={{ color: 'var(--terminal-muted)' }}>
               {t('about.journey')}
             </div>
-            <div className="border-l-2 border-[var(--border-default)] pl-4 space-y-3">
+            <div className="border-l-2 border-[var(--border-default)] pl-4 space-y-2.5">
               {timeline.map((item, idx) => (
                 <div key={idx} className="flex gap-3">
-                  <span className="font-mono text-xs font-semibold flex-shrink-0 mt-0.5" style={{ color: 'var(--electric-blue)' }}>
+                  <span className="font-mono text-xs font-semibold flex-shrink-0" style={{ color: 'var(--electric-blue)' }}>
                     {item.year}
                   </span>
-                  <span className="text-sm" style={{ color: 'var(--terminal-text)' }}>
+                  <span className="text-xs" style={{ color: 'var(--terminal-text)' }}>
                     {item.label}
                   </span>
                 </div>
