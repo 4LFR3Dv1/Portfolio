@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { TerminalTopBar } from '@/app/components/terminal-topbar';
 import { HeroSection } from '@/app/components/hero-section';
 import { TechTicker } from '@/app/components/tech-ticker';
@@ -113,6 +114,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Analytics />
       <TerminalTopBar />
 
       {/* Command Palette */}
