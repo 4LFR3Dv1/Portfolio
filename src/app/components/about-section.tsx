@@ -18,19 +18,18 @@ export function AboutSection() {
   ];
 
   return (
-    <section className="mx-auto max-w-[1480px] px-6 py-24 lg:px-10 lg:py-32" id="about">
+    <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24 border-t border-[var(--border-subtle)]" id="about">
       {/* Header with photo */}
-      <div className="mb-14 flex items-center gap-6">
-        <div className="h-24 w-24 flex-shrink-0 overflow-hidden border border-[var(--border-default)] bg-[var(--surface-2)] p-1">
+      <div className="flex items-center gap-5 mb-10">
+        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[var(--border-default)] flex-shrink-0">
           <img
             src="/docs/EDIT RENAN 1.png"
             alt="Renan Melo"
-            className="h-full w-full object-cover object-top grayscale transition-all duration-500 hover:grayscale-0"
+            className="w-full h-full object-cover object-top"
           />
         </div>
         <div>
-          <div className="eyebrow mb-3">05 / Profile</div>
-          <h2 className="text-white">
+          <h2 className="font-mono font-bold" style={{ color: 'var(--electric-blue)' }}>
             {t('about.title')}
           </h2>
           <div className="font-mono text-xs mt-1" style={{ color: 'var(--terminal-muted)' }}>
@@ -41,7 +40,7 @@ export function AboutSection() {
         </div>
       </div>
 
-      <div className="glass-panel grid gap-12 border-t-2 border-t-[var(--electric-blue)] p-7 sm:p-10 lg:grid-cols-5 lg:p-14">
+      <div className="grid lg:grid-cols-5 gap-12">
         {/* Left: Bio (3 cols) */}
         <div className="lg:col-span-3 space-y-4 text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
           <p>{t('about.p1')}</p>

@@ -84,28 +84,25 @@ export function EvidenceRoom() {
     : { all: 'TODOS', live: 'ONLINE', source: 'CÓDIGO', document: 'DOCUMENTOS', health: 'SAÚDE', open: 'ABRIR EVIDÊNCIA' };
 
   return (
-    <section className="mx-auto max-w-[1480px] px-6 py-24 lg:px-10 lg:py-32" id="evidence">
-      <div className="mb-14 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-        <div>
-          <div className="eyebrow mb-5">03 / Public proof</div>
-          <h2 className="text-white">{t('evidence.title')}</h2>
-        </div>
-        <p className="max-w-2xl text-base leading-relaxed text-[var(--terminal-muted)] lg:justify-self-end">
+    <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24 border-t border-[var(--border-subtle)]" id="evidence">
+      <div className="mb-12">
+        <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>{t('evidence.title')}</h2>
+        <p className="text-base max-w-3xl" style={{ color: 'var(--terminal-muted)' }}>
           {language === 'en'
             ? 'Every item below resolves to a public deployment, repository, endpoint or document. Private projects are never presented as publicly auditable.'
             : 'Cada item abaixo leva a um deploy, repositório, endpoint ou documento público. Projetos privados nunca são apresentados como publicamente auditáveis.'}
         </p>
       </div>
 
-      <div className="mb-8 flex flex-wrap gap-1 border-y border-[var(--border-subtle)] bg-white/[0.02] p-2">
+      <div className="flex flex-wrap gap-3 mb-8">
         {(['all', 'live', 'source', 'document', 'health'] as const).map((filter) => (
           <button
             key={filter}
             type="button"
             onClick={() => setActiveFilter(filter)}
-            className={`rounded-[0.2rem] px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] transition-all ${activeFilter === filter
-              ? 'bg-[var(--electric-blue)] text-[#0a0a0f]'
-              : 'text-[var(--terminal-muted)] hover:bg-white/[0.04] hover:text-white'}`}
+            className={`px-4 py-2 font-mono text-xs uppercase tracking-wider border transition-all ${activeFilter === filter
+              ? 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)]'
+              : 'border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)]'}`}
           >
             {labels[filter]}
           </button>
@@ -114,13 +111,13 @@ export function EvidenceRoom() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {visibleItems.map((item) => (
-          <article key={item.id} className="glass-panel group flex min-h-64 flex-col border-t-2 border-t-[var(--border-strong)] p-6 transition-transform duration-300 hover:-translate-y-1 hover:border-t-[var(--electric-blue)]">
-            <div className="flex items-start justify-between gap-3">
-              <h3 className="font-mono text-xs font-semibold text-white">{item.title[language]}</h3>
+          <article key={item.id} className="border border-[var(--border-default)] bg-[var(--surface-1)] flex flex-col">
+            <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)] flex items-start justify-between gap-3">
+              <h3 className="font-mono text-xs font-semibold" style={{ color: 'var(--electric-blue)' }}>{item.title[language]}</h3>
               <Badge variant={item.type === 'health' ? 'green' : 'default'}>{labels[item.type]}</Badge>
             </div>
-            <div className="mt-8 flex flex-1 flex-col space-y-4">
-              <p className="flex-1 text-sm leading-relaxed" style={{ color: 'var(--terminal-muted)' }}>{item.description[language]}</p>
+            <div className="p-6 space-y-4 flex flex-col flex-1">
+              <p className="text-sm flex-1" style={{ color: 'var(--terminal-muted)' }}>{item.description[language]}</p>
               <p className="font-mono text-[10px] uppercase tracking-wider" style={{ color: 'var(--electric-green)' }}>{item.provenance[language]}</p>
               <Button variant="secondary" onClick={() => window.open(item.url, '_blank', 'noopener,noreferrer')} className="w-full">
                 {labels.open}

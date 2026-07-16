@@ -6,12 +6,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ variant = 'primary', children, className = '', ...props }: ButtonProps) {
-  const baseClasses = 'group inline-flex min-h-11 items-center justify-center rounded-[0.3rem] px-5 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-300 border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] disabled:opacity-50';
+  const baseClasses = 'px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-200 border';
   
   const variantClasses = {
-    primary: 'bg-[var(--electric-blue)] text-[#090b12] border-[var(--electric-blue)] hover:-translate-y-0.5 hover:bg-[#a5b5ff] hover:shadow-[0_14px_35px_rgba(104,126,255,0.28)]',
-    secondary: 'bg-white/[0.035] border-[var(--border-strong)] text-[var(--terminal-text)] hover:-translate-y-0.5 hover:bg-white/[0.07] hover:border-[var(--electric-blue)]',
-    ghost: 'bg-transparent border-transparent text-[var(--terminal-muted)] hover:text-white hover:bg-white/[0.05]'
+    primary: 'bg-[var(--electric-blue)] text-[#0a0a0f] border-[var(--electric-blue)] hover:bg-[#00c4ea] hover:shadow-[0_0_20px_rgba(0,217,255,0.4)]',
+    secondary: 'bg-transparent border-[var(--border-strong)] text-[var(--terminal-text)] hover:bg-[var(--surface-2)] hover:border-[var(--electric-blue)]',
+    ghost: 'bg-transparent border-transparent text-[var(--terminal-muted)] hover:text-[var(--electric-blue)] hover:bg-[var(--surface-1)]'
   };
   
   return (

@@ -1,31 +1,32 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #070910;
-  --foreground: #f1f4fb;
+  /* Bloomberg/DevTools Design System */
+  /* Base - forcing dark mode */
+  --background: #0a0a0f;
+  --foreground: #e8e8ea;
   
   /* Terminal colors */
-  --terminal-bg: #070910;
-  --terminal-border: rgba(255, 255, 255, 0.08);
-  --terminal-text: #d8deeb;
-  --terminal-muted: #8a94a8;
+  --terminal-bg: #0a0a0f;
+  --terminal-border: #1a1a24;
+  --terminal-text: #e8e8ea;
+  --terminal-muted: #6b6b7a;
   
   /* Accent colors - high contrast */
-  --electric-blue: #8da2ff;
-  --electric-green: #65e6b4;
-  --amber: #ffc36b;
-  --red: #ff718c;
-  --violet: #bd8cff;
+  --electric-blue: #00d9ff;
+  --electric-green: #00ff88;
+  --amber: #ffaa00;
+  --red: #ff3366;
   
   /* Surfaces */
-  --surface-1: rgba(16, 20, 31, 0.74);
-  --surface-2: rgba(24, 29, 44, 0.72);
-  --surface-3: #202638;
+  --surface-1: #12121a;
+  --surface-2: #1a1a24;
+  --surface-3: #24242e;
   
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-default: rgba(255, 255, 255, 0.11);
-  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-subtle: #1a1a24;
+  --border-default: #24242e;
+  --border-strong: #3a3a44;
   
   /* Status colors */
   --status-online: #00ff88;
@@ -35,7 +36,7 @@
   
   /* Typography */
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
   /* Spacing scale */
   --space-1: 0.25rem;
@@ -71,7 +72,7 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: #00d9ff;
-  --radius: 0.375rem;
+  --radius: 0.25rem;
   
   /* Chart colors - adapted for dark */
   --chart-1: #00d9ff;
@@ -159,18 +160,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
-    min-width: 320px;
-    background:
-      radial-gradient(circle at 12% 8%, rgba(104, 126, 255, 0.14), transparent 30rem),
-      radial-gradient(circle at 88% 22%, rgba(101, 230, 180, 0.08), transparent 26rem),
-      var(--background);
-    background-attachment: fixed;
-    -webkit-font-smoothing: antialiased;
   }
-
-  html { scroll-behavior: smooth; }
-
-  ::selection { background: rgba(141, 162, 255, 0.35); color: white; }
 
   /**
   * Default typography styles for HTML elements (h1-h4, p, label, button, input).
@@ -182,26 +172,26 @@
   }
 
   h1 {
-    font-size: clamp(3.4rem, 9vw, 7.5rem);
-    font-weight: 800;
-    line-height: 0.9;
-    letter-spacing: -0.075em;
-    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-family: var(--font-mono);
   }
 
   h2 {
-    font-size: clamp(2.2rem, 5vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.055em;
-    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-family: var(--font-mono);
   }
 
   h3 {
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 1.4;
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
   }
 
   h4 {
@@ -235,38 +225,5 @@
   
   code, pre {
     font-family: var(--font-mono);
-  }
-}
-
-@layer utilities {
-  .glass-panel {
-    background: linear-gradient(145deg, rgba(25, 30, 46, 0.8), rgba(10, 13, 22, 0.66));
-    border: 1px solid var(--border-default);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24), inset 0 1px rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(20px);
-  }
-
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    line-height: 1;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--electric-green);
-  }
-
-  .text-gradient {
-    background: linear-gradient(115deg, #ffffff 10%, var(--electric-blue) 52%, var(--electric-green));
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-
-  .soft-grid {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 52px 52px;
-    mask-image: linear-gradient(to bottom, black, transparent 85%);
   }
 }

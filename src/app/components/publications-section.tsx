@@ -10,23 +10,21 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
     const { t, language } = useLanguage();
 
     return (
-        <section className="mx-auto max-w-[1480px] px-6 py-24 lg:px-10 lg:py-32" id="publications">
+        <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24" id="publications">
             {/* Section Header */}
-            <div className="mb-14 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-                <div>
-                <div className="eyebrow mb-5">04 / Written systems</div>
-                <h2 className="text-white">
+            <div className="mb-12">
+                <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
                     {t('publications.title')}
-                </h2></div>
-                <p className="max-w-2xl text-base leading-relaxed text-[var(--terminal-muted)] lg:justify-self-end">
+                </h2>
+                <p className="text-base" style={{ color: 'var(--terminal-muted)' }}>
                     {t('publications.subtitle')}
                 </p>
             </div>
 
             {/* Featured Publication - VERIFY SYSTEMS */}
-            <div className="glass-panel group mb-5 overflow-hidden border-l-2 border-l-[var(--violet)] transition-all duration-300 hover:border-[rgba(189,140,255,0.35)]">
+            <div className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--border-strong)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] group mb-8">
                 {/* Header with purple accent */}
-                <div className="flex items-center justify-between border-b border-[var(--border-default)] bg-white/[0.025] px-6 py-5">
+                <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)] flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
                             <span className="font-mono text-lg" style={{ color: '#a855f7' }}>▸</span>
@@ -42,7 +40,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                 </div>
 
                 {/* Body */}
-                <div className="p-6 sm:p-8">
+                <div className="p-6">
                     <div className="grid md:grid-cols-[2fr_1fr] gap-8">
                         {/* Left: Description */}
                         <div className="space-y-4">
@@ -91,7 +89,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                         </div>
 
                         {/* Right: Origin Story */}
-                        <div className="border border-[var(--border-default)] bg-white/[0.025] p-6">
+                        <div className="border border-[var(--border-default)] bg-[var(--surface-2)] p-5">
                             <div className="font-mono text-[10px] uppercase tracking-wider mb-4" style={{ color: '#a855f7' }}>
                                 {t('publications.verify.origin')}
                             </div>
@@ -130,7 +128,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
             {/* Other Publications */}
             <div className="grid md:grid-cols-2 gap-6">
                 {/* Production Handbook */}
-                <div className="glass-panel border-t-2 border-t-[var(--electric-blue)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]">
+                <div className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--border-strong)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)] p-6">
                     <div className="flex items-center gap-3 mb-3">
                         <span className="font-mono" style={{ color: 'var(--electric-blue)' }}>▸</span>
                         <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
@@ -152,7 +150,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                 </div>
 
                 {/* TypeScript Handbook */}
-                <div className="glass-panel border-t-2 border-t-[var(--electric-blue)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]">
+                <div className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--border-strong)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.1)] p-6">
                     <div className="flex items-center gap-3 mb-3">
                         <span className="font-mono" style={{ color: 'var(--electric-blue)' }}>▸</span>
                         <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>

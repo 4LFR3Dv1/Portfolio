@@ -63,7 +63,7 @@ export function MermaidDiagram({ chart, id }: MermaidDiagramProps) {
 
   if (error) {
     return (
-      <div className="overflow-x-auto border border-red-500/50 bg-[var(--surface-1)] p-6">
+      <div className="bg-[var(--surface-1)] p-6 rounded-lg border border-red-500/50 overflow-x-auto">
         <p className="text-red-400 font-mono text-sm mb-4">Diagram render error</p>
         <pre className="text-xs text-[var(--terminal-muted)] overflow-x-auto whitespace-pre-wrap">{chart}</pre>
       </div>
@@ -76,7 +76,7 @@ export function MermaidDiagram({ chart, id }: MermaidDiagramProps) {
 
   return (
     <div
-      className="overflow-x-auto border border-[var(--border-default)] bg-[var(--surface-1)] p-6"
+      className="bg-[var(--surface-1)] p-6 rounded-lg border border-[var(--border-default)] overflow-x-auto"
       data-diagram-id={id}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
