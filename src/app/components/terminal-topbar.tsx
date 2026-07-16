@@ -5,26 +5,24 @@ export function TerminalTopBar() {
   const { language } = useLanguage();
 
   return (
-    <header className="w-full border-b border-[#1a1a24] bg-[#0a0a0f] sticky top-0 z-50">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
-        <a href="/" className="font-mono text-xs sm:text-sm font-semibold tracking-wide" style={{ color: 'var(--electric-blue)' }}>
-          RENAN MELO // PORTFOLIO
+    <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-6">
+      <div className="glass-panel mx-auto flex max-w-[1480px] items-center justify-between gap-4 rounded-2xl px-4 py-3 sm:px-5">
+        <a href="/" className="flex items-center gap-3 text-sm font-bold tracking-[-0.02em] text-white">
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-[var(--electric-blue)] font-mono text-[10px] text-[#090b12]">RM</span>
+          <span className="hidden sm:inline">Renan Melo</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-3 font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>
-          <span>{language === 'en' ? 'SYSTEMS' : 'SISTEMAS'}</span>
-          <span className="text-[#3a3a44]">/</span>
-          <span>PRODUCT</span>
-          <span className="text-[#3a3a44]">/</span>
-          <span>WEB3</span>
-          <span className="text-[#3a3a44]">/</span>
-          <span>AI</span>
+        <div className="hidden items-center gap-6 font-mono text-[10px] uppercase tracking-[0.14em] lg:flex" style={{ color: 'var(--terminal-muted)' }}>
+          <a href="/#selected-work" className="transition-colors hover:text-white">{language === 'en' ? 'Work' : 'Projetos'}</a>
+          <a href="/#evidence" className="transition-colors hover:text-white">{language === 'en' ? 'Evidence' : 'Evidências'}</a>
+          <a href="/#about" className="transition-colors hover:text-white">{language === 'en' ? 'About' : 'Sobre'}</a>
+          <a href="/#contact" className="transition-colors hover:text-white">{language === 'en' ? 'Contact' : 'Contato'}</a>
         </div>
 
         <div className="flex items-center gap-3 sm:gap-6">
           <LanguageToggle />
-          <span className="hidden sm:block font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--terminal-muted)' }}>
-            SÃO PAULO · REMOTE
+          <span className="hidden rounded-full border border-[var(--border-default)] bg-white/[0.03] px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.12em] sm:block" style={{ color: 'var(--electric-green)' }}>
+            ● {language === 'en' ? 'Available remotely' : 'Disponível remoto'}
           </span>
         </div>
       </div>

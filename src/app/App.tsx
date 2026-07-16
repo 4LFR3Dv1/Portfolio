@@ -86,7 +86,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen overflow-hidden bg-background">
+      <div className="soft-grid pointer-events-none absolute inset-x-0 top-0 h-[70rem] opacity-70" />
       <Analytics />
       <TerminalTopBar />
       <CommandPalette
@@ -136,7 +137,7 @@ export default function App() {
         type="button"
         aria-label="Open command palette"
         onClick={() => setIsPaletteOpen(true)}
-        className="fixed bottom-6 right-6 z-30 w-14 h-14 sm:w-auto sm:h-auto sm:px-4 sm:py-2 bg-[var(--electric-blue)] sm:bg-[var(--surface-2)] text-[#0a0a0f] sm:text-[var(--terminal-muted)] border border-[var(--electric-blue)] sm:border-[var(--border-default)] font-mono text-sm font-bold shadow-[0_0_30px_rgba(0,217,255,0.35)]"
+        className="glass-panel fixed bottom-5 right-5 z-30 grid h-12 w-12 place-items-center rounded-full font-mono text-sm font-bold text-[var(--electric-blue)] transition-transform hover:-translate-y-1 sm:flex sm:w-auto sm:px-4"
       >
         <span className="sm:hidden" aria-hidden="true">⌘</span>
         <span className="hidden sm:inline">⌘K COMMANDS</span>

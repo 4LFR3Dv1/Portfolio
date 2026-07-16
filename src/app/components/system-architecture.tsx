@@ -21,13 +21,15 @@ export function SystemArchitecture() {
     const currentDiagram = diagramMetadata.find(d => d.id === selectedDiagram);
 
     return (
-        <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24 border-t border-[var(--border-subtle)]" id="architecture">
+        <section className="mx-auto max-w-[1480px] px-6 py-24 lg:px-10 lg:py-32" id="architecture">
             {/* Header */}
-            <div className="mb-12">
-                <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
+            <div className="mb-14 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+                <div>
+                <div className="eyebrow mb-5">Architecture / Interactive</div>
+                <h2 className="text-white">
                     {t('architecture.title')}
-                </h2>
-                <p className="text-base" style={{ color: 'var(--terminal-muted)' }}>
+                </h2></div>
+                <p className="max-w-2xl text-base leading-relaxed text-[var(--terminal-muted)] lg:justify-self-end">
                     {t('architecture.subtitle')}
                 </p>
             </div>
@@ -42,9 +44,9 @@ export function SystemArchitecture() {
                             setSelectedDiagram(diagram.id);
                             setIsDiagramLoaded(true);
                         }}
-                        className={`border p-6 text-left transition-all group ${selectedDiagram === diagram.id
-                                ? 'border-[var(--electric-blue)] bg-[var(--surface-2)]'
-                                : 'border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--electric-blue)]'
+                        className={`group rounded-[1.25rem] border p-6 text-left transition-all ${selectedDiagram === diagram.id
+                                ? 'border-[rgba(141,162,255,0.5)] bg-[rgba(141,162,255,0.08)]'
+                                : 'border-[var(--border-default)] bg-white/[0.025] hover:-translate-y-0.5 hover:border-[var(--electric-blue)]'
                             }`}
                     >
                         <div className="flex items-start justify-between mb-3">
@@ -88,7 +90,7 @@ export function SystemArchitecture() {
                         <button
                             type="button"
                             onClick={() => setIsDiagramLoaded(true)}
-                            className="w-full min-h-72 border border-[var(--border-default)] bg-[var(--surface-1)] font-mono text-sm hover:border-[var(--electric-blue)] transition-colors"
+                            className="glass-panel min-h-72 w-full rounded-[1.5rem] font-mono text-sm transition-colors hover:border-[var(--electric-blue)]"
                             style={{ color: 'var(--electric-blue)' }}
                         >
                             {language === 'en' ? 'LOAD INTERACTIVE DIAGRAM' : 'CARREGAR DIAGRAMA INTERATIVO'}

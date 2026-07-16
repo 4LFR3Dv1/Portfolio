@@ -12,17 +12,20 @@ export function SelectedWorkSection({ onCaseStudy, onOpen, onEvidence }: Selecte
   const { language, t } = useLanguage();
 
   return (
-    <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24" id="selected-work">
-      <div className="mb-12">
-        <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
+    <section className="mx-auto max-w-[1480px] px-6 py-24 lg:px-10 lg:py-32" id="selected-work">
+      <div className="mb-14 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+        <div>
+          <div className="eyebrow mb-5">02 / Selected systems</div>
+          <h2 className="text-white">
           {t('work.title')}
-        </h2>
-        <p className="text-base" style={{ color: 'var(--terminal-muted)' }}>
+          </h2>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-[var(--terminal-muted)] lg:justify-self-end">
           {t('work.subtitle')}
         </p>
       </div>
 
-      <div className="grid gap-6 lg:gap-8">
+      <div className="grid gap-5 lg:grid-cols-2">
         {projects.map((project, index) => (
           <ProjectCard
             key={project.id}
@@ -40,7 +43,8 @@ export function SelectedWorkSection({ onCaseStudy, onOpen, onEvidence }: Selecte
               public: language === 'en' ? 'PUBLIC' : 'PÚBLICO',
               private: language === 'en' ? 'PRIVATE BUILD' : 'PROJETO PRIVADO',
             }}
-            size={index < 3 ? 'large' : 'medium'}
+            size={index === 0 ? 'large' : 'medium'}
+            index={index}
             onCaseStudy={() => onCaseStudy?.(project.id)}
             primaryAction={project.links[0]
               ? { label: project.links[0].label[language], onClick: () => onOpen?.(project.links[0].url) }

@@ -26,30 +26,33 @@ export function ContactSection() {
   ];
 
   return (
-    <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24 border-t border-[var(--border-subtle)]" id="contact">
+    <section className="mx-auto max-w-[1480px] px-6 pb-10 pt-24 lg:px-10 lg:pt-32" id="contact">
       {/* Section Header */}
-      <div className="mb-12">
-        <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
+      <div className="glass-panel relative overflow-hidden rounded-[2rem] p-7 sm:p-12 lg:p-16">
+        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[rgba(141,162,255,0.12)] blur-3xl" />
+        <div className="relative mb-12 max-w-3xl">
+          <div className="eyebrow mb-5">06 / Start a conversation</div>
+          <h2 className="text-white">
           {t('contact.title')}
         </h2>
-        <p className="text-base" style={{ color: 'var(--terminal-muted)' }}>
+        <p className="mt-5 text-base leading-relaxed" style={{ color: 'var(--terminal-muted)' }}>
           {t('contact.subtitle')}
         </p>
       </div>
 
       {/* Contact Cards */}
-      <div className="grid md:grid-cols-3 gap-6 mb-12">
+      <div className="relative grid gap-4 md:grid-cols-3">
         {contactCards.map((card, idx) => (
           <div
             key={idx}
-            className="border border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--electric-blue)] transition-all"
+            className="rounded-[1.5rem] border border-[var(--border-default)] bg-white/[0.025] p-6 transition-all hover:-translate-y-1 hover:border-[var(--electric-blue)]"
           >
-            <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)]">
+            <div>
               <div className="font-mono text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--electric-blue)' }}>
                 {t(card.titleKey)}
               </div>
             </div>
-            <div className="p-6 space-y-6">
+            <div className="mt-5 space-y-6">
               <p className="text-sm" style={{ color: 'var(--terminal-text)' }}>
                 {t(card.descKey)}
               </p>
@@ -62,7 +65,7 @@ export function ContactSection() {
       </div>
 
       {/* Footer Links */}
-      <div className="pt-12 border-t border-[var(--border-subtle)]">
+      <div className="relative mt-12 border-t border-[var(--border-subtle)] pt-8">
         <div className="flex flex-wrap gap-4 font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>
           <a
             href="mailto:byrenanmelo@gmail.com"
@@ -99,11 +102,12 @@ export function ContactSection() {
           </a>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-[var(--border-subtle)] text-center">
+        <div className="mt-8 border-t border-[var(--border-subtle)] pt-8 text-center">
           <p className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>
             {t('contact.location')}
           </p>
         </div>
+      </div>
       </div>
     </section>
   );

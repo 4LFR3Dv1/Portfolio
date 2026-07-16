@@ -7,13 +7,13 @@ export function TechTicker() {
   ];
 
   return (
-    <section className="border-y border-[var(--border-subtle)] bg-[var(--surface-1)]" aria-label="Technology stack">
-      <div className="max-w-[1600px] mx-auto px-6 py-4 flex flex-wrap gap-x-8 gap-y-3">
+    <section className="mx-auto max-w-[1480px] px-6 lg:px-10" aria-label="Technology stack">
+      <div className="flex flex-wrap gap-x-8 gap-y-4 rounded-2xl border border-[var(--border-subtle)] bg-white/[0.02] px-5 py-5">
         {groups.map((group) => (
           <div key={group.label} className="flex flex-wrap items-center gap-2 font-mono text-[10px]">
-            <span style={{ color: 'var(--electric-blue)' }}>{group.label}</span>
+            <span style={{ color: 'var(--electric-green)' }}>{group.label}</span>
             <span style={{ color: 'var(--border-strong)' }}>//</span>
-            {group.techs.map((tech) => <span key={tech} style={{ color: 'var(--terminal-muted)' }}>{tech}</span>)}
+            {group.techs.map((tech) => <span key={tech} className="rounded-full bg-white/[0.035] px-2 py-1" style={{ color: 'var(--terminal-muted)' }}>{tech}</span>)}
           </div>
         ))}
       </div>
