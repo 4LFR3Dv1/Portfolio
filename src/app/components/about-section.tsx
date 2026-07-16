@@ -1,13 +1,12 @@
-import React from 'react';
 import { Badge } from './badge';
 import { useLanguage } from '../context/language-context';
 
 export function AboutSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const skills = [
-    'PLATFORM UX', 'DESIGN SYSTEMS', 'DESKTOP DISTRIBUTION', 'API DESIGN',
-    'SECURITY MODELING', 'WEB3 AUTH', 'OPS/DIAGNOSTICS'
+    'DISTRIBUTED SYSTEMS', 'AGENTIC WORKFLOWS', 'API DESIGN', 'EVENT SOURCING',
+    'SECURITY MODELING', 'BITCOIN / SOLANA', 'OPS / DIAGNOSTICS'
   ];
 
   const timeline = [
@@ -34,7 +33,9 @@ export function AboutSection() {
             {t('about.title')}
           </h2>
           <div className="font-mono text-xs mt-1" style={{ color: 'var(--terminal-muted)' }}>
-            Renan Melo — Decentralized Systems Architect
+            {language === 'en'
+              ? 'Renan Melo — Blockchain & Agentic Systems Engineer'
+              : 'Renan Melo — Engenheiro de Blockchain & Sistemas Agênticos'}
           </div>
         </div>
       </div>

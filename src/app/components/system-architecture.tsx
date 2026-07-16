@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MermaidDiagram } from './mermaid-diagram';
 import { architectureDiagrams } from '../data/diagrams';
 import { Badge } from './badge';
 import { useLanguage } from '../context/language-context';
 
 export function SystemArchitecture() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [selectedDiagram, setSelectedDiagram] = useState<string>('overview');
+    const [isDiagramLoaded, setIsDiagramLoaded] = useState(false);
 
     const diagramMetadata = [
         { id: 'overview', titleKey: 'diagram.overview.title', descKey: 'diagram.overview.desc' },
@@ -36,7 +37,11 @@ export function SystemArchitecture() {
                 {diagramMetadata.map((diagram) => (
                     <button
                         key={diagram.id}
-                        onClick={() => setSelectedDiagram(diagram.id)}
+                        type="button"
+                        onClick={() => {
+                            setSelectedDiagram(diagram.id);
+                            setIsDiagramLoaded(true);
+                        }}
                         className={`border p-6 text-left transition-all group ${selectedDiagram === diagram.id
                                 ? 'border-[var(--electric-blue)] bg-[var(--surface-2)]'
                                 : 'border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--electric-blue)]'
@@ -74,10 +79,21 @@ export function SystemArchitecture() {
                         <Badge variant="green">{t('architecture.interactive')}</Badge>
                     </div>
 
-                    <MermaidDiagram
-                        chart={architectureDiagrams[selectedDiagram as keyof typeof architectureDiagrams]}
-                        id={selectedDiagram}
-                    />
+                    {isDiagramLoaded ? (
+                        <MermaidDiagram
+                            chart={architectureDiagrams[selectedDiagram as keyof typeof architectureDiagrams]}
+                            id={selectedDiagram}
+                        />
+                    ) : (
+                        <button
+                            type="button"
+                            onClick={() => setIsDiagramLoaded(true)}
+                            className="w-full min-h-72 border border-[var(--border-default)] bg-[var(--surface-1)] font-mono text-sm hover:border-[var(--electric-blue)] transition-colors"
+                            style={{ color: 'var(--electric-blue)' }}
+                        >
+                            {language === 'en' ? 'LOAD INTERACTIVE DIAGRAM' : 'CARREGAR DIAGRAMA INTERATIVO'}
+                        </button>
+                    )}
 
                     <div className="flex items-center gap-3 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
                         <span>💡 {t('architecture.tip')}</span>

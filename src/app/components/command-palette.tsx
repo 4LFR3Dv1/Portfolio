@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useLanguage } from '../context/language-context';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ interface Command {
 }
 
 export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArchitecture }: CommandPaletteProps) {
+  const { language } = useLanguage();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -24,106 +26,106 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
   const commands: Command[] = [
     {
       id: 'nav-home',
-      label: 'Go to Home',
-      description: 'Navigate to portfolio home',
+      label: language === 'en' ? 'Go to Home' : 'Ir para início',
+      description: language === 'en' ? 'Navigate to portfolio home' : 'Navegar para o início do portfólio',
       category: 'navigation',
       action: () => { onNavigate('home'); onClose(); }
     },
     {
       id: 'nav-work',
-      label: 'Go to Selected Work',
-      description: 'View project showcase',
+      label: language === 'en' ? 'Go to Selected Work' : 'Ir para projetos',
+      description: language === 'en' ? 'View project showcase' : 'Ver projetos selecionados',
       category: 'navigation',
       action: () => { onNavigate('work'); onClose(); }
     },
     {
       id: 'nav-about',
-      label: 'Go to About',
-      description: 'Learn more about Renan',
+      label: language === 'en' ? 'Go to About' : 'Ir para sobre',
+      description: language === 'en' ? 'Learn more about Renan' : 'Conhecer mais sobre Renan',
       category: 'navigation',
       action: () => { onNavigate('about'); onClose(); }
     },
     {
       id: 'nav-contact',
-      label: 'Go to Contact',
-      description: 'Get in touch',
+      label: language === 'en' ? 'Go to Contact' : 'Ir para contato',
+      description: language === 'en' ? 'Get in touch' : 'Entrar em contato',
       category: 'navigation',
       action: () => { onNavigate('contact'); onClose(); }
     },
     {
       id: 'nav-evidence',
-      label: 'Go to Evidence Room',
-      description: 'View documentation and artifacts',
+      label: language === 'en' ? 'Go to Evidence Room' : 'Ir para sala de evidências',
+      description: language === 'en' ? 'View public proof and artifacts' : 'Ver provas e artefatos públicos',
       category: 'navigation',
       action: () => { onNavigate('evidence'); onClose(); }
     },
     {
       id: 'arch-explorer',
-      label: 'Open Architecture Explorer',
-      description: 'Explore system architecture',
+      label: language === 'en' ? 'Open Architecture Explorer' : 'Abrir explorador de arquitetura',
+      description: language === 'en' ? 'Explore system architecture' : 'Explorar arquitetura de sistemas',
       category: 'navigation',
       action: () => { onArchitecture(); onClose(); }
     },
     {
-      id: 'case-sne-os',
-      label: 'SNE OS Case Study',
-      description: 'Control Plane Web',
+      id: 'case-vira',
+      label: 'VIRA',
+      description: language === 'en' ? 'Real-time product case study' : 'Estudo de produto em tempo real',
       category: 'case-study',
-      action: () => { onCaseStudy('sne-os'); onClose(); }
+      action: () => { onCaseStudy('vira'); onClose(); }
     },
     {
-      id: 'case-radar',
-      label: 'SNE Radar Case Study',
-      description: 'Desktop + Web + Backend',
+      id: 'case-wallet',
+      label: 'XS Wallet',
+      description: language === 'en' ? 'Self-custody architecture' : 'Arquitetura self-custody',
       category: 'case-study',
-      action: () => { onCaseStudy('sne-radar'); onClose(); }
+      action: () => { onCaseStudy('xs-wallet'); onClose(); }
     },
     {
-      id: 'case-vault',
-      label: 'SNE Vault Case Study',
-      description: 'Security & Infrastructure',
+      id: 'case-agents',
+      label: 'Agentic Systems & Foundry',
+      description: language === 'en' ? 'Agent operations and evidence' : 'Operação de agentes e evidências',
       category: 'case-study',
-      action: () => { onCaseStudy('sne-vault'); onClose(); }
+      action: () => { onCaseStudy('agentic-systems'); onClose(); }
     },
     {
       id: 'ext-demo',
-      label: 'Open Demo (snelabs.space)',
-      description: 'Visit live demo',
+      label: language === 'en' ? 'Open SNE OS' : 'Abrir SNE OS',
+      description: language === 'en' ? 'Visit public product' : 'Visitar produto público',
       category: 'external',
-      action: () => { window.open('https://snelabs.space', '_blank'); onClose(); }
+      action: () => { window.open('https://snelabs.space', '_blank', 'noopener,noreferrer'); onClose(); }
     },
     {
       id: 'ext-github',
-      label: 'Open GitHub',
-      description: 'View code repositories',
+      label: language === 'en' ? 'Open GitHub' : 'Abrir GitHub',
+      description: language === 'en' ? 'View public repositories' : 'Ver repositórios públicos',
       category: 'external',
-      action: () => { window.open('https://github.com/SNE-Labs', '_blank'); onClose(); }
+      action: () => { window.open('https://github.com/4LFR3Dv1', '_blank', 'noopener,noreferrer'); onClose(); }
     },
     {
       id: 'ext-linkedin',
-      label: 'Open LinkedIn',
-      description: 'Connect on LinkedIn',
+      label: language === 'en' ? 'Open LinkedIn' : 'Abrir LinkedIn',
+      description: language === 'en' ? 'Connect on LinkedIn' : 'Conectar no LinkedIn',
       category: 'external',
-      action: () => { window.open('https://linkedin.com/in/renan-melo-connexions', '_blank'); onClose(); }
+      action: () => { window.open('https://linkedin.com/in/renan-melo-connexions', '_blank', 'noopener,noreferrer'); onClose(); }
     },
     {
       id: 'ext-email',
-      label: 'Send Email',
+      label: language === 'en' ? 'Send Email' : 'Enviar email',
       description: 'byrenanmelo@gmail.com',
       category: 'external',
-      action: () => { window.location.href = 'mailto:byrenanmelo@gmail.com'; onClose(); }
+      action: () => { window.open('mailto:byrenanmelo@gmail.com', '_self'); onClose(); }
     },
     {
       id: 'nav-publications',
-      label: 'Go to Publications',
-      description: 'View books and written work',
+      label: language === 'en' ? 'Go to Publications' : 'Ir para publicações',
+      description: language === 'en' ? 'View books and written work' : 'Ver livros e textos',
       category: 'navigation',
       action: () => { onNavigate('publications'); onClose(); }
     },
     {
       id: 'case-verify',
-      label: 'VERIFY SYSTEMS Case Study',
-      description: 'Operational Doctrine for Verifiable Systems',
+      label: language === 'en' ? 'VERIFY SYSTEMS Case Study' : 'Estudo de caso VERIFY SYSTEMS',
+      description: language === 'en' ? 'Operational doctrine for verifiable systems' : 'Doutrina operacional para sistemas verificáveis',
       category: 'case-study',
       action: () => { onCaseStudy('verify-systems'); onClose(); }
     },
@@ -139,10 +141,6 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
       inputRef.current.focus();
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -170,9 +168,9 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
 
   const getCategoryLabel = (category: string) => {
     switch (category) {
-      case 'navigation': return 'NAVIGATION';
-      case 'case-study': return 'CASE STUDIES';
-      case 'external': return 'EXTERNAL LINKS';
+      case 'navigation': return language === 'en' ? 'NAVIGATION' : 'NAVEGAÇÃO';
+      case 'case-study': return language === 'en' ? 'CASE STUDIES' : 'ESTUDOS DE CASO';
+      case 'external': return language === 'en' ? 'EXTERNAL LINKS' : 'LINKS EXTERNOS';
       default: return category.toUpperCase();
     }
   };
@@ -202,8 +200,11 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
                 ref={inputRef}
                 type="text"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Type a command or search..."
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(0);
+                }}
+                placeholder={language === 'en' ? 'Type a command or search...' : 'Digite um comando ou pesquise...'}
                 className="flex-1 bg-transparent border-none outline-none font-mono text-sm"
                 style={{ color: 'var(--terminal-text)' }}
               />
@@ -220,7 +221,7 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
                     {getCategoryLabel(category)}
                   </div>
                 </div>
-                {cmds.map((cmd, idx) => {
+                {cmds.map((cmd) => {
                   const globalIndex = filteredCommands.indexOf(cmd);
                   const isSelected = globalIndex === selectedIndex;
 

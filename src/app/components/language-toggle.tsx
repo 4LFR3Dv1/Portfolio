@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLanguage } from '../context/language-context';
 
 export function LanguageToggle() {

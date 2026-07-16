@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Badge } from './badge';
 import { Button } from './button';
 import { MermaidDiagram } from './mermaid-diagram';
@@ -237,7 +237,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="font-mono font-bold mb-2" style={{ color: 'var(--electric-blue)' }}>
-              ARCHITECTURE EXPLORER
+              {language === 'en' ? 'ARCHITECTURE EXPLORER' : 'EXPLORADOR DE ARQUITETURA'}
             </h2>
             <p className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
               {language === 'en'
@@ -282,7 +282,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
               {descriptions[activeTab][language]}
             </span>
           </div>
-          <Badge variant="green">INTERACTIVE</Badge>
+          <Badge variant="green">{language === 'en' ? 'INTERACTIVE' : 'INTERATIVO'}</Badge>
         </div>
 
         {/* Diagram Container */}
@@ -293,7 +293,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[var(--status-online)] animate-pulse"></div>
-              <span className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>LIVE</span>
+              <span className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>{language === 'en' ? 'LIVE' : 'ATIVO'}</span>
             </div>
           </div>
 
@@ -309,15 +309,15 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
         <div className="flex flex-wrap gap-4 pt-4 border-t border-[var(--border-subtle)]">
           <div className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
             <div className="w-3 h-3 rounded bg-[var(--electric-blue)]"></div>
-            <span>Core Service</span>
+            <span>{language === 'en' ? 'Core Service' : 'Serviço principal'}</span>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
             <div className="w-3 h-3 rounded bg-[var(--electric-green)]"></div>
-            <span>Storage/Blockchain</span>
+            <span>{language === 'en' ? 'Storage/Blockchain' : 'Armazenamento/Blockchain'}</span>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
             <div className="w-3 h-3 rounded bg-[var(--amber)]"></div>
-            <span>External Integration</span>
+            <span>{language === 'en' ? 'External Integration' : 'Integração externa'}</span>
           </div>
           <div className="flex-1 text-right text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
             💡 {language === 'en' ? 'Scroll horizontally for full diagram' : 'Role horizontalmente para diagrama completo'}

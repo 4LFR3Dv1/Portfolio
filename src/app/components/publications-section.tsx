@@ -1,4 +1,3 @@
-import React from 'react';
 import { Badge } from './badge';
 import { Button } from './button';
 import { useLanguage } from '../context/language-context';
@@ -8,7 +7,7 @@ interface PublicationsSectionProps {
 }
 
 export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
 
     return (
         <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24" id="publications">
@@ -33,7 +32,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                                 VERIFY SYSTEMS
                             </h3>
                         </div>
-                        <Badge variant="purple">FEATURED</Badge>
+                        <Badge variant="purple">{language === 'en' ? 'FEATURED' : 'DESTAQUE'}</Badge>
                     </div>
                     <div className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>
                         2026 • PDF • 84 PAGES
@@ -84,7 +83,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                                     CASE STUDY
                                 </Button>
                                 <Button variant="secondary" onClick={() => window.open('/docs/Verify_By_Renan_Melo.pdf', '_blank')}>
-                                    READ PDF
+                                    {language === 'en' ? 'READ PDF' : 'LER PDF'}
                                 </Button>
                             </div>
                         </div>
@@ -146,7 +145,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                         ))}
                     </div>
                     <Button variant="secondary" onClick={() => window.open('/docs/Production_By_Renan_Melo.pdf', '_blank')}>
-                        READ PDF
+                        {language === 'en' ? 'READ PDF' : 'LER PDF'}
                     </Button>
                 </div>
 
@@ -168,7 +167,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                         ))}
                     </div>
                     <Button variant="secondary" onClick={() => window.open('/docs/TypeScript_Handbook__Renan_Melo.pdf', '_blank')}>
-                        READ PDF
+                        {language === 'en' ? 'READ PDF' : 'LER PDF'}
                     </Button>
                 </div>
             </div>

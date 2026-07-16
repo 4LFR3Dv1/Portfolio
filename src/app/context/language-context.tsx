@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Language = 'en' | 'pt';
+export type Language = 'en' | 'pt';
 
 interface LanguageContextType {
     language: Language;
@@ -22,9 +22,9 @@ const translations: Record<Language, Record<string, string>> = {
 
         // Hero
         'hero.title': 'RENAN MELO',
-        'hero.subtitle': 'Decentralized Systems Architect | Author of VERIFY SYSTEMS',
-        'hero.description': 'From Bitcoin principles to production systems. I derive verifiable architectures from first principles and build end-to-end: Platform UX, desktop runtime, backend, and Web3 auth/licensing.',
-        'hero.desc.origin': 'From Bitcoin principles to production systems. I derive verifiable architectures from first principles and build end-to-end.',
+        'hero.subtitle': 'Blockchain & Agentic Systems Engineer | Author of VERIFY SYSTEMS',
+        'hero.description': 'Production-grade financial products, agentic systems, and developer tooling.',
+        'hero.desc.origin': 'I build systems end to end: product, interfaces, runtime, evidence, and operations.',
         'hero.cta.work': 'VIEW WORK',
         'hero.cta.contact': 'CONTACT',
         'hero.cta.architecture': 'ARCHITECTURE',
@@ -33,7 +33,7 @@ const translations: Record<Language, Record<string, string>> = {
 
         // Selected Work
         'work.title': 'SELECTED WORK',
-        'work.subtitle': 'Production-grade systems. Real users. Measurable impact.',
+        'work.subtitle': 'Selected systems with explicit maturity, architecture, and verifiable evidence.',
         'work.cta.casestudy': 'CASE STUDY',
         'work.cta.demo': 'LIVE DEMO',
         'work.cta.evidence': 'EVIDENCE',
@@ -68,8 +68,8 @@ const translations: Record<Language, Record<string, string>> = {
         'about.timeline.1': 'Industrial Design background. Systems thinking from first principles.',
         'about.timeline.2': 'Discovered Bitcoin. Studied protocol architecture deeply.',
         'about.timeline.3': 'Applied decentralized patterns to fintech and desktop platforms.',
-        'about.timeline.4': 'Built SNE ecosystem: OS, Radar, Vault Protocol.',
-        'about.timeline.5': 'Authored VERIFY SYSTEMS. Formalized operational doctrine.',
+        'about.timeline.4': 'Built the SNE product ecosystem and financial-infrastructure experiments.',
+        'about.timeline.5': 'Built VIRA, self-custody wallet R&D and operational platforms for AI agents.',
 
         // Contact
         'contact.title': 'CONTACT // ROUTING',
@@ -163,9 +163,9 @@ const translations: Record<Language, Record<string, string>> = {
 
         // Hero
         'hero.title': 'RENAN MELO',
-        'hero.subtitle': 'Arquiteto de Sistemas Descentralizados | Autor de VERIFY SYSTEMS',
-        'hero.description': 'Dos princípios do Bitcoin a sistemas de produção. Derivo arquiteturas verificáveis a partir de primeiros princípios e construo end-to-end: Platform UX, desktop runtime, backend e Web3 auth/licensing.',
-        'hero.desc.origin': 'Dos princípios do Bitcoin a sistemas de produção. Derivo arquiteturas verificáveis a partir de primeiros princípios e construo end-to-end.',
+        'hero.subtitle': 'Engenheiro de Blockchain & Sistemas Agênticos | Autor de VERIFY SYSTEMS',
+        'hero.description': 'Produtos financeiros, sistemas agênticos e ferramentas para desenvolvedores.',
+        'hero.desc.origin': 'Construo sistemas de ponta a ponta: produto, interfaces, runtime, evidência e operação.',
         'hero.cta.work': 'VER TRABALHOS',
         'hero.cta.contact': 'CONTATO',
         'hero.cta.architecture': 'ARQUITETURA',
@@ -174,7 +174,7 @@ const translations: Record<Language, Record<string, string>> = {
 
         // Selected Work
         'work.title': 'TRABALHOS SELECIONADOS',
-        'work.subtitle': 'Sistemas production-grade. Usuários reais. Impacto mensurável.',
+        'work.subtitle': 'Sistemas selecionados com maturidade, arquitetura e evidência verificável explícitas.',
         'work.cta.casestudy': 'CASE STUDY',
         'work.cta.demo': 'DEMO AO VIVO',
         'work.cta.evidence': 'EVIDÊNCIAS',
@@ -209,8 +209,8 @@ const translations: Record<Language, Record<string, string>> = {
         'about.timeline.1': 'Background em Design Industrial. Pensamento sistemico desde primeiros principios.',
         'about.timeline.2': 'Descobriu Bitcoin. Estudou a arquitetura do protocolo a fundo.',
         'about.timeline.3': 'Aplicou padroes descentralizados em fintech e plataformas desktop.',
-        'about.timeline.4': 'Construiu ecossistema SNE: OS, Radar, Vault Protocol.',
-        'about.timeline.5': 'Publicou VERIFY SYSTEMS. Formalizou doutrina operacional.',
+        'about.timeline.4': 'Construiu o ecossistema de produtos SNE e experimentos de infraestrutura financeira.',
+        'about.timeline.5': 'Construiu VIRA, P&D de wallet self-custody e plataformas operacionais para agentes de IA.',
 
         // Contact
         'contact.title': 'CONTATO // ROTEAMENTO',

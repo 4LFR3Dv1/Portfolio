@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from './button';
 import { useLanguage } from '../context/language-context';
 
@@ -10,19 +9,19 @@ export function ContactSection() {
       titleKey: 'contact.hiring.title',
       descKey: 'contact.hiring.desc',
       ctaKey: 'contact.hiring.cta',
-      action: () => window.location.href = 'mailto:byrenanmelo@gmail.com'
+      action: () => window.open('mailto:byrenanmelo@gmail.com', '_self')
     },
     {
       titleKey: 'contact.partnership.title',
       descKey: 'contact.partnership.desc',
       ctaKey: 'contact.partnership.cta',
-      action: () => window.location.href = 'mailto:byrenanmelo@gmail.com?subject=Partnership Inquiry'
+      action: () => window.open('mailto:byrenanmelo@gmail.com?subject=Partnership Inquiry', '_self')
     },
     {
       titleKey: 'contact.consulting.title',
       descKey: 'contact.consulting.desc',
       ctaKey: 'contact.consulting.cta',
-      action: () => window.location.href = 'mailto:byrenanmelo@gmail.com?subject=Consulting Inquiry'
+      action: () => window.open('mailto:byrenanmelo@gmail.com?subject=Consulting Inquiry', '_self')
     }
   ];
 
@@ -82,12 +81,12 @@ export function ContactSection() {
           </a>
           <span>•</span>
           <a
-            href="https://github.com/SNE-Labs"
+            href="https://github.com/4LFR3Dv1"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[var(--electric-blue)] transition-colors"
           >
-            GitHub: SNE-Labs
+            GitHub: 4LFR3Dv1
           </a>
           <span>•</span>
           <a

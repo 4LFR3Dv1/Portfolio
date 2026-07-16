@@ -1,75 +1,50 @@
-# Renan Melo Portfolio
+# Renan Melo — Portfolio
 
-Professional portfolio with Bloomberg/devtools aesthetic - dark, technical, premium, high-contrast UI.
+Public portfolio for Renan Melo, a blockchain and agentic systems engineer building financial products, real-time runtimes, AI agent platforms, and developer tooling.
 
-## Design System
+## Product surfaces
 
-- **Color Palette**: Dark terminal theme with electric blue accents (#00d9ff)
-- **Typography**: JetBrains Mono (monospace) + Inter (sans-serif)
-- **Aesthetic**: Console/terminal UI with grid background, sharp borders, technical feel
+- Landing page with English and Portuguese content.
+- Shareable case-study routes under `/work/:projectId`.
+- Architecture explorer under `/architecture`.
+- Public evidence room linking to deployments, repositories, endpoints, and documents.
+- Vercel Analytics and SPA rewrites.
 
-## Features
+## Featured work
 
-### Landing Page
-- **Hero Section**: Introduction with proof chips and spotlight panel for SNE Radar
-- **Selected Work**: 3 major projects (SNE OS, SNE Radar, SNE Vault Protocol)
-- **Tech Ticker**: Animated technology showcase
-- **Evidence Room**: Filterable documentation and artifacts
-- **About Section**: Operator notes and skills
-- **Contact**: Multiple contact routes (hiring, partnerships, consulting)
+- **VIRA** — synchronized multiplayer football with authoritative state and deterministic replay.
+- **XS Wallet** — private self-custody wallet R&D across Bitcoin, Liquid, and Lightning.
+- **Agentic Systems & Foundry** — operational control planes for agents, review, and evidence.
+- **SNE OS** — public sovereign-account product surface.
+- **VERIFY SYSTEMS** — technical publication about verifiable and reconcilable systems.
 
-### Architecture Explorer
-- Interactive system architecture visualization
-- Node details with interfaces, guarantees, and failure modes
-- Side drawer for deep dives into each component
+Private projects are described at architectural level and are never presented as publicly auditable.
 
-### Case Studies
-Comprehensive templates for each project with:
-- Problem statement
-- Approach and architecture
-- Security/threat models (where applicable)
-- Flow players for auth/daily usage patterns
-- Key decisions and learnings
+## Stack
 
-### Command Palette (⌘K)
-- Quick navigation across all sections
-- Case study access
-- External links (GitHub, LinkedIn, demo sites)
-- Keyboard-driven workflow
+- React 18 and TypeScript
+- Vite and Tailwind CSS
+- Mermaid loaded on demand with strict rendering
+- Vitest and ESLint
+- Vercel Analytics
 
-## Tech Stack
+## Local development
 
-- **React** + **TypeScript**
-- **Tailwind CSS v4**
-- Vite for build tooling
-- Custom design system
+```bash
+npm ci
+npm run dev
+```
 
-## Key Components
+## Verification
 
-- `TerminalTopBar`: Sticky navigation with status indicators
-- `HeroSection`: Main landing hero
-- `ProjectCard`: Showcase project cards
-- `ArchitectureExplorer`: Interactive system diagrams
-- `CaseStudyTemplate`: Reusable case study layout
-- `FlowPlayer`: Tabbed flow visualization
-- `EvidenceRoom`: Document library
-- `CommandPalette`: Quick navigation (⌘K)
+```bash
+npm run verify
+```
 
-## Responsive Design
+The verification gate runs strict TypeScript checks, lint, tests, and the production build. The same gate runs in GitHub Actions for pushes and pull requests.
 
-- Desktop-first (1440px optimal)
-- Mobile optimized (390px+)
-- Adaptive layouts and touch-friendly controls
+## Public links
 
-## Contact
-
-- **Email**: byrenanmelo@gmail.com
-- **GitHub**: [SNE-Labs](https://github.com/SNE-Labs)
-- **LinkedIn**: [renan-melo-connexions](https://linkedin.com/in/renan-melo-connexions)
-- **Demo**: [snelabs.space](https://snelabs.space)
-- **Location**: São Paulo, Brasil (Remote OK)
-
----
-
-**Built by Renan Melo** • Systems • Product • Web3 • Desktop
-# Portfolio
+- Portfolio: [renan.snelabs.space](https://renan.snelabs.space)
+- GitHub: [4LFR3Dv1](https://github.com/4LFR3Dv1)
+- LinkedIn: [renan-melo-connexions](https://linkedin.com/in/renan-melo-connexions)
