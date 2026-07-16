@@ -71,7 +71,7 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: #00d9ff;
-  --radius: 1rem;
+  --radius: 0.375rem;
   
   /* Chart colors - adapted for dark */
   --chart-1: #00d9ff;

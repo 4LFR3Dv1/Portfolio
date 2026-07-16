@@ -44,7 +44,7 @@ export function SystemArchitecture() {
                             setSelectedDiagram(diagram.id);
                             setIsDiagramLoaded(true);
                         }}
-                        className={`group rounded-[1.25rem] border p-6 text-left transition-all ${selectedDiagram === diagram.id
+                        className={`group border p-6 text-left transition-all ${selectedDiagram === diagram.id
                                 ? 'border-[rgba(141,162,255,0.5)] bg-[rgba(141,162,255,0.08)]'
                                 : 'border-[var(--border-default)] bg-white/[0.025] hover:-translate-y-0.5 hover:border-[var(--electric-blue)]'
                             }`}
@@ -90,7 +90,7 @@ export function SystemArchitecture() {
                         <button
                             type="button"
                             onClick={() => setIsDiagramLoaded(true)}
-                            className="glass-panel min-h-72 w-full rounded-[1.5rem] font-mono text-sm transition-colors hover:border-[var(--electric-blue)]"
+                            className="glass-panel min-h-72 w-full font-mono text-sm transition-colors hover:border-[var(--electric-blue)]"
                             style={{ color: 'var(--electric-blue)' }}
                         >
                             {language === 'en' ? 'LOAD INTERACTIVE DIAGRAM' : 'CARREGAR DIAGRAMA INTERATIVO'}

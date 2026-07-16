@@ -28,7 +28,7 @@ export function ContactSection() {
   return (
     <section className="mx-auto max-w-[1480px] px-6 pb-10 pt-24 lg:px-10 lg:pt-32" id="contact">
       {/* Section Header */}
-      <div className="glass-panel relative overflow-hidden rounded-[2rem] p-7 sm:p-12 lg:p-16">
+      <div className="glass-panel relative overflow-hidden border-t-2 border-t-[var(--electric-blue)] p-7 sm:p-12 lg:p-16">
         <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[rgba(141,162,255,0.12)] blur-3xl" />
         <div className="relative mb-12 max-w-3xl">
           <div className="eyebrow mb-5">06 / Start a conversation</div>
@@ -45,7 +45,7 @@ export function ContactSection() {
         {contactCards.map((card, idx) => (
           <div
             key={idx}
-            className="rounded-[1.5rem] border border-[var(--border-default)] bg-white/[0.025] p-6 transition-all hover:-translate-y-1 hover:border-[var(--electric-blue)]"
+            className="border border-[var(--border-default)] border-t-[var(--border-strong)] bg-white/[0.025] p-6 transition-all hover:-translate-y-1 hover:border-t-[var(--electric-blue)]"
           >
             <div>
               <div className="font-mono text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--electric-blue)' }}>

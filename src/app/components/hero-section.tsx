@@ -65,7 +65,7 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
           </div>
         </div>
 
-        <aside className="glass-panel relative overflow-hidden rounded-[2rem] p-6 sm:p-8">
+        <aside className="glass-panel relative overflow-hidden border-t-2 border-t-[var(--electric-green)] p-6 sm:p-8">
           <div className="absolute right-[-3rem] top-[-4rem] h-48 w-48 rounded-full bg-[rgba(101,230,180,0.12)] blur-3xl" />
           <div className="relative">
             <div className="eyebrow flex items-center justify-between">
@@ -76,10 +76,10 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
             <h2 className="mt-3 !text-5xl !tracking-[-0.06em] text-white sm:!text-6xl">Live intelligence.<br />Authoritative state.</h2>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-[var(--terminal-muted)]">{copy.vira}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="https://vira.snelabs.space/?lang=en" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[var(--electric-green)] px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#07100d] transition-transform hover:-translate-y-0.5">
+              <a href="https://vira.snelabs.space/?lang=en" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-[0.3rem] bg-[var(--electric-green)] px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#07100d] transition-transform hover:-translate-y-0.5">
                 {copy.proof} <span>↗</span>
               </a>
-              <a href="https://github.com/4LFR3Dv1" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-[var(--border-default)] px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-white">
+              <a href="https://github.com/4LFR3Dv1" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-[0.3rem] border border-[var(--border-default)] px-4 py-2.5 font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-white">
                 GitHub / 4LFR3Dv1
               </a>
             </div>

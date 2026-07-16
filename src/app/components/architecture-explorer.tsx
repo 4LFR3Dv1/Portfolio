@@ -286,7 +286,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
         </div>
 
         {/* Diagram Container */}
-        <div className="border border-[var(--border-default)] bg-[var(--surface-1)] rounded-lg overflow-hidden">
+        <div className="overflow-hidden border border-[var(--border-default)] bg-[var(--surface-1)]">
           <div className="border-b border-[var(--border-default)] px-4 py-3 bg-[var(--surface-2)] flex items-center justify-between">
             <div className="font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--electric-blue)' }}>
               {diagramTabs.find(t => t.id === activeTab)?.label} // ARCHITECTURE

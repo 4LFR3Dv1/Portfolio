@@ -21,11 +21,11 @@ export function AboutSection() {
     <section className="mx-auto max-w-[1480px] px-6 py-24 lg:px-10 lg:py-32" id="about">
       {/* Header with photo */}
       <div className="mb-14 flex items-center gap-6">
-        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-[1.5rem] border border-[var(--border-default)] bg-[var(--surface-2)] p-1">
+        <div className="h-24 w-24 flex-shrink-0 overflow-hidden border border-[var(--border-default)] bg-[var(--surface-2)] p-1">
           <img
             src="/docs/EDIT RENAN 1.png"
             alt="Renan Melo"
-            className="h-full w-full rounded-[1.15rem] object-cover object-top grayscale transition-all duration-500 hover:grayscale-0"
+            className="h-full w-full object-cover object-top grayscale transition-all duration-500 hover:grayscale-0"
           />
         </div>
         <div>
@@ -41,7 +41,7 @@ export function AboutSection() {
         </div>
       </div>
 
-      <div className="glass-panel grid gap-12 rounded-[2rem] p-7 sm:p-10 lg:grid-cols-5 lg:p-14">
+      <div className="glass-panel grid gap-12 border-t-2 border-t-[var(--electric-blue)] p-7 sm:p-10 lg:grid-cols-5 lg:p-14">
         {/* Left: Bio (3 cols) */}
         <div className="lg:col-span-3 space-y-4 text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
           <p>{t('about.p1')}</p>

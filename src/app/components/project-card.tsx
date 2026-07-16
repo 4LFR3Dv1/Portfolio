@@ -22,7 +22,7 @@ export function ProjectCard({ title, subtitle, impact, highlights, badges, visib
   const accent = accents[index % accents.length];
 
   return (
-    <article className={`group glass-panel relative isolate overflow-hidden rounded-[1.75rem] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--border-strong)] sm:p-8 ${large ? 'lg:col-span-2 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-12' : ''}`}>
+    <article className={`group glass-panel relative isolate overflow-hidden border-l-2 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--border-strong)] sm:p-8 ${large ? 'lg:col-span-2 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-12' : ''}`} style={{ borderLeftColor: accent }}>
       <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-[0.08] blur-3xl transition-opacity duration-500 group-hover:opacity-[0.16]" style={{ background: accent }} />
 
       <div className="relative flex flex-col">

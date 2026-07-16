@@ -137,7 +137,7 @@ export default function App() {
         type="button"
         aria-label="Open command palette"
         onClick={() => setIsPaletteOpen(true)}
-        className="glass-panel fixed bottom-5 right-5 z-30 grid h-12 w-12 place-items-center rounded-full font-mono text-sm font-bold text-[var(--electric-blue)] transition-transform hover:-translate-y-1 sm:flex sm:w-auto sm:px-4"
+        className="glass-panel fixed bottom-5 right-5 z-30 grid h-12 w-12 place-items-center rounded-[0.3rem] font-mono text-sm font-bold text-[var(--electric-blue)] transition-transform hover:-translate-y-1 sm:flex sm:w-auto sm:px-4"
       >
         <span className="sm:hidden" aria-hidden="true">⌘</span>
         <span className="hidden sm:inline">⌘K COMMANDS</span>

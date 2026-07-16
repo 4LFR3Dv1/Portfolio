@@ -24,7 +24,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
             </div>
 
             {/* Featured Publication - VERIFY SYSTEMS */}
-            <div className="glass-panel group mb-5 overflow-hidden rounded-[2rem] transition-all duration-300 hover:border-[rgba(189,140,255,0.35)]">
+            <div className="glass-panel group mb-5 overflow-hidden border-l-2 border-l-[var(--violet)] transition-all duration-300 hover:border-[rgba(189,140,255,0.35)]">
                 {/* Header with purple accent */}
                 <div className="flex items-center justify-between border-b border-[var(--border-default)] bg-white/[0.025] px-6 py-5">
                     <div className="flex items-center gap-4">
@@ -91,7 +91,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                         </div>
 
                         {/* Right: Origin Story */}
-                        <div className="rounded-[1.5rem] border border-[var(--border-default)] bg-white/[0.025] p-6">
+                        <div className="border border-[var(--border-default)] bg-white/[0.025] p-6">
                             <div className="font-mono text-[10px] uppercase tracking-wider mb-4" style={{ color: '#a855f7' }}>
                                 {t('publications.verify.origin')}
                             </div>
@@ -130,7 +130,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
             {/* Other Publications */}
             <div className="grid md:grid-cols-2 gap-6">
                 {/* Production Handbook */}
-                <div className="glass-panel rounded-[1.5rem] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]">
+                <div className="glass-panel border-t-2 border-t-[var(--electric-blue)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]">
                     <div className="flex items-center gap-3 mb-3">
                         <span className="font-mono" style={{ color: 'var(--electric-blue)' }}>▸</span>
                         <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
@@ -152,7 +152,7 @@ export function PublicationsSection({ onCaseStudy }: PublicationsSectionProps) {
                 </div>
 
                 {/* TypeScript Handbook */}
-                <div className="glass-panel rounded-[1.5rem] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]">
+                <div className="glass-panel border-t-2 border-t-[var(--electric-blue)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-strong)]">
                     <div className="flex items-center gap-3 mb-3">
                         <span className="font-mono" style={{ color: 'var(--electric-blue)' }}>▸</span>
                         <h4 className="font-mono text-sm font-semibold" style={{ color: 'var(--electric-blue)' }}>
