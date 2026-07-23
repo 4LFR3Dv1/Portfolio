@@ -13,12 +13,12 @@ Public portfolio for Renan Melo, a blockchain and agentic systems engineer build
 ## Featured work
 
 - **VIRA** — synchronized multiplayer football with authoritative state and deterministic replay.
-- **XS Wallet** — private self-custody wallet R&D across Bitcoin, Liquid, and Lightning.
+- **XS Wallet / Domini R&D** — public pre-beta self-custody codebase across Bitcoin, Liquid, and Lightning; no public release.
 - **Agentic Systems & Foundry** — operational control planes for agents, review, and evidence.
 - **SNE OS** — public sovereign-account product surface.
 - **VERIFY SYSTEMS** — technical publication about verifiable and reconcilable systems.
 
-Private projects are described at architectural level and are never presented as publicly auditable.
+Visibility labels follow the current public evidence surface. Private projects are described at architectural level and are never presented as publicly auditable; public source is not presented as a production release.
 
 ## Stack
 

@@ -23,7 +23,7 @@ const translations: Record<Language, Record<string, string>> = {
         // Hero
         'hero.title': 'RENAN MELO',
         'hero.subtitle': 'Blockchain & Agentic Systems Engineer | Author of VERIFY SYSTEMS',
-        'hero.description': 'Production-grade financial products, agentic systems, and developer tooling.',
+        'hero.description': 'Verifiable financial products, agentic systems, and developer tooling.',
         'hero.desc.origin': 'I build systems end to end: product, interfaces, runtime, evidence, and operations.',
         'hero.cta.work': 'VIEW WORK',
         'hero.cta.contact': 'CONTACT',
@@ -149,7 +149,7 @@ const translations: Record<Language, Record<string, string>> = {
         'publications.verify.timeline.3': 'Applied UTXO thinking to fintech systems.',
         'publications.verify.timeline.4': 'Formalized VERIFY SYSTEMS as operational doctrine.',
         'publications.production.title': 'Production Systems Handbook',
-        'publications.production.desc': 'Operational guide for production-grade systems. Covers deployment strategies, monitoring, incident response, and system reliability patterns.',
+        'publications.production.desc': 'Operational guide for deployed systems. Covers deployment strategies, monitoring, incident response, and reliability patterns.',
         'publications.typescript.title': 'TypeScript Handbook',
         'publications.typescript.desc': 'Comprehensive guide to TypeScript best practices, advanced type patterns, and type-safe architecture for scalable applications.',
     },
@@ -290,7 +290,7 @@ const translations: Record<Language, Record<string, string>> = {
         'publications.verify.timeline.3': 'Aplicou pensamento UTXO em sistemas fintech.',
         'publications.verify.timeline.4': 'Formalizou VERIFY SYSTEMS como doutrina operacional.',
         'publications.production.title': 'Manual de Sistemas em Producao',
-        'publications.production.desc': 'Guia operacional para sistemas production-grade. Cobre estrategias de deploy, monitoramento, resposta a incidentes e padroes de confiabilidade.',
+        'publications.production.desc': 'Guia operacional para sistemas implantados. Cobre estrategias de deploy, monitoramento, resposta a incidentes e padroes de confiabilidade.',
         'publications.typescript.title': 'Manual de TypeScript',
         'publications.typescript.desc': 'Guia completo de boas praticas TypeScript, padroes avancados de tipos e arquitetura type-safe para aplicacoes escalaveis.',
     }

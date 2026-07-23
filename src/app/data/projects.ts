@@ -43,10 +43,12 @@ export const projects: Project[] = [
       pt: ['Prazos controlados pelo servidor e resolução determinística', 'Ledger encadeado por hash e replay verificado', 'Produto online com testes automatizados e E2E em dois dispositivos'],
     },
     badges: ['REACT', 'TYPESCRIPT', 'EVENT SOURCING', 'SOLANA', 'PLAYWRIGHT'],
-    visibility: 'private',
+    visibility: 'public',
     links: [
       { label: local('LIVE PRODUCT', 'PRODUTO ONLINE'), url: 'https://vira.snelabs.space/?lang=en' },
-      { label: local('DEMO VIDEO', 'VÍDEO DEMO'), url: 'https://www.youtube.com/watch?v=eqe9e5TZ02k' },
+      { label: local('SOURCE', 'CÓDIGO'), url: 'https://github.com/4LFR3Dv1/VIRA-' },
+      { label: local('DEMO V2', 'DEMO V2'), url: 'https://www.youtube.com/watch?v=LnOd2kWTiGA' },
+      { label: local('EVALUATION GUIDE', 'GUIA DE AVALIAÇÃO'), url: 'https://vira.snelabs.space/help?lang=en' },
     ],
     caseStudy: {
       type: local('Real-time consumer product', 'Produto de consumo em tempo real'),
@@ -67,8 +69,10 @@ export const projects: Project[] = [
       guarantees: ['AUTHORITATIVE STATE', 'DETERMINISTIC REPLAY', 'PRIVATE ANSWERS', 'OBSERVABLE DELIVERY'],
       evidence: [
         { label: local('Open live product', 'Abrir produto online'), url: 'https://vira.snelabs.space/?lang=en' },
-        { label: local('Watch end-to-end demo', 'Assistir demonstração end-to-end'), url: 'https://www.youtube.com/watch?v=eqe9e5TZ02k' },
+        { label: local('Inspect public repository', 'Inspecionar repositório público'), url: 'https://github.com/4LFR3Dv1/VIRA-' },
+        { label: local('Watch end-to-end demo', 'Assistir demonstração end-to-end'), url: 'https://www.youtube.com/watch?v=LnOd2kWTiGA' },
         { label: local('Inspect readiness endpoint', 'Inspecionar endpoint de prontidão'), url: 'https://vira.snelabs.space/ready' },
+        { label: local('Inspect verified playback', 'Inspecionar playback verificado'), url: 'https://vira.snelabs.space/public/playback' },
       ],
       learnings: {
         en: ['Authoritative time is a product feature.', 'Replayable evidence improves debugging and trust.', 'Fail closed when provider authority is missing.'],
@@ -79,19 +83,19 @@ export const projects: Project[] = [
   {
     id: 'xs-wallet',
     title: 'XS Wallet',
-    subtitle: local('Private technical pre-beta for self-custody across Bitcoin, Liquid and Lightning.', 'Pré-beta técnico privado de self-custody para Bitcoin, Liquid e Lightning.'),
+    subtitle: local('Public technical pre-beta codebase for self-custody across Bitcoin, Liquid and Lightning.', 'Código público em pré-beta técnico de self-custody para Bitcoin, Liquid e Lightning.'),
     impact: local('Unifies wallet security, node operations and swaps in a local-first desktop system.', 'Unifica segurança de wallet, operação de nós e swaps em um sistema desktop local-first.'),
     highlights: {
       en: ['Encrypted local vault and explicit session contract', 'Electron → local bridge → gRPC → Go core', 'Real Bitcoin testnet transaction validated end to end'],
       pt: ['Vault local criptografado e contrato explícito de sessão', 'Electron → bridge local → gRPC → core Go', 'Transação real em Bitcoin testnet validada ponta a ponta'],
     },
     badges: ['GO', 'ELECTRON', 'GRPC', 'BITCOIN', 'LIQUID', 'LIGHTNING'],
-    visibility: 'private',
-    links: [],
+    visibility: 'public',
+    links: [{ label: local('SOURCE', 'CÓDIGO'), url: 'https://github.com/4LFR3Dv1/XSWallet' }],
     caseStudy: {
-      type: local('Private financial infrastructure R&D', 'P&D privado de infraestrutura financeira'),
+      type: local('Public financial infrastructure R&D', 'P&D público de infraestrutura financeira'),
       role: local('Architecture, security model and implementation', 'Arquitetura, modelo de segurança e implementação'),
-      summary: local('A modular desktop wallet that keeps critical execution local and separates UI, IPC, bridge and core responsibilities. Public disclosure is limited while release hardening continues.', 'Uma wallet desktop modular que mantém execução crítica local e separa responsabilidades de UI, IPC, bridge e core. A divulgação pública é limitada durante o hardening de release.'),
+      summary: local('A modular desktop wallet codebase that keeps critical execution local and separates UI, IPC, bridge and core responsibilities. There is no public release. The current desktop UI is branded Domini while the repository and historical specifications still use XS Wallet; product identity and release scope remain under reconciliation.', 'Um código modular de wallet desktop que mantém execução crítica local e separa responsabilidades de UI, IPC, bridge e core. Não existe release público. A interface desktop atual usa a marca Domini enquanto o repositório e as especificações históricas ainda usam XS Wallet; identidade do produto e escopo de release seguem em reconciliação.'),
       problem: {
         en: ['Self-custody fails when privileged operations leak across layers.', 'BTC, Liquid and Lightning expose different settlement models.', 'Desktop releases need explicit recovery and node-management gates.'],
         pt: ['Self-custody falha quando operações privilegiadas vazam entre camadas.', 'BTC, Liquid e Lightning possuem modelos distintos de settlement.', 'Releases desktop exigem gates explícitos de recuperação e gestão de nós.'],
@@ -105,10 +109,10 @@ export const projects: Project[] = [
         pt: [{ name: 'DESKTOP', items: ['Interface React', 'Electron main/preload e registro IPC'] }, { name: 'SERVIÇOS LOCAIS', items: ['Bridge REST-para-gRPC', 'Serviços Go de wallet, swap e nós'] }, { name: 'REDES', items: ['Bitcoin Core', 'Elements/Liquid', 'LND e provedor de swaps'] }],
       },
       guarantees: ['SELF-CUSTODY', 'IPC-FIRST', 'LOCAL ENCRYPTION', 'EXPLICIT SESSIONS'],
-      evidence: [],
+      evidence: [{ label: local('Inspect public pre-beta source', 'Inspecionar código público em pré-beta'), url: 'https://github.com/4LFR3Dv1/XSWallet' }],
       learnings: {
-        en: ['A desktop wallet is a distributed system on one machine.', 'Recovery modes must be designed before release.', 'Private work must be described without pretending to be publicly auditable.'],
-        pt: ['Uma wallet desktop é um sistema distribuído em uma máquina.', 'Modos de recuperação precisam ser projetados antes do release.', 'Trabalho privado deve ser descrito sem fingir ser publicamente auditável.'],
+        en: ['A desktop wallet is a distributed system on one machine.', 'Recovery modes must be designed before release.', 'Public source does not imply a production release or a completed security review.'],
+        pt: ['Uma wallet desktop é um sistema distribuído em uma máquina.', 'Modos de recuperação precisam ser projetados antes do release.', 'Código público não implica release de produção nem revisão de segurança concluída.'],
       },
     },
   },
