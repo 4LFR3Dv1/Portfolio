@@ -14,7 +14,7 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
     ? {
         role: 'Blockchain & Agentic Systems Engineer',
         author: 'Author of VERIFY SYSTEMS',
-        description: 'I build production-grade financial products, agentic systems and developer tooling — from protocol and backend architecture to the interfaces people use.',
+        description: 'I build verifiable financial products, agentic systems and developer tooling — from protocol and backend architecture to the interfaces people use.',
         focus: ['Financial infrastructure', 'Agent platforms', 'Real-time products', 'Developer tooling'],
         quick: 'VERIFIABLE LINKS',
         portfolio: 'PERSONAL GITHUB',
