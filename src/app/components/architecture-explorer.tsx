@@ -60,8 +60,8 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
               </span>
               <span className="h-px w-12 bg-[var(--electric-blue)]" aria-hidden="true" />
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl">
-              {language === 'en' ? 'Architecture Explorer' : 'Explorador de Arquitetura'}
+            <h1 className="font-mono text-3xl font-bold tracking-tight text-[var(--electric-blue)] lg:text-4xl">
+              {language === 'en' ? 'ARCHITECTURE EXPLORER' : 'EXPLORADOR DE ARQUITETURA'}
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-[var(--terminal-muted)] sm:text-lg">
               {language === 'en'
@@ -155,7 +155,9 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-4xl">
               <Badge variant="blue">{activeView.index} // {activeView.shortLabel[language]}</Badge>
-              <h2 className="mt-5 text-2xl text-[var(--terminal-text)] sm:text-3xl">{activeView.title[language]}</h2>
+              <h2 className="mt-5 font-mono text-lg font-semibold text-[var(--electric-blue)]">
+                {activeView.title[language]}
+              </h2>
               <p className="mt-4 text-base leading-relaxed text-[var(--terminal-muted)]">
                 {activeView.summary[language]}
               </p>

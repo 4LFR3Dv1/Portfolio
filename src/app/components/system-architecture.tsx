@@ -21,7 +21,9 @@ export function SystemArchitecture({ onOpen }: SystemArchitectureProps) {
           <div className="mb-3 font-mono text-xs uppercase tracking-widest text-[var(--electric-blue)]">
             {language === 'en' ? 'ARCHITECTURE // OPERATING MODEL' : 'ARQUITETURA // MODELO OPERACIONAL'}
           </div>
-          <h2>{language === 'en' ? 'How the systems fit together' : 'Como os sistemas se conectam'}</h2>
+          <h2 className="font-mono font-bold text-[var(--electric-blue)]">
+            {language === 'en' ? 'HOW THE SYSTEMS FIT TOGETHER' : 'COMO OS SISTEMAS SE CONECTAM'}
+          </h2>
           <p className="mt-4 text-base leading-relaxed text-[var(--terminal-muted)]">
             {systemMap.summary[language]}
           </p>
