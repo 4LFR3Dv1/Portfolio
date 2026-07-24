@@ -39,6 +39,7 @@ export function SelectedWorkSection({ onCaseStudy, onOpen, onEvidence }: Selecte
               evidence: t('work.cta.evidence'),
               public: language === 'en' ? 'PUBLIC' : 'PÚBLICO',
               private: language === 'en' ? 'PRIVATE BUILD' : 'PROJETO PRIVADO',
+              publicCase: language === 'en' ? 'PUBLIC CASE' : 'CASE PÚBLICO',
             }}
             size={index < 3 ? 'large' : 'medium'}
             onCaseStudy={() => onCaseStudy?.(project.id)}

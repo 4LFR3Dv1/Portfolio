@@ -1,5 +1,6 @@
 import { Badge } from './badge';
 import { Button } from './button';
+import type { ProjectVisibility } from '../data/projects';
 
 interface ProjectCardProps {
   title: string;
@@ -7,7 +8,7 @@ interface ProjectCardProps {
   impact: string;
   highlights: string[];
   badges: string[];
-  visibility: 'public' | 'private';
+  visibility: ProjectVisibility;
   labels: {
     impact: string;
     highlights: string;
@@ -15,6 +16,7 @@ interface ProjectCardProps {
     evidence: string;
     public: string;
     private: string;
+    publicCase: string;
   };
   size?: 'large' | 'medium';
   onCaseStudy?: () => void;
@@ -40,8 +42,12 @@ export function ProjectCard({
         <h3 className="font-mono text-lg font-semibold" style={{ color: 'var(--electric-blue)' }}>
           {title}
         </h3>
-        <Badge variant={visibility === 'public' ? 'green' : 'default'}>
-          {visibility === 'public' ? labels.public : labels.private}
+        <Badge variant={visibility === 'private' ? 'default' : 'green'}>
+          {visibility === 'public'
+            ? labels.public
+            : visibility === 'case-study'
+              ? labels.publicCase
+              : labels.private}
         </Badge>
       </div>
 

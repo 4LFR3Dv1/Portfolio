@@ -1,7 +1,14 @@
 import type { Language } from '../context/language-context';
 
-export type ProjectId = 'vira' | 'xs-wallet' | 'agentic-systems' | 'sne-os' | 'verify-systems';
+export type ProjectId =
+  | 'vira'
+  | 'xs-wallet'
+  | 'agentic-systems'
+  | 'transactional-support-bot'
+  | 'sne-os'
+  | 'verify-systems';
 type Localized = Record<Language, string>;
+export type ProjectVisibility = 'public' | 'private' | 'case-study';
 
 export interface ProjectLink {
   label: Localized;
@@ -11,11 +18,15 @@ export interface ProjectLink {
 export interface Project {
   id: ProjectId;
   title: string;
+  seo?: {
+    title: Localized;
+    description: Localized;
+  };
   subtitle: Localized;
   impact: Localized;
   highlights: Record<Language, string[]>;
   badges: string[];
-  visibility: 'public' | 'private';
+  visibility: ProjectVisibility;
   links: ProjectLink[];
   caseStudy: {
     type: Localized;
@@ -27,6 +38,17 @@ export interface Project {
     guarantees: string[];
     evidence: ProjectLink[];
     learnings: Record<Language, string[]>;
+    extended?: {
+      flow: Record<Language, string[]>;
+      stateModel: {
+        primary: Record<Language, string[]>;
+        branches: Record<Language, string[]>;
+        note: Localized;
+      };
+      roleDescription: Localized;
+      aiRelevance: Localized;
+      disclosure: Localized;
+    };
   };
 }
 
@@ -149,6 +171,252 @@ export const projects: Project[] = [
       learnings: {
         en: ['Agent reliability depends on workflow design.', 'Review and evidence need first-class models.', 'Clear intervention points precede safe autonomy.'],
         pt: ['Confiabilidade de agentes depende do desenho do fluxo.', 'Revisão e evidência precisam de modelos de primeira classe.', 'Pontos claros de intervenção precedem autonomia segura.'],
+      },
+    },
+  },
+  {
+    id: 'transactional-support-bot',
+    title: 'Transactional Support Bot',
+    seo: {
+      title: local(
+        'Transactional Support Bot — Renan Melo',
+        'Bot Transacional de Suporte — Renan Melo',
+      ),
+      description: local(
+        'A session-based conversational support system with persistent state, identity binding, idempotent confirmation, secure handoff and operational traceability.',
+        'Um sistema conversacional de suporte baseado em sessões, com estado persistente, vínculo de identidade, confirmação idempotente, encaminhamento seguro e rastreabilidade operacional.',
+      ),
+    },
+    subtitle: local(
+      'Designed and implemented a transactional support bot connecting a product interface, backend sessions, a messaging platform and human support. The system handled identity binding, expiration, confirmation, cancellation, idempotency, structured events and secure handoff.',
+      'Projetei e implementei um bot transacional de suporte que conectava a interface do produto, sessões no backend, uma plataforma de mensagens e o atendimento humano. O sistema tratava vínculo de identidade, expiração, confirmação, cancelamento, idempotência, eventos estruturados e encaminhamento seguro.',
+    ),
+    impact: local(
+      'Replaced a fragile redirect with an authoritative, traceable workflow across product, messaging and support boundaries.',
+      'Substituiu um redirecionamento frágil por um fluxo autoritativo e rastreável entre produto, mensageria e atendimento.',
+    ),
+    highlights: {
+      en: [
+        'Persistent sessions with explicit lifecycle states',
+        'Identity-bound, idempotent confirmation and controlled retry',
+        'Secure human handoff with structured operational events',
+      ],
+      pt: [
+        'Sessões persistentes com estados explícitos de ciclo de vida',
+        'Confirmação vinculada à identidade, idempotente e com retry controlado',
+        'Encaminhamento humano seguro com eventos operacionais estruturados',
+      ],
+    },
+    badges: [
+      'TYPESCRIPT',
+      'NODE.JS',
+      'REST APIS',
+      'WEBHOOKS',
+      'POSTGRESQL',
+      'MESSAGING API',
+      'STRUCTURED LOGGING',
+    ],
+    visibility: 'case-study',
+    links: [],
+    caseStudy: {
+      type: local(
+        'Deterministic conversational system',
+        'Sistema conversacional determinístico',
+      ),
+      role: local(
+        'Architecture and full-stack product engineering',
+        'Arquitetura e engenharia de produto full-stack',
+      ),
+      summary: local(
+        'A secure, session-based conversational workflow connecting product, messaging and human support.',
+        'Um fluxo conversacional seguro e baseado em sessões, conectando produto, mensageria e atendimento humano.',
+      ),
+      problem: {
+        en: [
+          'The existing support flow redirected users to an external messaging channel through a fragile text-based link. Users could be required to repeat information, the product had no authoritative session state, and the internal team lacked reliable confirmation and end-to-end traceability.',
+        ],
+        pt: [
+          'O fluxo anterior redirecionava usuários para um canal externo de mensagens por meio de um link textual frágil. O usuário podia precisar repetir informações, o produto não possuía um estado de sessão autoritativo e a equipe interna não tinha confirmação confiável nem rastreabilidade ponta a ponta.',
+        ],
+      },
+      approach: {
+        en: [
+          'I replaced the loose redirect with a session-based handoff. The website created a structured request, the backend persisted an expiring session, and the messaging bot recovered that session through a deep link. The user could review the request, confirm it, cancel it or return to the product before the support team received the handoff.',
+        ],
+        pt: [
+          'Substituí o redirecionamento solto por um handoff baseado em sessão. O site criava uma solicitação estruturada, o backend persistia uma sessão com expiração e o bot recuperava essa sessão por meio de um deep link. O usuário podia revisar a solicitação, confirmá-la, cancelá-la ou retornar ao produto antes de o atendimento ser encaminhado à equipe.',
+        ],
+      },
+      architecture: {
+        en: [
+          {
+            name: 'AUTHORITATIVE SESSION STATE',
+            items: [
+              'Persistent request state instead of relying on chat history.',
+              'Explicit states: pending, opened, confirmed, cancelled, expired and failed.',
+            ],
+          },
+          {
+            name: 'IDENTITY BINDING',
+            items: [
+              'The session was bound to the first messaging account that opened it.',
+              'Another account could not confirm an already-bound request.',
+            ],
+          },
+          {
+            name: 'IDEMPOTENT CONFIRMATION',
+            items: [
+              'Repeated callbacks could not create duplicate support requests.',
+              'Failed deliveries could be retried under controlled rules.',
+            ],
+          },
+          {
+            name: 'SECURITY AND PRIVACY',
+            items: [
+              'Random non-sequential session identifiers and explicit expiration.',
+              'Authenticated webhooks and internal API calls.',
+              'Sensitive-data redaction and no secrets in logs.',
+            ],
+          },
+          {
+            name: 'PROVIDER ABSTRACTION',
+            items: [
+              'The domain did not depend directly on a specific support provider.',
+              'Providers could be replaced without rewriting the conversational flow.',
+            ],
+          },
+          {
+            name: 'OBSERVABILITY',
+            items: [
+              'Structured events covered creation, opening, confirmation and cancellation.',
+              'Expiration, provider delivery and failure remained traceable.',
+            ],
+          },
+        ],
+        pt: [
+          {
+            name: 'ESTADO AUTORITATIVO DA SESSÃO',
+            items: [
+              'Estado persistente da solicitação em vez de depender do histórico da conversa.',
+              'Estados explícitos: pending, opened, confirmed, cancelled, expired e failed.',
+            ],
+          },
+          {
+            name: 'VÍNCULO DE IDENTIDADE',
+            items: [
+              'A sessão era vinculada à primeira conta de mensageria que a abria.',
+              'Outra conta não podia confirmar uma solicitação já vinculada.',
+            ],
+          },
+          {
+            name: 'CONFIRMAÇÃO IDEMPOTENTE',
+            items: [
+              'Callbacks repetidos não criavam solicitações duplicadas de atendimento.',
+              'Falhas de entrega podiam ser repetidas sob regras controladas.',
+            ],
+          },
+          {
+            name: 'SEGURANÇA E PRIVACIDADE',
+            items: [
+              'Identificadores de sessão aleatórios e não sequenciais, com expiração explícita.',
+              'Webhooks e chamadas à API interna autenticados.',
+              'Redação de dados sensíveis e ausência de segredos nos logs.',
+            ],
+          },
+          {
+            name: 'ABSTRAÇÃO DE PROVEDOR',
+            items: [
+              'O domínio não dependia diretamente de um provedor específico de atendimento.',
+              'Provedores podiam ser substituídos sem reescrever o fluxo conversacional.',
+            ],
+          },
+          {
+            name: 'OBSERVABILIDADE',
+            items: [
+              'Eventos estruturados cobriam criação, abertura, confirmação e cancelamento.',
+              'Expiração, entrega ao provedor e falhas permaneciam rastreáveis.',
+            ],
+          },
+        ],
+      },
+      guarantees: [
+        'AUTHORITATIVE STATE',
+        'IDENTITY BINDING',
+        'IDEMPOTENT HANDOFF',
+        'EXPIRING SESSIONS',
+        'PROVIDER ABSTRACTION',
+        'AUDIT TRAIL',
+      ],
+      evidence: [],
+      learnings: {
+        en: [
+          'Conversation is an interface; the backend remains the source of truth.',
+          'Retries are safe only when identity, state and side effects are explicit.',
+          'Human escalation is a domain transition, not an informal fallback.',
+        ],
+        pt: [
+          'A conversa é uma interface; o backend permanece como fonte da verdade.',
+          'Retries só são seguros quando identidade, estado e efeitos são explícitos.',
+          'Escalonamento humano é uma transição de domínio, não um fallback informal.',
+        ],
+      },
+      extended: {
+        flow: {
+          en: [
+            'Product form',
+            'Backend session',
+            'Secure deep link',
+            'Messaging bot',
+            'User review',
+            'Confirm / Cancel / Edit',
+            'Support provider',
+            'Human support',
+          ],
+          pt: [
+            'Formulário do produto',
+            'Sessão no backend',
+            'Deep link seguro',
+            'Bot de mensagens',
+            'Revisão pelo usuário',
+            'Confirmar / Cancelar / Editar',
+            'Provedor de atendimento',
+            'Suporte humano',
+          ],
+        },
+        stateModel: {
+          primary: {
+            en: ['pending', 'opened', 'confirmed'],
+            pt: ['pending', 'opened', 'confirmed'],
+          },
+          branches: {
+            en: [
+              'pending / opened → cancelled',
+              'pending / opened → expired',
+              'delivery error → failed / controlled retry',
+            ],
+            pt: [
+              'pending / opened → cancelled',
+              'pending / opened → expired',
+              'erro de entrega → failed / retry controlado',
+            ],
+          },
+          note: local(
+            'States and transitions belonged to the backend, never to the messaging client.',
+            'Estados e transições pertenciam ao backend, nunca ao cliente de mensagens.',
+          ),
+        },
+        roleDescription: local(
+          'I designed the architecture and implemented the integration across the product frontend, backend API, persistent session model, messaging webhook and internal support handoff. I was responsible for the domain states, security boundaries, failure behavior, idempotency and operational traceability.',
+          'Projetei a arquitetura e implementei a integração entre o frontend do produto, a API, o modelo persistente de sessões, o webhook de mensageria e o encaminhamento ao atendimento interno. Fui responsável pelos estados de domínio, fronteiras de segurança, comportamento diante de falhas, idempotência e rastreabilidade operacional.',
+        ),
+        aiRelevance: local(
+          'The bot itself was deterministic rather than generative. Its relevance to applied AI is the operational foundation: persistent context, identity, explicit state, constrained actions, observability and human escalation. A reliable AI assistant still needs these layers around the model.',
+          'O bot era determinístico, e não generativo. Sua relevância para sistemas de IA está na fundação operacional: contexto persistente, identidade, estados explícitos, ações limitadas, observabilidade e escalonamento humano. Um assistente de IA confiável ainda precisa dessas camadas ao redor do modelo.',
+        ),
+        disclosure: local(
+          'Generalized professional case study. Source code, infrastructure, provider details and operational data remain confidential.',
+          'Case profissional generalizado. Código-fonte, infraestrutura, detalhes de provedores e dados operacionais permanecem confidenciais.',
+        ),
       },
     },
   },

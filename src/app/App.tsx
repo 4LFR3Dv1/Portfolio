@@ -9,6 +9,8 @@ import { PublicationsSection } from '@/app/components/publications-section';
 import { SelectedWorkSection } from '@/app/components/selected-work-section';
 import { TechTicker } from '@/app/components/tech-ticker';
 import { TerminalTopBar } from '@/app/components/terminal-topbar';
+import { useLanguage } from '@/app/context/language-context';
+import { applyMetadata, metadataForRoute } from '@/app/metadata';
 import { parseRoute, routePath, type PortfolioRoute } from '@/app/routing';
 
 const ArchitectureExplorer = lazy(() =>
@@ -22,6 +24,7 @@ const SystemArchitecture = lazy(() =>
 );
 
 export default function App() {
+  const { language } = useLanguage();
   const [route, setRoute] = useState<PortfolioRoute>(() => parseRoute(window.location.pathname));
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
 
@@ -43,13 +46,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const title = route.view === 'case-study'
-      ? `${route.projectId} — Renan Melo`
-      : route.view === 'architecture'
-        ? 'Architecture — Renan Melo'
-        : 'Renan Melo — Blockchain & Agentic Systems Engineer';
-    document.title = title;
-  }, [route]);
+    applyMetadata(metadataForRoute(route, language));
+  }, [language, route]);
 
   const navigate = (nextRoute: PortfolioRoute) => {
     window.history.pushState({}, '', routePath(nextRoute));
