@@ -6,6 +6,10 @@ describe('portfolio routing', () => {
     expect(parseRoute('/')).toEqual({ view: 'landing' });
     expect(parseRoute('/architecture/')).toEqual({ view: 'architecture' });
     expect(parseRoute('/work/vira')).toEqual({ view: 'case-study', projectId: 'vira' });
+    expect(parseRoute('/work/transactional-support-bot')).toEqual({
+      view: 'case-study',
+      projectId: 'transactional-support-bot',
+    });
   });
 
   it('falls back to the landing view for unknown paths', () => {

@@ -88,6 +88,15 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
       action: () => { onCaseStudy('agentic-systems'); onClose(); }
     },
     {
+      id: 'case-transactional-support',
+      label: 'Transactional Support Bot',
+      description: language === 'en'
+        ? 'Deterministic conversational support workflow'
+        : 'Fluxo conversacional determinístico de suporte',
+      category: 'case-study',
+      action: () => { onCaseStudy('transactional-support-bot'); onClose(); }
+    },
+    {
       id: 'ext-demo',
       label: language === 'en' ? 'Open SNE OS' : 'Abrir SNE OS',
       description: language === 'en' ? 'Visit public product' : 'Visitar produto público',
