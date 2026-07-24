@@ -111,7 +111,7 @@ export default function App() {
             />
             <EvidenceRoom />
             <PublicationsSection onCaseStudy={(projectId) => navigate({ view: 'case-study', projectId })} />
-            <SystemArchitecture />
+            <SystemArchitecture onOpen={() => navigate({ view: 'architecture' })} />
             <AboutSection />
             <ContactSection />
           </>

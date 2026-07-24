@@ -26,8 +26,8 @@ export function metadataForRoute(route: PortfolioRoute, language: Language): Por
     return {
       title: language === 'en' ? 'Architecture — Renan Melo' : 'Arquitetura — Renan Melo',
       description: language === 'en'
-        ? 'System architecture across product, runtime, protocols and operational evidence.'
-        : 'Arquitetura de sistemas entre produto, runtime, protocolos e evidência operacional.',
+        ? 'Explore system architecture across governed settlement, agent operations, real-time products, transactional workflows and verifiable evidence.'
+        : 'Explore arquiteturas de settlement governado, operação agêntica, produtos em tempo real, fluxos transacionais e evidência verificável.',
       canonicalUrl: `${SITE_URL}/architecture`,
     };
   }

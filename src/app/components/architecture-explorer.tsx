@@ -1,329 +1,241 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { ArchitectureLegend, ArchitectureMap } from './architecture-map';
 import { Badge } from './badge';
 import { Button } from './button';
-import { MermaidDiagram } from './mermaid-diagram';
 import { useLanguage } from '../context/language-context';
+import { architectureViews, getArchitectureView, type ArchitectureViewId } from '../data/architecture';
 
 interface ArchitectureExplorerProps {
   onBack?: () => void;
 }
 
-// Full ecosystem diagrams
-const ecosystemDiagrams = {
-  overview: `graph TB
-    subgraph UserLayer["👤 USER LAYER"]
-        USER["User / Trader"]
-        WALLET["Wallet (MetaMask)"]
-    end
-    
-    subgraph Products["🎯 SNE LABS PRODUCTS"]
-        SNEOS["SNE OS<br/>Control Plane Web"]
-        RADAR["SNE Radar<br/>Desktop Trading"]
-        VAULT["SNE Vault<br/>Security Protocol"]
-    end
-    
-    subgraph Backend["⚙️ BACKEND SERVICES"]
-        API["SNE Core API<br/>Flask + PostgreSQL"]
-        AUTH["Auth Service<br/>SIWE + Sessions"]
-        ALERTS["Alerts/Ops<br/>Telegram Bot"]
-    end
-    
-    subgraph Blockchain["🔗 BLOCKCHAIN LAYER"]
-        SCROLL["Scroll L2<br/>License Registry"]
-        NFT["NFT Entitlements"]
-    end
-    
-    subgraph External["🌐 EXTERNAL"]
-        BINANCE["Binance API"]
-        BYBIT["Bybit API"]
-    end
-    
-    USER --> WALLET
-    WALLET --> SNEOS
-    WALLET --> SCROLL
-    
-    SNEOS --> API
-    SNEOS --> AUTH
-    
-    RADAR --> API
-    RADAR --> BINANCE
-    RADAR --> BYBIT
-    RADAR --> ALERTS
-    
-    VAULT --> SCROLL
-    VAULT --> NFT
-    
-    API --> AUTH
-    AUTH --> SCROLL
-    SCROLL --> NFT`,
-
-  sneos: `graph TB
-    subgraph SNEOS["SNE OS - Control Plane"]
-        LANDING["Landing Page<br/>radar.snelabs.space"]
-        APP["Web App<br/>snelabs.space"]
-        DESIGN["Design System<br/>Components + Tokens"]
-    end
-    
-    subgraph Routes["📍 MODULAR ROUTES"]
-        HOME["/home"]
-        RADAR_R["/radar"]
-        PASS["/pass"]
-        VAULT_R["/vault"]
-    end
-    
-    subgraph Trust["🛡️ TRUST SURFACES"]
-        DOCS["Docs"]
-        STATUS["Status"]
-        PRICING["Pricing"]
-    end
-    
-    subgraph Auth["🔐 AUTHENTICATION"]
-        CONNECT["WalletConnect"]
-        SIWE["SIWE Signature"]
-        TIERS["Tier Gating<br/>Free/Pro/Enterprise"]
-    end
-    
-    APP --> Routes
-    APP --> Trust
-    APP --> DESIGN
-    
-    LANDING --> CONNECT
-    CONNECT --> SIWE
-    SIWE --> TIERS
-    
-    Routes --> TIERS`,
-
-  radar: `graph TB
-    subgraph Desktop["🖥️ DESKTOP RUNTIME"]
-        ELECTRON["Electron Shell"]
-        PYTHON["Python Backend<br/>Flask + Motor"]
-        VUE["Vue.js Frontend"]
-        LOCAL_DB["SQLite Cache"]
-    end
-    
-    subgraph Features["📊 FEATURES"]
-        SCANNER["Market Scanner"]
-        ALERTS_F["Alert System"]
-        DASHBOARD["Dashboard UI"]
-        ANALYSIS["Technical Analysis"]
-    end
-    
-    subgraph AuthFlow["🔐 AUTH FLOW"]
-        DEEPLINK["Deep Link<br/>sneradar://"]
-        CODE["One-Time Code"]
-        TOKENS["Access/Refresh Tokens"]
-        GRACE["Offline Grace Mode"]
-    end
-    
-    subgraph Integrations["🔌 INTEGRATIONS"]
-        BINANCE_I["Binance WebSocket"]
-        BYBIT_I["Bybit WebSocket"]
-        TELEGRAM["Telegram Alerts"]
-    end
-    
-    ELECTRON --> VUE
-    ELECTRON --> PYTHON
-    PYTHON --> LOCAL_DB
-    PYTHON --> Features
-    
-    VUE --> DASHBOARD
-    
-    DEEPLINK --> CODE
-    CODE --> TOKENS
-    TOKENS --> GRACE
-    
-    PYTHON --> Integrations`,
-
-  vault: `graph TB
-    subgraph Core["🔒 SNE VAULT PROTOCOL"]
-        SPEC["Hardened Specification"]
-        THREAT["Threat Model"]
-        CRYPTO["Crypto Primitives"]
-    end
-    
-    subgraph Security["🛡️ SECURITY CONTROLS"]
-        AEAD["AEAD Encryption"]
-        HKDF["Key Derivation"]
-        TAMPER["Tamper Detection"]
-        ZERO["Zeroization"]
-    end
-    
-    subgraph Trust_I["✅ TRUST INPUTS"]
-        HARDWARE["Hardware Attestation"]
-        POU["Proof of Uptime"]
-        ENTITLE["Entitlements"]
-    end
-    
-    subgraph Guarantees["🎯 GUARANTEES"]
-        SEPARATION["Domain Separation"]
-        VERIFY["Verifiable Signals"]
-        RESPONSE["Compromise Response"]
-        GOV["Governance Ready"]
-    end
-    
-    Core --> Security
-    Core --> Threat
-    
-    Trust_I --> SPEC
-    Security --> Guarantees
-    
-    AEAD --> HKDF
-    TAMPER --> ZERO`,
-
-  dataflow: `sequenceDiagram
-    participant User
-    participant Desktop as SNE Radar Desktop
-    participant API as SNE Core API
-    participant Exchange as Binance/Bybit
-    participant Telegram as Telegram Bot
-    
-    User->>Desktop: Opens App
-    Desktop->>API: Validate Session
-    API-->>Desktop: Session Valid
-    
-    Desktop->>Exchange: Subscribe WebSocket
-    Exchange-->>Desktop: Market Data Stream
-    
-    Desktop->>Desktop: Run Analysis Motor
-    Desktop->>Desktop: Detect Signal
-    
-    alt Alert Triggered
-        Desktop->>Telegram: Send Alert
-        Telegram-->>User: Notification
-    end
-    
-    Desktop-->>User: Update Dashboard`
-};
-
-const diagramTabs = [
-  { id: 'overview', label: 'ECOSYSTEM', icon: '🌐' },
-  { id: 'sneos', label: 'SNE OS', icon: '🎯' },
-  { id: 'radar', label: 'SNE RADAR', icon: '📡' },
-  { id: 'vault', label: 'SNE VAULT', icon: '🔒' },
-  { id: 'dataflow', label: 'DATA FLOW', icon: '📊' },
-];
+function initialView(): ArchitectureViewId {
+  if (typeof window === 'undefined') return 'systems';
+  return getArchitectureView(new URLSearchParams(window.location.search).get('view')).id;
+}
 
 export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
   const { language } = useLanguage();
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeViewId, setActiveViewId] = useState<ArchitectureViewId>(initialView);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const activeView = getArchitectureView(activeViewId);
 
-  const descriptions: Record<string, { en: string; pt: string }> = {
-    overview: {
-      en: 'Complete SNE Labs ecosystem: Products, Services, Blockchain, and External Integrations.',
-      pt: 'Ecossistema completo SNE Labs: Produtos, Serviços, Blockchain e Integrações Externas.'
-    },
-    sneos: {
-      en: 'Control Plane Web with modular routes, trust surfaces, and wallet-based authentication.',
-      pt: 'Control Plane Web com rotas modulares, superfícies de confiança e autenticação via wallet.'
-    },
-    radar: {
-      en: 'Desktop trading terminal with local runtime, market analysis, and real-time integrations.',
-      pt: 'Terminal de trading desktop com runtime local, análise de mercado e integrações em tempo real.'
-    },
-    vault: {
-      en: 'Security protocol with hardened specification, threat modeling, and cryptographic guarantees.',
-      pt: 'Protocolo de segurança com especificação hardened, modelagem de ameaças e garantias criptográficas.'
-    },
-    dataflow: {
-      en: 'Real-time data flow from market exchanges to user notifications.',
-      pt: 'Fluxo de dados em tempo real dos exchanges de mercado até notificações do usuário.'
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (activeViewId === 'systems') {
+      url.searchParams.delete('view');
+    } else {
+      url.searchParams.set('view', activeViewId);
     }
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  }, [activeViewId]);
+
+  const selectView = (id: ArchitectureViewId) => {
+    setActiveViewId(id);
+  };
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+
+    let nextIndex = index;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % architectureViews.length;
+    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + architectureViews.length) % architectureViews.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = architectureViews.length - 1;
+
+    const nextView = architectureViews[nextIndex];
+    selectView(nextView.id);
+    tabRefs.current[nextIndex]?.focus();
   };
 
   return (
-    <section className="max-w-[1600px] mx-auto px-6 py-16">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="font-mono font-bold mb-2" style={{ color: 'var(--electric-blue)' }}>
-              {language === 'en' ? 'ARCHITECTURE EXPLORER' : 'EXPLORADOR DE ARQUITETURA'}
-            </h2>
-            <p className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
+    <main className="mx-auto max-w-[1600px] px-4 py-10 sm:px-6 sm:py-16">
+      <header className="border-b border-[var(--border-default)] pb-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-4xl">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--electric-blue)]">
+                {language === 'en' ? 'SYSTEM MAP // PUBLIC' : 'MAPA DE SISTEMAS // PÚBLICO'}
+              </span>
+              <span className="h-px w-12 bg-[var(--electric-blue)]" aria-hidden="true" />
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl">
+              {language === 'en' ? 'Architecture Explorer' : 'Explorador de Arquitetura'}
+            </h1>
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-[var(--terminal-muted)] sm:text-lg">
               {language === 'en'
-                ? 'Interactive visualization of the complete SNE Labs ecosystem.'
-                : 'Visualização interativa do ecossistema completo SNE Labs.'}
+                ? 'A current, sanitized view of how product interfaces, authoritative services, constrained runtimes and verification layers fit together across my work.'
+                : 'Uma visão atual e sanitizada de como interfaces de produto, serviços autoritativos, runtimes limitados e camadas de verificação se conectam nos meus trabalhos.'}
             </p>
           </div>
+
           {onBack && (
-            <Button variant="ghost" onClick={onBack}>
-              ← {language === 'en' ? 'BACK' : 'VOLTAR'}
+            <Button
+              variant="ghost"
+              onClick={onBack}
+              className="min-h-10 self-start focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] lg:self-auto"
+            >
+              ← {language === 'en' ? 'BACK TO PORTFOLIO' : 'VOLTAR AO PORTFÓLIO'}
             </Button>
           )}
         </div>
-      </div>
 
-      {/* Tab Navigation */}
-      <div className="flex flex-wrap gap-2 mb-6 pb-4 border-b border-[var(--border-default)]">
-        {diagramTabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-3 font-mono text-xs uppercase tracking-wider border transition-all flex items-center gap-2 ${activeTab === tab.id
-                ? 'bg-[var(--electric-blue)] text-black border-[var(--electric-blue)]'
-                : 'bg-[var(--surface-1)] border-[var(--border-default)] text-[var(--terminal-muted)] hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]'
-              }`}
-          >
-            <span>{tab.icon}</span>
-            <span>{tab.label}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Active Diagram */}
-      <div className="space-y-4">
-        {/* Description */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Badge variant="blue">
-              {diagramTabs.find(t => t.id === activeTab)?.icon} {diagramTabs.find(t => t.id === activeTab)?.label}
-            </Badge>
-            <span className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
-              {descriptions[activeTab][language]}
-            </span>
+        <dl className="mt-8 grid grid-cols-1 border border-[var(--border-default)] sm:grid-cols-3">
+          <div className="border-b border-[var(--border-default)] p-4 sm:border-b-0 sm:border-r">
+            <dt className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">
+              {language === 'en' ? 'Operating model' : 'Modelo operacional'}
+            </dt>
+            <dd className="mt-2 font-mono text-sm text-[var(--terminal-text)]">
+              {language === 'en' ? 'DETERMINISTIC FIRST' : 'DETERMINÍSTICO PRIMEIRO'}
+            </dd>
           </div>
-          <Badge variant="green">{language === 'en' ? 'INTERACTIVE' : 'INTERATIVO'}</Badge>
-        </div>
+          <div className="border-b border-[var(--border-default)] p-4 sm:border-b-0 sm:border-r">
+            <dt className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">
+              {language === 'en' ? 'Authority' : 'Autoridade'}
+            </dt>
+            <dd className="mt-2 font-mono text-sm text-[var(--terminal-text)]">
+              {language === 'en' ? 'EXPLICIT & BOUNDED' : 'EXPLÍCITA E LIMITADA'}
+            </dd>
+          </div>
+          <div className="p-4">
+            <dt className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">
+              {language === 'en' ? 'Outcome' : 'Resultado'}
+            </dt>
+            <dd className="mt-2 font-mono text-sm text-[var(--terminal-text)]">
+              {language === 'en' ? 'VERIFIED EXTERNALLY' : 'VERIFICADO EXTERNAMENTE'}
+            </dd>
+          </div>
+        </dl>
+      </header>
 
-        {/* Diagram Container */}
-        <div className="border border-[var(--border-default)] bg-[var(--surface-1)] rounded-lg overflow-hidden">
-          <div className="border-b border-[var(--border-default)] px-4 py-3 bg-[var(--surface-2)] flex items-center justify-between">
-            <div className="font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--electric-blue)' }}>
-              {diagramTabs.find(t => t.id === activeTab)?.label} // ARCHITECTURE
+      <nav className="py-6" aria-label={language === 'en' ? 'Architecture views' : 'Visões de arquitetura'}>
+        <div
+          role="tablist"
+          aria-label={language === 'en' ? 'Select architecture view' : 'Selecionar visão de arquitetura'}
+          className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-5"
+        >
+          {architectureViews.map((view, index) => {
+            const isActive = view.id === activeViewId;
+            return (
+              <button
+                key={view.id}
+                ref={(element) => { tabRefs.current[index] = element; }}
+                type="button"
+                role="tab"
+                id={`architecture-tab-${view.id}`}
+                aria-controls={`architecture-panel-${view.id}`}
+                aria-selected={isActive}
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => selectView(view.id)}
+                onKeyDown={(event) => handleTabKeyDown(event, index)}
+                className={`min-h-14 border px-4 py-3 text-left motion-safe:transition-colors motion-safe:duration-100 focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] ${
+                  isActive
+                    ? 'border-[var(--electric-blue)] bg-[var(--electric-blue)] text-[#0a0a0f]'
+                    : 'border-[var(--border-default)] bg-[var(--surface-1)] text-[var(--terminal-text)] hover:border-[var(--border-strong)]'
+                }`}
+              >
+                <span className={`mr-3 text-xs ${isActive ? 'text-[#0a0a0f]' : 'text-[var(--terminal-muted)]'}`}>
+                  {view.index}
+                </span>
+                <span className="text-xs uppercase tracking-wider">{view.shortLabel[language]}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
+      <section
+        role="tabpanel"
+        id={`architecture-panel-${activeView.id}`}
+        aria-labelledby={`architecture-tab-${activeView.id}`}
+        className="border border-[var(--border-default)] bg-[var(--surface-1)]"
+      >
+        <div className="border-b border-[var(--border-default)] p-5 sm:p-8">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-4xl">
+              <Badge variant="blue">{activeView.index} // {activeView.shortLabel[language]}</Badge>
+              <h2 className="mt-5 text-2xl text-[var(--terminal-text)] sm:text-3xl">{activeView.title[language]}</h2>
+              <p className="mt-4 text-base leading-relaxed text-[var(--terminal-muted)]">
+                {activeView.summary[language]}
+              </p>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[var(--status-online)] animate-pulse"></div>
-              <span className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>{language === 'en' ? 'LIVE' : 'ATIVO'}</span>
+            <div className="border-l-2 border-[var(--electric-green)] bg-[var(--surface-2)] p-4 lg:max-w-md">
+              <div className="font-mono text-xs uppercase tracking-wider text-[var(--electric-green)]">
+                {language === 'en' ? 'Governing principle' : 'Princípio de governo'}
+              </div>
+              <p className="mt-2 font-mono text-sm leading-relaxed text-[var(--terminal-text)]">
+                {activeView.principle[language]}
+              </p>
             </div>
           </div>
-
-          <div className="p-4 min-h-[500px]">
-            <MermaidDiagram
-              chart={ecosystemDiagrams[activeTab as keyof typeof ecosystemDiagrams]}
-              id={`arch-${activeTab}`}
-            />
-          </div>
         </div>
 
-        {/* Legend */}
-        <div className="flex flex-wrap gap-4 pt-4 border-t border-[var(--border-subtle)]">
-          <div className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
-            <div className="w-3 h-3 rounded bg-[var(--electric-blue)]"></div>
-            <span>{language === 'en' ? 'Core Service' : 'Serviço principal'}</span>
+        <div className="p-4 sm:p-8">
+          <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <h2 className="font-mono text-sm uppercase tracking-wider text-[var(--terminal-text)]">
+              {language === 'en' ? 'Responsibility flow' : 'Fluxo de responsabilidades'}
+            </h2>
+            <ArchitectureLegend language={language} />
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
-            <div className="w-3 h-3 rounded bg-[var(--electric-green)]"></div>
-            <span>{language === 'en' ? 'Storage/Blockchain' : 'Armazenamento/Blockchain'}</span>
-          </div>
-          <div className="flex items-center gap-2 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
-            <div className="w-3 h-3 rounded bg-[var(--amber)]"></div>
-            <span>{language === 'en' ? 'External Integration' : 'Integração externa'}</span>
-          </div>
-          <div className="flex-1 text-right text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
-            💡 {language === 'en' ? 'Scroll horizontally for full diagram' : 'Role horizontalmente para diagrama completo'}
-          </div>
+          <ArchitectureMap
+            steps={activeView.steps}
+            language={language}
+            label={`${activeView.title[language]} — ${language === 'en' ? 'responsibility flow' : 'fluxo de responsabilidades'}`}
+          />
         </div>
-      </div>
-    </section>
+
+        <div className="grid border-t border-[var(--border-default)] lg:grid-cols-[1.2fr_1fr]">
+          <section className="border-b border-[var(--border-default)] p-5 sm:p-8 lg:border-b-0 lg:border-r">
+            <h2 className="font-mono text-sm uppercase tracking-wider text-[var(--electric-blue)]">
+              {language === 'en' ? 'Trust boundaries' : 'Fronteiras de confiança'}
+            </h2>
+            <ol className="mt-5 space-y-3">
+              {activeView.boundaries.map((boundary, index) => (
+                <li key={boundary.label.en} className="grid gap-3 border-t border-[var(--border-default)] pt-4 sm:grid-cols-[2rem_12rem_1fr]">
+                  <span className="font-mono text-xs text-[var(--terminal-muted)]">{String(index + 1).padStart(2, '0')}</span>
+                  <h3 className="font-mono text-sm font-semibold text-[var(--terminal-text)]">{boundary.label[language]}</h3>
+                  <p className="text-sm leading-relaxed text-[var(--terminal-muted)]">{boundary.detail[language]}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <aside className="p-5 sm:p-8">
+            <h2 className="font-mono text-sm uppercase tracking-wider text-[var(--electric-green)]">
+              {language === 'en' ? 'System guarantees' : 'Garantias do sistema'}
+            </h2>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              {activeView.guarantees[language].map((guarantee) => (
+                <li key={guarantee} className="flex items-center gap-3 border border-[var(--border-default)] bg-[var(--surface-2)] p-3">
+                  <span className="h-2 w-2 bg-[var(--electric-green)]" aria-hidden="true" />
+                  <span className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-text)]">{guarantee}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h2 className="mt-8 font-mono text-sm uppercase tracking-wider text-[var(--terminal-muted)]">
+              {language === 'en' ? 'Applied in' : 'Aplicado em'}
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {activeView.examples.map((example) => (
+                <li key={example}>
+                  <Badge>{example}</Badge>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <footer className="mt-6 flex flex-col gap-3 border-l-2 border-[var(--amber)] bg-[var(--surface-1)] p-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm leading-relaxed text-[var(--terminal-muted)]">
+          {language === 'en'
+            ? 'This explorer publishes responsibility boundaries and operating principles. Credentials, customer data and private deployment topology are intentionally excluded.'
+            : 'Este explorador publica fronteiras de responsabilidade e princípios operacionais. Credenciais, dados de clientes e topologia privada de deploy são intencionalmente excluídos.'}
+        </p>
+        <Badge variant="amber">{language === 'en' ? 'SANITIZED PUBLIC VIEW' : 'VISÃO PÚBLICA SANITIZADA'}</Badge>
+      </footer>
+    </main>
   );
 }

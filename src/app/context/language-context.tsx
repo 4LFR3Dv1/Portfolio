@@ -49,14 +49,6 @@ const translations: Record<Language, Record<string, string>> = {
         'evidence.cta.openpdf': 'OPEN PDF',
         'evidence.cta.view': 'VIEW',
 
-        // System Architecture
-        'architecture.title': 'SYSTEM ARCHITECTURE',
-        'architecture.subtitle': 'Interactive diagrams of SNE Radar architecture: Components, Flows, and Integrations.',
-        'architecture.interactive': 'INTERACTIVE',
-        'architecture.active': 'ACTIVE',
-        'architecture.tip': 'TIP: Scroll horizontally to see full diagram',
-        'architecture.rendered': 'Rendered with Mermaid.js',
-
         // About
         'about.title': 'ABOUT // OPERATOR NOTES',
         'about.p1': 'I come from Industrial Design. That taught me to think in systems before thinking in screens — and to build end-to-end: from architecture to deploy.',
@@ -124,20 +116,6 @@ const translations: Record<Language, Record<string, string>> = {
         'project.vault.title': 'SNE Vault Protocol',
         'project.vault.description': 'Sovereign physical infrastructure for secure key storage and decentralized identity management.',
 
-        // Diagram titles
-        'diagram.overview.title': 'SNE Radar // System Overview',
-        'diagram.overview.desc': 'Complete ecosystem architecture: Frontend, Backend, Blockchain and Integrations.',
-        'diagram.desktop.title': 'Desktop App // Component Architecture',
-        'diagram.desktop.desc': 'Internal structure of SNE_Radar.exe: Python Backend + Vue.js Frontend.',
-        'diagram.landing.title': 'Landing Page // Component Architecture',
-        'diagram.landing.desc': 'Landing page organization: Auth, License Flow and UI Components.',
-        'diagram.purchase.title': 'User Flow // Purchase & Installation',
-        'diagram.purchase.desc': 'Complete flow from license purchase to first app execution.',
-        'diagram.auth.title': 'User Flow // Desktop Authentication',
-        'diagram.auth.desc': 'Deep Link authentication: How desktop authenticates via browser + SIWE.',
-        'diagram.data.title': 'Data Flow // Market Analysis Pipeline',
-        'diagram.data.desc': 'Data pipeline: Market APIs -> Processing -> Dashboard & Alerts.',
-
         // Publications
         'publications.title': 'PUBLICATIONS // WRITING',
         'publications.subtitle': 'Doctrine, frameworks, and systems thinking. From first principles to production.',
@@ -189,14 +167,6 @@ const translations: Record<Language, Record<string, string>> = {
         'evidence.cta.viewsource': 'VER CÓDIGO',
         'evidence.cta.openpdf': 'ABRIR PDF',
         'evidence.cta.view': 'VER',
-
-        // System Architecture
-        'architecture.title': 'ARQUITETURA DO SISTEMA',
-        'architecture.subtitle': 'Diagramas interativos da arquitetura SNE Radar: Componentes, Fluxos e Integrações.',
-        'architecture.interactive': 'INTERATIVO',
-        'architecture.active': 'ATIVO',
-        'architecture.tip': 'DICA: Role horizontalmente para ver o diagrama completo',
-        'architecture.rendered': 'Renderizado com Mermaid.js',
 
         // About
         'about.title': 'SOBRE // NOTAS DO OPERADOR',
@@ -264,20 +234,6 @@ const translations: Record<Language, Record<string, string>> = {
         'project.sneradar.description': 'Terminal de trading desktop com backend Python, análise de mercado em tempo real e sistema de autenticação Web3.',
         'project.vault.title': 'SNE Vault Protocol',
         'project.vault.description': 'Infraestrutura física soberana para armazenamento seguro de chaves e gerenciamento de identidade descentralizada.',
-
-        // Diagram titles
-        'diagram.overview.title': 'SNE Radar // Visão Geral do Sistema',
-        'diagram.overview.desc': 'Arquitetura completa do ecossistema: Frontend, Backend, Blockchain e Integrações.',
-        'diagram.desktop.title': 'Desktop App // Arquitetura de Componentes',
-        'diagram.desktop.desc': 'Estrutura interna do SNE_Radar.exe: Python Backend + Vue.js Frontend.',
-        'diagram.landing.title': 'Landing Page // Arquitetura de Componentes',
-        'diagram.landing.desc': 'Organização da landing page: Auth, License Flow e UI Components.',
-        'diagram.purchase.title': 'User Flow // Compra & Instalação',
-        'diagram.purchase.desc': 'Fluxo completo desde a compra da licença até a primeira execução do app.',
-        'diagram.auth.title': 'User Flow // Autenticação Desktop',
-        'diagram.auth.desc': 'Deep Link authentication: Como o desktop se autentica via browser + SIWE.',
-        'diagram.data.title': 'Data Flow // Pipeline de Analise de Mercado',
-        'diagram.data.desc': 'Pipeline de dados: Market APIs -> Processing -> Dashboard & Alerts.',
 
         // Publications
         'publications.title': 'PUBLICACOES // ESCRITOS',

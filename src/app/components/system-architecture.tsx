@@ -1,107 +1,52 @@
-import { useState } from 'react';
-import { MermaidDiagram } from './mermaid-diagram';
-import { architectureDiagrams } from '../data/diagrams';
-import { Badge } from './badge';
+import { ArchitectureLegend, ArchitectureMap } from './architecture-map';
+import { Button } from './button';
 import { useLanguage } from '../context/language-context';
+import { architectureViews } from '../data/architecture';
 
-export function SystemArchitecture() {
-    const { t, language } = useLanguage();
-    const [selectedDiagram, setSelectedDiagram] = useState<string>('overview');
-    const [isDiagramLoaded, setIsDiagramLoaded] = useState(false);
+interface SystemArchitectureProps {
+  onOpen: () => void;
+}
 
-    const diagramMetadata = [
-        { id: 'overview', titleKey: 'diagram.overview.title', descKey: 'diagram.overview.desc' },
-        { id: 'desktopArchitecture', titleKey: 'diagram.desktop.title', descKey: 'diagram.desktop.desc' },
-        { id: 'landingArchitecture', titleKey: 'diagram.landing.title', descKey: 'diagram.landing.desc' },
-        { id: 'purchaseFlow', titleKey: 'diagram.purchase.title', descKey: 'diagram.purchase.desc' },
-        { id: 'authFlow', titleKey: 'diagram.auth.title', descKey: 'diagram.auth.desc' },
-        { id: 'dataFlow', titleKey: 'diagram.data.title', descKey: 'diagram.data.desc' },
-    ];
+export function SystemArchitecture({ onOpen }: SystemArchitectureProps) {
+  const { language } = useLanguage();
+  const systemMap = architectureViews[0];
 
-    const currentDiagram = diagramMetadata.find(d => d.id === selectedDiagram);
+  return (
+    <section
+      className="mx-auto max-w-[1600px] border-t border-[var(--border-subtle)] px-4 py-16 sm:px-6 lg:py-24"
+      id="architecture"
+    >
+      <div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="max-w-3xl">
+          <div className="mb-3 font-mono text-xs uppercase tracking-widest text-[var(--electric-blue)]">
+            {language === 'en' ? 'ARCHITECTURE // OPERATING MODEL' : 'ARQUITETURA // MODELO OPERACIONAL'}
+          </div>
+          <h2>{language === 'en' ? 'How the systems fit together' : 'Como os sistemas se conectam'}</h2>
+          <p className="mt-4 text-base leading-relaxed text-[var(--terminal-muted)]">
+            {systemMap.summary[language]}
+          </p>
+        </div>
+        <Button
+          variant="secondary"
+          onClick={onOpen}
+          className="min-h-10 self-start focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] lg:self-auto"
+        >
+          {language === 'en' ? 'EXPLORE ALL ARCHITECTURES →' : 'EXPLORAR TODAS AS ARQUITETURAS →'}
+        </Button>
+      </div>
 
-    return (
-        <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24 border-t border-[var(--border-subtle)]" id="architecture">
-            {/* Header */}
-            <div className="mb-12">
-                <h2 className="font-mono font-bold mb-4" style={{ color: 'var(--electric-blue)' }}>
-                    {t('architecture.title')}
-                </h2>
-                <p className="text-base" style={{ color: 'var(--terminal-muted)' }}>
-                    {t('architecture.subtitle')}
-                </p>
-            </div>
-
-            {/* Diagram Selector */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                {diagramMetadata.map((diagram) => (
-                    <button
-                        key={diagram.id}
-                        type="button"
-                        onClick={() => {
-                            setSelectedDiagram(diagram.id);
-                            setIsDiagramLoaded(true);
-                        }}
-                        className={`border p-6 text-left transition-all group ${selectedDiagram === diagram.id
-                                ? 'border-[var(--electric-blue)] bg-[var(--surface-2)]'
-                                : 'border-[var(--border-default)] bg-[var(--surface-1)] hover:border-[var(--electric-blue)]'
-                            }`}
-                    >
-                        <div className="flex items-start justify-between mb-3">
-                            <h3 className="font-mono text-sm font-semibold leading-tight" style={{
-                                color: selectedDiagram === diagram.id ? 'var(--electric-blue)' : 'var(--terminal-text)'
-                            }}>
-                                {t(diagram.titleKey)}
-                            </h3>
-                            {selectedDiagram === diagram.id && (
-                                <Badge variant="default">{t('architecture.active')}</Badge>
-                            )}
-                        </div>
-                        <p className="text-xs leading-relaxed" style={{ color: 'var(--terminal-muted)' }}>
-                            {t(diagram.descKey)}
-                        </p>
-                    </button>
-                ))}
-            </div>
-
-            {/* Active Diagram Display */}
-            {currentDiagram && (
-                <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <h3 className="font-mono text-lg font-bold mb-1" style={{ color: 'var(--electric-blue)' }}>
-                                {t(currentDiagram.titleKey)}
-                            </h3>
-                            <p className="text-sm" style={{ color: 'var(--terminal-muted)' }}>
-                                {t(currentDiagram.descKey)}
-                            </p>
-                        </div>
-                        <Badge variant="green">{t('architecture.interactive')}</Badge>
-                    </div>
-
-                    {isDiagramLoaded ? (
-                        <MermaidDiagram
-                            chart={architectureDiagrams[selectedDiagram as keyof typeof architectureDiagrams]}
-                            id={selectedDiagram}
-                        />
-                    ) : (
-                        <button
-                            type="button"
-                            onClick={() => setIsDiagramLoaded(true)}
-                            className="w-full min-h-72 border border-[var(--border-default)] bg-[var(--surface-1)] font-mono text-sm hover:border-[var(--electric-blue)] transition-colors"
-                            style={{ color: 'var(--electric-blue)' }}
-                        >
-                            {language === 'en' ? 'LOAD INTERACTIVE DIAGRAM' : 'CARREGAR DIAGRAMA INTERATIVO'}
-                        </button>
-                    )}
-
-                    <div className="flex items-center gap-3 text-xs font-mono" style={{ color: 'var(--terminal-muted)' }}>
-                        <span>💡 {t('architecture.tip')}</span>
-                        <span>•</span>
-                        <span>{t('architecture.rendered')}</span>
-                    </div>
-                </div>
-            )}
-        </section>
-    );
+      <div className="border border-[var(--border-default)] bg-[var(--surface-1)] p-4 sm:p-6">
+        <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <p className="font-mono text-sm text-[var(--terminal-text)]">{systemMap.principle[language]}</p>
+          <ArchitectureLegend language={language} />
+        </div>
+        <ArchitectureMap
+          steps={systemMap.steps}
+          language={language}
+          label={language === 'en' ? 'Portfolio operating model' : 'Modelo operacional do portfólio'}
+          compact
+        />
+      </div>
+    </section>
+  );
 }
