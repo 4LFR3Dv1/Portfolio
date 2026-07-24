@@ -147,6 +147,8 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
+      setQuery('');
+      setSelectedIndex(0);
       inputRef.current.focus();
     }
   }, [isOpen]);
@@ -193,13 +195,21 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
   return (
     <>
       {/* Overlay */}
-      <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+      <button
+        type="button"
+        aria-label={language === 'en' ? 'Close command palette' : 'Fechar paleta de comandos'}
+        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
-      ></div>
+        tabIndex={-1}
+      />
 
       {/* Palette */}
-      <div className="fixed top-[20vh] left-1/2 -translate-x-1/2 w-full max-w-[600px] z-50 mx-4">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={language === 'en' ? 'Command palette' : 'Paleta de comandos'}
+        className="fixed inset-x-4 top-[14vh] z-50 mx-auto max-w-[600px] sm:top-[20vh]"
+      >
         <div className="border border-[var(--electric-blue)] bg-[var(--terminal-bg)] shadow-[0_0_40px_rgba(0,217,255,0.3)]">
           {/* Header */}
           <div className="border-b border-[var(--border-default)] px-4 py-3 bg-[var(--surface-2)]">
@@ -214,7 +224,8 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
                   setSelectedIndex(0);
                 }}
                 placeholder={language === 'en' ? 'Type a command or search...' : 'Digite um comando ou pesquise...'}
-                className="flex-1 bg-transparent border-none outline-none font-mono text-sm"
+                aria-label={language === 'en' ? 'Search commands' : 'Pesquisar comandos'}
+                className="min-h-10 flex-1 border-none bg-transparent font-mono text-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)]"
                 style={{ color: 'var(--terminal-text)' }}
               />
               <span className="font-mono text-xs" style={{ color: 'var(--terminal-muted)' }}>ESC</span>
@@ -238,7 +249,7 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
                     <button
                       key={cmd.id}
                       onClick={cmd.action}
-                      className={`w-full text-left px-4 py-3 border-b border-[var(--border-subtle)] transition-colors ${isSelected
+                      className={`min-h-14 w-full border-b border-[var(--border-subtle)] px-4 py-3 text-left motion-safe:transition-colors motion-safe:duration-100 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] ${isSelected
                           ? 'bg-[var(--surface-2)]'
                           : 'hover:bg-[var(--surface-1)]'
                         }`}
@@ -268,7 +279,7 @@ export function CommandPalette({ isOpen, onClose, onNavigate, onCaseStudy, onArc
             {filteredCommands.length === 0 && (
               <div className="px-4 py-8 text-center">
                 <p className="font-mono text-sm" style={{ color: 'var(--terminal-muted)' }}>
-                  No commands found
+                  {language === 'en' ? 'No commands found' : 'Nenhum comando encontrado'}
                 </p>
               </div>
             )}
