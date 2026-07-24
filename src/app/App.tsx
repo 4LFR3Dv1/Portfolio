@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { AboutSection } from '@/app/components/about-section';
 import { CommandPalette } from '@/app/components/command-palette';
@@ -27,6 +27,17 @@ export default function App() {
   const { language } = useLanguage();
   const [route, setRoute] = useState<PortfolioRoute>(() => parseRoute(window.location.pathname));
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const paletteOriginRef = useRef<HTMLElement | null>(null);
+
+  const openPalette = () => {
+    paletteOriginRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setIsPaletteOpen(true);
+  };
+
+  const closePalette = () => {
+    setIsPaletteOpen(false);
+    window.requestAnimationFrame(() => paletteOriginRef.current?.focus());
+  };
 
   useEffect(() => {
     const handlePopState = () => setRoute(parseRoute(window.location.pathname));
@@ -38,7 +49,7 @@ export default function App() {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
-        setIsPaletteOpen(true);
+        openPalette();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -86,10 +97,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background">
       <Analytics />
-      <TerminalTopBar />
+      <TerminalTopBar
+        route={route}
+        onNavigate={handlePaletteNavigate}
+        onArchitecture={() => navigate({ view: 'architecture' })}
+        onOpenPalette={openPalette}
+      />
       <CommandPalette
         isOpen={isPaletteOpen}
-        onClose={() => setIsPaletteOpen(false)}
+        onClose={closePalette}
         onNavigate={handlePaletteNavigate}
         onCaseStudy={(projectId) => navigate({ view: 'case-study', projectId })}
         onArchitecture={() => navigate({ view: 'architecture' })}
@@ -130,15 +146,6 @@ export default function App() {
         )}
       </Suspense>
 
-      <button
-        type="button"
-        aria-label="Open command palette"
-        onClick={() => setIsPaletteOpen(true)}
-        className="fixed bottom-6 right-6 z-30 w-14 h-14 sm:w-auto sm:h-auto sm:px-4 sm:py-2 bg-[var(--electric-blue)] sm:bg-[var(--surface-2)] text-[#0a0a0f] sm:text-[var(--terminal-muted)] border border-[var(--electric-blue)] sm:border-[var(--border-default)] font-mono text-sm font-bold shadow-[0_0_30px_rgba(0,217,255,0.35)]"
-      >
-        <span className="sm:hidden" aria-hidden="true">⌘</span>
-        <span className="hidden sm:inline">⌘K COMMANDS</span>
-      </button>
     </div>
   );
 }
