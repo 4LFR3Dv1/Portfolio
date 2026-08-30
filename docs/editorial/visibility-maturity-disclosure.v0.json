@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-visibility-maturity-disclosure/v0",
   "contractId": "PORTFOLIO-R0.6-2026-08-30",
-  "status": "draft",
+  "status": "frozen",
   "normative": true,
   "preconditions": {
     "r0_5Complete": true
@@ -249,11 +249,16 @@
       "expectedPayloadDigest": "sha256_0a17b20911ba4a31200316ecd36de1cdc3d2dc0b5f07a68e26238e4d111e0d3b"
     }
   ],
-  "ciWitness": null,
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33335132498,
+    "commit": "90dc28291a2fc891d21de113c46e1d657071c834",
+    "conclusion": "success"
+  },
   "acceptance": {
     "r0_5Preserved": true,
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_6Complete": false
+    "r0_6Complete": true
   }
 }

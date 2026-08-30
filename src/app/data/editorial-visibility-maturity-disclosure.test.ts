@@ -367,12 +367,17 @@ describe('R0.6 Visibility / Maturity / Disclosure', () => {
     }
   });
 
-  it('keeps R0.6 isolated from route, language, migration and UI semantics', () => {
+  it('closes only with successful materialization witness and no UI/runtime changes', () => {
     expect(contract.normative).toBe(true);
+    expect(contract.status).toBe('frozen');
+    expect(contract.ciWitness).toEqual({
+      workflow: 'Verify',
+      runId: 33335132498,
+      commit: '90dc28291a2fc891d21de113c46e1d657071c834',
+      conclusion: 'success',
+    });
     expect(contract.acceptance.runtimeSemanticsChanged).toBe(false);
     expect(contract.acceptance.uiChanged).toBe(false);
-    expect(contract.status).toBe('draft');
-    expect(contract.ciWitness).toBeNull();
-    expect(contract.acceptance.r0_6Complete).toBe(false);
+    expect(contract.acceptance.r0_6Complete).toBe(true);
   });
 });
