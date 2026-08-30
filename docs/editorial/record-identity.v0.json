@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "editorial-record-identity/v0",
+  "contractId": "PORTFOLIO-R0.2-2026-08-30",
+  "status": "draft",
+  "normative": true,
+  "preconditions": {
+    "r0_1Frozen": true,
+    "r0_2PreComplete": true
+  },
+  "identifiers": {
+    "recordId": {
+      "pattern": "^rec_[0-9a-f]{32}$",
+      "opaque": true,
+      "contentDerived": false,
+      "kindDerived": false,
+      "routeDerived": false,
+      "reusable": false
+    },
+    "recordKind": {
+      "pattern": "^[a-z][a-z0-9]*(?:\\.[a-z][a-z0-9-]*)+$",
+      "constitutive": true,
+      "registryOwnedBy": "R0.3"
+    },
+    "payloadDigest": {
+      "pattern": "^sha256_[0-9a-f]{64}$",
+      "algorithm": "sha256",
+      "payloadCanonicalizationOwnedBy": "kind-specific-schema"
+    },
+    "revisionId": {
+      "pattern": "^rev_sha256_[0-9a-f]{64}$",
+      "algorithm": "sha256",
+      "canonicalMaterialVersion": "editorial-revision-material/v0"
+    }
+  },
+  "canonicalRevisionMaterial": {
+    "encoding": "utf-8",
+    "lineEnding": "LF",
+    "terminalLineEnding": true,
+    "fields": [
+      "identitySchemaVersion",
+      "recordId",
+      "kind",
+      "generation",
+      "previousRevisionId",
+      "lifecycle",
+      "payloadDigest"
+    ],
+    "nullPreviousEncoding": "-",
+    "generationEncoding": "unsigned-base10",
+    "lineFormat": "<field>=<value>\\n"
+  },
+  "lifecycle": {
+    "states": ["active", "archived", "withdrawn", "tombstoned"],
+    "terminal": ["tombstoned"],
+    "allowedTransitions": {
+      "active": ["active", "archived", "withdrawn", "tombstoned"],
+      "archived": ["active", "archived", "withdrawn", "tombstoned"],
+      "withdrawn": ["active", "archived", "withdrawn", "tombstoned"],
+      "tombstoned": []
+    }
+  },
+  "referenceModes": [
+    {"type":"record","fields":["recordId"],"semantics":"resolve-current-admissible-head"},
+    {"type":"pinned-record","fields":["recordId","revisionId"],"semantics":"resolve-exact-accepted-revision"}
+  ],
+  "lineage": {
+    "birthGeneration": 0,
+    "birthPreviousRevisionId": null,
+    "successorGenerationDelta": 1,
+    "predecessorBindingRequired": true,
+    "singleLogicalHead": true,
+    "conflictState": "conflict",
+    "conflictResolutionByRecency": false,
+    "tombstoneAllowsSuccessor": false
+  },
+  "locator": {
+    "ontologicalIdentity": false,
+    "historicalBindingReassignable": false,
+    "routeGrammarOwnedBy": "R0.7"
+  },
+  "laws": [
+    {"id":"RI-01","title":"RecordId is logical identity","rule":"RecordId MUST identify one logical Record across its accepted lineage and MUST remain distinct from revision, payload and locator identities."},
+    {"id":"RI-02","title":"RecordId is opaque","rule":"RecordId MUST NOT derive from title, route, kind, language, timestamp, author, storage location, content digest, framework or mutable state."},
+    {"id":"RI-03","title":"RecordId is globally non-reusable","rule":"Once admitted, a RecordId MUST remain reserved forever, including after archival, withdrawal or tombstone."},
+    {"id":"RI-04","title":"RecordKind is constitutive","rule":"RecordKind MUST be fixed at birth and MUST remain identical across every accepted successor revision of that Record."},
+    {"id":"RI-05","title":"Kind change creates a new Record","rule":"A change of ontological kind MUST create a different RecordId and an explicit relation rather than mutating the original RecordKind."},
+    {"id":"RI-06","title":"Birth occurs once","rule":"A RecordId MUST have at most one admitted birth and that birth MUST be generation zero with no predecessor revision."},
+    {"id":"RI-07","title":"Revision identity is content-addressed","rule":"RevisionId MUST be SHA-256 over the frozen canonical revision material and MUST change when any revision-bound field changes."},
+    {"id":"RI-08","title":"Revision binds payload without interpreting it","rule":"The identity layer MUST bind the exact PayloadDigest supplied by the responsible kind schema and MUST NOT define semantic payload meaning."},
+    {"id":"RI-09","title":"Succession requires exact predecessor","rule":"An accepted successor MUST increment generation by exactly one and MUST name the current accepted RevisionId as its predecessor."},
+    {"id":"RI-10","title":"Identity and kind survive succession","rule":"A successor MUST preserve both RecordId and RecordKind exactly; changing either invalidates continuity."},
+    {"id":"RI-11","title":"Lifecycle is mutable state","rule":"Lifecycle MAY change only through an admitted revision and MUST NOT change logical identity or constitutive kind."},
+    {"id":"RI-12","title":"Tombstone is terminal history","rule":"A tombstone MUST be an accepted terminal revision, MUST preserve prior lineage and MUST permanently reserve the RecordId."},
+    {"id":"RI-13","title":"Persistence is evidence not authority","rule":"Files, rows, serialized bytes, Git order, timestamps and build artifacts MUST NOT establish Record continuity without lineage validation."},
+    {"id":"RI-14","title":"Conflicts fail closed","rule":"Incompatible valid candidate heads MUST produce an explicit conflict state and MUST NOT be resolved solely by recency, file order, timestamp or route precedence."},
+    {"id":"RI-15","title":"Logical and pinned references are distinct","rule":"The system MUST distinguish RecordRef resolution of a logical current head from PinnedRecordRef resolution of one exact accepted RevisionId."},
+    {"id":"RI-16","title":"Locator is not identity","rule":"A route, slug, filename or external handle MUST be treated as a locator that resolves a Record, never as the RecordId itself."},
+    {"id":"RI-17","title":"Historical locator binding is not silently reassignable","rule":"A locator previously bound publicly to one RecordId MUST NOT later be silently rebound to another RecordId."},
+    {"id":"RI-18","title":"Revision order is not epistemic order","rule":"A later generation MUST express temporal succession only and MUST NOT imply greater truth, support, maturity, visibility or importance."},
+    {"id":"RI-19","title":"Representation does not mint identity","rule":"Changing renderer, framework, storage adapter, file location, serialization, route realization, build artifact or language representation MUST NOT mint a new RecordId by itself."},
+    {"id":"RI-20","title":"Relations do not rewrite endpoints","rule":"A graph relation MAY connect Records but MUST NOT mutate, replace or retroactively redefine either endpoint identity or historical revision."}
+  ],
+  "testVectors": [
+    {
+      "name": "birth",
+      "material": {
+        "identitySchemaVersion": "editorial-record-identity/v0",
+        "recordId": "rec_00000000000000000000000000000001",
+        "kind": "example.record",
+        "generation": 0,
+        "previousRevisionId": null,
+        "lifecycle": "active",
+        "payloadDigest": "sha256_6f355ef4b0dbe31c480dbfac26e951a36b87c61b27b6ac0ed05d03d450fce20e"
+      },
+      "expectedRevisionId": "rev_sha256_af3545520085c52e4ddcca40e3c44a4e026f80f4659e1701b0aefcc227925fd1"
+    },
+    {
+      "name": "successor",
+      "material": {
+        "identitySchemaVersion": "editorial-record-identity/v0",
+        "recordId": "rec_00000000000000000000000000000001",
+        "kind": "example.record",
+        "generation": 1,
+        "previousRevisionId": "rev_sha256_af3545520085c52e4ddcca40e3c44a4e026f80f4659e1701b0aefcc227925fd1",
+        "lifecycle": "archived",
+        "payloadDigest": "sha256_191d0af1b1512ba90275c1c95fe861604b9ff7e6dac70888e23498f89a3e6ef9"
+      },
+      "expectedRevisionId": "rev_sha256_25b367b032e490a96734ed1b51a4c52dd06d07ff605c403519e1a1477d752f0e"
+    }
+  ],
+  "acceptance": {
+    "r0_1Preserved": true,
+    "r0_2PrePreserved": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_2Complete": false
+  }
+}
