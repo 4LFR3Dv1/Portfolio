@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "editorial-r0-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "materialization": {
+    "commit": "460b0b554a14dcf3b14dc54b49c83e416300dfb0",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33336382754,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/migration-acceptance.v0.json",
+    "manifestBlobSha": "dbc8e0c234ae0d0d636fef473fc28dd9416fc923"
+  },
+  "acceptance": {
+    "r0_8Complete": true,
+    "r0Complete": true,
+    "legacyCoverageComplete": true,
+    "semanticLossCount": 0,
+    "unresolvedMigrationCount": 0,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false
+  },
+  "next": "R1 — Editorial Foundation"
+}
