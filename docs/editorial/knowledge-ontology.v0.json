@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-knowledge-ontology/v0",
   "contractId": "PORTFOLIO-R0.3-2026-08-30",
-  "status": "draft",
+  "status": "frozen",
   "normative": true,
   "preconditions": {
     "r0_2Complete": true
@@ -156,10 +156,16 @@
       "expectedPayloadDigest": "sha256_8521d9e6744528f826cf437a667afb4bf396f30724404fe68961dde615ef5516"
     }
   ],
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33331171871,
+    "commit": "1d293b87668949f2227e24be2d15cf9ffb7f82ed",
+    "conclusion": "success"
+  },
   "acceptance": {
     "r0_2Preserved": true,
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_3Complete": false
+    "r0_3Complete": true
   }
 }
