@@ -53,6 +53,12 @@ interface EvidenceContractManifest {
     payload: EvidencePayload;
     expectedPayloadDigest: string;
   }>;
+  ciWitness: {
+    workflow: string;
+    runId: number;
+    commit: string;
+    conclusion: string;
+  };
   acceptance: {
     r0_3Preserved: boolean;
     runtimeSemanticsChanged: boolean;
@@ -240,7 +246,6 @@ describe('R0.4 Evidence Contract', () => {
       indexEntry(binding.targetRef, 'knowledge.claim'),
     ];
     expect(validateBindingResolution(binding, index)).toEqual([]);
-
     expect(validateBindingResolution(binding, [index[0]])).toContain('target-ref-unresolved');
 
     expect(validateBindingResolution(binding, [
@@ -312,15 +317,21 @@ describe('R0.4 Evidence Contract', () => {
     }
   });
 
-  it('keeps the materialization isolated from UI/runtime semantics until CI witness closes R0.4', () => {
-    expect(contract.status).toBe('draft');
+  it('closes only with successful materialization witness and no UI/runtime changes', () => {
+    expect(contract.status).toBe('frozen');
     expect(contract.normative).toBe(true);
     expect(contract.binding.referenceMode).toBe('pinned-record');
     expect(contract.binding.targetKinds).toEqual(['knowledge.claim', 'knowledge.experiment']);
     expect(contract.binding.facetMustExistOnArtifactRevision).toBe(true);
     expect(contract.binding.constitutiveFields).toEqual(['relation', 'evidenceRef', 'targetRef', 'facet']);
+    expect(contract.ciWitness).toEqual({
+      workflow: 'Verify',
+      runId: 33331608544,
+      commit: 'eed5327f054b137b6c9e5d117c64d9c9ed75afea',
+      conclusion: 'success',
+    });
     expect(contract.acceptance.runtimeSemanticsChanged).toBe(false);
     expect(contract.acceptance.uiChanged).toBe(false);
-    expect(contract.acceptance.r0_4Complete).toBe(false);
+    expect(contract.acceptance.r0_4Complete).toBe(true);
   });
 });

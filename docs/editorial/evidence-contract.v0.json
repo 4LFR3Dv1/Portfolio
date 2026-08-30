@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-evidence-contract/v0",
   "contractId": "PORTFOLIO-R0.4-2026-08-30",
-  "status": "draft",
+  "status": "frozen",
   "normative": true,
   "preconditions": {"r0_3Complete": true},
   "kindRegistry": [
@@ -157,10 +157,16 @@
       "expectedPayloadDigest": "sha256_789922e547ff89d491fb9ebcd6fe88e05bd807a729cfa5709b146766beb16940"
     }
   ],
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33331608544,
+    "commit": "eed5327f054b137b6c9e5d117c64d9c9ed75afea",
+    "conclusion": "success"
+  },
   "acceptance": {
     "r0_3Preserved": true,
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_4Complete": false
+    "r0_4Complete": true
   }
 }
