@@ -291,7 +291,7 @@ export function reconstructRecordLineage(
           reachedBirth = true;
           break;
         }
-        const previous = cursor.revision.previousRevisionId;
+        const previous: RevisionId | null = cursor.revision.previousRevisionId;
         cursor = previous === null ? undefined : byRevisionId.get(previous);
       }
       if (!reachedBirth) errors.push(`${entry.revision.revisionId}:disconnected-lineage`);
