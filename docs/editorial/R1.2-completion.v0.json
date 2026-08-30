@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "editorial-projection-engine-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.2-2026-08-30",
+  "materialization": {
+    "commit": "5113d3c3e6d4d15283e3b9d3ded512da05469a32",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33342868125,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/projection-engine.v0.json",
+    "manifestBlobSha": "ae6af0ec2e6d3b8a961f2f9eaa0df972beb8e8b1"
+  },
+  "effectiveProjection": {
+    "bornSystemRecords": 28,
+    "currentPublicProjectionCount": 0,
+    "recordBirthImpliesProjection": false,
+    "currentDisclosureRequired": true,
+    "routeLanguageResolutionRequired": true,
+    "canonicalPayloadIncluded": false,
+    "runtimeSanitizationAllowed": false,
+    "maturityActsAsExposureGate": false,
+    "aliasMayDuplicateCanonicalDocument": false,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "acceptance": {
+    "r1_1Complete": true,
+    "r1_2Complete": true,
+    "projectionEngineDeterministic": true,
+    "publicProjectionFailClosed": true,
+    "privateMaterialExcludedByConstruction": true,
+    "currentPublicProjectionCount": 0,
+    "nextRequiredCut": "R1.3 — Route Runtime"
+  }
+}
