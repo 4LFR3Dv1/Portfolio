@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "editorial-route-language-identity/v0",
+  "contractId": "PORTFOLIO-R0.7-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "preconditions": {
+    "r0_6Complete": true
+  },
+  "recordKindsAdded": [],
+  "languages": {
+    "tags": [
+      "pt-BR",
+      "en"
+    ],
+    "routeSegments": {
+      "pt-BR": "pt-br",
+      "en": "en"
+    },
+    "implicitFallback": false,
+    "translationRequired": false,
+    "canonicalPerExactRevision": true
+  },
+  "routes": {
+    "origin": "https://renan.snelabs.space",
+    "grammar": "/<locale>/<namespace>/<slug>",
+    "namespaces": [
+      "systems",
+      "questions",
+      "investigations",
+      "experiments",
+      "essays",
+      "research",
+      "notes",
+      "architecture"
+    ],
+    "roleValues": [
+      "canonical",
+      "alias"
+    ],
+    "oneCanonicalPerRecordLanguage": true,
+    "historicalPathReassignmentAllowed": false,
+    "unknownPathResolution": "unresolved",
+    "canonicalPathAllowsQueryOrFragment": false
+  },
+  "routeCompatibility": {
+    "systems": {
+      "kinds": [
+        "knowledge.system"
+      ]
+    },
+    "questions": {
+      "kinds": [
+        "knowledge.question"
+      ]
+    },
+    "investigations": {
+      "kinds": [
+        "knowledge.investigation"
+      ]
+    },
+    "experiments": {
+      "kinds": [
+        "knowledge.experiment"
+      ]
+    },
+    "essays": {
+      "kinds": [
+        "representation.publication"
+      ],
+      "publicationTypes": [
+        "essay"
+      ]
+    },
+    "research": {
+      "kinds": [
+        "representation.publication"
+      ],
+      "publicationTypes": [
+        "research-note",
+        "experiment-report",
+        "technical-paper"
+      ]
+    },
+    "notes": {
+      "kinds": [
+        "representation.publication"
+      ],
+      "publicationTypes": [
+        "system-note"
+      ]
+    },
+    "architecture": {
+      "kinds": [
+        "representation.architecture"
+      ]
+    }
+  },
+  "routeBinding": {
+    "schemaVersion": "identity.route-binding/v0",
+    "targetMode": "record",
+    "admissionBasisMode": "pinned-record",
+    "targetAndAdmissionRecordMustMatch": true,
+    "admissionBasisExpiresOnTargetRevision": false
+  },
+  "languageBinding": {
+    "schemaVersion": "identity.language-binding/v0",
+    "targetMode": "record",
+    "basisMode": "pinned-record",
+    "targetAndBasisRecordMustMatch": true,
+    "canonicalDigestMustEqualTargetPayloadDigest": true,
+    "translationDigestIndependent": true,
+    "translationMustNameCanonicalSourceLanguage": true,
+    "currentAvailabilityRequiresExactHeadBasis": true
+  },
+  "canonicalEntry": {
+    "encoding": "utf-8",
+    "format": "canonical-json",
+    "objectKeyOrder": "lexicographic",
+    "terminalLineEnding": true,
+    "lineEnding": "LF",
+    "unknownFieldsAllowed": false,
+    "digestAlgorithm": "sha256"
+  },
+  "laws": [
+    {
+      "id": "RLI-01",
+      "title": "Route is locator",
+      "rule": "A public Record route MUST remain an external locator bound to a logical Record identity and MUST NOT become that Record's ontological identity."
+    },
+    {
+      "id": "RLI-02",
+      "title": "Language realization is not Record identity",
+      "rule": "A language realization MUST remain a representation of one exact Record revision and MUST NOT mint a new RecordId merely because its language differs."
+    },
+    {
+      "id": "RLI-03",
+      "title": "R0.7 adds no RecordKinds",
+      "rule": "R0.7 MUST add zero RecordKinds; route and language bindings MUST remain identity-registry entries rather than ontology entities."
+    },
+    {
+      "id": "RLI-04",
+      "title": "Public paths are permanently reserved",
+      "rule": "Once a public path is admitted for a RecordId, that path MUST remain historically reserved to the same RecordId and MUST NOT be reassigned to another Record."
+    },
+    {
+      "id": "RLI-05",
+      "title": "Record route grammar is canonical",
+      "rule": "A Record route MUST use the frozen locale/namespace/slug grammar and MUST reject query strings, fragments, percent escapes, uppercase paths and trailing slashes as canonical identity."
+    },
+    {
+      "id": "RLI-06",
+      "title": "Locale is explicit in Record routes",
+      "rule": "Every R0.7 Record route MUST encode one admitted locale segment explicitly so canonical URLs do not depend on ambient browser language or hidden preference state."
+    },
+    {
+      "id": "RLI-07",
+      "title": "One canonical route per Record language",
+      "rule": "For each logical RecordId and language pair, the current route registry MUST contain exactly one canonical path whenever that pair has any registered paths."
+    },
+    {
+      "id": "RLI-08",
+      "title": "Aliases preserve target and language",
+      "rule": "A route alias MUST remain bound to the same logical RecordId and language as its historical binding and MUST NOT redirect to a different Record or language realization."
+    },
+    {
+      "id": "RLI-09",
+      "title": "Canonical moves preserve old locators",
+      "rule": "When a canonical route changes, the previous public path MUST remain registered as an alias or durable equivalent for the same RecordId and language."
+    },
+    {
+      "id": "RLI-10",
+      "title": "Route admission is historically pinned",
+      "rule": "Every route binding MUST record the exact target revision against which the path was admitted, while the path itself continues to identify the logical Record across later revisions."
+    },
+    {
+      "id": "RLI-11",
+      "title": "Language availability is revision-bound",
+      "rule": "A language binding MUST reference one exact Record revision, and a later Record head MUST NOT silently inherit a language realization admitted for an older revision."
+    },
+    {
+      "id": "RLI-12",
+      "title": "Canonical language binds canonical payload",
+      "rule": "The canonical language realization for an exact Record revision MUST bind the same PayloadDigest as that revision's canonical semantic payload."
+    },
+    {
+      "id": "RLI-13",
+      "title": "Translations identify their source language",
+      "rule": "A translation realization MUST bind the same exact target revision, MUST identify a different canonical source language, and MUST carry its own immutable realization digest."
+    },
+    {
+      "id": "RLI-14",
+      "title": "Translation cannot create semantic authority",
+      "rule": "Translated prose MAY render an existing Record but MUST NOT create a new Claim, Evidence binding, maturity classification or other semantic authority by translation alone."
+    },
+    {
+      "id": "RLI-15",
+      "title": "Translation is optional",
+      "rule": "A public Record MAY have only one language realization; R0.7 MUST NOT require bilingual publication or infer that a missing translation means private or unavailable knowledge."
+    },
+    {
+      "id": "RLI-16",
+      "title": "No implicit language fallback",
+      "rule": "If the requested language realization is not admitted for the exact current Record head, route resolution MUST report language unavailable and MUST NOT silently serve another language."
+    },
+    {
+      "id": "RLI-17",
+      "title": "Current language requires current head binding",
+      "rule": "When a Record advances to a new head revision, current language availability MUST require a language binding for that exact head before localized content may be treated as current."
+    },
+    {
+      "id": "RLI-18",
+      "title": "Unresolved route is not another Record",
+      "rule": "A path with no admitted route binding MUST resolve as unresolved and MUST NOT fall back to the landing page or another Record identity as an identity rule."
+    },
+    {
+      "id": "RLI-19",
+      "title": "R0.6 remains the exposure authority",
+      "rule": "Route and language resolution MUST NOT bypass R0.6 disclosure or lifecycle eligibility; a valid locator and language realization do not by themselves authorize public projection."
+    },
+    {
+      "id": "RLI-20",
+      "title": "Legacy migration remains deferred",
+      "rule": "R0.7 MUST NOT rewrite current Portfolio routes, client-side language behavior or public UI; mapping frozen legacy paths into the new registry remains R0.8 work."
+    }
+  ],
+  "testVectors": [
+    {
+      "kind": "route-binding",
+      "entry": {
+        "schemaVersion": "identity.route-binding/v0",
+        "path": "/pt-br/essays/identity-as-lineage",
+        "targetRef": {
+          "type": "record",
+          "recordId": "rec_00000000000000000000000000000001"
+        },
+        "admittedAgainst": {
+          "type": "pinned-record",
+          "recordId": "rec_00000000000000000000000000000001",
+          "revisionId": "rev_sha256_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "language": "pt-BR",
+        "role": "canonical"
+      },
+      "expectedDigest": "sha256_76b3898335ef2479cedf091548876c297f6a3f992486f05b0d20a54fbd92d1cc"
+    },
+    {
+      "kind": "language-binding",
+      "entry": {
+        "schemaVersion": "identity.language-binding/v0",
+        "targetRef": {
+          "type": "record",
+          "recordId": "rec_00000000000000000000000000000001"
+        },
+        "basisRef": {
+          "type": "pinned-record",
+          "recordId": "rec_00000000000000000000000000000001",
+          "revisionId": "rev_sha256_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "language": "pt-BR",
+        "role": "canonical",
+        "translatedFrom": null,
+        "realizationDigest": "sha256_1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "expectedDigest": "sha256_806f3bb44124dd15afab5700857ec5d7b1ac9caeb497abe0358a9606ca39243d"
+    }
+  ],
+  "ciWitness": null,
+  "acceptance": {
+    "r0_6Preserved": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_7Complete": false
+  }
+}
