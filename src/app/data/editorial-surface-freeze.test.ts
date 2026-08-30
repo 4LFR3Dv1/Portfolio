@@ -72,6 +72,7 @@ describe('R0.0 current surface freeze', () => {
     });
     expect(manifest.acceptance.runtimeSemanticsChanged).toBe(false);
     expect(manifest.acceptance.uiChanged).toBe(false);
+    expect(manifest.acceptance.r0_0Complete).toBe(true);
   });
 
   it('reconciles every current public route with the legacy sitemap', () => {

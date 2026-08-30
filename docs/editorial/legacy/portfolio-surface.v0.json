@@ -138,9 +138,15 @@
     "src/app/components/hero-section.tsx": "4795710773d50a1ece3c8752e75befc2f8a31a9e",
     "public/sitemap.xml": "3bbc5efdd78285ccc6052a9d84ed82f0ae9bca88"
   },
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33327906986,
+    "commit": "a0c0d1743d69d05bd439e6d53c220be1e55f34a3",
+    "conclusion": "success"
+  },
   "acceptance": {
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_0Complete": false
+    "r0_0Complete": true
   }
 }
