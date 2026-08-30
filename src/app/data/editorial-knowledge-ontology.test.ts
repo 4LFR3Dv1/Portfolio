@@ -42,6 +42,12 @@ interface OntologyManifest {
     payload: KnowledgePayload;
     expectedPayloadDigest: string;
   }>;
+  ciWitness: {
+    workflow: string;
+    runId: number;
+    commit: string;
+    conclusion: string;
+  };
   acceptance: {
     r0_2Preserved: boolean;
     runtimeSemanticsChanged: boolean;
@@ -260,13 +266,20 @@ describe('R0.3 Knowledge Ontology', () => {
     }
   });
 
-  it('keeps Evidence, UI and runtime semantics outside R0.3', () => {
+  it('closes only with a successful materialization witness and no UI/runtime changes', () => {
     for (const deferred of ['evidence', 'evidenceRefs', 'supportRefs', 'maturity', 'visibility', 'route', 'language']) {
       expect(ontology.deferredFields).toContain(deferred);
     }
+    expect(ontology.status).toBe('frozen');
     expect(ontology.normative).toBe(true);
+    expect(ontology.ciWitness).toEqual({
+      workflow: 'Verify',
+      runId: 33331171871,
+      commit: '1d293b87668949f2227e24be2d15cf9ffb7f82ed',
+      conclusion: 'success',
+    });
     expect(ontology.acceptance.runtimeSemanticsChanged).toBe(false);
     expect(ontology.acceptance.uiChanged).toBe(false);
-    expect(ontology.acceptance.r0_3Complete).toBe(false);
+    expect(ontology.acceptance.r0_3Complete).toBe(true);
   });
 });
