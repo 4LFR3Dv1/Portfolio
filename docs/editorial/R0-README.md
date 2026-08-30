@@ -13,8 +13,8 @@ R0 is the constitutional migration from the current project-centric portfolio to
 | R0.0 | Current Surface Freeze | **COMPLETE** |
 | R0.1 | Editorial Constitution | **COMPLETE** |
 | R0.2-PRE | Brine Identity Grounding | **COMPLETE** |
-| R0.2 | Record Identity Contract | **NEXT** |
-| R0.3 | Knowledge Ontology | NOT STARTED |
+| R0.2 | Record Identity Contract | **COMPLETE** |
+| R0.3 | Knowledge Ontology | **NEXT** |
 | R0.4 | Evidence Contract | NOT STARTED |
 | R0.5 | Publication & Architecture Contract | NOT STARTED |
 | R0.6 | Visibility / Maturity / Disclosure | NOT STARTED |
