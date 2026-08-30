@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "editorial-route-runtime/v0",
+  "contractId": "PORTFOLIO-R1.3-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "daee2f130295aca2c4a27edb760a9734d5f030ba",
+  "preconditions": {
+    "r1_2Complete": true,
+    "r1_1Complete": true,
+    "r0EffectiveComplete": true
+  },
+  "admission": {
+    "bindingSource": "docs/editorial/migration-acceptance.v0.json",
+    "admissionBasis": "r1.1-generation-zero-birth",
+    "runtimePathInferenceAllowed": false,
+    "assignmentCount": 10,
+    "targetRecordCount": 5,
+    "aliasCount": 0
+  },
+  "assignments": [
+    {"path":"/en/systems/vira","targetRecordId":"rec_c844725e35cf61830221efc597612017","language":"en","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/pt-br/systems/vira","targetRecordId":"rec_c844725e35cf61830221efc597612017","language":"pt-BR","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/en/systems/xs-wallet","targetRecordId":"rec_724d518ee338e32eb06e79077ad01f3d","language":"en","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/pt-br/systems/xs-wallet","targetRecordId":"rec_724d518ee338e32eb06e79077ad01f3d","language":"pt-BR","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/en/systems/transactional-support-bot","targetRecordId":"rec_c5a75fd5ecae0565aaa0c96f0ad53227","language":"en","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/pt-br/systems/transactional-support-bot","targetRecordId":"rec_c5a75fd5ecae0565aaa0c96f0ad53227","language":"pt-BR","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/en/systems/sne-os","targetRecordId":"rec_499f928363217da10f93cd54aead0101","language":"en","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/pt-br/systems/sne-os","targetRecordId":"rec_499f928363217da10f93cd54aead0101","language":"pt-BR","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/en/systems/foundry-pay","targetRecordId":"rec_0e6beb6a5f17831616af328fe8f2afb2","language":"en","role":"canonical","source":"r0.8-migration-plan"},
+    {"path":"/pt-br/systems/foundry-pay","targetRecordId":"rec_0e6beb6a5f17831616af328fe8f2afb2","language":"pt-BR","role":"canonical","source":"r0.8-migration-plan"}
+  ],
+  "cancelledPlans": [
+    {"path":"/en/systems/agentic-systems","reason":"r0-a1-retired-pre-birth-target"},
+    {"path":"/pt-br/systems/agentic-systems","reason":"r0-a1-retired-pre-birth-target"}
+  ],
+  "deferred": {
+    "legacyCompatibilityEnacted": false,
+    "languageRealizationsAdmitted": false,
+    "disclosureRecordsAdmitted": false,
+    "unbirthedRepresentationRoutesAdmitted": false,
+    "bornSystemsWithoutRouteCount": 23
+  },
+  "acceptance": {
+    "routeRuntimeMaterialized": true,
+    "routeBindingCount": 10,
+    "targetRecordCount": 5,
+    "canonicalRouteCount": 10,
+    "aliasCount": 0,
+    "invalidRouteCount": 0,
+    "duplicatePathCount": 0,
+    "retiredTargetRouteCount": 0,
+    "unbirthedTargetRouteCount": 0,
+    "runtimePathInferenceAllowed": false,
+    "languageFallbackAllowed": false,
+    "publicProjectionCountChanged": false,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false,
+    "r1_3Complete": false
+  }
+}
