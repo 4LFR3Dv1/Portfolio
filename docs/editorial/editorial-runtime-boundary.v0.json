@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "editorial-runtime-boundary/v0",
+  "contractId": "PORTFOLIO-R1.0-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "1393dd5221ec4ae8bd23615b65c487df1baec3ae",
+  "preconditions": {
+    "r0EffectiveComplete": true,
+    "r1PreComplete": true,
+    "recordBirthCount": 0
+  },
+  "observedLegacyRuntime": {
+    "application": "react-vite-spa",
+    "entrypoint": "src/main.tsx",
+    "buildConfig": "vite.config.ts",
+    "hostingConfig": "vercel.json",
+    "extensionlessPathFallback": "index.html",
+    "publicRuntimeStillActive": true
+  },
+  "targetRuntime": {
+    "publicationShell": "astro-static",
+    "interactiveLayer": "react-islands",
+    "outputMode": "static",
+    "canonicalReadingRequiresServer": false,
+    "requestTimeDatabaseRequired": false,
+    "requestTimeGitHubRequired": false,
+    "packageVersionFrozen": false
+  },
+  "authority": {
+    "semanticAuthority": "editorial-registry",
+    "rendererIsAuthority": false,
+    "htmlIsAuthority": false,
+    "clientStateIsAuthority": false,
+    "repositoryNameIsSystemIdentity": false,
+    "slugIsRecordIdentity": false,
+    "requestTimeRepositoryCrawlMayInferOntology": false,
+    "clientMayReconstructAuthoritativeRecordState": false
+  },
+  "pipeline": [
+    "load",
+    "validate-contracts",
+    "reconstruct-lineage",
+    "apply-amendments",
+    "resolve-governance",
+    "resolve-language",
+    "resolve-route",
+    "project",
+    "render"
+  ],
+  "projectionBoundary": {
+    "renderersConsumeProjectionDtos": true,
+    "reactIslandsReceiveAuthoritativeStores": false,
+    "reactIslandsMayMutateCanonicalEditorialState": false,
+    "searchConsumesProjection": true,
+    "rssConsumesProjection": true,
+    "sitemapConsumesProjection": true
+  },
+  "failClosed": {
+    "invalidRecordLineage": "build-error",
+    "recordIdReuse": "build-error",
+    "kindMutation": "build-error",
+    "incompatibleHeads": "build-error",
+    "invalidPinnedReference": "build-error",
+    "historicalLocatorReassignment": "build-error",
+    "duplicateCanonicalRoute": "build-error",
+    "routeKindContradiction": "build-error",
+    "conflictingCurrentGovernance": "build-error",
+    "invalidLanguageBinding": "build-error",
+    "publiclyIneligibleUnreferencedRecord": "omit-from-public-projection"
+  },
+  "routing": {
+    "recordRoutesGeneratedFromBindings": true,
+    "unknownPathOutcome": "404-unresolved",
+    "unknownPathMayRenderHome": false,
+    "legacyCompatibilityIsExplicit": true,
+    "r0A1AgenticLocatorHandledBy": "R1.8"
+  },
+  "language": {
+    "canonicalRecordRoutesAreLocalePrefixed": true,
+    "clientLanguageStateMayRedefineCanonicalUrl": false,
+    "implicitFallbackAllowed": false,
+    "missingRealizationOutcome": "language-unavailable"
+  },
+  "migration": {
+    "frameworkCutoverEnacted": false,
+    "packageJsonChanged": false,
+    "viteConfigChanged": false,
+    "mainEntrypointChanged": false,
+    "vercelConfigChanged": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "nextCuts": [
+    "R1.1 — Record Registry",
+    "R1.2 — Projection Engine",
+    "R1.3 — Route Runtime",
+    "R1.4 — Language Runtime",
+    "R1.5 — Editorial Document Runtime",
+    "R1.6 — Core Editorial Surfaces",
+    "R1.7 — Distribution Foundation",
+    "R1.8 — Legacy Compatibility",
+    "R1.9 — Foundation Acceptance"
+  ],
+  "acceptance": {
+    "runtimeBoundaryFrozen": true,
+    "targetShellSelected": true,
+    "semanticAuthoritySeparatedFromRenderer": true,
+    "staticFirst": true,
+    "reactIslandBoundaryExplicit": true,
+    "failClosedBuildBoundaryExplicit": true,
+    "recordBirthCount": 0,
+    "r1_0Complete": false
+  }
+}
