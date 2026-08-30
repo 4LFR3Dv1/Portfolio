@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-publication-architecture/v0",
   "contractId": "PORTFOLIO-R0.5-2026-08-30",
-  "status": "draft",
+  "status": "frozen",
   "normative": true,
   "preconditions": {"r0_4Complete": true},
   "kindRegistry": [
@@ -95,10 +95,16 @@
       "expectedPayloadDigest": "sha256_2593b7e1e7bc49662d49534903167aafe7b5b919bb4e1dbadc59f1ae4288cfe7"
     }
   ],
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33334053429,
+    "commit": "dad19fd77eff3eb42149aa3e103d1081fac334d1",
+    "conclusion": "success"
+  },
   "acceptance": {
     "r0_4Preserved": true,
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_5Complete": false
+    "r0_5Complete": true
   }
 }
