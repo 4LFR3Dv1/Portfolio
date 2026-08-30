@@ -19,7 +19,7 @@ R0 is the constitutional migration from the current project-centric portfolio to
 | R0.5 | Publication & Architecture Contract | **COMPLETE** |
 | R0.6 | Visibility / Maturity / Disclosure | **COMPLETE** |
 | R0.7 | Route + Language Identity | **COMPLETE** |
-| R0.8 | Migration & Acceptance | **NEXT** |
+| R0.8 | Migration & Acceptance | **IN PROGRESS** |
 
 ## Constitutional execution rule
 
