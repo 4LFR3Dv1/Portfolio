@@ -11,6 +11,7 @@ import {
   type PayloadDigest,
   type RecordId,
   type RecordKind,
+  type RecordLifecycle,
   type RecordLineageState,
   type RecordRevision,
   type RevisionId,
@@ -21,6 +22,7 @@ import {
   validateKnowledgePayload,
   type KnowledgeKind,
   type KnowledgePayload,
+  type SystemPayload,
 } from '../app/data/editorial-knowledge-ontology';
 
 export const RECORD_REGISTRY_SCHEMA_VERSION = 'editorial-record-registry/v0' as const;
@@ -47,6 +49,16 @@ export interface RegistryRecordEntry {
     legacyReservationUsed: boolean;
   };
   revisions: RegistryRevisionEntry[];
+}
+
+export interface RegistryBirthAssignment {
+  subjectKey: string;
+  name: string;
+  subjectClass: 'frontier-system' | 'historical-system';
+  recordId: RecordId;
+  groundingCluster: string | null;
+  identityDecision: string;
+  legacyReservationUsed: boolean;
 }
 
 export interface RetiredPreBirthIdentity {
@@ -83,11 +95,18 @@ export interface RecordRegistryManifest {
     systemBirthCount: number;
     otherRecordBirthCount: number;
   };
+  birthProfile: {
+    kind: 'knowledge.system';
+    payloadSchemaVersion: 'knowledge.system/v0';
+    summary: string;
+    thesis: null;
+    lifecycle: 'active';
+  };
   identityPool: {
     retiredPreBirth: RetiredPreBirthIdentity[];
     heldReservations: HeldReservation[];
   };
-  records: RegistryRecordEntry[];
+  assignments: RegistryBirthAssignment[];
   acceptance: {
     recordRegistryMaterialized: true;
     systemSubjectCoverage: number;
@@ -179,6 +198,54 @@ export function computeRegistryRevisionId(revision: RecordRevision): RevisionId 
     throw new Error(`invalid-revision-material:${errors.join(',')}`);
   }
   return `rev_sha256_${sha256Hex(serializeRevisionMaterial(material))}` as RevisionId;
+}
+
+export function materializeBirthRecord(
+  manifest: RecordRegistryManifest,
+  assignment: RegistryBirthAssignment,
+  codecs: readonly RegistryPayloadCodec[] = KNOWLEDGE_REGISTRY_CODECS,
+): RegistryRecordEntry {
+  const codec = codecMap(codecs).get(manifest.birthProfile.kind);
+  if (!codec) throw new Error(`unsupported-birth-kind:${manifest.birthProfile.kind}`);
+
+  const payload: SystemPayload = {
+    schemaVersion: manifest.birthProfile.payloadSchemaVersion,
+    name: assignment.name,
+    summary: manifest.birthProfile.summary,
+    thesis: manifest.birthProfile.thesis,
+  };
+
+  const revision: RecordRevision = {
+    identitySchemaVersion: IDENTITY_SCHEMA_VERSION,
+    recordId: assignment.recordId,
+    kind: manifest.birthProfile.kind,
+    generation: 0,
+    previousRevisionId: null,
+    lifecycle: manifest.birthProfile.lifecycle as RecordLifecycle,
+    payloadDigest: computeRegistryPayloadDigest(codec, payload),
+    revisionId: `rev_sha256_${'0'.repeat(64)}`,
+  };
+  revision.revisionId = computeRegistryRevisionId(revision);
+
+  return {
+    subjectKey: assignment.subjectKey,
+    subjectClass: assignment.subjectClass,
+    recordId: assignment.recordId,
+    kind: manifest.birthProfile.kind,
+    provenance: {
+      groundingCluster: assignment.groundingCluster,
+      identityDecision: assignment.identityDecision,
+      legacyReservationUsed: assignment.legacyReservationUsed,
+    },
+    revisions: [{ revision, payload }],
+  };
+}
+
+export function materializeRegistryRecords(
+  manifest: RecordRegistryManifest,
+  codecs: readonly RegistryPayloadCodec[] = KNOWLEDGE_REGISTRY_CODECS,
+): RegistryRecordEntry[] {
+  return manifest.assignments.map((assignment) => materializeBirthRecord(manifest, assignment, codecs));
 }
 
 export function reconstructRecordLineage(
@@ -334,6 +401,9 @@ export function reconstructRecordRegistry(
   if (manifest.normative !== true) errors.push('registry-normative');
   if (!isNonEmptyString(manifest.contractId)) errors.push('registry-contract-id');
   if (!isNonEmptyString(manifest.baseline)) errors.push('registry-baseline');
+  if (manifest.birthProfile.kind !== 'knowledge.system') errors.push('birth-kind');
+  if (manifest.birthProfile.payloadSchemaVersion !== 'knowledge.system/v0') errors.push('birth-payload-schema');
+  if (manifest.birthProfile.lifecycle !== 'active') errors.push('birth-lifecycle');
 
   const retiredIds = manifest.identityPool.retiredPreBirth.map((entry) => entry.recordId);
   const heldIds = manifest.identityPool.heldReservations.map((entry) => entry.recordId);
@@ -357,9 +427,26 @@ export function reconstructRecordRegistry(
   }
 
   const subjectKeys = new Set<string>();
-  for (const record of manifest.records) {
-    if (subjectKeys.has(record.subjectKey)) errors.push(`duplicate-subject-key:${record.subjectKey}`);
-    subjectKeys.add(record.subjectKey);
+  const materializedRecords: RegistryRecordEntry[] = [];
+
+  for (const assignment of manifest.assignments) {
+    if (subjectKeys.has(assignment.subjectKey)) errors.push(`duplicate-subject-key:${assignment.subjectKey}`);
+    subjectKeys.add(assignment.subjectKey);
+    if (!isNonEmptyString(assignment.name)) errors.push(`assignment-name:${assignment.subjectKey}`);
+    if (!isNonEmptyString(assignment.identityDecision)) errors.push(`assignment-decision:${assignment.subjectKey}`);
+    if (!isRecordId(assignment.recordId)) {
+      errors.push(`assignment-record-id:${assignment.subjectKey}`);
+      continue;
+    }
+
+    let record: RegistryRecordEntry;
+    try {
+      record = materializeBirthRecord(manifest, assignment, codecs);
+      materializedRecords.push(record);
+    } catch (error) {
+      errors.push(`materialize-birth:${assignment.subjectKey}:${error instanceof Error ? error.message : 'unknown'}`);
+      continue;
+    }
 
     if (records.has(record.recordId)) {
       errors.push(`duplicate-record-id:${record.recordId}`);
@@ -377,15 +464,16 @@ export function reconstructRecordRegistry(
     unavailableRecordIds.add(record.recordId);
   }
 
-  if (manifest.admission.systemBirthCount !== manifest.records.length) errors.push('system-birth-count');
+  if (manifest.admission.systemBirthCount !== manifest.assignments.length) errors.push('system-birth-count');
   if (manifest.admission.otherRecordBirthCount !== 0) errors.push('other-record-birth-count');
-  if (manifest.acceptance.systemBirthCount !== manifest.records.length) errors.push('acceptance-system-birth-count');
+  if (manifest.acceptance.systemBirthCount !== manifest.assignments.length) errors.push('acceptance-system-birth-count');
   if (manifest.acceptance.systemSubjectCoverage !== manifest.admission.systemSubjectsExpected) {
     errors.push('system-subject-coverage');
   }
   if (manifest.acceptance.heldReservationCount !== manifest.identityPool.heldReservations.length) {
     errors.push('held-reservation-count');
   }
+  if (materializedRecords.length !== manifest.assignments.length) errors.push('materialized-birth-count');
 
   return { records, unavailableRecordIds, errors: [...new Set(errors)] };
 }
