@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "editorial-visibility-maturity-disclosure/v0",
+  "contractId": "PORTFOLIO-R0.6-2026-08-30",
+  "status": "draft",
+  "normative": true,
+  "preconditions": {
+    "r0_5Complete": true
+  },
+  "kindRegistry": [
+    {
+      "kind": "governance.disclosure",
+      "schemaVersion": "governance.disclosure/v0"
+    },
+    {
+      "kind": "governance.maturity",
+      "schemaVersion": "governance.maturity/v0"
+    }
+  ],
+  "governableKinds": [
+    "knowledge.system",
+    "knowledge.question",
+    "knowledge.investigation",
+    "knowledge.experiment",
+    "knowledge.claim",
+    "evidence.artifact",
+    "evidence.binding",
+    "representation.publication",
+    "representation.architecture"
+  ],
+  "visibility": {
+    "record": [
+      "public",
+      "private"
+    ],
+    "source": [
+      "public",
+      "partial",
+      "private",
+      "not-applicable",
+      "unknown"
+    ],
+    "evidence": [
+      "public",
+      "partial",
+      "private",
+      "none",
+      "unknown"
+    ],
+    "disclosure": [
+      "full",
+      "sanitized",
+      "metadata-only",
+      "withheld"
+    ],
+    "compatibility": {
+      "public": [
+        "full",
+        "sanitized",
+        "metadata-only"
+      ],
+      "private": [
+        "withheld"
+      ]
+    }
+  },
+  "maturity": {
+    "stages": [
+      "concept",
+      "research",
+      "prototype",
+      "pre-beta",
+      "beta",
+      "production",
+      "completed"
+    ],
+    "targetKinds": [
+      "knowledge.system"
+    ],
+    "monotonic": false
+  },
+  "projection": {
+    "countedGovernanceLifecycles": [
+      "active",
+      "archived"
+    ],
+    "excludedGovernanceLifecycles": [
+      "withdrawn",
+      "tombstoned"
+    ],
+    "projectableTargetLifecycles": [
+      "active",
+      "archived"
+    ],
+    "failClosedOnMissingCurrentClassification": true,
+    "failClosedOnMultipleCurrentAuthorities": true,
+    "targetRevisionMustMatchBasis": true
+  },
+  "canonicalPayload": {
+    "encoding": "utf-8",
+    "format": "canonical-json",
+    "objectKeyOrder": "lexicographic",
+    "terminalLineEnding": true,
+    "lineEnding": "LF",
+    "unknownFieldsAllowed": false,
+    "payloadDigestAlgorithm": "sha256"
+  },
+  "laws": [
+    {
+      "id": "VMD-01",
+      "title": "Governance remains external to governed payloads",
+      "rule": "R0.6 governance Records MUST classify already-defined Records without adding visibility, disclosure or maturity fields to any frozen R0.2 through R0.5 payload schema."
+    },
+    {
+      "id": "VMD-02",
+      "title": "Disclosure has logical target and exact basis",
+      "rule": "A governance.disclosure Record MUST identify one durable target through RecordRef and MUST bind each policy revision to one exact revision of that same RecordId through PinnedRecordRef."
+    },
+    {
+      "id": "VMD-03",
+      "title": "Record visibility is independent",
+      "rule": "Record visibility MUST state only whether the governed Record may participate in public projection and MUST NOT imply source availability, Evidence availability or maturity."
+    },
+    {
+      "id": "VMD-04",
+      "title": "Source availability is independent",
+      "rule": "Source availability MUST describe only the public availability classification of implementation or source material and MUST NOT determine Record visibility, Evidence availability or maturity."
+    },
+    {
+      "id": "VMD-05",
+      "title": "Evidence availability is independent",
+      "rule": "Evidence availability MUST describe only the public availability classification of evidential material and MUST NOT determine Record visibility, source availability, truth or maturity."
+    },
+    {
+      "id": "VMD-06",
+      "title": "Unknown remains unknown",
+      "rule": "The values unknown, none, private and not-applicable MUST remain semantically distinct and MUST NOT be inferred from one another when source or Evidence availability is absent or unresolved."
+    },
+    {
+      "id": "VMD-07",
+      "title": "Disclosure form is separate from visibility",
+      "rule": "Disclosure mode MUST specify full, sanitized, metadata-only or withheld public form and MUST remain a separate axis from the public or private Record visibility classification."
+    },
+    {
+      "id": "VMD-08",
+      "title": "Private requires withheld",
+      "rule": "A governance.disclosure payload with private Record visibility MUST use withheld disclosure and MUST NOT authorize full, sanitized or metadata-only public projection."
+    },
+    {
+      "id": "VMD-09",
+      "title": "Public cannot be withheld",
+      "rule": "A governance.disclosure payload with public Record visibility MUST use full, sanitized or metadata-only disclosure and MUST NOT remain ambiguously classified as withheld."
+    },
+    {
+      "id": "VMD-10",
+      "title": "Sanitized is an admission boundary",
+      "rule": "Sanitized disclosure MUST mean that the admitted target revision is already a bounded public-safe representation and MUST NOT authorize automatic retrieval, transformation or publication of private source material."
+    },
+    {
+      "id": "VMD-11",
+      "title": "Policy does not silently inherit across target revisions",
+      "rule": "A current disclosure or maturity classification MUST match the exact current target revision through basisRef and MUST become unclassified when the target advances without a matching governance revision."
+    },
+    {
+      "id": "VMD-12",
+      "title": "Current governance conflicts fail closed",
+      "rule": "Multiple distinct current governance Records classifying the same exact target revision MUST produce conflict and MUST NOT be resolved by recency, file order, permissiveness or route precedence."
+    },
+    {
+      "id": "VMD-13",
+      "title": "Withdrawn governance does not classify current state",
+      "rule": "Current governance projection MUST count only active or archived governance Records and MUST exclude withdrawn or tombstoned governance heads while retaining their historical lineage."
+    },
+    {
+      "id": "VMD-14",
+      "title": "Public projection requires current disclosure",
+      "rule": "A target MUST be public-projectable only when its current lifecycle is active or archived and exactly one current matching disclosure classifies the Record as public with a non-withheld disclosure mode."
+    },
+    {
+      "id": "VMD-15",
+      "title": "Governance target identity is constitutive",
+      "rule": "One governance.disclosure or governance.maturity lineage MUST preserve targetRef.recordId across successors; changing the governed logical target MUST create another governance Record."
+    },
+    {
+      "id": "VMD-16",
+      "title": "Maturity is separate from disclosure",
+      "rule": "A governance.maturity stage MUST classify System development state independently from Record visibility, disclosure mode, source availability and Evidence availability."
+    },
+    {
+      "id": "VMD-17",
+      "title": "Maturity applies only to Systems",
+      "rule": "R0.6 maturity governance MUST target only knowledge.system Records and MUST NOT impose System maturity stages on Questions, Investigations, Experiments, Claims, Evidence or representations."
+    },
+    {
+      "id": "VMD-18",
+      "title": "Maturity is not Evidence",
+      "rule": "A maturity stage including production MUST NOT by itself establish deployment, runtime behavior, test success, security, correctness or any other evidential Claim governed by R0.4."
+    },
+    {
+      "id": "VMD-19",
+      "title": "Maturity is non-monotonic",
+      "rule": "Maturity stages MAY move in any direction through accepted governance revisions and MUST NOT be interpreted as a monotonic truth, quality or permanence ordering."
+    },
+    {
+      "id": "VMD-20",
+      "title": "Route, language and migration remain separate",
+      "rule": "R0.6 MUST NOT define slug, route, canonical URL, redirect, language, translation, locale, legacy migration or final UI semantics assigned to R0.7, R0.8 and R1."
+    }
+  ],
+  "testVectors": [
+    {
+      "kind": "governance.disclosure",
+      "payload": {
+        "schemaVersion": "governance.disclosure/v0",
+        "targetRef": {
+          "type": "record",
+          "recordId": "rec_00000000000000000000000000000001"
+        },
+        "basisRef": {
+          "type": "pinned-record",
+          "recordId": "rec_00000000000000000000000000000001",
+          "revisionId": "rev_sha256_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "visibility": {
+          "record": "public",
+          "source": "private",
+          "evidence": "partial"
+        },
+        "disclosure": "sanitized",
+        "rationale": "Public-safe representation with private source and partially public evidence."
+      },
+      "expectedPayloadDigest": "sha256_4ae1e1a2ebf938c497b32d2cc654f3d4b40a836e4dda77a4300e9a112e11df51"
+    },
+    {
+      "kind": "governance.maturity",
+      "payload": {
+        "schemaVersion": "governance.maturity/v0",
+        "targetRef": {
+          "type": "record",
+          "recordId": "rec_00000000000000000000000000000001"
+        },
+        "basisRef": {
+          "type": "pinned-record",
+          "recordId": "rec_00000000000000000000000000000001",
+          "revisionId": "rev_sha256_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "stage": "research",
+        "rationale": "The system is under active investigation and is not represented as production."
+      },
+      "expectedPayloadDigest": "sha256_0a17b20911ba4a31200316ecd36de1cdc3d2dc0b5f07a68e26238e4d111e0d3b"
+    }
+  ],
+  "ciWitness": null,
+  "acceptance": {
+    "r0_5Preserved": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_6Complete": false
+  }
+}
