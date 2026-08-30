@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "editorial-knowledge-ontology/v0",
+  "contractId": "PORTFOLIO-R0.3-2026-08-30",
+  "status": "frozen",
+  "normative": true,
+  "preconditions": {
+    "r0_2Complete": true
+  },
+  "kindRegistry": [
+    {
+      "kind": "knowledge.system",
+      "schemaVersion": "knowledge.system/v0",
+      "fields": ["schemaVersion", "name", "summary", "thesis"]
+    },
+    {
+      "kind": "knowledge.question",
+      "schemaVersion": "knowledge.question/v0",
+      "fields": ["schemaVersion", "prompt", "state", "aboutSystemRefs", "parentQuestionRef"]
+    },
+    {
+      "kind": "knowledge.investigation",
+      "schemaVersion": "knowledge.investigation/v0",
+      "fields": ["schemaVersion", "title", "scope", "state", "questionRefs"]
+    },
+    {
+      "kind": "knowledge.experiment",
+      "schemaVersion": "knowledge.experiment/v0",
+      "fields": ["schemaVersion", "title", "protocol", "declaredOutcome", "investigationRefs"]
+    },
+    {
+      "kind": "knowledge.claim",
+      "schemaVersion": "knowledge.claim/v0",
+      "fields": ["schemaVersion", "statement", "scope", "aboutRefs"]
+    }
+  ],
+  "questionStates": ["open", "investigating", "partially-answered", "answered", "superseded"],
+  "investigationStates": ["planned", "active", "paused", "completed", "abandoned"],
+  "experimentDeclaredOutcomes": ["not-run", "pass", "fail", "inconclusive"],
+  "graph": {
+    "forwardOnly": true,
+    "reverseRelationsDerived": true,
+    "referenceMode": "record",
+    "constraints": [
+      {"sourceKind":"knowledge.question","field":"aboutSystemRefs","targetKinds":["knowledge.system"],"min":0},
+      {"sourceKind":"knowledge.question","field":"parentQuestionRef","targetKinds":["knowledge.question"],"min":0,"max":1,"selfReference":false},
+      {"sourceKind":"knowledge.investigation","field":"questionRefs","targetKinds":["knowledge.question"],"min":1},
+      {"sourceKind":"knowledge.experiment","field":"investigationRefs","targetKinds":["knowledge.investigation"],"min":1},
+      {"sourceKind":"knowledge.claim","field":"aboutRefs","targetKinds":["knowledge.system","knowledge.question","knowledge.investigation","knowledge.experiment"],"min":1}
+    ]
+  },
+  "canonicalPayload": {
+    "encoding": "utf-8",
+    "format": "canonical-json",
+    "objectKeyOrder": "lexicographic",
+    "terminalLineEnding": true,
+    "lineEnding": "LF",
+    "unknownFieldsAllowed": false,
+    "unicodeNormalization": "none",
+    "setLikeReferenceArrays": [
+      "knowledge.question.aboutSystemRefs",
+      "knowledge.investigation.questionRefs",
+      "knowledge.experiment.investigationRefs",
+      "knowledge.claim.aboutRefs"
+    ],
+    "setLikeReferenceOrder": "recordId-ascending",
+    "duplicateReferencesAllowed": false,
+    "payloadDigestAlgorithm": "sha256"
+  },
+  "deferredFields": [
+    "evidence",
+    "evidenceRefs",
+    "supportRefs",
+    "counterEvidenceRefs",
+    "maturity",
+    "visibility",
+    "slug",
+    "route",
+    "language",
+    "publicationRefs"
+  ],
+  "laws": [
+    {"id":"KO-01","title":"The initial knowledge registry is closed","rule":"R0.3 MUST register exactly knowledge.system, knowledge.question, knowledge.investigation, knowledge.experiment and knowledge.claim as its initial RecordKinds."},
+    {"id":"KO-02","title":"Knowledge kinds are constitutive RecordKinds","rule":"Every R0.3 knowledge entity MUST use the constitutive RecordKind and lineage semantics frozen by R0.2 rather than inventing a parallel identity model."},
+    {"id":"KO-03","title":"System is durable and publication-independent","rule":"A knowledge.system Record MUST remain identifiable independently of publication, route, repository, deployment, maturity or current presentation."},
+    {"id":"KO-04","title":"Questions may remain unresolved","rule":"A knowledge.question Record MAY remain open or partially answered indefinitely and MUST NOT acquire synthetic closure merely because later Records exist."},
+    {"id":"KO-05","title":"Questions relate to Systems without owning them","rule":"Question aboutSystemRefs MAY reference knowledge.system Records but MUST NOT redefine their identity, lifecycle, maturity or truth state."},
+    {"id":"KO-06","title":"Investigations address Questions","rule":"A knowledge.investigation Record MUST reference at least one resolvable knowledge.question Record and MUST NOT duplicate inverse investigation lists into the Question payload."},
+    {"id":"KO-07","title":"Experiments belong to Investigations","rule":"A knowledge.experiment Record MUST reference at least one resolvable knowledge.investigation Record and MUST remain independently identifiable from the narrative written about it."},
+    {"id":"KO-08","title":"Experiment outcome is declared, not proved","rule":"An Experiment declaredOutcome MUST be treated as the admitted experiment result field and MUST NOT by itself be presented as operational evidence or proof."},
+    {"id":"KO-09","title":"Claims are scoped propositions","rule":"A knowledge.claim Record MUST contain an explicit statement and scope and MUST NOT be treated as self-validating merely because the Claim exists."},
+    {"id":"KO-10","title":"Claim epistemic rank is deferred","rule":"R0.3 MUST NOT assign supported, established, refuted or equivalent evidence-derived rank to Claims before the R0.4 Evidence Contract defines those semantics."},
+    {"id":"KO-11","title":"Knowledge relations use logical references","rule":"R0.3 graph fields MUST use logical RecordRef values and MUST NOT silently substitute route strings, slugs, filenames or other locators for Record identity."},
+    {"id":"KO-12","title":"Graph references resolve by target kind","rule":"Every admitted R0.3 graph reference MUST resolve to an admitted Record whose RecordKind is permitted by the source field constraint."},
+    {"id":"KO-13","title":"Reverse relations are projections","rule":"Inverse graph relationships MUST be derived from canonical forward references and MUST NOT become a second writable authority that can drift from the source relation."},
+    {"id":"KO-14","title":"Reference sets are canonical","rule":"Set-like RecordRef arrays MUST reject duplicate RecordIds and MUST canonicalize by ascending RecordId before payload serialization."},
+    {"id":"KO-15","title":"Semantic payloads fail closed","rule":"A kind-specific payload MUST reject unknown fields, invalid schema versions, invalid enum values and missing required semantic fields instead of silently admitting them."},
+    {"id":"KO-16","title":"Payload digests are deterministic","rule":"Each R0.3 payload MUST serialize under the frozen canonical JSON profile and MUST bind a SHA-256 PayloadDigest without becoming the logical RecordId."},
+    {"id":"KO-17","title":"Later contracts cannot arrive early","rule":"R0.3 payloads MUST NOT encode Evidence, maturity, visibility, route, language or Publication semantics that are constitutionally assigned to later R0 cuts."},
+    {"id":"KO-18","title":"Relations preserve endpoint history","rule":"Adding or changing a knowledge relation MAY revise the source Record through R0.2 lineage but MUST NOT rewrite the target Record identity or any historical revision."}
+  ],
+  "testVectors": [
+    {
+      "kind": "knowledge.system",
+      "payload": {
+        "schemaVersion": "knowledge.system/v0",
+        "name": "Genesis",
+        "summary": "Governed agentic web runtime.",
+        "thesis": "The web can be governed as an operational environment."
+      },
+      "expectedPayloadDigest": "sha256_d20a675dfa0e5c5bd0005e389f5ac2acb1f8e57481d2dd356ea684fbaa83736a"
+    },
+    {
+      "kind": "knowledge.question",
+      "payload": {
+        "schemaVersion": "knowledge.question/v0",
+        "prompt": "When does a browser stop being merely an application?",
+        "state": "open",
+        "aboutSystemRefs": [{"type":"record","recordId":"rec_00000000000000000000000000000001"}],
+        "parentQuestionRef": null
+      },
+      "expectedPayloadDigest": "sha256_b2dcab9f0e509876fc3f216e5c466b962091d74b1a87be6e82d1912ba0313087"
+    },
+    {
+      "kind": "knowledge.investigation",
+      "payload": {
+        "schemaVersion": "knowledge.investigation/v0",
+        "title": "Browser authority boundary",
+        "scope": "Separate observation, authorization, action and effect.",
+        "state": "active",
+        "questionRefs": [{"type":"record","recordId":"rec_00000000000000000000000000000002"}]
+      },
+      "expectedPayloadDigest": "sha256_a22e4bbbd2e3bd69d45bb89fd599077f159d9bc44d84c726e2319d74953cdc2c"
+    },
+    {
+      "kind": "knowledge.experiment",
+      "payload": {
+        "schemaVersion": "knowledge.experiment/v0",
+        "title": "Authority boundary campaign",
+        "protocol": "Execute one bounded action and verify proposal, authorization, action, observation and effect remain distinct.",
+        "declaredOutcome": "inconclusive",
+        "investigationRefs": [{"type":"record","recordId":"rec_00000000000000000000000000000003"}]
+      },
+      "expectedPayloadDigest": "sha256_24436307d439fe29ab400768ee7770e4027aed26ad52da61fac5787c7856e100"
+    },
+    {
+      "kind": "knowledge.claim",
+      "payload": {
+        "schemaVersion": "knowledge.claim/v0",
+        "statement": "Observation does not imply authorization.",
+        "scope": "Governed web runtime actions.",
+        "aboutRefs": [
+          {"type":"record","recordId":"rec_00000000000000000000000000000001"},
+          {"type":"record","recordId":"rec_00000000000000000000000000000004"}
+        ]
+      },
+      "expectedPayloadDigest": "sha256_8521d9e6744528f826cf437a667afb4bf396f30724404fe68961dde615ef5516"
+    }
+  ],
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33331171871,
+    "commit": "1d293b87668949f2227e24be2d15cf9ffb7f82ed",
+    "conclusion": "success"
+  },
+  "acceptance": {
+    "r0_2Preserved": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_3Complete": true
+  }
+}
