@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "editorial-r0-amendment/v0",
+  "amendmentId": "R0-A1-LEGACY-AGENTIC-MIGRATION-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "observedDate": "2026-08-30",
+  "authority": {
+    "baseContract": "PORTFOLIO-R0.8-2026-08-30",
+    "baseManifestPath": "docs/editorial/migration-acceptance.v0.json",
+    "baseCompletionPath": "docs/editorial/R0.8-completion.v0.json",
+    "groundingCompletionPath": "docs/editorial/R1-PRE-completion.v0.json",
+    "appliesAfter": "R0.8",
+    "historicalBaseMustRemainUnmodified": true
+  },
+  "affectedMapping": {
+    "legacyId": "agentic-systems",
+    "historicalTitle": "Agentic Systems & Foundry",
+    "previousNormativeState": {
+      "targetRecordId": "rec_d5549271c541d17165c0ad8512dcdcc1",
+      "targetKind": "knowledge.system",
+      "birthStatus": "reserved-for-r1",
+      "plannedCanonicalRoutes": {
+        "en": "/en/systems/agentic-systems",
+        "pt-BR": "/pt-br/systems/agentic-systems"
+      },
+      "guaranteeDisposition": "knowledge.claim"
+    },
+    "replacementNormativeState": {
+      "targetRecordId": null,
+      "targetKind": null,
+      "birthStatus": "retired-pre-birth-reservation",
+      "plannedCanonicalRoutes": null,
+      "guaranteeDisposition": "legacy-representation-text",
+      "compatibilityDisposition": "frozen-legacy-representation"
+    },
+    "reason": "Complete connected-corpus grounding resolves the broad legacy card into concrete Foundry, Factory and AgentHub subjects rather than another independent durable System.",
+    "migrationImpact": "The old public representation and locator remain preserved, but no generation-zero Record may be born for the abandoned broad System reservation and no canonical Record route may be enacted for it."
+  },
+  "retiredReservation": {
+    "recordId": "rec_d5549271c541d17165c0ad8512dcdcc1",
+    "wasBorn": false,
+    "recordLifecycle": null,
+    "status": "retired-pre-birth",
+    "reuseForbidden": true,
+    "mayBeAssignedToFoundry": false,
+    "mayBeAssignedToFactory": false,
+    "mayBeAssignedToAgentHub": false,
+    "mayBeAssignedToAnyFutureRecord": false,
+    "tombstoneRequired": false,
+    "reasonTombstoneNotUsed": "R0.2 tombstone is a terminal revision of an already-born Record. This identifier was only provisioned by R0.8 and never admitted at Birth."
+  },
+  "compatibility": {
+    "historicalLocator": "/work/agentic-systems",
+    "locatorClass": "legacy-compatibility-entry",
+    "resolutionMode": "render-frozen-legacy-representation",
+    "targetRecordId": null,
+    "redirectTarget": null,
+    "recordAlias": false,
+    "languageMode": "legacy-negotiated-entry",
+    "mayRebindToAnotherRecord": false,
+    "preservePublicSemantics": true,
+    "plannedCanonicalRecordRoutesCancelled": [
+      "/en/systems/agentic-systems",
+      "/pt-br/systems/agentic-systems"
+    ]
+  },
+  "legacyRepresentation": {
+    "preserve": true,
+    "sourceFreezeId": "PORTFOLIO-R0.0-2026-08-30",
+    "sourceCommit": "bff5519fd2b4986dd0c176bc96974b3233d97525",
+    "sourcePath": "src/app/data/projects.ts",
+    "sourceBlobSha": "df6fe680cd96ede69b3ff7e1f0a6b3b498b16c9f",
+    "legacyId": "agentic-systems",
+    "title": "Agentic Systems & Foundry",
+    "guarantees": [
+      "EXPLICIT STATE",
+      "HUMAN REVIEW",
+      "TRACEABLE OUTPUTS",
+      "BOUNDED EXECUTION"
+    ],
+    "disclosure": {
+      "record": "public",
+      "source": "private",
+      "evidence": "none",
+      "mode": "sanitized"
+    },
+    "guaranteesRemainRepresentationOnly": true,
+    "guaranteesMayBecomeClaimsByInheritance": false
+  },
+  "architectureCompatibility": {
+    "systems": {
+      "legacyArchitectureRecordId": "rec_54e1fc551f4db67b866cdadad0e757d7",
+      "removeSubjectRecordIds": ["rec_d5549271c541d17165c0ad8512dcdcc1"],
+      "replacementSubjectBinding": "deferred-until-concrete-systems-are-born",
+      "preserveFrozenRepresentation": true
+    },
+    "agents": {
+      "legacyArchitectureRecordId": "rec_89d75f5011a5fbee29199fc9d418e62f",
+      "removeSubjectRecordIds": ["rec_d5549271c541d17165c0ad8512dcdcc1"],
+      "replacementSubjectBinding": "deferred-until-concrete-systems-are-born",
+      "preserveFrozenRepresentation": true
+    }
+  },
+  "effectiveLaws": {
+    "frozenR0_8RemainsReconstructable": true,
+    "abandonedReservationIsNotARecord": true,
+    "abandonedReservationCannotBeReused": true,
+    "historicalLocatorRemainsResolvable": true,
+    "historicalLocatorCannotBecomeAliasToDifferentRecord": true,
+    "oldRepresentationRemainsAvailable": true,
+    "oldGuaranteesDoNotAutoMintClaims": true,
+    "foundryFactoryAgentHubRequireIndependentBirths": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false
+  },
+  "acceptance": {
+    "legacyAgenticReservationRetired": true,
+    "recordBirthCountForRetiredReservation": 0,
+    "historicalLocatorPreserved": true,
+    "recordIdReuseForbidden": true,
+    "compatibilityDispositionDefined": true,
+    "oldRepresentationPreserved": true,
+    "r0ConsistencyRestored": true,
+    "r1_0UnblockedAfterCi": false,
+    "r0A1Complete": false
+  }
+}
