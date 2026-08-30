@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "editorial-runtime-boundary-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.0-2026-08-30",
+  "materialization": {
+    "commit": "04995cc7c053cc07c56a5de458dd2e80c46248b5",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33339042562,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/editorial-runtime-boundary.v0.json",
+    "manifestBlobSha": "8b36af268da28c5364a124be0d92d90e43108f4d"
+  },
+  "effectiveRuntimeBoundary": {
+    "publicationShell": "astro-static",
+    "interactiveLayer": "react-islands",
+    "semanticAuthority": "editorial-registry",
+    "outputMode": "static",
+    "canonicalReadingRequiresServer": false,
+    "requestTimeGitHubAuthority": false,
+    "clientSemanticAuthority": false,
+    "recordBirthCount": 0,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "acceptance": {
+    "r1_0Complete": true,
+    "r1ProgramInProgress": true,
+    "r0EffectiveComplete": true,
+    "r1PreComplete": true,
+    "runtimeBoundaryFrozen": true,
+    "recordBirthCount": 0,
+    "nextRequiredCut": "R1.1 — Record Registry"
+  }
+}
