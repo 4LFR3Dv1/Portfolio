@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "editorial-r0-amendment-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "amendmentId": "R0-A1-LEGACY-AGENTIC-MIGRATION-2026-08-30",
+  "materialization": {
+    "commit": "3769d3fc059570b3643db557a27d92067ade4a1d",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33338527367,
+      "conclusion": "success"
+    },
+    "amendmentPath": "docs/editorial/R0-A1-legacy-agentic-migration-amendment.v0.json",
+    "amendmentDocPath": "docs/editorial/R0-A1-legacy-agentic-migration-amendment.md"
+  },
+  "historicalAuthority": {
+    "r0_8Preserved": true,
+    "r0_8ManifestPath": "docs/editorial/migration-acceptance.v0.json",
+    "r0_8CompletionPath": "docs/editorial/R0.8-completion.v0.json",
+    "r1PreGroundingPath": "docs/editorial/R1-PRE-completion.v0.json"
+  },
+  "effectiveState": {
+    "retiredReservation": "rec_d5549271c541d17165c0ad8512dcdcc1",
+    "retiredReservationWasBorn": false,
+    "retiredReservationReuseForbidden": true,
+    "historicalLocator": "/work/agentic-systems",
+    "historicalLocatorPreserved": true,
+    "historicalLocatorRebound": false,
+    "legacyRepresentationPreserved": true,
+    "legacyGuaranteesAreClaims": false,
+    "plannedCanonicalAgenticRoutesCancelled": true,
+    "architectureFalseSubjectBindingRemoved": true,
+    "concreteReplacementSubjectBindingDeferredToR1": true,
+    "recordBirthCount": 0,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false
+  },
+  "acceptance": {
+    "r0A1Complete": true,
+    "r0EffectiveComplete": true,
+    "r0ConsistencyRestored": true,
+    "r1PreComplete": true,
+    "r1_0Unblocked": true,
+    "nextRequiredCut": "R1.0 — Editorial Runtime Boundary"
+  }
+}
