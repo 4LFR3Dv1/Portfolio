@@ -49,6 +49,15 @@ const surfaceFreeze = JSON.parse(
 ) as SurfaceFreezeManifest;
 
 describe('R0.1 editorial constitution', () => {
+  it('is frozen only after preserving the completed R0.0 baseline', () => {
+    expect(constitution.status).toBe('frozen');
+    expect(surfaceFreeze.acceptance.r0_0Complete).toBe(true);
+    expect(constitution.acceptance.r0_0Preserved).toBe(true);
+    expect(constitution.acceptance.r0_1Complete).toBe(true);
+    expect(constitution.acceptance.runtimeSemanticsChanged).toBe(false);
+    expect(constitution.acceptance.uiChanged).toBe(false);
+  });
+
   it('defines exactly fifteen contiguous constitutional principles', () => {
     const expectedIds = Array.from({ length: 15 }, (_, index) => `EC-${String(index + 1).padStart(2, '0')}`);
     const actualIds = constitution.principles.map((principle) => principle.id);
@@ -88,13 +97,6 @@ describe('R0.1 editorial constitution', () => {
       'reason-for-change',
       'migration-impact',
     ]);
-  });
-
-  it('preserves the completed R0.0 surface freeze', () => {
-    expect(surfaceFreeze.acceptance.r0_0Complete).toBe(true);
-    expect(constitution.acceptance.r0_0Preserved).toBe(true);
-    expect(constitution.acceptance.runtimeSemanticsChanged).toBe(false);
-    expect(constitution.acceptance.uiChanged).toBe(false);
   });
 
   it('keeps truth, evidence, identity, privacy and representation in constitutional scope', () => {

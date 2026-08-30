@@ -1,118 +1,31 @@
 {
   "schemaVersion": "editorial-constitution/v0",
   "constitutionId": "PORTFOLIO-R0.1-2026-08-30",
-  "status": "materialized-awaiting-ci",
+  "status": "frozen",
   "principles": [
-    {
-      "id": "EC-01",
-      "title": "Public truth outranks presentation",
-      "rule": "A public interface MUST NOT strengthen, broaden or upgrade a claim beyond the evidence and scope available to the underlying record.",
-      "protects": ["truth", "scope", "public-claims"]
-    },
-    {
-      "id": "EC-02",
-      "title": "Publication is not the source of truth",
-      "rule": "A publication MAY interpret records, but it MUST NOT become the canonical authority for facts that belong to systems, experiments, claims or evidence.",
-      "protects": ["authority", "provenance", "separation-of-concerns"]
-    },
-    {
-      "id": "EC-03",
-      "title": "Evidence is not a claim",
-      "rule": "An artifact, commit, test, deployment, endpoint, document, witness or dataset MUST NOT determine its own conclusion merely by existing.",
-      "protects": ["evidence", "epistemic-boundary"]
-    },
-    {
-      "id": "EC-04",
-      "title": "Claim is not evidence",
-      "rule": "A claim MUST NOT be treated as self-validating. Claims that require support MUST be able to reference the evidence, observations or prior claims that support them.",
-      "protects": ["claims", "support", "provenance"]
-    },
-    {
-      "id": "EC-05",
-      "title": "Questions may remain open",
-      "rule": "An unanswered question is a valid public knowledge state. The system MUST permit questions to remain open, partially answered or superseded without manufacturing closure.",
-      "protects": ["questions", "uncertainty", "research"]
-    },
-    {
-      "id": "EC-06",
-      "title": "Unknown remains unknown",
-      "rule": "Absence of evidence MUST NOT be converted into success, failure, safety, correctness or any other conclusion by inference alone.",
-      "protects": ["uncertainty", "non-claims", "truth"]
-    },
-    {
-      "id": "EC-07",
-      "title": "System is not publication",
-      "rule": "A durable system identity MUST exist independently of any article, essay, case study or research note written about it.",
-      "protects": ["system-identity", "editorial-separation"]
-    },
-    {
-      "id": "EC-08",
-      "title": "Experiment is not narrative",
-      "rule": "An experiment and the editorial account of that experiment MUST be independently identifiable. Editing a narrative MUST NOT silently rewrite the experimental result.",
-      "protects": ["experiment-identity", "history", "editorial-separation"]
-    },
-    {
-      "id": "EC-09",
-      "title": "Visibility is multidimensional",
-      "rule": "Public visibility, source availability, evidence availability, maturity and disclosure MUST NOT be collapsed into one field or one label.",
-      "protects": ["visibility", "maturity", "disclosure"]
-    },
-    {
-      "id": "EC-10",
-      "title": "Architecture is representation",
-      "rule": "Architecture records describe responsibilities, boundaries, relationships or invariants. They MUST NOT be treated as proof that the represented system behaves as described.",
-      "protects": ["architecture", "evidence-boundary", "representation"]
-    },
-    {
-      "id": "EC-11",
-      "title": "Published URLs are durable identities",
-      "rule": "Once a public canonical URL is established, a later migration MUST preserve its identity through continued resolution or an explicit durable redirect. Content MUST NOT silently move to a different identity.",
-      "protects": ["route-identity", "continuity", "public-history"]
-    },
-    {
-      "id": "EC-12",
-      "title": "Revision preserves history",
-      "rule": "A material correction or constitutional change MUST remain distinguishable from the state that preceded it. Frozen contracts MUST be amended explicitly rather than silently rewritten.",
-      "protects": ["revision", "history", "constitution"]
-    },
-    {
-      "id": "EC-13",
-      "title": "Private knowledge cannot leak by composition",
-      "rule": "A set of individually public records MUST NOT be linked or projected in a way that reconstructs information deliberately withheld by a private or sanitized boundary.",
-      "protects": ["privacy", "sanitization", "composition"]
-    },
-    {
-      "id": "EC-14",
-      "title": "UI is not ontology",
-      "rule": "Cards, sections, pages, tabs, navigation, search results and visual templates are replaceable projections. They MUST NOT define what the underlying records are.",
-      "protects": ["ontology", "projection", "implementation-independence"]
-    },
-    {
-      "id": "EC-15",
-      "title": "Code is not evidence of operation by itself",
-      "rule": "Public source proves that source is public. It MUST NOT, by itself, be presented as proof of deployment, runtime behavior, production maturity, security review or successful physical execution.",
-      "protects": ["source", "operation", "maturity", "evidence"]
-    }
+    {"id":"EC-01","title":"Public truth outranks presentation","rule":"A public interface MUST NOT strengthen, broaden or upgrade a claim beyond the evidence and scope available to the underlying record.","protects":["truth","scope","public-claims"]},
+    {"id":"EC-02","title":"Publication is not the source of truth","rule":"A publication MAY interpret records, but it MUST NOT become the canonical authority for facts that belong to systems, experiments, claims or evidence.","protects":["authority","provenance","separation-of-concerns"]},
+    {"id":"EC-03","title":"Evidence is not a claim","rule":"An artifact, commit, test, deployment, endpoint, document, witness or dataset MUST NOT determine its own conclusion merely by existing.","protects":["evidence","epistemic-boundary"]},
+    {"id":"EC-04","title":"Claim is not evidence","rule":"A claim MUST NOT be treated as self-validating. Claims that require support MUST be able to reference the evidence, observations or prior claims that support them.","protects":["claims","support","provenance"]},
+    {"id":"EC-05","title":"Questions may remain open","rule":"An unanswered question is a valid public knowledge state. The system MUST permit questions to remain open, partially answered or superseded without manufacturing closure.","protects":["questions","uncertainty","research"]},
+    {"id":"EC-06","title":"Unknown remains unknown","rule":"Absence of evidence MUST NOT be converted into success, failure, safety, correctness or any other conclusion by inference alone.","protects":["uncertainty","non-claims","truth"]},
+    {"id":"EC-07","title":"System is not publication","rule":"A durable system identity MUST exist independently of any article, essay, case study or research note written about it.","protects":["system-identity","editorial-separation"]},
+    {"id":"EC-08","title":"Experiment is not narrative","rule":"An experiment and the editorial account of that experiment MUST be independently identifiable. Editing a narrative MUST NOT silently rewrite the experimental result.","protects":["experiment-identity","history","editorial-separation"]},
+    {"id":"EC-09","title":"Visibility is multidimensional","rule":"Public visibility, source availability, evidence availability, maturity and disclosure MUST NOT be collapsed into one field or one label.","protects":["visibility","maturity","disclosure"]},
+    {"id":"EC-10","title":"Architecture is representation","rule":"Architecture records describe responsibilities, boundaries, relationships or invariants. They MUST NOT be treated as proof that the represented system behaves as described.","protects":["architecture","evidence-boundary","representation"]},
+    {"id":"EC-11","title":"Published URLs are durable identities","rule":"Once a public canonical URL is established, a later migration MUST preserve its identity through continued resolution or an explicit durable redirect. Content MUST NOT silently move to a different identity.","protects":["route-identity","continuity","public-history"]},
+    {"id":"EC-12","title":"Revision preserves history","rule":"A material correction or constitutional change MUST remain distinguishable from the state that preceded it. Frozen contracts MUST be amended explicitly rather than silently rewritten.","protects":["revision","history","constitution"]},
+    {"id":"EC-13","title":"Private knowledge cannot leak by composition","rule":"A set of individually public records MUST NOT be linked or projected in a way that reconstructs information deliberately withheld by a private or sanitized boundary.","protects":["privacy","sanitization","composition"]},
+    {"id":"EC-14","title":"UI is not ontology","rule":"Cards, sections, pages, tabs, navigation, search results and visual templates are replaceable projections. They MUST NOT define what the underlying records are.","protects":["ontology","projection","implementation-independence"]},
+    {"id":"EC-15","title":"Code is not evidence of operation by itself","rule":"Public source proves that source is public. It MUST NOT, by itself, be presented as proof of deployment, runtime behavior, production maturity, security review or successful physical execution.","protects":["source","operation","maturity","evidence"]}
   ],
   "priorityRule": "When future implementation choices conflict, preserve public truth, explicit uncertainty, provenance and disclosure boundaries before convenience, aesthetics or marketing value.",
   "amendmentRule": {
     "required": true,
-    "mustRecord": [
-      "affected-principle-ids",
-      "previous-normative-text",
-      "replacement-normative-text",
-      "reason-for-change",
-      "migration-impact"
-    ],
+    "mustRecord": ["affected-principle-ids","previous-normative-text","replacement-normative-text","reason-for-change","migration-impact"],
     "historyMustRemainReconstructable": true
   },
-  "implementationNeutrality": {
-    "forbiddenConstitutionalDependencies": ["React", "Vite", "Astro", "MDX", "Tailwind", "Vercel"]
-  },
-  "acceptance": {
-    "r0_0Preserved": true,
-    "runtimeSemanticsChanged": false,
-    "uiChanged": false,
-    "r0_1Complete": false
-  }
+  "implementationNeutrality": {"forbiddenConstitutionalDependencies":["React","Vite","Astro","MDX","Tailwind","Vercel"]},
+  "ciWitness": {"workflow":"Verify","runId":33328195868,"commit":"4b953dd926882bd4583ee9a135badec87c953ab7","conclusion":"success"},
+  "acceptance": {"r0_0Preserved":true,"runtimeSemanticsChanged":false,"uiChanged":false,"r0_1Complete":true}
 }
