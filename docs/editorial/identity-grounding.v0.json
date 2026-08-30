@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-identity-grounding/v0",
   "groundingId": "PORTFOLIO-R0.2-PRE-2026-08-30",
-  "status": "grounding",
+  "status": "grounded",
   "normative": false,
   "portfolioBaseline": "3147dac4a31da58bdf800dccdc0851ca31495d74",
   "sourceBoundary": {
@@ -55,12 +55,18 @@
     "RecordConflict",
     "RecordBirth"
   ],
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33330326597,
+    "commit": "d4e8d96a26daf058308613084fc12f653f271dfe",
+    "conclusion": "success"
+  },
   "acceptance": {
     "r0_1Preserved": true,
     "privateBoundaryPreserved": true,
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_2PreComplete": false,
+    "r0_2PreComplete": true,
     "r0_2Complete": false
   }
 }

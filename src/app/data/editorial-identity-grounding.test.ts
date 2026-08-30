@@ -23,6 +23,12 @@ interface GroundingManifest {
   researchBoundaries: Array<{ id: string; topic: string; transfer: string }>;
   candidateLaws: IdentityLaw[];
   requiredR02Concepts: string[];
+  ciWitness: {
+    workflow: string;
+    runId: number;
+    commit: string;
+    conclusion: string;
+  };
   acceptance: {
     r0_1Preserved: boolean;
     privateBoundaryPreserved: boolean;
@@ -54,8 +60,10 @@ const constitution = JSON.parse(
 ) as ConstitutionManifest;
 
 describe('R0.2-PRE Brine identity grounding', () => {
-  it('remains a non-normative research input to R0.2', () => {
+  it('is complete as research while remaining non-normative', () => {
+    expect(grounding.status).toBe('grounded');
     expect(grounding.normative).toBe(false);
+    expect(grounding.acceptance.r0_2PreComplete).toBe(true);
     expect(grounding.acceptance.r0_2Complete).toBe(false);
   });
 
@@ -130,6 +138,13 @@ describe('R0.2-PRE Brine identity grounding', () => {
     for (const id of grounding.constitutionalBasis) {
       expect(constitutionalIds.has(id)).toBe(true);
     }
+  });
+
+  it('records the successful materialization witness without promoting R0.2', () => {
+    expect(grounding.ciWitness.workflow).toBe('Verify');
+    expect(grounding.ciWitness.runId).toBe(33330326597);
+    expect(grounding.ciWitness.commit).toBe('d4e8d96a26daf058308613084fc12f653f271dfe');
+    expect(grounding.ciWitness.conclusion).toBe('success');
   });
 
   it('changes neither runtime semantics nor the public UI', () => {
