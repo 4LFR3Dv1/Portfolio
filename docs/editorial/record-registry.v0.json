@@ -1,0 +1,967 @@
+{
+  "schemaVersion": "editorial-record-registry/v0",
+  "contractId": "PORTFOLIO-R1.1-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "650ca686854110ec817e47f1658bf37e6d1a2daf",
+  "preconditions": {
+    "r1_0Complete": true,
+    "r0EffectiveComplete": true,
+    "r1PreComplete": true
+  },
+  "admission": {
+    "source": "docs/editorial/github-corpus-admission.v0.json",
+    "mode": "explicit-r1-system-birth",
+    "groundingAloneAuthorizedBirth": false,
+    "systemSubjectsExpected": 28,
+    "systemBirthCount": 28,
+    "otherRecordBirthCount": 0
+  },
+  "identityPool": {
+    "retiredPreBirth": [
+      {
+        "recordId": "rec_d5549271c541d17165c0ad8512dcdcc1",
+        "source": "R0-A1",
+        "status": "retired-pre-birth",
+        "reuseForbidden": true,
+        "reason": "Legacy Agentic Systems & Foundry reservation was retired before Birth and may never be reused."
+      }
+    ],
+    "heldReservations": [
+      {
+        "recordId": "rec_fc3e81a9cb37b73ca03462e03cbcd90b",
+        "kind": "representation.publication",
+        "source": "R0.8",
+        "reason": "VERIFY Systems publication remains reserved for a later explicit representation birth."
+      },
+      {
+        "recordId": "rec_f86d2f96e2988b93eda3bcbe01861636",
+        "kind": "representation.publication",
+        "source": "R0.8",
+        "reason": "Production Systems Handbook publication remains reserved for a later explicit representation birth."
+      },
+      {
+        "recordId": "rec_1b9b9be6aefcb8c7f871362ab1b71cf0",
+        "kind": "representation.publication",
+        "source": "R0.8",
+        "reason": "TypeScript Handbook publication remains reserved for a later explicit representation birth."
+      },
+      {
+        "recordId": "rec_54e1fc551f4db67b866cdadad0e757d7",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Systems architecture remains reserved until its concrete born subject bindings are admitted."
+      },
+      {
+        "recordId": "rec_601d671e448af6ed84b821a748be84e4",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Settlement architecture remains reserved for later explicit representation birth."
+      },
+      {
+        "recordId": "rec_89d75f5011a5fbee29199fc9d418e62f",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Agents architecture remains reserved until R0-A1 replacement subject relations are explicitly admitted."
+      },
+      {
+        "recordId": "rec_86286c78367ccc41cfa734f30f7daf33",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Realtime architecture remains reserved for later explicit representation birth."
+      },
+      {
+        "recordId": "rec_93f3df5cc87747ed31f9885f5afb5027",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Handoff architecture remains reserved for later explicit representation birth."
+      }
+    ]
+  },
+  "records": [
+    {
+      "subjectKey": "genesis",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_5eeb93bd8811b6c0fbecf3cc733cbd2e",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-001",
+        "identityDecision": "distinct-system",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_5eeb93bd8811b6c0fbecf3cc733cbd2e",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_02617c615f93695ad6c8bd82ac90e72dd936c06e1bbd2f9790d7f0fd7b6f1c0a",
+            "revisionId": "rev_sha256_679e0c52c64af22317def4e50fba44ee2ab1494e173c5d5e06e93a4bc3d7556d"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Genesis",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "brineos",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_6822adfb4aaf3520816ff305f6b4e572",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-002",
+        "identityDecision": "distinct-from-brine",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_6822adfb4aaf3520816ff305f6b4e572",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_9164c90f81ae0be410542373a0cc560a12c19f71d03da2fbdc870ce26faf8f8e",
+            "revisionId": "rev_sha256_a79d3ccfc20727a1596d7dc7f393f0747a9f96d4389f507e0ce400a70604cc98"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "BrineOS",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "wer-esk",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_4515d2eb7d17e9a876ff890f7b90d6a8",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-003",
+        "identityDecision": "distinct-system",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_4515d2eb7d17e9a876ff890f7b90d6a8",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_35b260577b7268123898911960864290d154a72f4e1507d9dcc38ca1543ee901",
+            "revisionId": "rev_sha256_201c8c49c610ab569765fef0af5ff99d0e85283970844603e2620912212b2a77"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "WER-ESK",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "lisa",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_286639cfc48e0fac9065fe4e3258a916",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-004",
+        "identityDecision": "one-system-three-repository-realizations",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_286639cfc48e0fac9065fe4e3258a916",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_7ce7683251b91adf04f0737f1e0f012cc69cfdbdfbb62218146103cfe6ecbdbf",
+            "revisionId": "rev_sha256_bf0879914e33c1b146229a2c72b0757d3881005736cd76ecfd6d89d7d1a56688"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Lisa",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "factory",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_1fe061f491894efe1e0b1674448b7501",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-006",
+        "identityDecision": "distinct-from-brine-and-foundry",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_1fe061f491894efe1e0b1674448b7501",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_d927eaf03b4f1d6c128a2d9e5c7591c43cd9ce1ab70b26e9d73fde3eda49aa54",
+            "revisionId": "rev_sha256_4c082228a7d13c416b506f95c987bc2ec9e255851ee97da92c5649a93b7470e8"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Factory",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "foundry",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_66057eae80fabfa4478a600481d755f0",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-007",
+        "identityDecision": "system-plus-presentation-realization",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_66057eae80fabfa4478a600481d755f0",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_f8b598d6b9c2d2df0ae9f1441653411bb7fdb78bb8ce088369d82831fa76dfe5",
+            "revisionId": "rev_sha256_92473ed8313067ef6438a29affee32c8d7663753eb76f8f9900c02dbd8463bab"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Foundry",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "agenthub",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_10d864e055b79f67dce52412083e6763",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-008",
+        "identityDecision": "independent-from-foundry",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_10d864e055b79f67dce52412083e6763",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_f0c7f1ab686165211c518ca37eb58b3f39a1081455f8864847963085651ff87e",
+            "revisionId": "rev_sha256_55a4e2a99d57fe60c58d8c1ce4fd77d33726ff486928ccdc73f9551226669d91"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "AgentHub",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "foundry-pay",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_0e6beb6a5f17831616af328fe8f2afb2",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-009",
+        "identityDecision": "same-subject-as-r0-8-supporting-reservation",
+        "legacyReservationUsed": true
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_0e6beb6a5f17831616af328fe8f2afb2",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_3a81a72942488704d10689fdc7b177ad9c32712915286f87bef3dcd8326ee2ba",
+            "revisionId": "rev_sha256_1700efbe05522c5fb7c42cfc7bfe36811f56451491237608b973299713feac59"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Foundry Pay",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "foundry-channels",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_38f6f81328b9ccd007127d1071f8cc02",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-010",
+        "identityDecision": "independent-authority-boundary",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_38f6f81328b9ccd007127d1071f8cc02",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_3e0fc30272bf542373603320e0ca2fce15b1d5a0d4e71953698dcf968cb8011f",
+            "revisionId": "rev_sha256_bd603f812755c774557eb6c2ff1cf7e3be99aeab9749e75924c22a7202551426"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Foundry Channels",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "solana-agent",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_43dd086ef220193d441943461e8863f0",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-011",
+        "identityDecision": "independent-authority-boundary",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_43dd086ef220193d441943461e8863f0",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_06fb8dab6fb65d048b3df46b63bd3b6e311ae310a13e3c9daac0d1408c616c0b",
+            "revisionId": "rev_sha256_352bfa7bd2aed3a4ae46793151a0e24b0f96adef405bd22616b9d0441f1497fa"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Solana-Agent",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "sne-fde",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_6bd4d56023990c25879daecf2ff34b55",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-012",
+        "identityDecision": "current-field-authority-with-public-surface-history",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_6bd4d56023990c25879daecf2ff34b55",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_647891d5d7de0870acbc005b887ac5d9f1659db2269b1c0bbd1c1338bd3dc5ec",
+            "revisionId": "rev_sha256_2314e8ad87099c1c49253c3a770b3a80c2469635ddae36f8496a638869016716"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "SNE-FDE",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "github-flow",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_0db35eb308dd8da06948dcde9666a6df",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-014",
+        "identityDecision": "distinct-operational-system",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_0db35eb308dd8da06948dcde9666a6df",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_41a45b222d6cdce9ff1c6761f63c0d52c40f49b872066027db92ed6a86e92924",
+            "revisionId": "rev_sha256_c1d1b40414702becbc8d047a2d0f96e8ea8a1def450d1b7f498197cb191aceff"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "GitHub Flow",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "sne-os",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_499f928363217da10f93cd54aead0101",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-015",
+        "identityDecision": "same-subject-as-r0-8-sne-os-reservation-distinct-from-sne-vault",
+        "legacyReservationUsed": true
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_499f928363217da10f93cd54aead0101",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_50ee03c48a89f8e1091d582503f564d12f4857323f776440bd7ecac5da2478c8",
+            "revisionId": "rev_sha256_adfaeb55522e83dd5a95bc9a59b0c5e506384882ca5ed3cce003ee24665a0635"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "SNE-OS",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "sne-radar",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_553b9088a5b22a51a44679f582de47f5",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-016",
+        "identityDecision": "one-system-multi-repository-lineage",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_553b9088a5b22a51a44679f582de47f5",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_2b911ec59286fd327a509586054b1864a0f95a0bcafba0e6994020fc57065fee",
+            "revisionId": "rev_sha256_93aed5355fc3de1e940c04184a56065151882f60fd2aabbb0f067014379b2c27"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "SNE Radar",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "sne-trading",
+      "subjectClass": "frontier-system",
+      "recordId": "rec_b1afa6a6409eff3f0c4d55f88b2112b2",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-021",
+        "identityDecision": "independent-tribunal-execution-plane",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_b1afa6a6409eff3f0c4d55f88b2112b2",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_722ccf50cb4f25fac879d5ac99293629212033682255f1f31a4eb3687203e836",
+            "revisionId": "rev_sha256_41777da70c8a01e7e8394233a5548c32a5bc4b2e4131ab378c97afc4ec9f631a"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "SNE Trading",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "brine",
+      "subjectClass": "historical-system",
+      "recordId": "rec_5c9f2ece90fb6528b9b317a5181d5336",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-020",
+        "identityDecision": "distinct-from-brineos",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_5c9f2ece90fb6528b9b317a5181d5336",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_12945258ce7a66df2d6522fe48805b57493cde84a17ebf3bf52c56a2e3734069",
+            "revisionId": "rev_sha256_ef3f46722189279632937ca6ac3b23fa26611b76972faf7b7eb510c04d0c3886"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Brine",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "personal-identity-runtime",
+      "subjectClass": "historical-system",
+      "recordId": "rec_10610fee4c64c6463ccbb745deaf1a92",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-005",
+        "identityDecision": "distinct-from-lisa-no-positive-continuity-evidence",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_10610fee4c64c6463ccbb745deaf1a92",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_1b09c9fcfa2339fa32634379c9ceee25b3b78fbdb56572513aec6518a350b239",
+            "revisionId": "rev_sha256_5e69cfb155cff564f91122cfc8a89ae60fa13717207f803679872f3c3d00be0d"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Personal Identity Runtime",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "vira",
+      "subjectClass": "historical-system",
+      "recordId": "rec_c844725e35cf61830221efc597612017",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-017",
+        "identityDecision": "same-subject-as-r0-8-vira-reservation",
+        "legacyReservationUsed": true
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_c844725e35cf61830221efc597612017",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_718ea4601073ccf9587640201bdd5973dab85829b190b6ca5f444e25ce21880a",
+            "revisionId": "rev_sha256_315b6c1a5aa3f4cc76197de8f090c7fb7851795159272446f92f55add44d9805"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "VIRA",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "xs-wallet",
+      "subjectClass": "historical-system",
+      "recordId": "rec_724d518ee338e32eb06e79077ad01f3d",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-018",
+        "identityDecision": "same-logical-subject-as-r0-8-xs-wallet-reservation-title-unresolved",
+        "legacyReservationUsed": true
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_724d518ee338e32eb06e79077ad01f3d",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_f80381a7111bdf2f2ec11cc5bc5f47fdd572b8571eb0d85f9a0607f1efe58633",
+            "revisionId": "rev_sha256_0552d73ca08568f09b84ab44158b83f1029de27d28d896204ed63f8ec9e4e93f"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "XS Wallet / Domini",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "ordm",
+      "subjectClass": "historical-system",
+      "recordId": "rec_f941765df0d17315570234ddb6df2c24",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-019",
+        "identityDecision": "one-research-lineage-across-poc-and-testnet-realizations",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_f941765df0d17315570234ddb6df2c24",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_b40a435a9516970325766ad2f8ea77ebbf60ea9a769877883d9bf498a1817ea4",
+            "revisionId": "rev_sha256_565e1c6a88d02be157e0ae7873d48515aff650ee1cb53b0cfbb8c67724e0da0e"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "ORDM",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "sne-vault",
+      "subjectClass": "historical-system",
+      "recordId": "rec_358fbaec4b74b7f1739ea5943c4a4ca0",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-023",
+        "identityDecision": "distinct-predecessor-system-with-material-migration-into-sne-os",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_358fbaec4b74b7f1739ea5943c4a4ca0",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_10997c66414ef6516645498843876445b792390f3564be98516200cd4e631773",
+            "revisionId": "rev_sha256_ce8261603d82d97fd82a3399efcd96dc80c874d6d6551436649e8b42b9e71202"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "SNE Vault",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "sne-scroll-pass",
+      "subjectClass": "historical-system",
+      "recordId": "rec_eb671d4728bb44327b1a0b832006f320",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-022",
+        "identityDecision": "distinct-from-in-suite-sne-pass-by-default",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_eb671d4728bb44327b1a0b832006f320",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_241b9d7c2b5ace11d45db155c90896eb0f7973a067d6e67f80a88a5d7045255b",
+            "revisionId": "rev_sha256_8a0c7bd654786cdd54e6389c28ffc32ba44d192d75f58427e1bb7395f378aeb5"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "SNE Scroll Pass",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "sne-observatorio",
+      "subjectClass": "historical-system",
+      "recordId": "rec_c2af8a986e38518d716f397320072368",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-035",
+        "identityDecision": "distinct-historical-market-language-research-no-radar-continuity-asserted",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_c2af8a986e38518d716f397320072368",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_a42295448fc51047d2d15aa4fb5922a00a38915793b1fa5a6a9ecb64958615da",
+            "revisionId": "rev_sha256_4cd3650a0b9fbc2416371a3a4666d57b004e685bdef0be7835a956542d883d16"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "SNE Observatório",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "viewcounter",
+      "subjectClass": "historical-system",
+      "recordId": "rec_757fe2f771ef44acc68af55ce9313c95",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-024",
+        "identityDecision": "distinct-experimental-system",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_757fe2f771ef44acc68af55ce9313c95",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_ba51525c51dd66b980701893e4271019333ee57479d812d24e0b990398040ea7",
+            "revisionId": "rev_sha256_888b737a7ddb92da903a5d5160b524d5ab9a9530414aa6757683215628b5d3a8"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "ViewCounter",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "edital-sales",
+      "subjectClass": "historical-system",
+      "recordId": "rec_e8947ad40f9a202dc9413a1bb91199f1",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-025",
+        "identityDecision": "distinct-system",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_e8947ad40f9a202dc9413a1bb91199f1",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_609fac1f5ac3c6ab9e06fc0fc0b413908c8e2adff81bf4b230766a02d9b2fbb1",
+            "revisionId": "rev_sha256_33ec5fc4dbfdc210b87a170743d2a07e501780fc785451b63044c6ef291bd2f5"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Edital Sales",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "estampai",
+      "subjectClass": "historical-system",
+      "recordId": "rec_b9dc85a2002a434fdb540b53496c99f2",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-026",
+        "identityDecision": "distinct-authored-system-scaffold-not-identity",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_b9dc85a2002a434fdb540b53496c99f2",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_8fe5907cfd3ca5fc44fd830b3fd8a752955500b3e8a98305feec8d8c01eeacdb",
+            "revisionId": "rev_sha256_2250123173941e19b00298dab6832f596174fcd47b9d91d4bc5384aad5578bad"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "EstampAI",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "vlbet",
+      "subjectClass": "historical-system",
+      "recordId": "rec_ad5db27acd07f0934b47ae313e9e812f",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": "GCG-027",
+        "identityDecision": "distinct-experimental-system",
+        "legacyReservationUsed": false
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_ad5db27acd07f0934b47ae313e9e812f",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_455658b8f4352796096b44842203a6133bad43a8e64164a5e579a3209c2b7da0",
+            "revisionId": "rev_sha256_49a678668c73f27e6d19efe566744629c58d8d44b1f02e1c524b495325969676"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "VLBet",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    },
+    {
+      "subjectKey": "transactional-support-bot",
+      "subjectClass": "historical-system",
+      "recordId": "rec_c5a75fd5ecae0565aaa0c96f0ad53227",
+      "kind": "knowledge.system",
+      "provenance": {
+        "groundingCluster": null,
+        "identityDecision": "standalone-historical-sanitized-system-no-repository-successor-found",
+        "legacyReservationUsed": true
+      },
+      "revisions": [
+        {
+          "revision": {
+            "identitySchemaVersion": "editorial-record-identity/v0",
+            "recordId": "rec_c5a75fd5ecae0565aaa0c96f0ad53227",
+            "kind": "knowledge.system",
+            "generation": 0,
+            "previousRevisionId": null,
+            "lifecycle": "active",
+            "payloadDigest": "sha256_251e851279a35326b2a5bd45553be8a009562d8f4b7c84fe0f9daf4d1da53774",
+            "revisionId": "rev_sha256_e5bd2e5ec267eb05da25f7037e03f75e54deee74474fe488a0a423417a7bc0d5"
+          },
+          "payload": {
+            "schemaVersion": "knowledge.system/v0",
+            "name": "Transactional Support Bot",
+            "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+            "thesis": null
+          }
+        }
+      ]
+    }
+  ],
+  "acceptance": {
+    "recordRegistryMaterialized": true,
+    "systemSubjectCoverage": 28,
+    "systemBirthCount": 28,
+    "frontierSystemBirthCount": 15,
+    "historicalSystemBirthCount": 13,
+    "legacySystemReservationsPreserved": 5,
+    "retiredAgenticIdRejected": true,
+    "heldReservationCount": 8,
+    "duplicateRecordIds": 0,
+    "invalidBirths": 0,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false,
+    "r1_1Complete": false
+  }
+}
