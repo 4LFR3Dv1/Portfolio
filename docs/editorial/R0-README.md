@@ -14,8 +14,8 @@ R0 is the constitutional migration from the current project-centric portfolio to
 | R0.1 | Editorial Constitution | **COMPLETE** |
 | R0.2-PRE | Brine Identity Grounding | **COMPLETE** |
 | R0.2 | Record Identity Contract | **COMPLETE** |
-| R0.3 | Knowledge Ontology | **NEXT** |
-| R0.4 | Evidence Contract | NOT STARTED |
+| R0.3 | Knowledge Ontology | **IN PROGRESS** |
+| R0.4 | Evidence Contract | BLOCKED BY R0.3 |
 | R0.5 | Publication & Architecture Contract | NOT STARTED |
 | R0.6 | Visibility / Maturity / Disclosure | NOT STARTED |
 | R0.7 | Route + Language Identity | NOT STARTED |
@@ -26,6 +26,8 @@ R0 is the constitutional migration from the current project-centric portfolio to
 A completed cut is not silently rewritten by a later cut. Material changes to a frozen contract require an explicit amendment so the history of the editorial system remains reconstructable.
 
 Research grounding cuts such as R0.2-PRE are explicitly non-normative. They may derive candidate laws from prior research, but those laws acquire authority only when admitted by the corresponding normative R0 cut.
+
+Each normative cut owns only its declared semantic layer. Later contracts MUST NOT be anticipated by adding fields or semantics to an earlier ontology merely for implementation convenience.
 
 ## R0 boundary
 
