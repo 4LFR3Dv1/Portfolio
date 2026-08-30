@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "portfolio-surface-freeze/v0",
+  "freezeId": "PORTFOLIO-R0.0-2026-08-30",
+  "capturedAt": "2026-08-30",
+  "canonical": {
+    "repository": "4LFR3Dv1/Portfolio",
+    "branch": "main",
+    "commit": "bff5519fd2b4986dd0c176bc96974b3233d97525",
+    "origin": "https://renan.snelabs.space"
+  },
+  "routes": [
+    "/",
+    "/architecture",
+    "/work/vira",
+    "/work/xs-wallet",
+    "/work/agentic-systems",
+    "/work/transactional-support-bot",
+    "/work/sne-os",
+    "/work/verify-systems"
+  ],
+  "identityClaims": {
+    "name": "RENAN MELO",
+    "role": "Blockchain & Agentic Systems Engineer",
+    "author": "Author of VERIFY SYSTEMS",
+    "siteName": "Renan Melo — Portfolio"
+  },
+  "projects": [
+    {
+      "id": "vira",
+      "title": "VIRA",
+      "visibility": "public",
+      "guarantees": ["AUTHORITATIVE STATE", "DETERMINISTIC REPLAY", "PRIVATE ANSWERS", "OBSERVABLE DELIVERY"]
+    },
+    {
+      "id": "xs-wallet",
+      "title": "XS Wallet",
+      "visibility": "public",
+      "guarantees": ["SELF-CUSTODY", "IPC-FIRST", "LOCAL ENCRYPTION", "EXPLICIT SESSIONS"]
+    },
+    {
+      "id": "agentic-systems",
+      "title": "Agentic Systems & Foundry",
+      "visibility": "private",
+      "guarantees": ["EXPLICIT STATE", "HUMAN REVIEW", "TRACEABLE OUTPUTS", "BOUNDED EXECUTION"]
+    },
+    {
+      "id": "transactional-support-bot",
+      "title": "Transactional Support Bot",
+      "visibility": "case-study",
+      "guarantees": ["AUTHORITATIVE STATE", "IDENTITY BINDING", "IDEMPOTENT HANDOFF", "EXPIRING SESSIONS", "PROVIDER ABSTRACTION", "AUDIT TRAIL"]
+    },
+    {
+      "id": "sne-os",
+      "title": "SNE OS",
+      "visibility": "public",
+      "guarantees": ["RESPONSIVE UX", "EXPLICIT CONTEXT", "PUBLIC DEMO"]
+    },
+    {
+      "id": "verify-systems",
+      "title": "VERIFY SYSTEMS",
+      "visibility": "public",
+      "guarantees": ["VERIFIABLE STATE", "CONTINUOUS RECONCILIATION", "EXPLICIT FAILURE MODES"]
+    }
+  ],
+  "architectureViews": [
+    {
+      "id": "systems",
+      "principle": "Intelligence can propose. Deterministic boundaries authorize, execute and verify.",
+      "guarantees": ["Explicit authority", "Fail-closed execution", "Recoverable state", "Verifiable outcomes"]
+    },
+    {
+      "id": "settlement",
+      "principle": "Prepare and simulate → verify → authorize exact bytes → execute → reconcile.",
+      "guarantees": ["Exact-message authorization", "Single-use grant", "At-most-one controlled broadcast", "Independent reconciliation"]
+    },
+    {
+      "id": "agents",
+      "principle": "Plan → delegate → inspect → review → merge → preserve evidence.",
+      "guarantees": ["Bounded capability", "Explicit review", "Canonical main", "Preserved provenance"]
+    },
+    {
+      "id": "realtime",
+      "principle": "The browser renders. The server decides. The event trail explains.",
+      "guarantees": ["Server authority", "Deterministic deadlines", "Reconnect safety", "Explainable resolution"]
+    },
+    {
+      "id": "handoff",
+      "principle": "Chat is an interface. The backend remains the source of truth.",
+      "guarantees": ["Persistent session", "Identity binding", "Idempotent confirmation", "Human escalation"]
+    }
+  ],
+  "evidenceLocators": [
+    "https://vira.snelabs.space/?lang=en",
+    "https://vira.snelabs.space/ready",
+    "https://github.com/4LFR3Dv1/Portfolio",
+    "https://github.com/4LFR3Dv1/EditalSales",
+    "https://github.com/4LFR3Dv1/ordm-testnet",
+    "/docs/Verify_By_Renan_Melo.pdf",
+    "/docs/RENAN_MELO_2026_EN.pdf"
+  ],
+  "projectEvidenceLocators": [
+    "https://github.com/4LFR3Dv1/VIRA-",
+    "https://www.youtube.com/watch?v=LnOd2kWTiGA",
+    "https://vira.snelabs.space/help?lang=en",
+    "https://vira.snelabs.space/public/playback",
+    "https://github.com/4LFR3Dv1/XSWallet",
+    "https://snelabs.space",
+    "/docs/Verify_By_Renan_Melo.pdf"
+  ],
+  "publications": [
+    {
+      "id": "verify-systems",
+      "title": "VERIFY SYSTEMS",
+      "locator": "/docs/Verify_By_Renan_Melo.pdf"
+    },
+    {
+      "id": "production-systems-handbook",
+      "title": "Production Systems Handbook",
+      "locator": "/docs/Production_By_Renan_Melo.pdf"
+    },
+    {
+      "id": "typescript-handbook",
+      "title": "TypeScript Handbook",
+      "locator": "/docs/TypeScript_Handbook__Renan_Melo.pdf"
+    }
+  ],
+  "sourceBlobs": {
+    "README.md": "b4e27e8b4cfff22554f9abfc4fbe32687041f6a7",
+    "package.json": "d0a873b3e644fc278ee6e7710c23ac1f6ac28177",
+    "src/app/App.tsx": "c9deab3cde37f0ffa001c4746a9b02d98843728e",
+    "src/app/routing.ts": "a669050e13254c3c1cd4b46afc5084e69899c1f8",
+    "src/app/metadata.ts": "806a255a7a01b7c2bd378c5096ea5cf9e95bb494",
+    "src/app/context/language-context.tsx": "c54e808a194d1dea8ca17cb0cfeae7cdb1fc63b6",
+    "src/app/data/projects.ts": "df6fe680cd96ede69b3ff7e1f0a6b3b498b16c9f",
+    "src/app/data/architecture.ts": "377fd24faab1be39ba135b8d1cd62379e97f403a",
+    "src/app/components/evidence-room.tsx": "46937c017ff9e2d3a5948e6ac1d6d790eb89622a",
+    "src/app/components/publications-section.tsx": "9d6dd7beeabed6860c3bc256a71b4b711bc5771a",
+    "src/app/components/hero-section.tsx": "4795710773d50a1ece3c8752e75befc2f8a31a9e",
+    "public/sitemap.xml": "3bbc5efdd78285ccc6052a9d84ed82f0ae9bca88"
+  },
+  "acceptance": {
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_0Complete": false
+  }
+}
