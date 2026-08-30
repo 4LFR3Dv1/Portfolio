@@ -111,6 +111,12 @@ function targetRef(target: ProjectionTargetHead): PinnedRecordRef {
   };
 }
 
+function currentProjectableLifecycle(target: ProjectionTargetHead): 'active' | 'archived' | null {
+  return target.lifecycle === 'active' || target.lifecycle === 'archived'
+    ? target.lifecycle
+    : null;
+}
+
 function isCurrentDisclosure(
   target: ProjectionTargetHead,
   disclosure: GovernanceProjection<DisclosurePayload>,
@@ -153,11 +159,10 @@ function uniqueReasons(reasons: readonly ProjectionOmissionReason[]): Projection
 
 export function projectPublicRecord(input: PublicProjectionInput): PublicProjectionDecision {
   const current = targetRef(input.target);
+  const lifecycle = currentProjectableLifecycle(input.target);
   const reasons: ProjectionOmissionReason[] = [];
 
-  if (input.target.lifecycle !== 'active' && input.target.lifecycle !== 'archived') {
-    reasons.push('target-lifecycle-ineligible');
-  }
+  if (lifecycle === null) reasons.push('target-lifecycle-ineligible');
 
   if (input.disclosure.state === 'unclassified') {
     reasons.push('disclosure-unclassified');
@@ -172,11 +177,10 @@ export function projectPublicRecord(input: PublicProjectionInput): PublicProject
       if (input.disclosure.payload.visibility.record === 'private') reasons.push('record-private');
       if (input.disclosure.payload.disclosure === 'withheld') reasons.push('record-withheld');
       if (!mayProjectPublicly(input.target.lifecycle, input.disclosure)) {
-        if (input.target.lifecycle === 'active' || input.target.lifecycle === 'archived') {
-          if (input.disclosure.payload.visibility.record !== 'private'
-            && input.disclosure.payload.disclosure !== 'withheld') {
-            reasons.push('disclosure-invalid');
-          }
+        if (lifecycle !== null
+          && input.disclosure.payload.visibility.record !== 'private'
+          && input.disclosure.payload.disclosure !== 'withheld') {
+          reasons.push('disclosure-invalid');
         }
       }
     }
@@ -194,7 +198,7 @@ export function projectPublicRecord(input: PublicProjectionInput): PublicProject
     return { state: 'omitted', targetRef: current, reasons: omissionReasons };
   }
 
-  if (input.disclosure.state !== 'classified' || input.route.state !== 'resolved') {
+  if (input.disclosure.state !== 'classified' || input.route.state !== 'resolved' || lifecycle === null) {
     return { state: 'omitted', targetRef: current, reasons: ['disclosure-invalid'] };
   }
 
@@ -224,7 +228,7 @@ export function projectPublicRecord(input: PublicProjectionInput): PublicProject
       schemaVersion: PUBLIC_PROJECTION_SCHEMA_VERSION,
       targetRef: current,
       kind: input.target.kind,
-      lifecycle: input.target.lifecycle,
+      lifecycle,
       language: input.route.language,
       canonicalPath: input.route.canonicalPath,
       canonicalUrl,
