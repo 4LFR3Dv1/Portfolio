@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "editorial-migration-acceptance/v0",
+  "contractId": "PORTFOLIO-R0.8-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "preconditions": {
+    "r0_7Complete": true,
+    "legacyFreezeId": "PORTFOLIO-R0.0-2026-08-30",
+    "legacyCommit": "bff5519fd2b4986dd0c176bc96974b3233d97525"
+  },
+  "migrationBoundary": {
+    "birthOccursInR1": true,
+    "reservedIdsAreNotBornRecords": true,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false,
+    "legacyCompatibilityEnacted": false
+  },
+  "projectMappings": [
+    {
+      "legacyId": "vira",
+      "targetRecordId": "rec_c844725e35cf61830221efc597612017",
+      "targetKind": "knowledge.system",
+      "birthStatus": "reserved-for-r1",
+      "guarantees": [
+        {"label": "AUTHORITATIVE STATE", "disposition": "knowledge.claim"},
+        {"label": "DETERMINISTIC REPLAY", "disposition": "knowledge.claim"},
+        {"label": "PRIVATE ANSWERS", "disposition": "knowledge.claim"},
+        {"label": "OBSERVABLE DELIVERY", "disposition": "knowledge.claim"}
+      ],
+      "disclosurePlan": {"record": "public", "source": "public", "evidence": "public", "mode": "full"},
+      "maturityPlan": null,
+      "canonicalRoutes": {"en": "/en/systems/vira", "pt-BR": "/pt-br/systems/vira"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]}
+    },
+    {
+      "legacyId": "xs-wallet",
+      "targetRecordId": "rec_724d518ee338e32eb06e79077ad01f3d",
+      "targetKind": "knowledge.system",
+      "birthStatus": "reserved-for-r1",
+      "guarantees": [
+        {"label": "SELF-CUSTODY", "disposition": "knowledge.claim"},
+        {"label": "IPC-FIRST", "disposition": "knowledge.claim"},
+        {"label": "LOCAL ENCRYPTION", "disposition": "knowledge.claim"},
+        {"label": "EXPLICIT SESSIONS", "disposition": "knowledge.claim"}
+      ],
+      "disclosurePlan": {"record": "public", "source": "public", "evidence": "public", "mode": "full"},
+      "maturityPlan": "pre-beta",
+      "canonicalRoutes": {"en": "/en/systems/xs-wallet", "pt-BR": "/pt-br/systems/xs-wallet"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]}
+    },
+    {
+      "legacyId": "agentic-systems",
+      "targetRecordId": "rec_d5549271c541d17165c0ad8512dcdcc1",
+      "targetKind": "knowledge.system",
+      "birthStatus": "reserved-for-r1",
+      "guarantees": [
+        {"label": "EXPLICIT STATE", "disposition": "knowledge.claim"},
+        {"label": "HUMAN REVIEW", "disposition": "knowledge.claim"},
+        {"label": "TRACEABLE OUTPUTS", "disposition": "knowledge.claim"},
+        {"label": "BOUNDED EXECUTION", "disposition": "knowledge.claim"}
+      ],
+      "disclosurePlan": {"record": "public", "source": "private", "evidence": "none", "mode": "sanitized"},
+      "maturityPlan": null,
+      "canonicalRoutes": {"en": "/en/systems/agentic-systems", "pt-BR": "/pt-br/systems/agentic-systems"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]}
+    },
+    {
+      "legacyId": "transactional-support-bot",
+      "targetRecordId": "rec_c5a75fd5ecae0565aaa0c96f0ad53227",
+      "targetKind": "knowledge.system",
+      "birthStatus": "reserved-for-r1",
+      "guarantees": [
+        {"label": "AUTHORITATIVE STATE", "disposition": "knowledge.claim"},
+        {"label": "IDENTITY BINDING", "disposition": "knowledge.claim"},
+        {"label": "IDEMPOTENT HANDOFF", "disposition": "knowledge.claim"},
+        {"label": "EXPIRING SESSIONS", "disposition": "knowledge.claim"},
+        {"label": "PROVIDER ABSTRACTION", "disposition": "knowledge.claim"},
+        {"label": "AUDIT TRAIL", "disposition": "knowledge.claim"}
+      ],
+      "disclosurePlan": {"record": "public", "source": "private", "evidence": "private", "mode": "sanitized"},
+      "maturityPlan": null,
+      "canonicalRoutes": {"en": "/en/systems/transactional-support-bot", "pt-BR": "/pt-br/systems/transactional-support-bot"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]}
+    },
+    {
+      "legacyId": "sne-os",
+      "targetRecordId": "rec_499f928363217da10f93cd54aead0101",
+      "targetKind": "knowledge.system",
+      "birthStatus": "reserved-for-r1",
+      "guarantees": [
+        {"label": "RESPONSIVE UX", "disposition": "knowledge.claim"},
+        {"label": "EXPLICIT CONTEXT", "disposition": "knowledge.claim"},
+        {"label": "PUBLIC DEMO", "disposition": "knowledge.claim"}
+      ],
+      "disclosurePlan": {"record": "public", "source": "unknown", "evidence": "public", "mode": "full"},
+      "maturityPlan": null,
+      "canonicalRoutes": {"en": "/en/systems/sne-os", "pt-BR": "/pt-br/systems/sne-os"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]}
+    },
+    {
+      "legacyId": "verify-systems",
+      "targetRecordId": "rec_fc3e81a9cb37b73ca03462e03cbcd90b",
+      "targetKind": "representation.publication",
+      "birthStatus": "reserved-for-r1",
+      "guarantees": [
+        {"label": "VERIFIABLE STATE", "disposition": "representation-text"},
+        {"label": "CONTINUOUS RECONCILIATION", "disposition": "representation-text"},
+        {"label": "EXPLICIT FAILURE MODES", "disposition": "representation-text"}
+      ],
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "public", "mode": "full"},
+      "maturityPlan": null,
+      "canonicalRoutes": {"en": "/en/research/verify-systems", "pt-BR": "/pt-br/research/verify-systems"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]}
+    }
+  ],
+  "supportingSystemMappings": [
+    {
+      "source": "architecture:settlement",
+      "name": "Foundry Pay",
+      "targetRecordId": "rec_0e6beb6a5f17831616af328fe8f2afb2",
+      "targetKind": "knowledge.system",
+      "birthStatus": "reserved-for-r1",
+      "reason": "Named as the authoritative system in the frozen settlement architecture view.",
+      "disclosurePlan": {"record": "public", "source": "unknown", "evidence": "unknown", "mode": "sanitized"},
+      "canonicalRoutes": {"en": "/en/systems/foundry-pay", "pt-BR": "/pt-br/systems/foundry-pay"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]}
+    }
+  ],
+  "architectureMappings": [
+    {
+      "legacyId": "systems",
+      "targetRecordId": "rec_54e1fc551f4db67b866cdadad0e757d7",
+      "targetKind": "representation.architecture",
+      "birthStatus": "reserved-for-r1",
+      "subjectRecordIds": [
+        "rec_c844725e35cf61830221efc597612017",
+        "rec_724d518ee338e32eb06e79077ad01f3d",
+        "rec_d5549271c541d17165c0ad8512dcdcc1",
+        "rec_c5a75fd5ecae0565aaa0c96f0ad53227",
+        "rec_499f928363217da10f93cd54aead0101",
+        "rec_0e6beb6a5f17831616af328fe8f2afb2"
+      ],
+      "guaranteeDisposition": "representation-text",
+      "canonicalRoutes": {"en": "/en/architecture/systems", "pt-BR": "/pt-br/architecture/systems"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "none", "mode": "sanitized"}
+    },
+    {
+      "legacyId": "settlement",
+      "targetRecordId": "rec_601d671e448af6ed84b821a748be84e4",
+      "targetKind": "representation.architecture",
+      "birthStatus": "reserved-for-r1",
+      "subjectRecordIds": ["rec_0e6beb6a5f17831616af328fe8f2afb2"],
+      "guaranteeDisposition": "representation-text",
+      "canonicalRoutes": {"en": "/en/architecture/settlement", "pt-BR": "/pt-br/architecture/settlement"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "none", "mode": "sanitized"}
+    },
+    {
+      "legacyId": "agents",
+      "targetRecordId": "rec_89d75f5011a5fbee29199fc9d418e62f",
+      "targetKind": "representation.architecture",
+      "birthStatus": "reserved-for-r1",
+      "subjectRecordIds": ["rec_d5549271c541d17165c0ad8512dcdcc1"],
+      "guaranteeDisposition": "representation-text",
+      "canonicalRoutes": {"en": "/en/architecture/agents", "pt-BR": "/pt-br/architecture/agents"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "none", "mode": "sanitized"}
+    },
+    {
+      "legacyId": "realtime",
+      "targetRecordId": "rec_86286c78367ccc41cfa734f30f7daf33",
+      "targetKind": "representation.architecture",
+      "birthStatus": "reserved-for-r1",
+      "subjectRecordIds": ["rec_c844725e35cf61830221efc597612017"],
+      "guaranteeDisposition": "representation-text",
+      "canonicalRoutes": {"en": "/en/architecture/realtime", "pt-BR": "/pt-br/architecture/realtime"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "none", "mode": "sanitized"}
+    },
+    {
+      "legacyId": "handoff",
+      "targetRecordId": "rec_93f3df5cc87747ed31f9885f5afb5027",
+      "targetKind": "representation.architecture",
+      "birthStatus": "reserved-for-r1",
+      "subjectRecordIds": ["rec_c5a75fd5ecae0565aaa0c96f0ad53227"],
+      "guaranteeDisposition": "representation-text",
+      "canonicalRoutes": {"en": "/en/architecture/handoff", "pt-BR": "/pt-br/architecture/handoff"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "none", "mode": "sanitized"}
+    }
+  ],
+  "publicationMappings": [
+    {
+      "legacyId": "verify-systems",
+      "targetRecordId": "rec_fc3e81a9cb37b73ca03462e03cbcd90b",
+      "targetKind": "representation.publication",
+      "publicationType": "technical-paper",
+      "birthStatus": "reserved-for-r1",
+      "artifactLocator": "/docs/Verify_By_Renan_Melo.pdf",
+      "canonicalRoutes": {"en": "/en/research/verify-systems", "pt-BR": "/pt-br/research/verify-systems"},
+      "languagePlan": {"canonical": "en", "translations": ["pt-BR"]},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "public", "mode": "full"}
+    },
+    {
+      "legacyId": "production-systems-handbook",
+      "targetRecordId": "rec_f86d2f96e2988b93eda3bcbe01861636",
+      "targetKind": "representation.publication",
+      "publicationType": "technical-paper",
+      "birthStatus": "reserved-for-r1",
+      "artifactLocator": "/docs/Production_By_Renan_Melo.pdf",
+      "canonicalRoutes": {"en": "/en/research/production-systems-handbook"},
+      "languagePlan": {"canonical": "en", "translations": []},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "public", "mode": "full"}
+    },
+    {
+      "legacyId": "typescript-handbook",
+      "targetRecordId": "rec_1b9b9be6aefcb8c7f871362ab1b71cf0",
+      "targetKind": "representation.publication",
+      "publicationType": "technical-paper",
+      "birthStatus": "reserved-for-r1",
+      "artifactLocator": "/docs/TypeScript_Handbook__Renan_Melo.pdf",
+      "canonicalRoutes": {"en": "/en/research/typescript-handbook"},
+      "languagePlan": {"canonical": "en", "translations": []},
+      "disclosurePlan": {"record": "public", "source": "not-applicable", "evidence": "public", "mode": "full"}
+    }
+  ],
+  "evidenceMappings": [
+    {"locator": "https://vira.snelabs.space/?lang=en", "treatment": "artifact-plan", "evidenceClass": "deployment", "facet": "deployment-existence", "relatedLegacyIds": ["vira"]},
+    {"locator": "https://vira.snelabs.space/ready", "treatment": "recapture-required", "evidenceClass": "endpoint", "facet": null, "relatedLegacyIds": ["vira"]},
+    {"locator": "https://github.com/4LFR3Dv1/Portfolio", "treatment": "artifact-plan", "evidenceClass": "source", "facet": "source-existence", "relatedLegacyIds": []},
+    {"locator": "https://github.com/4LFR3Dv1/EditalSales", "treatment": "artifact-plan", "evidenceClass": "source", "facet": "source-existence", "relatedLegacyIds": []},
+    {"locator": "https://github.com/4LFR3Dv1/ordm-testnet", "treatment": "artifact-plan", "evidenceClass": "source", "facet": "source-existence", "relatedLegacyIds": []},
+    {"locator": "/docs/Verify_By_Renan_Melo.pdf", "treatment": "artifact-plan", "evidenceClass": "document", "facet": "document-existence", "relatedLegacyIds": ["verify-systems"]},
+    {"locator": "/docs/RENAN_MELO_2026_EN.pdf", "treatment": "artifact-plan", "evidenceClass": "document", "facet": "document-existence", "relatedLegacyIds": []},
+    {"locator": "https://github.com/4LFR3Dv1/VIRA-", "treatment": "artifact-plan", "evidenceClass": "source", "facet": "source-existence", "relatedLegacyIds": ["vira"]},
+    {"locator": "https://www.youtube.com/watch?v=LnOd2kWTiGA", "treatment": "recapture-required", "evidenceClass": "video", "facet": null, "relatedLegacyIds": ["vira"]},
+    {"locator": "https://vira.snelabs.space/help?lang=en", "treatment": "artifact-plan", "evidenceClass": "document", "facet": "document-existence", "relatedLegacyIds": ["vira"]},
+    {"locator": "https://vira.snelabs.space/public/playback", "treatment": "recapture-required", "evidenceClass": "endpoint", "facet": null, "relatedLegacyIds": ["vira"]},
+    {"locator": "https://github.com/4LFR3Dv1/XSWallet", "treatment": "artifact-plan", "evidenceClass": "source", "facet": "source-existence", "relatedLegacyIds": ["xs-wallet"]},
+    {"locator": "https://snelabs.space", "treatment": "artifact-plan", "evidenceClass": "deployment", "facet": "deployment-existence", "relatedLegacyIds": ["sne-os"]}
+  ],
+  "compatibilityRoutes": [
+    {"legacyPath": "/", "mode": "service-route", "service": "home", "targetRecordId": null, "preserve": true},
+    {"legacyPath": "/architecture", "mode": "service-route", "service": "architecture-index", "targetRecordId": null, "preserve": true},
+    {"legacyPath": "/work/vira", "mode": "language-negotiating-redirect", "targetRecordId": "rec_c844725e35cf61830221efc597612017", "defaultLanguage": "en", "targets": {"en": "/en/systems/vira", "pt-BR": "/pt-br/systems/vira"}, "preserve": true},
+    {"legacyPath": "/work/xs-wallet", "mode": "language-negotiating-redirect", "targetRecordId": "rec_724d518ee338e32eb06e79077ad01f3d", "defaultLanguage": "en", "targets": {"en": "/en/systems/xs-wallet", "pt-BR": "/pt-br/systems/xs-wallet"}, "preserve": true},
+    {"legacyPath": "/work/agentic-systems", "mode": "language-negotiating-redirect", "targetRecordId": "rec_d5549271c541d17165c0ad8512dcdcc1", "defaultLanguage": "en", "targets": {"en": "/en/systems/agentic-systems", "pt-BR": "/pt-br/systems/agentic-systems"}, "preserve": true},
+    {"legacyPath": "/work/transactional-support-bot", "mode": "language-negotiating-redirect", "targetRecordId": "rec_c5a75fd5ecae0565aaa0c96f0ad53227", "defaultLanguage": "en", "targets": {"en": "/en/systems/transactional-support-bot", "pt-BR": "/pt-br/systems/transactional-support-bot"}, "preserve": true},
+    {"legacyPath": "/work/sne-os", "mode": "language-negotiating-redirect", "targetRecordId": "rec_499f928363217da10f93cd54aead0101", "defaultLanguage": "en", "targets": {"en": "/en/systems/sne-os", "pt-BR": "/pt-br/systems/sne-os"}, "preserve": true},
+    {"legacyPath": "/work/verify-systems", "mode": "language-negotiating-redirect", "targetRecordId": "rec_fc3e81a9cb37b73ca03462e03cbcd90b", "defaultLanguage": "en", "targets": {"en": "/en/research/verify-systems", "pt-BR": "/pt-br/research/verify-systems"}, "preserve": true}
+  ],
+  "deferredRuntimeCorrections": [
+    {"id": "runtime-404", "legacy": "Unknown application paths fall back to landing.", "target": "Unbound Record paths resolve unresolved/404 rather than landing identity.", "owner": "R1"},
+    {"id": "locale-routing", "legacy": "EN/PT share one path and client state.", "target": "Record routes use explicit /en/ and /pt-br/ locale identity while legacy paths remain compatibility entry points.", "owner": "R1"},
+    {"id": "generated-indexes", "legacy": "Sitemap, publications and command palette are manually indexed.", "target": "Generate projections from the admitted editorial registry.", "owner": "R1"}
+  ],
+  "laws": [
+    {"id": "RMA-01", "title": "Frozen legacy source is authority", "rule": "R0.8 MUST reconcile the machine-readable R0.0 freeze as the authoritative migration inventory and MUST NOT replace missing legacy facts with inferred ones."},
+    {"id": "RMA-02", "title": "Migration map is not Birth", "rule": "A reserved migration RecordId MUST remain pre-birth until R1 materializes and admits a valid generation-zero revision under the frozen R0.2 identity contract."},
+    {"id": "RMA-03", "title": "Reserved RecordIds are opaque", "rule": "Every migration RecordId MUST satisfy R0.2 grammar, MUST be globally unique within the migration registry and MUST NOT encode the legacy slug, kind, language or route."},
+    {"id": "RMA-04", "title": "Legacy projects have explicit target kinds", "rule": "Every frozen legacy Project MUST map exactly once to an explicit target RecordKind or representation treatment and MUST NOT retain Project as the future ontology root."},
+    {"id": "RMA-05", "title": "Guarantee labels preserve but do not self-establish", "rule": "Every frozen project guarantee label MUST be preserved either as a planned knowledge.claim or as representation text and MUST NOT acquire evidential rank during migration."},
+    {"id": "RMA-06", "title": "VERIFY SYSTEMS migrates as Publication", "rule": "The legacy VERIFY SYSTEMS project identity MUST map to the same representation.publication identity as the frozen VERIFY SYSTEMS publication rather than minting a duplicate System by convenience."},
+    {"id": "RMA-07", "title": "Sanitized legacy surfaces stay bounded", "rule": "Legacy private or case-study surfaces that are already publicly rendered in sanitized form MUST map only to admitted public-safe Records and MUST NOT import hidden private source material."},
+    {"id": "RMA-08", "title": "Visibility decomposition is explicit", "rule": "Every migrated public project, publication and architecture target MUST receive an explicit R0.6 disclosure plan separating record visibility, source availability, Evidence availability and disclosure mode."},
+    {"id": "RMA-09", "title": "Maturity is not invented", "rule": "R0.8 MAY plan maturity only when the frozen legacy surface states a compatible maturity fact and MUST leave other System maturity unclassified rather than infer progress from presentation."},
+    {"id": "RMA-10", "title": "Architecture views become representations", "rule": "Every frozen Architecture Explorer view MUST map exactly once to representation.architecture and MUST preserve its principle and guarantee text without treating the diagram as Evidence."},
+    {"id": "RMA-11", "title": "Architecture subjects resolve", "rule": "Every planned Architecture subject MUST resolve to a reserved knowledge.system identity, including a bounded supporting System only when that System is explicitly named in the frozen architecture source."},
+    {"id": "RMA-12", "title": "Evidence catalogs reconcile by locator", "rule": "The union of frozen Evidence Room and project evidence locators MUST map exactly once by locator so duplicate catalogs do not mint duplicate evidential identities."},
+    {"id": "RMA-13", "title": "Occurrence evidence requires recapture", "rule": "A frozen locator that would require an occurrence-oriented R0.4 facet MUST be marked recapture-required unless the freeze contains the required digest and observedAt provenance."},
+    {"id": "RMA-14", "title": "Migration does not manufacture Evidence bindings", "rule": "R0.8 MUST NOT create supports, contradicts or qualifies relations before exact Evidence and target revisions exist; pinned Evidence bindings remain post-Birth materialization work."},
+    {"id": "RMA-15", "title": "Legacy routes remain reachable by plan", "rule": "Every frozen R0.0 public route MUST appear exactly once in the compatibility route plan and MUST NOT be silently dropped or reassigned."},
+    {"id": "RMA-16", "title": "Unprefixed work routes are compatibility entry points", "rule": "Legacy /work routes that served multiple client languages MUST remain language-negotiating compatibility routes and MUST NOT be misrepresented as one R0.7 language-specific Record alias."},
+    {"id": "RMA-17", "title": "Home and architecture index are service routes", "rule": "The frozen root and /architecture routes MUST remain service/collection compatibility routes and MUST NOT be forced into a single Record identity."},
+    {"id": "RMA-18", "title": "Target Record routes obey R0.7", "rule": "Every planned canonical Record route MUST satisfy the frozen R0.7 locale, namespace and slug grammar, while translations remain optional and exact-revision-bound after Birth."},
+    {"id": "RMA-19", "title": "Runtime incompatibilities are explicit", "rule": "Observed legacy runtime behaviors that conflict with the frozen target contracts MUST remain explicit deferred R1 corrections and MUST NOT be silently claimed as fixed by R0.8."},
+    {"id": "RMA-20", "title": "R0 closes only with zero semantic loss", "rule": "R0_COMPLETE MUST remain false until executable reconciliation proves full frozen inventory coverage, zero unresolved migration entries, zero semantic-loss entries and a successful Verify witness."}
+  ],
+  "ciWitness": null,
+  "acceptance": {
+    "r0_7Preserved": true,
+    "legacyCoverageComplete": true,
+    "semanticLossCount": 0,
+    "unresolvedMigrationCount": 0,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0Complete": false
+  }
+}
