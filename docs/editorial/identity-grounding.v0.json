@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "editorial-identity-grounding/v0",
+  "groundingId": "PORTFOLIO-R0.2-PRE-2026-08-30",
+  "status": "grounding",
+  "normative": false,
+  "portfolioBaseline": "3147dac4a31da58bdf800dccdc0851ca31495d74",
+  "sourceBoundary": {
+    "sourceSystem": "BrineOS",
+    "sourceVisibility": "private",
+    "publicSourceLocatorsIncluded": false,
+    "privateImplementationDetailsPromoted": false,
+    "derivationOnly": true
+  },
+  "constitutionalBasis": ["EC-07", "EC-11", "EC-12", "EC-13", "EC-14"],
+  "researchBoundaries": [
+    {"id":"A2","topic":"authoritative identity","transfer":"identity is distinct from mutable state"},
+    {"id":"A3","topic":"continuity and reconstruction","transfer":"persisted representation is evidence for reconstruction, not identity authority"},
+    {"id":"GENESIS-ID","topic":"identity separation","transfer":"logical entity, runtime, image, checkpoint and execution identities must not collapse"},
+    {"id":"GVR0","topic":"birth lineage resume","transfer":"birth is one-time and later continuity advances the same lineage"},
+    {"id":"STORE","topic":"generation predecessor conflict","transfer":"accepted successors bind exact predecessors and conflict cannot resolve by recency alone"},
+    {"id":"WORK","topic":"content-addressed records","transfer":"immutable realization identity is distinct from logical identity"},
+    {"id":"N1","topic":"immutable source revisable interpretation","transfer":"later interpretation does not rewrite source identity"},
+    {"id":"N2","topic":"object versus transport identity","transfer":"locator and realization are not object identity"},
+    {"id":"N3-N4","topic":"revision lineage and graph references","transfer":"later readings and graph relations preserve prior identities"}
+  ],
+  "candidateLaws": [
+    {"id":"IG-01","title":"Identity is not mutable state","rule":"A logical Record identity must remain distinct from lifecycle state, editorial status, maturity, visibility and other mutable properties."},
+    {"id":"IG-02","title":"Persistence is not identity authority","rule":"A file, row, serialized object or stored byte sequence may carry evidence for reconstruction but must not become authoritative identity merely by existing."},
+    {"id":"IG-03","title":"Logical identity is not revision identity","rule":"RecordId must identify one logical entity across time while RevisionId must identify one exact accepted immutable revision."},
+    {"id":"IG-04","title":"Kind is constitutive","rule":"RecordKind must be fixed at birth. A change of ontological kind creates a distinct Record and an explicit relationship rather than mutating the original kind."},
+    {"id":"IG-05","title":"Birth occurs once","rule":"A RecordId may be admitted at most once. Later states are lineage successors, not repeated births of the same identifier."},
+    {"id":"IG-06","title":"Continuity requires predecessor binding","rule":"An accepted successor revision must name and validate the exact predecessor required by the Record lineage."},
+    {"id":"IG-07","title":"Conflicts fail closed","rule":"Incompatible successors must remain an explicit conflict and must not be resolved solely by updatedAt, file order, commit recency or route precedence."},
+    {"id":"IG-08","title":"Identifiers are never reused","rule":"Once admitted, a RecordId remains globally reserved even if the Record is withdrawn, archived or tombstoned."},
+    {"id":"IG-09","title":"Locator is not identity","rule":"Routes, slugs, filenames and external handles are locators that resolve Records and must not define ontological identity."},
+    {"id":"IG-10","title":"Aliases preserve historical binding","rule":"A locator that has publicly identified one Record must not later be silently reassigned to a different Record; migration uses an explicit alias or historical boundary."},
+    {"id":"IG-11","title":"Revision order is not truth order","rule":"A later revision is temporally later but is not automatically more correct, more supported or epistemically superior."},
+    {"id":"IG-12","title":"Source survives interpretation","rule":"Later review, reading, summary or claim must not rewrite the identity or immutable content of the source Record it interprets."},
+    {"id":"IG-13","title":"References have logical and pinned modes","rule":"The identity system must distinguish a logical RecordRef from a PinnedRecordRef bound to one exact RecordId and RevisionId."},
+    {"id":"IG-14","title":"Representation does not mint identity","rule":"Changing framework, renderer, storage adapter, file location, serialization, route realization or build output must not create a new logical Record identity by itself."},
+    {"id":"IG-15","title":"Relations do not rewrite endpoints","rule":"A graph edge may relate Records but must not mutate, replace or retroactively redefine the identities of its subject or object."}
+  ],
+  "requiredR02Concepts": [
+    "RecordId",
+    "RecordKind",
+    "RecordLineage",
+    "RecordGeneration",
+    "RecordRevision",
+    "RevisionId",
+    "RecordRef",
+    "PinnedRecordRef",
+    "RecordLocator",
+    "RecordAlias",
+    "RecordTombstone",
+    "RecordConflict",
+    "RecordBirth"
+  ],
+  "acceptance": {
+    "r0_1Preserved": true,
+    "privateBoundaryPreserved": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_2PreComplete": false,
+    "r0_2Complete": false
+  }
+}
