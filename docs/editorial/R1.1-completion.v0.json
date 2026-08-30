@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "editorial-record-registry-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.1-2026-08-30",
+  "materialization": {
+    "commit": "305f9832922353aa842d82836ccacda4bd59f13b",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33340127024,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/record-registry.v0.json",
+    "manifestBlobSha": "269795f11a40e1569f1c8a8444c540cede40f199"
+  },
+  "effectiveRegistry": {
+    "systemBirthCount": 28,
+    "frontierSystemBirthCount": 15,
+    "historicalSystemBirthCount": 13,
+    "otherRecordBirthCount": 0,
+    "preservedR0_8SystemReservations": 5,
+    "retiredPreBirthIdentityCount": 1,
+    "heldReservationCount": 8,
+    "repositoryIdentityInference": false,
+    "birthImpliesPublication": false,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "acceptance": {
+    "r1_0Complete": true,
+    "r1_1Complete": true,
+    "recordRegistryReconstructs": true,
+    "systemSubjectCoverage": 28,
+    "invalidBirthCount": 0,
+    "duplicateRecordIdCount": 0,
+    "retiredAgenticIdReused": false,
+    "nextRequiredCut": "R1.2 — Projection Engine"
+  }
+}
