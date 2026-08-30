@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "editorial-github-corpus-admission/v0",
+  "status": "pre-birth",
+  "normative": false,
+  "sourceCensus": "editorial-github-corpus-census/v0",
+  "recordBirthCount": 0,
+  "frontierSystemCount": 15,
+  "historicalSystemCount": 13,
+  "systemSubjectCount": 28,
+  "subjects": [
+    {"key":"genesis","title":"Genesis","class":"frontier-system","cluster":"GCG-001","legacyReservation":null,"identityDecision":"distinct-system","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"brineos","title":"BrineOS","class":"frontier-system","cluster":"GCG-002","legacyReservation":null,"identityDecision":"distinct-from-brine","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"wer-esk","title":"WER-ESK","class":"frontier-system","cluster":"GCG-003","legacyReservation":null,"identityDecision":"distinct-system","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"lisa","title":"Lisa","class":"frontier-system","cluster":"GCG-004","legacyReservation":null,"identityDecision":"one-system-three-repository-realizations","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"factory","title":"Factory","class":"frontier-system","cluster":"GCG-006","legacyReservation":null,"identityDecision":"distinct-from-brine-and-foundry","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"foundry","title":"Foundry","class":"frontier-system","cluster":"GCG-007","legacyReservation":null,"identityDecision":"system-plus-presentation-realization","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"agenthub","title":"AgentHub","class":"frontier-system","cluster":"GCG-008","legacyReservation":null,"identityDecision":"independent-from-foundry","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"foundry-pay","title":"Foundry Pay","class":"frontier-system","cluster":"GCG-009","legacyReservation":"rec_0e6beb6a5f17831616af328fe8f2afb2","identityDecision":"same-subject-as-r0-8-supporting-reservation","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"foundry-channels","title":"Foundry Channels","class":"frontier-system","cluster":"GCG-010","legacyReservation":null,"identityDecision":"independent-authority-boundary","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"solana-agent","title":"Solana-Agent","class":"frontier-system","cluster":"GCG-011","legacyReservation":null,"identityDecision":"independent-authority-boundary","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"sne-fde","title":"SNE-FDE","class":"frontier-system","cluster":"GCG-012","legacyReservation":null,"identityDecision":"current-field-authority-with-public-surface-history","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"github-flow","title":"GitHub Flow","class":"frontier-system","cluster":"GCG-014","legacyReservation":null,"identityDecision":"distinct-operational-system","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"sne-os","title":"SNE-OS","class":"frontier-system","cluster":"GCG-015","legacyReservation":"rec_499f928363217da10f93cd54aead0101","identityDecision":"same-subject-as-r0-8-sne-os-reservation-distinct-from-sne-vault","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"sne-radar","title":"SNE Radar","class":"frontier-system","cluster":"GCG-016","legacyReservation":null,"identityDecision":"one-system-multi-repository-lineage","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"sne-trading","title":"SNE Trading","class":"frontier-system","cluster":"GCG-021","legacyReservation":null,"identityDecision":"independent-tribunal-execution-plane","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+
+    {"key":"brine","title":"Brine","class":"historical-system","cluster":"GCG-020","legacyReservation":null,"identityDecision":"distinct-from-brineos","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"personal-identity-runtime","title":"Personal Identity Runtime","class":"historical-system","cluster":"GCG-005","legacyReservation":null,"identityDecision":"distinct-from-lisa-no-positive-continuity-evidence","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"vira","title":"VIRA","class":"historical-system","cluster":"GCG-017","legacyReservation":"rec_c844725e35cf61830221efc597612017","identityDecision":"same-subject-as-r0-8-vira-reservation","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"xs-wallet","title":"XS Wallet / Domini","class":"historical-system","cluster":"GCG-018","legacyReservation":"rec_724d518ee338e32eb06e79077ad01f3d","identityDecision":"same-logical-subject-as-r0-8-xs-wallet-reservation-title-unresolved","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"ordm","title":"ORDM","class":"historical-system","cluster":"GCG-019","legacyReservation":null,"identityDecision":"one-research-lineage-across-poc-and-testnet-realizations","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"sne-vault","title":"SNE Vault","class":"historical-system","cluster":"GCG-023","legacyReservation":null,"identityDecision":"distinct-predecessor-system-with-material-migration-into-sne-os","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"sne-scroll-pass","title":"SNE Scroll Pass","class":"historical-system","cluster":"GCG-022","legacyReservation":null,"identityDecision":"distinct-from-in-suite-sne-pass-by-default","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"sne-observatorio","title":"SNE Observatório","class":"historical-system","cluster":"GCG-035","legacyReservation":null,"identityDecision":"distinct-historical-market-language-research-no-radar-continuity-asserted","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"viewcounter","title":"ViewCounter","class":"historical-system","cluster":"GCG-024","legacyReservation":null,"identityDecision":"distinct-experimental-system","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"edital-sales","title":"Edital Sales","class":"historical-system","cluster":"GCG-025","legacyReservation":null,"identityDecision":"distinct-system","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"estampai","title":"EstampAI","class":"historical-system","cluster":"GCG-026","legacyReservation":null,"identityDecision":"distinct-authored-system-scaffold-not-identity","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"vlbet","title":"VLBet","class":"historical-system","cluster":"GCG-027","legacyReservation":null,"identityDecision":"distinct-experimental-system","disclosureDecision":"pending-r0-6-governance","birthAuthorized":false},
+    {"key":"transactional-support-bot","title":"Transactional Support Bot","class":"historical-system","cluster":null,"legacyReservation":"rec_c5a75fd5ecae0565aaa0c96f0ad53227","identityDecision":"standalone-historical-sanitized-system-no-repository-successor-found","disclosureDecision":"preserve-r0-8-sanitized-plan-until-born","birthAuthorized":false}
+  ],
+  "nonSystemTreatments": [
+    {"key":"genesis-cp","cluster":"GCG-013","treatment":"program-research-surface","reason":"Do not force a contributor/research program into knowledge.system merely because no program RecordKind exists."},
+    {"key":"agentic-engineering","cluster":"GCG-028","treatment":"proposal-artifact","reason":"Repository explicitly says proposed project, not yet built."},
+    {"key":"agenthub-blueprints","cluster":"GCG-029","treatment":"artifact-and-validation-policy-corpus","reason":"Candidate source repositories and trusted validation policy are not Systems by default."},
+    {"key":"profile","cluster":"GCG-030","treatment":"profile-index-surface","reason":"Repository indexes work rather than constituting the subject work."},
+    {"key":"solana-demos","cluster":"GCG-031","treatment":"learning-and-generated-experiment-artifacts","reason":"Generated demos are outputs/evidence, not independent product Systems."},
+    {"key":"hive","cluster":"GCG-032","treatment":"third-party-reference-source","reason":"Upstream third-party source identity does not become a user-authored System."},
+    {"key":"alfred","cluster":"GCG-033","treatment":"defer-private-disclosure","reason":"Substantive private multi-repository product workspace; public ownership/disclosure boundary unresolved."},
+    {"key":"dominipay","cluster":"GCG-034","treatment":"defer-private-disclosure","reason":"Substantive private payment workspace; public ownership/disclosure boundary unresolved."},
+    {"key":"estampai-chatbot","cluster":"GCG-036","treatment":"third-party-scaffold-relation-unproven","reason":"Generic scaffold does not establish EstampAI identity."},
+    {"key":"portfolio-runtime","cluster":null,"treatment":"self-hosting-editorial-infrastructure","reason":"Portfolio is the future projection runtime, not automatically a subject System in its own public corpus."}
+  ],
+  "legacyReconciliation": {
+    "preserveReservationForBirth": [
+      "rec_c844725e35cf61830221efc597612017",
+      "rec_724d518ee338e32eb06e79077ad01f3d",
+      "rec_c5a75fd5ecae0565aaa0c96f0ad53227",
+      "rec_499f928363217da10f93cd54aead0101",
+      "rec_0e6beb6a5f17831616af328fe8f2afb2"
+    ],
+    "doNotBirth": [
+      {
+        "legacyId":"agentic-systems",
+        "reservedRecordId":"rec_d5549271c541d17165c0ad8512dcdcc1",
+        "reason":"Complete corpus resolves the old broad card into concrete Foundry, Factory and AgentHub subjects rather than another independent System.",
+        "reservationReuseForbidden":true,
+        "r0AmendmentRequired":true
+      }
+    ]
+  },
+  "remainingBlockers": [
+    "XS-NAME-01",
+    "PRIVATE-WORK-01",
+    "LEGACY-AGENTIC-AMENDMENT",
+    "PUBLICATION-SELECTION-01",
+    "RESEARCH-EXTRACTION-01"
+  ],
+  "acceptance": {
+    "systemSubjectsClassified": true,
+    "systemSubjectCount": 28,
+    "frontierSystemCount": 15,
+    "historicalSystemCount": 13,
+    "legacyReservationsReconciled": true,
+    "agenticLegacyReservationBirthForbidden": true,
+    "allBirthAuthorizedFalse": true,
+    "recordBirthCount": 0,
+    "r1RuntimeStarted": false,
+    "r1PreComplete": false
+  }
+}
