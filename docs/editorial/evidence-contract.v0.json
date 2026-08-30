@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "editorial-evidence-contract/v0",
+  "contractId": "PORTFOLIO-R0.4-2026-08-30",
+  "status": "draft",
+  "normative": true,
+  "preconditions": {"r0_3Complete": true},
+  "kindRegistry": [
+    {"kind":"evidence.artifact","schemaVersion":"evidence.artifact/v0"},
+    {"kind":"evidence.binding","schemaVersion":"evidence.binding/v0"}
+  ],
+  "evidenceClasses": [
+    "source",
+    "commit",
+    "test",
+    "deployment",
+    "endpoint",
+    "document",
+    "physical-witness",
+    "video",
+    "dataset",
+    "artifact"
+  ],
+  "facets": [
+    "source-existence",
+    "source-state",
+    "test-result",
+    "deployment-existence",
+    "runtime-observation",
+    "endpoint-observation",
+    "document-existence",
+    "physical-observation",
+    "visual-observation",
+    "dataset-observation",
+    "artifact-integrity"
+  ],
+  "classFacetPolicy": {
+    "source": ["source-existence", "source-state"],
+    "commit": ["source-state", "artifact-integrity"],
+    "test": ["test-result", "artifact-integrity"],
+    "deployment": ["deployment-existence", "runtime-observation"],
+    "endpoint": ["endpoint-observation", "runtime-observation"],
+    "document": ["document-existence", "artifact-integrity"],
+    "physical-witness": ["physical-observation", "runtime-observation", "artifact-integrity"],
+    "video": ["visual-observation", "artifact-integrity"],
+    "dataset": ["dataset-observation", "artifact-integrity"],
+    "artifact": ["artifact-integrity"]
+  },
+  "provenanceRules": {
+    "requiresLocatorOrDigest": true,
+    "digestPattern": "^sha256_[0-9a-f]{64}$",
+    "observedAtFormat": "RFC3339-UTC-seconds",
+    "digestRequiredFacets": [
+      "source-state",
+      "test-result",
+      "runtime-observation",
+      "endpoint-observation",
+      "physical-observation",
+      "visual-observation",
+      "dataset-observation",
+      "artifact-integrity"
+    ],
+    "observedAtRequiredFacets": [
+      "test-result",
+      "runtime-observation",
+      "endpoint-observation",
+      "physical-observation",
+      "visual-observation",
+      "dataset-observation"
+    ]
+  },
+  "binding": {
+    "relations": ["supports", "contradicts", "qualifies"],
+    "referenceMode": "pinned-record",
+    "targetKinds": ["knowledge.claim", "knowledge.experiment"],
+    "facetMustExistOnArtifactRevision": true,
+    "constitutiveFields": ["relation", "evidenceRef", "targetRef", "facet"]
+  },
+  "currentEvaluation": {
+    "countedLifecycles": ["active", "archived"],
+    "excludedLifecycles": ["withdrawn", "tombstoned"],
+    "dispositions": [
+      "unassessed",
+      "support-present",
+      "contradiction-present",
+      "mixed",
+      "qualification-only"
+    ],
+    "automaticTruthRank": false
+  },
+  "canonicalPayload": {
+    "encoding": "utf-8",
+    "format": "canonical-json",
+    "objectKeyOrder": "lexicographic",
+    "terminalLineEnding": true,
+    "lineEnding": "LF",
+    "unknownFieldsAllowed": false,
+    "payloadDigestAlgorithm": "sha256"
+  },
+  "laws": [
+    {"id":"EV-01","title":"Artifact is not claim","rule":"An evidence.artifact Record MUST represent an evidential source or captured occurrence and MUST NOT encode the conclusion that the artifact allegedly proves."},
+    {"id":"EV-02","title":"Binding is not artifact","rule":"An evidence.binding Record MUST express an explicit relation between exact revisions and MUST NOT become the evidential source it references."},
+    {"id":"EV-03","title":"Evidence kinds use R0.2 identity","rule":"Both R0.4 RecordKinds MUST use the logical identity, revision lineage, lifecycle and tombstone semantics frozen by R0.2."},
+    {"id":"EV-04","title":"Evidence class is evidentially constitutive","rule":"An Evidence Artifact evidenceClass MUST remain unchanged across successors of the same logical Evidence Record."},
+    {"id":"EV-05","title":"Provenance core is immutable","rule":"Origin, locator, observedAt and digest of one admitted Evidence Artifact MUST NOT be rewritten across successor revisions of that logical Evidence Record."},
+    {"id":"EV-06","title":"Evidence requires an anchor","rule":"An Evidence Artifact MUST contain at least one provenance anchor through locator or digest and MUST NOT exist as provenance-free assertion text."},
+    {"id":"EV-07","title":"Evidence facets are bounded","rule":"Every admitted Evidence facet MUST be permitted by the Evidence class/facet policy and MUST NOT be inferred merely from a title or locator."},
+    {"id":"EV-08","title":"Content facets require digest","rule":"A facet that concerns captured content, state, execution or integrity MUST bind an immutable SHA-256 digest under the provenance policy."},
+    {"id":"EV-09","title":"Occurrence facets require time","rule":"A facet that concerns an execution or observation occurrence MUST bind an explicit RFC3339 UTC observedAt timestamp under the provenance policy."},
+    {"id":"EV-10","title":"Locator alone is not runtime proof","rule":"A URL, endpoint, repository path or deployment locator MUST NOT by itself be interpreted as evidence of runtime behavior, successful execution or current health."},
+    {"id":"EV-11","title":"Bindings are historically pinned","rule":"Evidence bindings MUST reference one exact Evidence revision and one exact target revision through PinnedRecordRef values."},
+    {"id":"EV-12","title":"Binding targets are bounded","rule":"R0.4 Evidence bindings MUST target only exact knowledge.claim or knowledge.experiment revisions until later contracts explicitly expand citation semantics."},
+    {"id":"EV-13","title":"Binding facet must be admitted","rule":"An Evidence binding MUST use a facet present on the exact pinned Evidence Artifact revision and MUST fail closed on facet mismatch."},
+    {"id":"EV-14","title":"Binding relation is explicit","rule":"A Binding relation MUST be exactly supports, contradicts or qualifies and MUST NOT be inferred from ordering, proximity, labels or UI presentation."},
+    {"id":"EV-15","title":"Binding core is immutable","rule":"Relation, evidenceRef, targetRef and facet MUST remain unchanged across successors of one logical Evidence Binding; rebinding creates another Record."},
+    {"id":"EV-16","title":"Current evaluation respects withdrawal","rule":"Current evidential projections MUST exclude Evidence Artifact or Binding Records whose current lifecycle is withdrawn or tombstoned while preserving their historical revisions."},
+    {"id":"EV-17","title":"Disposition is mechanical not truth","rule":"The derived evidential disposition MUST summarize currently admissible bindings and MUST NOT automatically assign established, refuted, true or false status."},
+    {"id":"EV-18","title":"No evidence by count","rule":"The number of Evidence Artifacts or Bindings MUST NOT by itself strengthen a Claim beyond their explicit facets, relations, scopes and provenance."},
+    {"id":"EV-19","title":"Evidence payloads fail closed","rule":"R0.4 payloads MUST reject unknown fields, invalid classes, invalid facets, invalid provenance and malformed pinned references rather than silently admitting them."},
+    {"id":"EV-20","title":"Later presentation remains separate","rule":"R0.4 MUST NOT define Publication citation UI, Architecture projection, visibility, maturity, route or language identity semantics assigned to later R0 cuts."}
+  ],
+  "testVectors": [
+    {
+      "kind": "evidence.artifact",
+      "payload": {
+        "schemaVersion": "evidence.artifact/v0",
+        "evidenceClass": "test",
+        "title": "Authority boundary verification",
+        "provenance": {
+          "origin": "portfolio-test-fixture",
+          "locator": "urn:portfolio:test:authority-boundary",
+          "observedAt": "2026-08-30T19:36:24Z",
+          "digest": "sha256_1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "facets": ["test-result"]
+      },
+      "expectedPayloadDigest": "sha256_132de7ee60e76efea03c5e42b5918028531ebe1daa0d74e87ad1e585d18d32c2"
+    },
+    {
+      "kind": "evidence.binding",
+      "payload": {
+        "schemaVersion": "evidence.binding/v0",
+        "relation": "supports",
+        "facet": "test-result",
+        "evidenceRef": {
+          "type": "pinned-record",
+          "recordId": "rec_00000000000000000000000000000006",
+          "revisionId": "rev_sha256_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "targetRef": {
+          "type": "pinned-record",
+          "recordId": "rec_00000000000000000000000000000005",
+          "revisionId": "rev_sha256_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "scope": "Exact Claim revision under authority-boundary verification.",
+        "rationale": "The captured test result exercises the stated authority boundary."
+      },
+      "expectedPayloadDigest": "sha256_789922e547ff89d491fb9ebcd6fe88e05bd807a729cfa5709b146766beb16940"
+    }
+  ],
+  "acceptance": {
+    "r0_3Preserved": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_4Complete": false
+  }
+}
