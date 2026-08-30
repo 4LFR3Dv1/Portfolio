@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "editorial-publication-architecture/v0",
+  "contractId": "PORTFOLIO-R0.5-2026-08-30",
+  "status": "frozen",
+  "normative": true,
+  "preconditions": {"r0_4Complete": true},
+  "kindRegistry": [
+    {"kind":"representation.publication","schemaVersion":"representation.publication/v0"},
+    {"kind":"representation.architecture","schemaVersion":"representation.architecture/v0"}
+  ],
+  "publicationTypes": ["essay","research-note","experiment-report","system-note","technical-paper"],
+  "architectureTypes": ["system","flow","protocol","boundary","conceptual"],
+  "referencePolicy": {
+    "subjectMode": "record",
+    "basisMode": "pinned-record",
+    "publicationSubjectKinds": ["knowledge.system","knowledge.question","knowledge.investigation","knowledge.experiment","knowledge.claim"],
+    "publicationBasisKinds": ["knowledge.system","knowledge.question","knowledge.investigation","knowledge.experiment","knowledge.claim","evidence.artifact","evidence.binding"],
+    "architectureSubjectKinds": ["knowledge.system","knowledge.investigation","knowledge.experiment"],
+    "architectureBasisKinds": ["knowledge.system","knowledge.investigation","knowledge.experiment","knowledge.claim"],
+    "claimKind": "knowledge.claim",
+    "subjectMustHavePinnedBasis": true,
+    "claimMustHavePinnedBasis": true
+  },
+  "canonicalPayload": {
+    "encoding": "utf-8",
+    "format": "canonical-json",
+    "objectKeyOrder": "lexicographic",
+    "terminalLineEnding": true,
+    "lineEnding": "LF",
+    "unknownFieldsAllowed": false,
+    "payloadDigestAlgorithm": "sha256",
+    "setLikeFields": ["subjectRefs","basisRefs","claimRefs","invariantClaimRefs"]
+  },
+  "laws": [
+    {"id":"PA-01","title":"Publication is representation","rule":"A representation.publication Record MUST remain an editorial interpretation of other Records and MUST NOT become the canonical authority for the subjects it discusses."},
+    {"id":"PA-02","title":"Architecture is representation","rule":"A representation.architecture Record MUST describe responsibilities, boundaries, components or relations and MUST NOT become proof that a represented system behaves as described."},
+    {"id":"PA-03","title":"Representations use R0.2 identity","rule":"Both R0.5 RecordKinds MUST use the logical identity, revision lineage, lifecycle and tombstone semantics frozen by R0.2."},
+    {"id":"PA-04","title":"Subjects are logical identities","rule":"A representation MUST identify its durable subjects through RecordRef values so the represented entity remains recognizable across revisions."},
+    {"id":"PA-05","title":"Interpretive basis is pinned","rule":"A representation MUST bind the exact historical Record revisions it interpreted through PinnedRecordRef basisRefs rather than silently inheriting future subject state."},
+    {"id":"PA-06","title":"Every subject has historical basis","rule":"Every logical subject referenced by a representation MUST have at least one pinned basis revision of the same RecordId in that representation payload."},
+    {"id":"PA-07","title":"Publication body is narrative not authority","rule":"Publication body text MAY interpret or explain Records but MUST NOT by itself create a canonical Claim, Evidence relation, lifecycle state, maturity state or public-truth verdict."},
+    {"id":"PA-08","title":"Publication claims remain external Records","rule":"A Publication that exposes machine-addressable Claims MUST reference knowledge.claim Records and MUST NOT encode evidential status into the publication body or publication metadata."},
+    {"id":"PA-09","title":"Claim references are historically grounded","rule":"Every Claim referenced by a Publication MUST have at least one pinned basis revision so later Claim edits cannot retroactively change what the Publication interpreted."},
+    {"id":"PA-10","title":"Evidence basis is not evidence support","rule":"A Publication basisRef to evidence.artifact or evidence.binding MUST indicate historical material consulted and MUST NOT create a supports, contradicts or qualifies relation by itself."},
+    {"id":"PA-11","title":"Evidence relations remain owned by R0.4","rule":"Only the R0.4 evidence.binding contract MAY encode supports, contradicts or qualifies semantics between exact Evidence and Claim or Experiment revisions."},
+    {"id":"PA-12","title":"Architecture subjects are bounded","rule":"R0.5 Architecture subjects MUST resolve only to System, Investigation or Experiment Records and MUST NOT silently treat Publications, Evidence or Claims as architectural systems."},
+    {"id":"PA-13","title":"Architecture components are local representation identifiers","rule":"Architecture component IDs MUST be unique only within one Architecture payload and MUST NOT be treated as global RecordIds or independent ontology entities."},
+    {"id":"PA-14","title":"Architecture edges are representational","rule":"Architecture relations MUST connect local component IDs and MUST NOT create, mutate or replace canonical graph relations among the underlying Records."},
+    {"id":"PA-15","title":"Architecture invariants are Claim references","rule":"An Architecture MAY reference invariant Claims but MUST NOT manufacture those propositions from diagram labels, boundaries or component text."},
+    {"id":"PA-16","title":"Architecture Claims require pinned basis","rule":"Every invariant Claim referenced by Architecture MUST have an exact pinned basis revision so a later Claim revision cannot silently alter the represented invariant."},
+    {"id":"PA-17","title":"Representation revision does not rewrite subjects","rule":"Changing Publication prose, Architecture components, relations, boundaries or basis MUST revise only the representation Record and MUST NOT rewrite referenced Record identities or historical revisions."},
+    {"id":"PA-18","title":"Canonical payloads fail closed","rule":"R0.5 payloads MUST reject unknown fields, malformed references, missing basis coverage, invalid local components and unresolved or wrong-kind references rather than silently admitting them."},
+    {"id":"PA-19","title":"Rendering remains implementation-neutral","rule":"R0.5 MUST treat Publication body as opaque editorial text and Architecture data as semantic representation without freezing a framework, markup renderer, visual layout engine or UI component model."},
+    {"id":"PA-20","title":"Later exposure semantics remain separate","rule":"R0.5 MUST NOT define visibility, maturity, disclosure, public route, canonical URL, language identity or legacy migration semantics assigned to R0.6 through R0.8."}
+  ],
+  "testVectors": [
+    {
+      "kind": "representation.publication",
+      "payload": {
+        "schemaVersion": "representation.publication/v0",
+        "publicationType": "research-note",
+        "title": "Identity as lineage",
+        "summary": "A bounded editorial interpretation of one system state and one claim.",
+        "body": "This publication interprets pinned records without becoming their source of truth.",
+        "subjectRefs": [{"type":"record","recordId":"rec_00000000000000000000000000000001"}],
+        "basisRefs": [
+          {"type":"pinned-record","recordId":"rec_00000000000000000000000000000001","revisionId":"rev_sha256_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+          {"type":"pinned-record","recordId":"rec_00000000000000000000000000000002","revisionId":"rev_sha256_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+          {"type":"pinned-record","recordId":"rec_00000000000000000000000000000004","revisionId":"rev_sha256_cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}
+        ],
+        "claimRefs": [{"type":"record","recordId":"rec_00000000000000000000000000000002"}]
+      },
+      "expectedPayloadDigest": "sha256_27c7b5cd107667dead1ae11dcf1525a8f27a6a0d6f95ecd61486e896c9ba117f"
+    },
+    {
+      "kind": "representation.architecture",
+      "payload": {
+        "schemaVersion": "representation.architecture/v0",
+        "architectureType": "flow",
+        "title": "Governed execution flow",
+        "summary": "A representation of responsibility and authority boundaries for one pinned system state.",
+        "subjectRefs": [{"type":"record","recordId":"rec_00000000000000000000000000000001"}],
+        "basisRefs": [
+          {"type":"pinned-record","recordId":"rec_00000000000000000000000000000001","revisionId":"rev_sha256_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+          {"type":"pinned-record","recordId":"rec_00000000000000000000000000000002","revisionId":"rev_sha256_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+        ],
+        "components": [
+          {"id":"proposal","label":"Proposal","responsibility":"Carries intent without authority.","subjectRef":null},
+          {"id":"authority","label":"Authority boundary","responsibility":"Admits or rejects the proposed transition.","subjectRef":{"type":"record","recordId":"rec_00000000000000000000000000000001"}}
+        ],
+        "relations": [{"from":"proposal","to":"authority","label":"requests admission"}],
+        "boundaries": ["Representation does not prove runtime behavior."],
+        "invariantClaimRefs": [{"type":"record","recordId":"rec_00000000000000000000000000000002"}]
+      },
+      "expectedPayloadDigest": "sha256_2593b7e1e7bc49662d49534903167aafe7b5b919bb4e1dbadc59f1ae4288cfe7"
+    }
+  ],
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33334053429,
+    "commit": "dad19fd77eff3eb42149aa3e103d1081fac334d1",
+    "conclusion": "success"
+  },
+  "acceptance": {
+    "r0_4Preserved": true,
+    "runtimeSemanticsChanged": false,
+    "uiChanged": false,
+    "r0_5Complete": true
+  }
+}
