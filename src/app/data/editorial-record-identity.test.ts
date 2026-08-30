@@ -45,6 +45,12 @@ interface ContractManifest {
     material: RecordRevisionMaterial;
     expectedRevisionId: RevisionId;
   }>;
+  ciWitness: {
+    workflow: string;
+    runId: number;
+    commit: string;
+    conclusion: string;
+  };
   acceptance: {
     r0_1Preserved: boolean;
     r0_2PrePreserved: boolean;
@@ -221,10 +227,18 @@ describe('R0.2 Record Identity Contract', () => {
     ).toBe(true);
   });
 
+  it('freezes only after the materialization CI witness succeeds', () => {
+    expect(contract.status).toBe('frozen');
+    expect(contract.ciWitness.workflow).toBe('Verify');
+    expect(contract.ciWitness.runId).toBe(33330694121);
+    expect(contract.ciWitness.commit).toBe('32932438363b5500211c18307dce2e0ee8ffb2b1');
+    expect(contract.ciWitness.conclusion).toBe('success');
+    expect(contract.acceptance.r0_2Complete).toBe(true);
+  });
+
   it('keeps R0.2 identity work isolated from runtime and UI semantics', () => {
     expect(contract.normative).toBe(true);
     expect(contract.acceptance.runtimeSemanticsChanged).toBe(false);
     expect(contract.acceptance.uiChanged).toBe(false);
-    expect(contract.acceptance.r0_2Complete).toBe(false);
   });
 });

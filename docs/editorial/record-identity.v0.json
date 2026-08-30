@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-record-identity/v0",
   "contractId": "PORTFOLIO-R0.2-2026-08-30",
-  "status": "draft",
+  "status": "frozen",
   "normative": true,
   "preconditions": {
     "r0_1Frozen": true,
@@ -128,11 +128,17 @@
       "expectedRevisionId": "rev_sha256_25b367b032e490a96734ed1b51a4c52dd06d07ff605c403519e1a1477d752f0e"
     }
   ],
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33330694121,
+    "commit": "32932438363b5500211c18307dce2e0ee8ffb2b1",
+    "conclusion": "success"
+  },
   "acceptance": {
     "r0_1Preserved": true,
     "r0_2PrePreserved": true,
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_2Complete": false
+    "r0_2Complete": true
   }
 }
