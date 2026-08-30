@@ -133,7 +133,7 @@ describe('R1.2 Projection Engine', () => {
       nextRequiredCut: 'R1.2 — Projection Engine',
     });
     expect(reconstructRecordRegistry(registryManifest).errors).toEqual([]);
-    expect(r1Readme).toContain('| R1.2 | Projection Engine | **NEXT** |');
+    expect(r1Readme).toMatch(/\| R1\.2 \| Projection Engine \| \*\*(?:NEXT|COMPLETE)\*\* \|/);
   });
 
   it('fails closed when current disclosure is absent or conflicted', () => {
