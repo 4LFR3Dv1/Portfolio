@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-route-language-identity/v0",
   "contractId": "PORTFOLIO-R0.7-2026-08-30",
-  "status": "materialized",
+  "status": "frozen",
   "normative": true,
   "preconditions": {
     "r0_6Complete": true
@@ -264,11 +264,16 @@
       "expectedDigest": "sha256_806f3bb44124dd15afab5700857ec5d7b1ac9caeb497abe0358a9606ca39243d"
     }
   ],
-  "ciWitness": null,
+  "ciWitness": {
+    "workflow": "Verify",
+    "runId": 33335793038,
+    "commit": "35af98114abc21d788ec25489e32a6016615f733",
+    "conclusion": "success"
+  },
   "acceptance": {
     "r0_6Preserved": true,
     "runtimeSemanticsChanged": false,
     "uiChanged": false,
-    "r0_7Complete": false
+    "r0_7Complete": true
   }
 }

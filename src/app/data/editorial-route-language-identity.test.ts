@@ -430,13 +430,18 @@ describe('R0.7 Route + Language Identity', () => {
     }
   });
 
-  it('materializes without changing UI/runtime and waits for CI witness before completion', () => {
+  it('closes only with successful materialization witness and no UI/runtime changes', () => {
     expect(contract.normative).toBe(true);
-    expect(contract.status).toBe('materialized');
-    expect(contract.ciWitness).toBeNull();
+    expect(contract.status).toBe('frozen');
+    expect(contract.ciWitness).toEqual({
+      workflow: 'Verify',
+      runId: 33335793038,
+      commit: '35af98114abc21d788ec25489e32a6016615f733',
+      conclusion: 'success',
+    });
     expect(contract.acceptance.r0_6Preserved).toBe(true);
     expect(contract.acceptance.runtimeSemanticsChanged).toBe(false);
     expect(contract.acceptance.uiChanged).toBe(false);
-    expect(contract.acceptance.r0_7Complete).toBe(false);
+    expect(contract.acceptance.r0_7Complete).toBe(true);
   });
 });
