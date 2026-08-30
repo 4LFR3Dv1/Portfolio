@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "editorial-github-corpus-grounding-completion/v0",
+  "status": "frozen",
+  "normative": false,
+  "materialization": {
+    "commit": "6fd001c91da4918f5c99ab53b12de2e57ba4ae77",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33338027991,
+      "conclusion": "success"
+    },
+    "censusPath": "docs/editorial/github-corpus-census.v0.json",
+    "admissionPath": "docs/editorial/github-corpus-admission.v0.json"
+  },
+  "grounding": {
+    "connectedRepositoryCount": 54,
+    "repositoryDispositionCount": 54,
+    "systemSubjectCount": 28,
+    "frontierSystemCount": 15,
+    "historicalSystemCount": 13,
+    "repositoryEqualsSystem": false,
+    "repositoryEqualsRecord": false,
+    "allSystemSubjectsRemainPreBirth": true,
+    "recordBirthCount": 0,
+    "r1RuntimeStarted": false
+  },
+  "closedIdentityDecisions": [
+    "Lisa is one System across lisa-web, lisa-app and lisa-runtime.",
+    "Personal Identity Runtime remains a distinct logical System from Lisa because no positive continuity evidence was found.",
+    "Brine and BrineOS are distinct logical Systems; naming and chronology do not transfer identity.",
+    "Factory and Brine are distinct; Factory is external production infrastructure and Brine is a local-first agent runtime.",
+    "Foundry and Factory are distinct; FoundryLandingPage is a Foundry presentation realization.",
+    "Foundry Pay, Foundry Channels and Solana-Agent are separate authority-bearing Systems.",
+    "SNE-FDE is current field/public execution authority while Public-Surface is historical presentation research.",
+    "SNE Radar is one repository lineage across its primary, backup, historical generation, distribution and snapshot repositories; SNE-OS is not a Radar repository.",
+    "SNE Trading is a separate research/replay/risk/execution System from SNE Radar.",
+    "SNE Vault is a historical System distinct from SNE-OS despite explicit material migration and integration.",
+    "SNE Observatorio is a distinct historical market-language research System; exact Radar continuity is not asserted.",
+    "ORDM is one historical research lineage across the early PoC and expanded testnet realizations.",
+    "SNE Scroll Pass remains distinct from the in-suite SNE Pass concept absent positive continuity evidence.",
+    "The legacy Agentic Systems & Foundry card is not sufficient evidence for another independent System.",
+    "Transactional Support Bot remains a standalone historical sanitized System despite having no dedicated repository successor in the observed corpus."
+  ],
+  "legacyReconciliation": {
+    "preservedReservations": [
+      "rec_c844725e35cf61830221efc597612017",
+      "rec_724d518ee338e32eb06e79077ad01f3d",
+      "rec_c5a75fd5ecae0565aaa0c96f0ad53227",
+      "rec_499f928363217da10f93cd54aead0101",
+      "rec_0e6beb6a5f17831616af328fe8f2afb2"
+    ],
+    "abandonedPreBirthReservation": "rec_d5549271c541d17165c0ad8512dcdcc1",
+    "abandonedReservationReuseForbidden": true,
+    "explicitR0AmendmentRequired": true
+  },
+  "deferredWithoutBlockingGroundingCompletion": [
+    "XS-NAME-01: canonical public name may be chosen later because title/slug are not Record identity.",
+    "PRIVATE-WORK-01: Alfred and Dominipay stay excluded from positive public admission until disclosure/ownership is explicit.",
+    "PUBLICATION-SELECTION-01: public projection is an R0.6 governance/R1 projection decision, not corpus identity discovery.",
+    "RESEARCH-EXTRACTION-01: internal Question/Investigation/Experiment/Claim/Evidence extraction follows System Birth and does not change System identity."
+  ],
+  "acceptance": {
+    "r1PreComplete": true,
+    "recordBirthAuthorizedByGroundingAlone": false,
+    "r1RuntimeMayStart": false,
+    "nextRequiredCut": "R0-A1 — Legacy Agentic Migration Amendment"
+  }
+}
