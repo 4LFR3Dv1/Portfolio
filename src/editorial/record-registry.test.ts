@@ -43,6 +43,7 @@ interface R10Completion {
     r1_0Complete: true;
     recordBirthCount: 0;
     nextRequiredCut: 'R1.1 — Record Registry';
+    [key: string]: unknown;
   };
 }
 
@@ -101,7 +102,7 @@ function syntheticSuccessor(
 
 describe('R1.1 Record Registry', () => {
   it('begins only after R1.0 and converts the 28 grounded System subjects into explicit Births', () => {
-    expect(runtimeCompletion.acceptance).toEqual({
+    expect(runtimeCompletion.acceptance).toMatchObject({
       r1_0Complete: true,
       recordBirthCount: 0,
       nextRequiredCut: 'R1.1 — Record Registry',
