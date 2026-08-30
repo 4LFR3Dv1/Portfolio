@@ -17,8 +17,8 @@ R0 is the constitutional migration from the current project-centric portfolio to
 | R0.3 | Knowledge Ontology | **COMPLETE** |
 | R0.4 | Evidence Contract | **COMPLETE** |
 | R0.5 | Publication & Architecture Contract | **COMPLETE** |
-| R0.6 | Visibility / Maturity / Disclosure | **NEXT** |
-| R0.7 | Route + Language Identity | NOT STARTED |
+| R0.6 | Visibility / Maturity / Disclosure | **COMPLETE** |
+| R0.7 | Route + Language Identity | **NEXT** |
 | R0.8 | Migration & Acceptance | NOT STARTED |
 
 ## Constitutional execution rule
