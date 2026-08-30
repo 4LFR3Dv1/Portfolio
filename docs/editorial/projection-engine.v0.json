@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "editorial-projection-engine/v0",
+  "contractId": "PORTFOLIO-R1.2-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "3269521c20027ac1f4a80950458d705a58fa7f42",
+  "preconditions": {
+    "r0EffectiveComplete": true,
+    "r1PreComplete": true,
+    "r1_0Complete": true,
+    "r1_1Complete": true
+  },
+  "authority": {
+    "projectionIsSemanticAuthority": false,
+    "projectionMayMintRecords": false,
+    "projectionMayInferDisclosure": false,
+    "projectionMayInferMaturity": false,
+    "projectionMayInventRoute": false,
+    "projectionMayInventLanguageFallback": false,
+    "runtimeSanitizationAllowed": false
+  },
+  "publicGates": [
+    "current-head-lifecycle",
+    "current-disclosure",
+    "record-public-visibility",
+    "non-withheld-disclosure",
+    "resolved-current-route-language-identity",
+    "exact-route-target"
+  ],
+  "outputs": {
+    "states": ["omitted", "redirect", "projected"],
+    "projectedDtoSchema": "editorial-public-record-projection/v0",
+    "canonicalPayloadIncluded": false,
+    "governanceRationaleIncluded": false,
+    "registryProvenanceIncluded": false,
+    "metadataOnlyMayExposePayload": false,
+    "aliasMayDuplicateCanonicalDocument": false
+  },
+  "currentEditorialState": {
+    "bornSystemRecords": 28,
+    "otherBornRecordKinds": 0,
+    "currentPublicProjectionCount": 0,
+    "reason": "R1.1 born System identity only. No current R1 disclosure, route or language authority has yet been admitted for those heads; projection therefore fails closed while the legacy public runtime remains unchanged."
+  },
+  "laws": [
+    {"id":"PE-01","text":"Projection consumes admitted state and never becomes semantic authority."},
+    {"id":"PE-02","text":"Record Birth does not imply public projection."},
+    {"id":"PE-03","text":"Only active or archived current target heads are public-projectable."},
+    {"id":"PE-04","text":"Current disclosure must be uniquely classified against the exact current target head."},
+    {"id":"PE-05","text":"Unclassified or conflicted disclosure fails closed."},
+    {"id":"PE-06","text":"Private or withheld targets are omitted from public projection."},
+    {"id":"PE-07","text":"A resolved current route and language identity is required before projection."},
+    {"id":"PE-08","text":"Route identity must resolve to the exact target head being projected."},
+    {"id":"PE-09","text":"Unknown route, unavailable head, unavailable language and route conflict remain distinct fail-closed outcomes."},
+    {"id":"PE-10","text":"Alias resolution produces redirect intent, never a duplicate canonical document projection."},
+    {"id":"PE-11","text":"Projection never performs runtime redaction or sanitization."},
+    {"id":"PE-12","text":"Sanitized disclosure means the admitted target is already the bounded public-safe form."},
+    {"id":"PE-13","text":"Metadata-only projection never includes canonical semantic payload."},
+    {"id":"PE-14","text":"R1.2 public projection DTOs contain no governance rationale, registry provenance, source locator or private evidence material."},
+    {"id":"PE-15","text":"Maturity is projected independently and never acts as an exposure gate."},
+    {"id":"PE-16","text":"Maturity uncertainty and conflict remain explicit rather than inferred away."},
+    {"id":"PE-17","text":"Projection does not use latest-wins, file-order or permissiveness to repair conflicts."},
+    {"id":"PE-18","text":"Canonical URL is derived only from a valid resolved canonical Record path."},
+    {"id":"PE-19","text":"R1.2 does not materialize disclosure Records, route bindings, language bindings or content realizations."},
+    {"id":"PE-20","text":"R1.2 performs no framework cutover, public UI mutation or deployed runtime semantic change."}
+  ],
+  "acceptance": {
+    "recordBirthDoesNotImplyProjection": true,
+    "currentDisclosureRequired": true,
+    "routeLanguageResolutionRequired": true,
+    "exactTargetBindingRequired": true,
+    "privateWithheldFailClosed": true,
+    "withdrawnTombstonedFailClosed": true,
+    "metadataOnlyPayloadExcluded": true,
+    "runtimeSanitizationForbidden": true,
+    "maturityNotExposureGate": true,
+    "aliasDuplicateProjectionForbidden": true,
+    "currentPublicProjectionCount": 0,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false,
+    "r1_2Complete": false
+  }
+}

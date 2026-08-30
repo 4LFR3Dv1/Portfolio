@@ -19,8 +19,8 @@ R1 materializes the editorial world already defined by R0 and grounded across th
 | --- | --- | --- |
 | R1.0 | Editorial Runtime Boundary | **COMPLETE** |
 | R1.1 | Record Registry | **COMPLETE** |
-| R1.2 | Projection Engine | **NEXT** |
-| R1.3 | Route Runtime | NOT STARTED |
+| R1.2 | Projection Engine | **COMPLETE** |
+| R1.3 | Route Runtime | **NEXT** |
 | R1.4 | Language Runtime | NOT STARTED |
 | R1.5 | Editorial Document Runtime | NOT STARTED |
 | R1.6 | Core Editorial Surfaces | NOT STARTED |
@@ -50,8 +50,11 @@ R1.0 froze the target runtime boundary as static Astro publication output with b
 
 R1.1 admitted the 28 durable System subjects reconstructed by R1-PRE into generation-zero `knowledge.system` Records. The registry derives canonical payload digests and `RevisionId`s from explicit Birth assignments and fails closed on lineage, identity-pool or revision contradictions. Birth does not imply public disclosure, maturity, routing, language availability or projection eligibility.
 
+R1.2 materialized the deterministic public projection boundary. A Record reaches a bounded public projection only after current lifecycle, disclosure and route/language identity resolve consistently against the exact current head. Projection never becomes authority, never performs runtime sanitization and never carries canonical payload in the R1.2 envelope. The current new editorial substrate intentionally has zero public projections until the later governance, route and language runtime cuts admit the missing authority.
+
 ```text
 R1_0_COMPLETE=true
 R1_1_COMPLETE=true
-NEXT=R1.2 — Projection Engine
+R1_2_COMPLETE=true
+NEXT=R1.3 — Route Runtime
 ```

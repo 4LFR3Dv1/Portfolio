@@ -104,7 +104,7 @@ describe('R1.1 terminal completion seal', () => {
     });
   });
 
-  it('advances the shared program to Projection Engine without mutating the materialized manifest', () => {
+  it('preserves the R1.1 terminal seal after later R1 cuts advance the program', () => {
     expect(manifest.acceptance.r1_1Complete).toBe(false);
     expect(completion.acceptance).toMatchObject({
       r1_0Complete: true,
@@ -117,7 +117,7 @@ describe('R1.1 terminal completion seal', () => {
       nextRequiredCut: 'R1.2 — Projection Engine',
     });
     expect(r1Readme).toContain('| R1.1 | Record Registry | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.2 | Projection Engine | **NEXT** |');
+    expect(r1Readme).toMatch(/\| R1\.2 \| Projection Engine \| \*\*(?:NEXT|COMPLETE)\*\* \|/);
     expect(r1Readme).toContain('R1_1_COMPLETE=true');
     expect(r11Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r11Doc).toContain('R1_1_COMPLETE                                 true');
