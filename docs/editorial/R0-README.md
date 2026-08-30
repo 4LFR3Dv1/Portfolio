@@ -11,7 +11,7 @@ R0 is the constitutional migration from the current project-centric portfolio to
 | Cut | Purpose | Status |
 | --- | --- | --- |
 | R0.0 | Current Surface Freeze | **COMPLETE** |
-| R0.1 | Editorial Constitution | **NEXT** |
+| R0.1 | Editorial Constitution | **IN PROGRESS** |
 | R0.2 | Record Identity Contract | NOT STARTED |
 | R0.3 | Knowledge Ontology | NOT STARTED |
 | R0.4 | Evidence Contract | NOT STARTED |
