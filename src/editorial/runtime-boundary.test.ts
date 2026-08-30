@@ -138,7 +138,7 @@ describe('R1.0 editorial runtime boundary', () => {
     expect(manifest.migration.runtimeSemanticsChanged).toBe(false);
   });
 
-  it('keeps the machine-readable and narrative contracts aligned', () => {
+  it('keeps the materialized contract aligned after terminal completion', () => {
     expect(manifest.schemaVersion).toBe(EDITORIAL_RUNTIME_BOUNDARY_SCHEMA_VERSION);
     expect(manifest.status).toBe('materialized');
     expect(manifest.normative).toBe(true);
@@ -149,7 +149,8 @@ describe('R1.0 editorial runtime boundary', () => {
     });
     expect(manifest.acceptance.runtimeBoundaryFrozen).toBe(true);
     expect(manifest.acceptance.r1_0Complete).toBe(false);
-    expect(r1Readme).toContain('| R1.0 | Editorial Runtime Boundary | **MATERIALIZING** |');
+    expect(r1Readme).toContain('| R1.0 | Editorial Runtime Boundary | **COMPLETE** |');
+    expect(r1Readme).toContain('| R1.1 | Record Registry | **NEXT** |');
     expect(r10Doc).toContain('Astro static output');
     expect(r10Doc).toContain('React islands');
     expect(r10Doc).toContain('R1.1 — Record Registry');
