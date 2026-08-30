@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "editorial-record-registry/v0",
+  "contractId": "PORTFOLIO-R1.1-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "650ca686854110ec817e47f1658bf37e6d1a2daf",
+  "preconditions": {
+    "r1_0Complete": true,
+    "r0EffectiveComplete": true,
+    "r1PreComplete": true
+  },
+  "admission": {
+    "source": "docs/editorial/github-corpus-admission.v0.json",
+    "mode": "explicit-r1-system-birth",
+    "groundingAloneAuthorizedBirth": false,
+    "systemSubjectsExpected": 28,
+    "systemBirthCount": 28,
+    "otherRecordBirthCount": 0
+  },
+  "birthProfile": {
+    "kind": "knowledge.system",
+    "payloadSchemaVersion": "knowledge.system/v0",
+    "summary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+    "thesis": null,
+    "lifecycle": "active"
+  },
+  "identityPool": {
+    "retiredPreBirth": [
+      {
+        "recordId": "rec_d5549271c541d17165c0ad8512dcdcc1",
+        "source": "R0-A1",
+        "status": "retired-pre-birth",
+        "reuseForbidden": true,
+        "reason": "Legacy Agentic Systems & Foundry reservation was retired before Birth and may never be reused."
+      }
+    ],
+    "heldReservations": [
+      {
+        "recordId": "rec_fc3e81a9cb37b73ca03462e03cbcd90b",
+        "kind": "representation.publication",
+        "source": "R0.8",
+        "reason": "VERIFY Systems publication remains reserved for a later explicit representation birth."
+      },
+      {
+        "recordId": "rec_f86d2f96e2988b93eda3bcbe01861636",
+        "kind": "representation.publication",
+        "source": "R0.8",
+        "reason": "Production Systems Handbook publication remains reserved for a later explicit representation birth."
+      },
+      {
+        "recordId": "rec_1b9b9be6aefcb8c7f871362ab1b71cf0",
+        "kind": "representation.publication",
+        "source": "R0.8",
+        "reason": "TypeScript Handbook publication remains reserved for a later explicit representation birth."
+      },
+      {
+        "recordId": "rec_54e1fc551f4db67b866cdadad0e757d7",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Systems architecture remains reserved until its concrete born subject bindings are admitted."
+      },
+      {
+        "recordId": "rec_601d671e448af6ed84b821a748be84e4",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Settlement architecture remains reserved for later explicit representation birth."
+      },
+      {
+        "recordId": "rec_89d75f5011a5fbee29199fc9d418e62f",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Agents architecture remains reserved until R0-A1 replacement subject relations are explicitly admitted."
+      },
+      {
+        "recordId": "rec_86286c78367ccc41cfa734f30f7daf33",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Realtime architecture remains reserved for later explicit representation birth."
+      },
+      {
+        "recordId": "rec_93f3df5cc87747ed31f9885f5afb5027",
+        "kind": "representation.architecture",
+        "source": "R0.8",
+        "reason": "Handoff architecture remains reserved for later explicit representation birth."
+      }
+    ]
+  },
+  "assignments": [
+    {"subjectKey":"genesis","name":"Genesis","subjectClass":"frontier-system","recordId":"rec_5eeb93bd8811b6c0fbecf3cc733cbd2e","groundingCluster":"GCG-001","identityDecision":"distinct-system","legacyReservationUsed":false},
+    {"subjectKey":"brineos","name":"BrineOS","subjectClass":"frontier-system","recordId":"rec_6822adfb4aaf3520816ff305f6b4e572","groundingCluster":"GCG-002","identityDecision":"distinct-from-brine","legacyReservationUsed":false},
+    {"subjectKey":"wer-esk","name":"WER-ESK","subjectClass":"frontier-system","recordId":"rec_4515d2eb7d17e9a876ff890f7b90d6a8","groundingCluster":"GCG-003","identityDecision":"distinct-system","legacyReservationUsed":false},
+    {"subjectKey":"lisa","name":"Lisa","subjectClass":"frontier-system","recordId":"rec_286639cfc48e0fac9065fe4e3258a916","groundingCluster":"GCG-004","identityDecision":"one-system-three-repository-realizations","legacyReservationUsed":false},
+    {"subjectKey":"factory","name":"Factory","subjectClass":"frontier-system","recordId":"rec_1fe061f491894efe1e0b1674448b7501","groundingCluster":"GCG-006","identityDecision":"distinct-from-brine-and-foundry","legacyReservationUsed":false},
+    {"subjectKey":"foundry","name":"Foundry","subjectClass":"frontier-system","recordId":"rec_66057eae80fabfa4478a600481d755f0","groundingCluster":"GCG-007","identityDecision":"system-plus-presentation-realization","legacyReservationUsed":false},
+    {"subjectKey":"agenthub","name":"AgentHub","subjectClass":"frontier-system","recordId":"rec_10d864e055b79f67dce52412083e6763","groundingCluster":"GCG-008","identityDecision":"independent-from-foundry","legacyReservationUsed":false},
+    {"subjectKey":"foundry-pay","name":"Foundry Pay","subjectClass":"frontier-system","recordId":"rec_0e6beb6a5f17831616af328fe8f2afb2","groundingCluster":"GCG-009","identityDecision":"same-subject-as-r0-8-supporting-reservation","legacyReservationUsed":true},
+    {"subjectKey":"foundry-channels","name":"Foundry Channels","subjectClass":"frontier-system","recordId":"rec_38f6f81328b9ccd007127d1071f8cc02","groundingCluster":"GCG-010","identityDecision":"independent-authority-boundary","legacyReservationUsed":false},
+    {"subjectKey":"solana-agent","name":"Solana-Agent","subjectClass":"frontier-system","recordId":"rec_43dd086ef220193d441943461e8863f0","groundingCluster":"GCG-011","identityDecision":"independent-authority-boundary","legacyReservationUsed":false},
+    {"subjectKey":"sne-fde","name":"SNE-FDE","subjectClass":"frontier-system","recordId":"rec_6bd4d56023990c25879daecf2ff34b55","groundingCluster":"GCG-012","identityDecision":"current-field-authority-with-public-surface-history","legacyReservationUsed":false},
+    {"subjectKey":"github-flow","name":"GitHub Flow","subjectClass":"frontier-system","recordId":"rec_0db35eb308dd8da06948dcde9666a6df","groundingCluster":"GCG-014","identityDecision":"distinct-operational-system","legacyReservationUsed":false},
+    {"subjectKey":"sne-os","name":"SNE-OS","subjectClass":"frontier-system","recordId":"rec_499f928363217da10f93cd54aead0101","groundingCluster":"GCG-015","identityDecision":"same-subject-as-r0-8-sne-os-reservation-distinct-from-sne-vault","legacyReservationUsed":true},
+    {"subjectKey":"sne-radar","name":"SNE Radar","subjectClass":"frontier-system","recordId":"rec_553b9088a5b22a51a44679f582de47f5","groundingCluster":"GCG-016","identityDecision":"one-system-multi-repository-lineage","legacyReservationUsed":false},
+    {"subjectKey":"sne-trading","name":"SNE Trading","subjectClass":"frontier-system","recordId":"rec_b1afa6a6409eff3f0c4d55f88b2112b2","groundingCluster":"GCG-021","identityDecision":"independent-tribunal-execution-plane","legacyReservationUsed":false},
+    {"subjectKey":"brine","name":"Brine","subjectClass":"historical-system","recordId":"rec_5c9f2ece90fb6528b9b317a5181d5336","groundingCluster":"GCG-020","identityDecision":"distinct-from-brineos","legacyReservationUsed":false},
+    {"subjectKey":"personal-identity-runtime","name":"Personal Identity Runtime","subjectClass":"historical-system","recordId":"rec_10610fee4c64c6463ccbb745deaf1a92","groundingCluster":"GCG-005","identityDecision":"distinct-from-lisa-no-positive-continuity-evidence","legacyReservationUsed":false},
+    {"subjectKey":"vira","name":"VIRA","subjectClass":"historical-system","recordId":"rec_c844725e35cf61830221efc597612017","groundingCluster":"GCG-017","identityDecision":"same-subject-as-r0-8-vira-reservation","legacyReservationUsed":true},
+    {"subjectKey":"xs-wallet","name":"XS Wallet / Domini","subjectClass":"historical-system","recordId":"rec_724d518ee338e32eb06e79077ad01f3d","groundingCluster":"GCG-018","identityDecision":"same-logical-subject-as-r0-8-xs-wallet-reservation-title-unresolved","legacyReservationUsed":true},
+    {"subjectKey":"ordm","name":"ORDM","subjectClass":"historical-system","recordId":"rec_f941765df0d17315570234ddb6df2c24","groundingCluster":"GCG-019","identityDecision":"one-research-lineage-across-poc-and-testnet-realizations","legacyReservationUsed":false},
+    {"subjectKey":"sne-vault","name":"SNE Vault","subjectClass":"historical-system","recordId":"rec_358fbaec4b74b7f1739ea5943c4a4ca0","groundingCluster":"GCG-023","identityDecision":"distinct-predecessor-system-with-material-migration-into-sne-os","legacyReservationUsed":false},
+    {"subjectKey":"sne-scroll-pass","name":"SNE Scroll Pass","subjectClass":"historical-system","recordId":"rec_eb671d4728bb44327b1a0b832006f320","groundingCluster":"GCG-022","identityDecision":"distinct-from-in-suite-sne-pass-by-default","legacyReservationUsed":false},
+    {"subjectKey":"sne-observatorio","name":"SNE Observatório","subjectClass":"historical-system","recordId":"rec_c2af8a986e38518d716f397320072368","groundingCluster":"GCG-035","identityDecision":"distinct-historical-market-language-research-no-radar-continuity-asserted","legacyReservationUsed":false},
+    {"subjectKey":"viewcounter","name":"ViewCounter","subjectClass":"historical-system","recordId":"rec_757fe2f771ef44acc68af55ce9313c95","groundingCluster":"GCG-024","identityDecision":"distinct-experimental-system","legacyReservationUsed":false},
+    {"subjectKey":"edital-sales","name":"Edital Sales","subjectClass":"historical-system","recordId":"rec_e8947ad40f9a202dc9413a1bb91199f1","groundingCluster":"GCG-025","identityDecision":"distinct-system","legacyReservationUsed":false},
+    {"subjectKey":"estampai","name":"EstampAI","subjectClass":"historical-system","recordId":"rec_b9dc85a2002a434fdb540b53496c99f2","groundingCluster":"GCG-026","identityDecision":"distinct-authored-system-scaffold-not-identity","legacyReservationUsed":false},
+    {"subjectKey":"vlbet","name":"VLBet","subjectClass":"historical-system","recordId":"rec_ad5db27acd07f0934b47ae313e9e812f","groundingCluster":"GCG-027","identityDecision":"distinct-experimental-system","legacyReservationUsed":false},
+    {"subjectKey":"transactional-support-bot","name":"Transactional Support Bot","subjectClass":"historical-system","recordId":"rec_c5a75fd5ecae0565aaa0c96f0ad53227","groundingCluster":null,"identityDecision":"standalone-historical-sanitized-system-no-repository-successor-found","legacyReservationUsed":true}
+  ],
+  "acceptance": {
+    "recordRegistryMaterialized": true,
+    "systemSubjectCoverage": 28,
+    "systemBirthCount": 28,
+    "frontierSystemBirthCount": 15,
+    "historicalSystemBirthCount": 13,
+    "legacySystemReservationsPreserved": 5,
+    "retiredAgenticIdRejected": true,
+    "heldReservationCount": 8,
+    "duplicateRecordIds": 0,
+    "invalidBirths": 0,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false,
+    "r1_1Complete": false
+  }
+}

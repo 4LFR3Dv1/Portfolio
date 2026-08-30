@@ -18,8 +18,8 @@ R1 materializes the editorial world already defined by R0 and grounded across th
 | Cut | Purpose | Status |
 | --- | --- | --- |
 | R1.0 | Editorial Runtime Boundary | **COMPLETE** |
-| R1.1 | Record Registry | **NEXT** |
-| R1.2 | Projection Engine | NOT STARTED |
+| R1.1 | Record Registry | **COMPLETE** |
+| R1.2 | Projection Engine | **NEXT** |
 | R1.3 | Route Runtime | NOT STARTED |
 | R1.4 | Language Runtime | NOT STARTED |
 | R1.5 | Editorial Document Runtime | NOT STARTED |
@@ -48,7 +48,10 @@ The renderer is a consumer of admitted editorial state. It is never the authorit
 
 R1.0 froze the target runtime boundary as static Astro publication output with bounded React islands while leaving the current React/Vite public runtime untouched. Its terminal completion marker is `docs/editorial/R1.0-completion.v0.json`.
 
+R1.1 admitted the 28 durable System subjects reconstructed by R1-PRE into generation-zero `knowledge.system` Records. The registry derives canonical payload digests and `RevisionId`s from explicit Birth assignments and fails closed on lineage, identity-pool or revision contradictions. Birth does not imply public disclosure, maturity, routing, language availability or projection eligibility.
+
 ```text
 R1_0_COMPLETE=true
-NEXT=R1.1 — Record Registry
+R1_1_COMPLETE=true
+NEXT=R1.2 — Projection Engine
 ```

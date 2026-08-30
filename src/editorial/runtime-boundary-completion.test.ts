@@ -95,7 +95,7 @@ describe('R1.0 terminal completion seal', () => {
     });
   });
 
-  it('advances R1 to Record Registry only after the runtime boundary is frozen', () => {
+  it('keeps R1.0 complete while the shared program advances beyond its next cut', () => {
     expect(completion.acceptance).toMatchObject({
       r1_0Complete: true,
       r1ProgramInProgress: true,
@@ -106,7 +106,7 @@ describe('R1.0 terminal completion seal', () => {
       nextRequiredCut: 'R1.1 — Record Registry',
     });
     expect(r1Readme).toContain('| R1.0 | Editorial Runtime Boundary | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.1 | Record Registry | **NEXT** |');
+    expect(r1Readme).toContain('| R1.1 | Record Registry |');
     expect(r1Readme).toContain('R1_0_COMPLETE=true');
     expect(r10Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r10Doc).toContain('Verify` run `33339042562`');
