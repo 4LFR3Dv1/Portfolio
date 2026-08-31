@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / IDENTITIES RECONCILED**
+Status: **IN PROGRESS / CURRENT REVISIONS MATERIALIZED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -46,8 +46,8 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | R1-A2.0 | Reconciliation Constitution + Cutover Eligibility Revocation | **MATERIALIZED** |
 | R1-A2.1 | Current GitHub Census + HEAD Observation | **COMPLETE** |
 | R1-A2.2 | Existing Identity Reconciliation | **COMPLETE** |
-| R1-A2.3 | Current Revision Materialization | **NEXT** |
-| R1-A2.4 | Evidence + Maturity Reconciliation | **NOT STARTED** |
+| R1-A2.3 | Current Revision Materialization | **COMPLETE** |
+| R1-A2.4 | Evidence + Maturity Reconciliation | **NEXT** |
 | R1-A2.5 | Public Disclosure Reauthorization | **NOT STARTED** |
 | R1-A2.6 | Current Route Admission | **NOT STARTED** |
 | R1-A2.7 | Current Editorial Surface Reconstruction | **NOT STARTED** |
@@ -55,7 +55,7 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 
 ## R1-A2.1 physical census
 
-The connected GitHub installation was re-enumerated rather than inferred from the R1-PRE file. The inventory still contains 54 repositories: 39 under `4LFR3Dv1` and 15 under `SNE-Labs`. Every default branch ref was queried directly. Fifty-two repositories have a material HEAD; `4LFR3Dv1/SNE-RADAR-v1.0` and `4LFR3Dv1/factory-control` are explicitly empty.
+The connected GitHub installation was re-enumerated rather than inferred from the R1-PRE file. The inventory still contains 54 repositories: 39 under `4LFR3Dv1` and 15 under `SNE-Labs`. Every default branch ref was queried directly. Fifty-two repositories have a material HEAD; `4LFR3Dv1/SNE-RADAR-v1.0` and `4LFR3Dv1/factory-control` are explicitly empty. `4LFR3Dv1/ORDM-TESTNET-v.01` is material despite repository size metadata of zero because its exact default-branch ref resolves to `186b1b09f82e92fb13217b48edc956b9d9fa701f`; repository size is not HEAD authority.
 
 The frozen observation is `docs/editorial/R1-A2.1-current-github-census.v0.json`. It records repository, visibility, default branch and exact observed HEAD. Inventory equality with R1-PRE is not treated as semantic equality.
 
@@ -87,7 +87,45 @@ RECORD_ID_CHANGE_COUNT=0
 NEW_RECORD_BIRTH_COUNT=0
 ```
 
-R1-A2.2 does not yet create current payload revisions. That belongs to R1-A2.3.
+## R1-A2.3 current Revision materialization
+
+R1-A2.3 preserves every R1 Birth revision and materializes current semantic payload only as a successor of that identity. The exact existing R1.1 digest and revision algorithms are reused; there is no amendment-specific identity scheme.
+
+```text
+Birth revision
+  generation=0
+        ↓
+same RecordId + same RecordKind
+        ↓
+current knowledge.system payload
+        ↓
+payload digest
+        ↓
+generation=1
+previousRevisionId=exact Birth RevisionId
+        ↓
+canonical RevisionId
+        ↓
+validateSuccessor()
+```
+
+Twenty-seven Systems now have generation-1 current successors. Transactional Support Bot remains explicitly deferred at its historical Birth revision because no current repository successor or new semantic evidence was admitted. This is not deletion and does not authorize a replacement Record.
+
+Every successor also resolves its repository realization through the exact R1-A2.1 census, inheriting repository, visibility, default branch, observed HEAD and `observedAt`. Repository names therefore cannot act as free-floating evidence locators.
+
+The candidate was witnessed by successful `Verify` run `33411967644` / run number `255` at branch head `a38d185184d437a71bd9de7f71b6f59267ebd5e1`. The accepted contract is `docs/editorial/R1-A2.3-current-system-revisions.v0.json`; the witness seal is `docs/editorial/R1-A2.3-completion.v0.json`.
+
+```text
+BORN_SYSTEM_RECORD_COUNT=28
+CURRENT_SUCCESSOR_REVISION_COUNT=27
+DEFERRED_CURRENT_REVISION_COUNT=1
+PRESERVED_RECORD_ID_COUNT=28
+RECORD_ID_CHANGE_COUNT=0
+NEW_RECORD_BIRTH_COUNT=0
+GENERIC_BIRTH_SUMMARY_SUCCESSOR_COUNT=0
+```
+
+A2.3 deliberately does **not** reauthorize disclosure, inherit maturity, admit routes or reconstruct public surfaces. Under R0.6, those policies are revision-bound. Advancing a System head therefore makes stale generation-zero maturity/disclosure insufficient for the new current head until a new policy decision is admitted.
 
 ## Direction of authority
 
@@ -127,12 +165,19 @@ R2_7_HISTORICAL_COMPLETE=true
 
 CURRENT_CORPUS_CENSUS_COMPLETE=true
 CURRENT_REPOSITORY_COUNT=54
+MATERIAL_HEAD_COUNT=52
+EMPTY_REPOSITORY_COUNT=2
 IDENTITY_RECONCILIATION_COMPLETE=true
 RECONCILED_SYSTEM_RECORD_COUNT=28
 RECORD_ID_CHANGE_COUNT=0
 NEW_RECORD_BIRTH_COUNT=0
 
-CURRENT_REVISION_MATERIALIZATION_COMPLETE=false
+CURRENT_REVISION_MATERIALIZATION_COMPLETE=true
+CURRENT_SUCCESSOR_REVISION_COUNT=27
+DEFERRED_CURRENT_REVISION_COUNT=1
+GENERIC_BIRTH_SUMMARY_SUCCESSOR_COUNT=0
+
+EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=false
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
@@ -141,6 +186,7 @@ CUTOVER_ENACTED=false
 R1_A2_0_MATERIALIZED=true
 R1_A2_1_COMPLETE=true
 R1_A2_2_COMPLETE=true
+R1_A2_3_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.3 — Current Revision Materialization
+NEXT=R1-A2.4 — Evidence + Maturity Reconciliation
 ```
