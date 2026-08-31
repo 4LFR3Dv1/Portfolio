@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "editorial-preview-environmental-invariance/v0",
+  "contractId": "PORTFOLIO-R2.6-2026-08-31",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "089f99298e895f299711449516efa55099f987f0",
+  "preconditions": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "r2_3Complete": true,
+    "r2_4Complete": true,
+    "r2_5Complete": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "sourceSpecimen": {
+    "runtime": "editorial-shell/runtime/commissioned-runtime.mjs",
+    "completion": "docs/editorial/R2.5-completion.v0.json",
+    "acceptedArtifactDigest": "sha256:e072e3fdb6f8a99dbc016633fdecaf1050edbfd2007b7bc9b566168089111c26",
+    "deploymentMutationAllowed": false
+  },
+  "previewAdapter": {
+    "entrypoint": "editorial-shell/runtime/preview-runtime.mjs",
+    "container": "editorial-shell/preview.Dockerfile",
+    "listenHost": "0.0.0.0",
+    "listenPortSource": "PORT",
+    "semanticRuntimeReplacementAllowed": false,
+    "providerGeneratedHttpsOriginPreferred": true,
+    "productionOriginForbidden": "renan.snelabs.space"
+  },
+  "comparison": {
+    "transportNormalization": {
+      "contentEncodingMayDiffer": true,
+      "httpProtocolMayDiffer": true,
+      "providerHeadersMayBeAdded": true,
+      "dateHeaderMayDiffer": true
+    },
+    "semanticInvariants": {
+      "decodedBodySha256": "equal",
+      "httpStatus": "equal",
+      "canonicalLink": "equal-or-absent-identically",
+      "contentLanguage": "equal-or-absent-identically",
+      "robots": "equal-or-absent-identically",
+      "redirectLocation": "equal-or-absent-identically",
+      "contentType": "equal-after-normalization",
+      "cacheControl": "remote-retains-all-local-directives",
+      "nosniff": "equal"
+    },
+    "publicTlsRequired": true,
+    "warmRepeatRequired": true
+  },
+  "expected": {
+    "canonicalCount": 18,
+    "historicalCount": 4,
+    "handshakeCount": 4,
+    "redirectCount": 8,
+    "unknownStatus": 404,
+    "sitemapUrlCount": 18,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 6,
+    "minimumStaticAssetCount": 1,
+    "semanticDifferenceCount": 0,
+    "productionMutationCount": 0
+  },
+  "currentState": {
+    "previewAdapterMaterialized": true,
+    "providerNeutralContainerMaterialized": true,
+    "localPreviewBindingWitnessed": false,
+    "publicPreviewDeployed": false,
+    "publicTlsWitnessed": false,
+    "internetComparisonWitnessed": false,
+    "productionDeploymentChanged": false,
+    "productionDnsChanged": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false
+  },
+  "acceptance": {
+    "sameCommissionedRuntimeRequired": true,
+    "isolatedPublicOriginRequired": true,
+    "httpsRequired": true,
+    "semanticDifferenceCountRequired": 0,
+    "productionMutationCountRequired": 0,
+    "r2_6Complete": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "nextRequiredCut": "R2.7 — Cutover Readiness"
+  }
+}
