@@ -26,8 +26,8 @@ export function metadataForRoute(route: PortfolioRoute, language: Language): Por
     return {
       title: language === 'en' ? 'Architecture — Renan Melo' : 'Arquitetura — Renan Melo',
       description: language === 'en'
-        ? 'A closer look at how product, services, software execution and infrastructure connect across Renan Melo’s work.'
-        : 'Uma visão mais próxima de como produto, serviços, execução de software e infraestrutura se conectam no trabalho de Renan Melo.',
+        ? 'A readable map of the recurring questions and design choices behind Renan Melo’s software systems.'
+        : 'Um mapa legível das perguntas e escolhas de design que se repetem nos sistemas de software de Renan Melo.',
       canonicalUrl: `${SITE_URL}/architecture`,
     };
   }
