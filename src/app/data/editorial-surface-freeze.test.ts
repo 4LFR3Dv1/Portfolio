@@ -129,9 +129,7 @@ describe('R0.0 current surface freeze', () => {
     }
   });
 
-  it('freezes historical public identity claims without owning future Hero copy', () => {
-    const index = readRepoFile('index.html');
-
+  it('freezes historical public identity claims without owning future public metadata', () => {
     expect(manifest.identityClaims).toEqual({
       name: 'RENAN MELO',
       role: 'Blockchain & Agentic Systems Engineer',
@@ -139,7 +137,6 @@ describe('R0.0 current surface freeze', () => {
       siteName: 'Renan Melo — Portfolio',
     });
     expect(manifest.sourceBlobs['src/app/components/hero-section.tsx']).toMatch(/^[0-9a-f]{40}$/);
-    expect(index).toContain(manifest.identityClaims.siteName);
   });
 
   it('records source blob witnesses for the principal legacy public-surface files', () => {
