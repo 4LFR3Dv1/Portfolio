@@ -40,6 +40,10 @@ import {
 import type { EditorialDocumentDto } from './document-runtime';
 import type { LegacyCompatibilityManifest } from './legacy-compatibility';
 import {
+  materializeLegacyPreservationState,
+  type LegacyPreservationState,
+} from './legacy-preservation-runtime';
+import {
   reconstructPublicationShellBoundary,
   type PublicationShellBoundaryManifest,
   type PublicationShellPlan,
@@ -85,6 +89,7 @@ export interface AcceptedRendererInput {
   surfaces: CoreSurfaceDto[];
   documents: EditorialDocumentDto[];
   shellPlan: PublicationShellPlan;
+  legacy: LegacyPreservationState;
 }
 
 export function materializeAcceptedRendererInput(): AcceptedRendererInput {
@@ -154,6 +159,8 @@ export function materializeAcceptedRendererInput(): AcceptedRendererInput {
     throw new Error(`renderer-input-shell-conflict:${shell.errors.join(',')}`);
   }
 
+  const legacy = materializeLegacyPreservationState(shell.plan);
+
   const documents = surfaceState.documents
     .filter((entry): entry is Extract<(typeof surfaceState.documents)[number], { state: 'document' }> => entry.state === 'document')
     .map((entry) => entry.document);
@@ -171,5 +178,6 @@ export function materializeAcceptedRendererInput(): AcceptedRendererInput {
     surfaces: surfaces.surfaces,
     documents,
     shellPlan: shell.plan,
+    legacy,
   };
 }
