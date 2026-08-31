@@ -449,7 +449,6 @@ export function materializeCurrentEditorialSurfaces(
     documents.push(materializeCurrentDocument(projection, routeAdmission.currentLanguageRealizations));
   }
 
-  const projected = projections.filter((entry) => entry.state === 'projected');
   const omittedProjections = projections.filter((entry) => entry.state === 'omitted');
   const semanticDocuments = documents.filter((entry): entry is Extract<EditorialDocumentDecision, { state: 'document' }> =>
     entry.state === 'document' && entry.document.content.type === 'knowledge.system');
