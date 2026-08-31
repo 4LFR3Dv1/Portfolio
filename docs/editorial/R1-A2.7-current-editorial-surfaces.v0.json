@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-current-surfaces/v0",
   "contractId": "PORTFOLIO-R1-A2.7-2026-08-31",
-  "status": "materialized-awaiting-ci",
+  "status": "complete",
   "normative": true,
   "baseline": "099fa7cd4a81020599dbbe5230e293359aa35403",
   "preconditions": {
@@ -80,9 +80,9 @@
     "surfaceRouteIdentityMutationCount": 0,
     "deployedPublicSurfaceMutationCount": 0,
     "productionMutationCount": 0,
-    "r1_a2_7Complete": false,
+    "r1_a2_7Complete": true,
     "currentPublicationValid": false,
     "cutoverReady": false,
-    "nextRequiredAction": "CI must reconstruct 54 current projections, 54 semantic bilingual documents and all 12 explicitly selected current surfaces before A2.7 acceptance"
+    "nextRequiredAction": "R1-A2.8 — Current Publication Acceptance"
   }
 }
