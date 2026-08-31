@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-cutover-readiness/v0",
   "contractId": "PORTFOLIO-R2.7-2026-08-31",
-  "status": "materialized",
+  "status": "accepted",
   "normative": true,
   "baseline": "1479b5ce092655c770bc24dee8c94fc825db931e",
   "preconditions": {
@@ -28,7 +28,8 @@
     "dnsSnapshotRequired": true,
     "httpFingerprintRequired": true,
     "rootBuildContractRequired": "vite build",
-    "rootVercelRewriteMustRemainUnchanged": true
+    "rootVercelRewriteMustRemainUnchanged": true,
+    "completionEvidence": "docs/editorial/R2.7-completion.v0.json"
   },
   "cutoverTransaction": {
     "strategy": "domain-handoff-to-accepted-r2-6-service",
@@ -46,12 +47,16 @@
   },
   "rollback": {
     "exactPreCutoverDnsSnapshotRequired": true,
+    "acceptedCnameRollbackTarget": "d27855497dcf813a.vercel-dns-017.com",
+    "observedTtlSeconds": 300,
     "oldProductionSourcePreserved": true,
     "oldProductionVercelConfigPreserved": true,
-    "rollbackInstruction": "restore the exact pre-cutover DNS answer set for renan.snelabs.space and keep the prior Vercel runtime intact until R2.9 acceptance"
+    "rollbackInstruction": "restore the exact pre-cutover DNS state for renan.snelabs.space, verify the accepted Vercel fingerprint, then and only then clean up a failed target binding"
   },
   "readinessWitness": {
     "workflow": ".github/workflows/editorial-cutover-readiness.yml",
+    "runId": 33401682696,
+    "artifactId": 9761473698,
     "targetFreshInternetWitnessRequired": true,
     "productionReadOnlyDnsWitnessRequired": true,
     "productionReadOnlyHttpWitnessRequired": true,
@@ -64,15 +69,16 @@
   },
   "currentState": {
     "cutoverPlanMaterialized": true,
-    "freshTargetWitnessed": false,
-    "productionDnsSnapshotCaptured": false,
-    "productionHttpFingerprintCaptured": false,
-    "rollbackBaselineCaptured": false,
+    "freshTargetWitnessed": true,
+    "productionDnsSnapshotCaptured": true,
+    "productionHttpFingerprintCaptured": true,
+    "rollbackBaselineCaptured": true,
+    "railwayCustomProductionDomainAttached": false,
     "productionMutationCount": 0
   },
   "acceptance": {
-    "r2_7Complete": false,
-    "cutoverReady": false,
+    "r2_7Complete": true,
+    "cutoverReady": true,
     "cutoverAuthorized": false,
     "productionMutationCountRequired": 0,
     "nextRequiredCut": "R2.8 — Public Cutover"
