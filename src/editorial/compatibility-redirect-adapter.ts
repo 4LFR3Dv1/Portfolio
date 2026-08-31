@@ -23,7 +23,7 @@ export interface CompatibilityRedirectAdapterManifest {
   };
   negotiation: {
     storageKey: 'portfolio-language';
-    acceptedStoredValues: readonly ['en', 'pt'];
+    acceptedStoredValues: string[];
     defaultWhenMissing: 'en';
     serverCanReadLocalStorage: false;
     clientHandshakeRequired: true;
@@ -149,6 +149,13 @@ export function reconstructCompatibilityRedirectAdapter(
   if (manifest.status !== 'materialized') errors.push('redirect-adapter-status');
   if (manifest.normative !== true) errors.push('redirect-adapter-normative');
   if (manifest.negotiation.storageKey !== 'portfolio-language') errors.push('redirect-adapter-storage-key');
+  if (
+    manifest.negotiation.acceptedStoredValues.length !== 2
+    || manifest.negotiation.acceptedStoredValues[0] !== 'en'
+    || manifest.negotiation.acceptedStoredValues[1] !== 'pt'
+  ) {
+    errors.push('redirect-adapter-language-values');
+  }
   if (manifest.negotiation.serverCanReadLocalStorage) errors.push('redirect-adapter-server-local-storage-read');
   if (!manifest.negotiation.clientHandshakeRequired) errors.push('redirect-adapter-client-handshake-disabled');
   if (manifest.negotiation.acceptLanguageInferenceAllowed) errors.push('redirect-adapter-accept-language-inference');
@@ -202,7 +209,7 @@ export function reconstructCompatibilityRedirectAdapter(
       sourceContractId: manifest.contractId,
       language: {
         storageKey: manifest.negotiation.storageKey,
-        acceptedStoredValues: manifest.negotiation.acceptedStoredValues,
+        acceptedStoredValues: ['en', 'pt'],
         defaultWhenMissing: manifest.negotiation.defaultWhenMissing,
         acceptLanguageInferenceAllowed: false,
         navigatorLanguageInferenceAllowed: false,
