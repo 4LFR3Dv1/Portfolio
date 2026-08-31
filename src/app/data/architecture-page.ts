@@ -239,6 +239,16 @@ export const architecturePage = {
           { label: localized('FOUNDRY CHANNELS', 'FOUNDRY CHANNELS'), href: 'https://github.com/4LFR3Dv1/Foundry-Channels', external: true },
         ],
       },
+      {
+        name: 'Solana Agent',
+        description: localized(
+          'Solana operations where preparing, authorizing, executing and confirming the result remain separate responsibilities.',
+          'Operações na Solana em que preparar, autorizar, executar e confirmar o resultado continuam sendo responsabilidades separadas.',
+        ),
+        links: [
+          { label: localized('VIEW CODE', 'VER CÓDIGO'), href: 'https://github.com/4LFR3Dv1/Solana-Agent', external: true },
+        ],
+      },
     ] satisfies ArchitectureProject[],
   },
 } as const;
