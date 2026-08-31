@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / PUBLICATION VALIDITY REOPENED**
+Status: **IN PROGRESS / CURRENT CENSUS COMPLETE**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -44,14 +44,20 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | Cut | Purpose | Status |
 | --- | --- | --- |
 | R1-A2.0 | Reconciliation Constitution + Cutover Eligibility Revocation | **MATERIALIZED** |
-| R1-A2.1 | Current GitHub Census + HEAD Observation | **IN PROGRESS** |
-| R1-A2.2 | Existing Identity Reconciliation | **NOT STARTED** |
+| R1-A2.1 | Current GitHub Census + HEAD Observation | **COMPLETE** |
+| R1-A2.2 | Existing Identity Reconciliation | **NEXT** |
 | R1-A2.3 | Current Revision Materialization | **NOT STARTED** |
 | R1-A2.4 | Evidence + Maturity Reconciliation | **NOT STARTED** |
 | R1-A2.5 | Public Disclosure Reauthorization | **NOT STARTED** |
 | R1-A2.6 | Current Route Admission | **NOT STARTED** |
 | R1-A2.7 | Current Editorial Surface Reconstruction | **NOT STARTED** |
 | R1-A2.8 | Current Publication Acceptance | **NOT STARTED** |
+
+## R1-A2.1 physical census
+
+The connected GitHub installation was re-enumerated rather than inferred from the R1-PRE file. The inventory still contains 54 repositories: 39 under `4LFR3Dv1` and 15 under `SNE-Labs`. Every default branch ref was queried directly. Fifty-two repositories have a material HEAD; `4LFR3Dv1/SNE-RADAR-v1.0` and `4LFR3Dv1/factory-control` are explicitly empty.
+
+The frozen observation is `docs/editorial/R1-A2.1-current-github-census.v0.json`. It records repository, visibility, default branch and exact observed HEAD. Inventory equality with R1-PRE is not treated as semantic equality; R1-A2.2 must now reconcile those observed repository realizations against existing Record identities.
 
 ## Direction of authority
 
@@ -89,12 +95,18 @@ R1_HISTORY_REWRITTEN=false
 R2_6_HISTORICAL_COMPLETE=true
 R2_7_HISTORICAL_COMPLETE=true
 
+CURRENT_CORPUS_CENSUS_COMPLETE=true
+CURRENT_REPOSITORY_COUNT=54
+MATERIAL_HEAD_COUNT=52
+EMPTY_REPOSITORY_COUNT=2
+
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
 CUTOVER_ENACTED=false
 
 R1_A2_0_MATERIALIZED=true
+R1_A2_1_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.1 — Current GitHub Census + HEAD Observation
+NEXT=R1-A2.2 — Existing Identity Reconciliation
 ```
