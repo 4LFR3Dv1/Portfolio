@@ -10,6 +10,8 @@
     "materialize": "node scripts/materialize-input.mjs",
     "dev": "npm run materialize && astro dev",
     "build": "npm run materialize && astro build",
+    "build:portfolio": "astro build --config astro.portfolio.config.mjs",
+    "dev:portfolio": "astro dev --config astro.portfolio.config.mjs",
     "preview": "astro preview",
     "commission": "node runtime/commissioned-runtime.mjs",
     "verify:commissioned": "node scripts/verify-commissioned-runtime.mjs",

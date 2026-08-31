@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { AboutSection } from '@/app/components/about-section';
 import { CommandPalette } from '@/app/components/command-palette';
 import { ContactSection } from '@/app/components/contact-section';
+import { EditorialSection } from '@/app/components/editorial-section';
 import { EvidenceRoom } from '@/app/components/evidence-room';
 import { HeroSection } from '@/app/components/hero-section';
 import { PublicationsSection } from '@/app/components/publications-section';
@@ -78,6 +79,10 @@ export default function App() {
   };
 
   const handlePaletteNavigate = (section: string) => {
+    if (section === 'editorial') {
+      window.location.assign('/editorial/');
+      return;
+    }
     if (section === 'home') {
       window.history.pushState({}, '', '/');
       setRoute({ view: 'landing' });
@@ -101,6 +106,7 @@ export default function App() {
         route={route}
         onNavigate={handlePaletteNavigate}
         onArchitecture={() => navigate({ view: 'architecture' })}
+        onEditorial={() => window.location.assign('/editorial/')}
         onOpenPalette={openPalette}
       />
       <CommandPalette
@@ -125,6 +131,7 @@ export default function App() {
               onOpen={(url) => window.open(url, '_blank', 'noopener,noreferrer')}
               onEvidence={() => navigateToSection('evidence')}
             />
+            <EditorialSection />
             <EvidenceRoom />
             <PublicationsSection onCaseStudy={(projectId) => navigate({ view: 'case-study', projectId })} />
             <SystemArchitecture onOpen={() => navigate({ view: 'architecture' })} />
@@ -145,7 +152,6 @@ export default function App() {
           <ArchitectureExplorer onBack={() => navigate({ view: 'landing' })} />
         )}
       </Suspense>
-
     </div>
   );
 }

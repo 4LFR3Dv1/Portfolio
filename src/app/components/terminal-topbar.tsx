@@ -3,12 +3,13 @@ import type { PortfolioRoute } from '../routing';
 import { useLanguage } from '../context/language-context';
 import { LanguageToggle } from './language-toggle';
 
-type NavigationId = 'home' | 'work' | 'evidence' | 'architecture' | 'about' | 'contact';
+type NavigationId = 'home' | 'work' | 'editorial' | 'evidence' | 'architecture' | 'about' | 'contact';
 
 interface TerminalTopBarProps {
   route: PortfolioRoute;
   onNavigate: (section: NavigationId) => void;
   onArchitecture: () => void;
+  onEditorial: () => void;
   onOpenPalette: () => void;
 }
 
@@ -20,6 +21,7 @@ interface NavigationItem {
 
 const observedSections: Array<{ elementId: string; navigationId: NavigationId }> = [
   { elementId: 'selected-work', navigationId: 'work' },
+  { elementId: 'editorial', navigationId: 'editorial' },
   { elementId: 'evidence', navigationId: 'evidence' },
   { elementId: 'architecture', navigationId: 'architecture' },
   { elementId: 'about', navigationId: 'about' },
@@ -32,7 +34,7 @@ export function resolveActiveNavigation(route: PortfolioRoute, visibleSection: N
   return visibleSection;
 }
 
-export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalette }: TerminalTopBarProps) {
+export function TerminalTopBar({ route, onNavigate, onArchitecture, onEditorial, onOpenPalette }: TerminalTopBarProps) {
   const { language } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [visibleSection, setVisibleSection] = useState<NavigationId>('home');
@@ -50,10 +52,11 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
         shortcut: 'Shortcut',
         items: [
           { id: 'work', index: '01', label: 'WORK' },
-          { id: 'evidence', index: '02', label: 'EVIDENCE' },
-          { id: 'architecture', index: '03', label: 'ARCHITECTURE' },
-          { id: 'about', index: '04', label: 'ABOUT' },
-          { id: 'contact', index: '05', label: 'CONTACT' },
+          { id: 'editorial', index: '02', label: 'EDITORIAL' },
+          { id: 'evidence', index: '03', label: 'EVIDENCE' },
+          { id: 'architecture', index: '04', label: 'ARCHITECTURE' },
+          { id: 'about', index: '05', label: 'ABOUT' },
+          { id: 'contact', index: '06', label: 'CONTACT' },
         ] satisfies NavigationItem[],
       }
     : {
@@ -66,10 +69,11 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
         shortcut: 'Atalho',
         items: [
           { id: 'work', index: '01', label: 'TRABALHOS' },
-          { id: 'evidence', index: '02', label: 'EVIDÊNCIAS' },
-          { id: 'architecture', index: '03', label: 'ARQUITETURA' },
-          { id: 'about', index: '04', label: 'SOBRE' },
-          { id: 'contact', index: '05', label: 'CONTATO' },
+          { id: 'editorial', index: '02', label: 'EDITORIAL' },
+          { id: 'evidence', index: '03', label: 'EVIDÊNCIAS' },
+          { id: 'architecture', index: '04', label: 'ARQUITETURA' },
+          { id: 'about', index: '05', label: 'SOBRE' },
+          { id: 'contact', index: '06', label: 'CONTATO' },
         ] satisfies NavigationItem[],
       };
 
@@ -134,6 +138,10 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
 
   const activateItem = (id: NavigationItem['id']) => {
     setIsMenuOpen(false);
+    if (id === 'editorial') {
+      onEditorial();
+      return;
+    }
     if (id === 'architecture') {
       onArchitecture();
       return;
@@ -157,9 +165,7 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
             RM
           </span>
           <span className="hidden min-w-0 xl:block">
-            <span className="block font-mono text-xs font-semibold tracking-wide text-[var(--terminal-text)]">
-              RENAN MELO
-            </span>
+            <span className="block font-mono text-xs font-semibold tracking-wide text-[var(--terminal-text)]">RENAN MELO</span>
             <span className="mt-1 flex items-center gap-2 font-mono text-xs text-[var(--terminal-muted)]">
               <span className="h-1.5 w-1.5 bg-[var(--status-online)]" aria-hidden="true" />
               {copy.portfolio}
@@ -167,10 +173,7 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
           </span>
         </button>
 
-        <nav
-          className="hidden min-w-0 flex-1 items-stretch border-l border-[var(--border-default)] lg:flex"
-          aria-label={copy.navigation}
-        >
+        <nav className="hidden min-w-0 flex-1 items-stretch border-l border-[var(--border-default)] lg:flex" aria-label={copy.navigation}>
           {copy.items.map((item) => {
             const isActive = activeNavigation === item.id;
             return (
@@ -179,22 +182,11 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
                 type="button"
                 onClick={() => activateItem(item.id)}
                 aria-current={isActive ? 'page' : undefined}
-                className={`group relative flex min-h-16 min-w-0 flex-1 items-center justify-center gap-2 border-r border-[var(--border-default)] px-3 font-mono text-xs tracking-wider motion-safe:transition-colors motion-safe:duration-100 focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] ${
-                  isActive
-                    ? 'bg-[var(--surface-2)] text-[var(--electric-blue)]'
-                    : 'text-[var(--terminal-muted)] hover:bg-[var(--surface-1)] hover:text-[var(--terminal-text)]'
-                }`}
+                className={`group relative flex min-h-16 min-w-0 flex-1 items-center justify-center gap-2 border-r border-[var(--border-default)] px-3 font-mono text-xs tracking-wider motion-safe:transition-colors motion-safe:duration-100 focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] ${isActive ? 'bg-[var(--surface-2)] text-[var(--electric-blue)]' : 'text-[var(--terminal-muted)] hover:bg-[var(--surface-1)] hover:text-[var(--terminal-text)]'}`}
               >
-                <span className={isActive ? 'text-[var(--electric-blue)]' : 'text-[var(--border-strong)]'}>
-                  {item.index}
-                </span>
+                <span className={isActive ? 'text-[var(--electric-blue)]' : 'text-[var(--border-strong)]'}>{item.index}</span>
                 <span className="truncate">{item.label}</span>
-                <span
-                  className={`absolute inset-x-0 bottom-0 h-px origin-left bg-[var(--electric-blue)] motion-safe:transition-transform motion-safe:duration-150 ${
-                    isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                  }`}
-                  aria-hidden="true"
-                />
+                <span className={`absolute inset-x-0 bottom-0 h-px origin-left bg-[var(--electric-blue)] motion-safe:transition-transform motion-safe:duration-150 ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} aria-hidden="true" />
               </button>
             );
           })}
@@ -205,66 +197,30 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
             <span className="h-1.5 w-1.5 bg-[var(--status-online)]" aria-hidden="true" />
             <span className="font-mono text-xs text-[var(--terminal-muted)]">{copy.status}</span>
           </div>
-
-          <button
-            type="button"
-            onClick={onOpenPalette}
-            className="hidden min-h-10 items-center gap-3 border border-[var(--border-default)] bg-[var(--surface-1)] px-3 font-mono text-xs text-[var(--terminal-muted)] motion-safe:transition-colors motion-safe:duration-100 hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)] focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] sm:flex"
-            aria-label={language === 'en' ? 'Open command palette' : 'Abrir paleta de comandos'}
-          >
+          <button type="button" onClick={onOpenPalette} className="hidden min-h-10 items-center gap-3 border border-[var(--border-default)] bg-[var(--surface-1)] px-3 font-mono text-xs text-[var(--terminal-muted)] motion-safe:transition-colors motion-safe:duration-100 hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)] focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] sm:flex" aria-label={language === 'en' ? 'Open command palette' : 'Abrir paleta de comandos'}>
             <span>{copy.commands}</span>
-            <kbd className="border border-[var(--border-strong)] bg-[var(--terminal-bg)] px-1.5 py-0.5 text-[var(--terminal-text)]">
-              ⌘K
-            </kbd>
+            <kbd className="border border-[var(--border-strong)] bg-[var(--terminal-bg)] px-1.5 py-0.5 text-[var(--terminal-text)]">⌘K</kbd>
           </button>
-
           <LanguageToggle />
-
-          <button
-            type="button"
-            aria-expanded={isMenuOpen}
-            aria-controls="portfolio-mobile-navigation"
-            onClick={() => setIsMenuOpen((open) => !open)}
-            className="flex min-h-11 min-w-11 items-center justify-center border border-[var(--border-default)] bg-[var(--surface-1)] px-3 font-mono text-xs text-[var(--terminal-text)] motion-safe:transition-colors motion-safe:duration-100 hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)] focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] lg:hidden"
-          >
+          <button type="button" aria-expanded={isMenuOpen} aria-controls="portfolio-mobile-navigation" onClick={() => setIsMenuOpen((open) => !open)} className="flex min-h-11 min-w-11 items-center justify-center border border-[var(--border-default)] bg-[var(--surface-1)] px-3 font-mono text-xs text-[var(--terminal-text)] motion-safe:transition-colors motion-safe:duration-100 hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)] focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] lg:hidden">
             {isMenuOpen ? copy.close : copy.menu}
           </button>
         </div>
       </div>
 
       {isMenuOpen && (
-        <div
-          id="portfolio-mobile-navigation"
-          className="border-t border-[var(--border-default)] bg-[var(--terminal-bg)] lg:hidden"
-        >
+        <div id="portfolio-mobile-navigation" className="border-t border-[var(--border-default)] bg-[var(--terminal-bg)] lg:hidden">
           <nav className="mx-auto grid max-w-[1600px] grid-cols-1 px-4 py-3 sm:grid-cols-2 sm:px-6" aria-label={copy.navigation}>
             {copy.items.map((item) => {
               const isActive = activeNavigation === item.id;
               return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => activateItem(item.id)}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`flex min-h-12 items-center justify-between border-b border-[var(--border-default)] px-3 text-left font-mono text-xs tracking-wider motion-safe:transition-colors motion-safe:duration-100 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] sm:odd:border-r ${
-                    isActive
-                      ? 'bg-[var(--surface-2)] text-[var(--electric-blue)]'
-                      : 'text-[var(--terminal-text)] hover:bg-[var(--surface-1)]'
-                  }`}
-                >
+                <button key={item.id} type="button" onClick={() => activateItem(item.id)} aria-current={isActive ? 'page' : undefined} className={`flex min-h-12 items-center justify-between border-b border-[var(--border-default)] px-3 text-left font-mono text-xs tracking-wider motion-safe:transition-colors motion-safe:duration-100 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] sm:odd:border-r ${isActive ? 'bg-[var(--surface-2)] text-[var(--electric-blue)]' : 'text-[var(--terminal-text)] hover:bg-[var(--surface-1)]'}`}>
                   <span><span className="mr-3 text-[var(--terminal-muted)]">{item.index}</span>{item.label}</span>
                   <span aria-hidden="true">→</span>
                 </button>
               );
             })}
-            <button
-              type="button"
-              onClick={() => {
-                setIsMenuOpen(false);
-                onOpenPalette();
-              }}
-              className="flex min-h-12 items-center justify-between border-b border-[var(--electric-blue)] px-3 text-left font-mono text-xs tracking-wider text-[var(--electric-blue)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] sm:col-span-2"
-            >
+            <button type="button" onClick={() => { setIsMenuOpen(false); onOpenPalette(); }} className="flex min-h-12 items-center justify-between border-b border-[var(--electric-blue)] px-3 text-left font-mono text-xs tracking-wider text-[var(--electric-blue)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] sm:col-span-2">
               <span>{copy.shortcut} // {copy.commands}</span>
               <kbd className="border border-[var(--electric-blue)] px-2 py-1">⌘K</kbd>
             </button>
@@ -273,10 +229,7 @@ export function TerminalTopBar({ route, onNavigate, onArchitecture, onOpenPalett
       )}
 
       <div className="absolute inset-x-0 bottom-0 h-px overflow-hidden" aria-hidden="true">
-        <div
-          className="h-full origin-left bg-[var(--electric-blue)]"
-          style={{ transform: `scaleX(${scrollProgress})` }}
-        />
+        <div className="h-full origin-left bg-[var(--electric-blue)]" style={{ transform: `scaleX(${scrollProgress})` }} />
       </div>
     </header>
   );

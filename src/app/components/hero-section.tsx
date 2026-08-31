@@ -12,22 +12,24 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
   const { language, t } = useLanguage();
   const copy = language === 'en'
     ? {
-        role: 'Blockchain & Agentic Systems Engineer',
-        author: 'Author of VERIFY SYSTEMS',
-        description: 'I build verifiable financial products, agentic systems and developer tooling — from protocol and backend architecture to the interfaces people use.',
-        focus: ['Financial infrastructure', 'Agent platforms', 'Real-time products', 'Developer tooling'],
-        quick: 'VERIFIABLE LINKS',
+        role: 'Computing Systems Engineer',
+        author: 'SNE Labs // Computing Research',
+        description: 'I build computing systems, agent-native runtimes and experimental infrastructure — from bare-metal and network primitives to governed software surfaces.',
+        focus: ['Agent-native systems', 'Bare-metal research', 'Computing infrastructure', 'Applied research'],
+        quick: 'CURRENT SURFACES',
         portfolio: 'PERSONAL GITHUB',
-        demo: 'SNE OS',
+        editorial: 'EDITORIAL',
+        lab: 'SNE LABS',
       }
     : {
-        role: 'Engenheiro de Blockchain & Sistemas Agênticos',
-        author: 'Autor de VERIFY SYSTEMS',
-        description: 'Construo produtos financeiros, sistemas agênticos e ferramentas para desenvolvedores — da arquitetura de protocolo e backend até as interfaces usadas por pessoas.',
-        focus: ['Infraestrutura financeira', 'Plataformas de agentes', 'Produtos em tempo real', 'Ferramentas para desenvolvedores'],
-        quick: 'LINKS VERIFICÁVEIS',
+        role: 'Engenheiro de Sistemas Computacionais',
+        author: 'SNE Labs // Pesquisa em Computação',
+        description: 'Construo sistemas computacionais, runtimes agent-native e infraestrutura experimental — de primitivas bare-metal e de rede a superfícies de software governadas.',
+        focus: ['Sistemas agent-native', 'Pesquisa bare-metal', 'Infraestrutura computacional', 'Pesquisa aplicada'],
+        quick: 'SUPERFÍCIES ATUAIS',
         portfolio: 'GITHUB PESSOAL',
-        demo: 'SNE OS',
+        editorial: 'EDITORIAL',
+        lab: 'SNE LABS',
       };
 
   return (
@@ -58,10 +60,10 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Badge variant="green">PRODUCTION SYSTEMS</Badge>
-            <Badge variant="blue">END-TO-END ENGINEERING</Badge>
-            <Badge variant="purple">AGENTIC WORKFLOWS</Badge>
-            <Badge variant="amber">BITCOIN + SOLANA</Badge>
+            <Badge variant="green">COMPUTING SYSTEMS</Badge>
+            <Badge variant="blue">AGENT-NATIVE</Badge>
+            <Badge variant="purple">RESEARCH + ENGINEERING</Badge>
+            <Badge variant="amber">LOCAL-FIRST</Badge>
           </div>
 
           <div className="flex flex-wrap gap-4 pt-4">
@@ -74,8 +76,8 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
             <div className="font-mono text-[10px] uppercase tracking-wider mb-4" style={{ color: 'var(--terminal-muted)' }}>{copy.quick}</div>
             <div className="grid sm:grid-cols-2 gap-3 font-mono text-sm">
               <QuickLink label={copy.portfolio} value="4LFR3Dv1" url="https://github.com/4LFR3Dv1" />
-              <QuickLink label="VIRA" value="vira.snelabs.space" url="https://vira.snelabs.space/?lang=en" />
-              <QuickLink label={copy.demo} value="snelabs.space" url="https://snelabs.space" />
+              <QuickLink label={copy.editorial} value="renan.snelabs.space/editorial" url="/editorial/" external={false} />
+              <QuickLink label={copy.lab} value="snelabs.space" url="https://snelabs.space" />
               <QuickLink label="LINKEDIN" value="renan-melo-connexions" url="https://linkedin.com/in/renan-melo-connexions" />
             </div>
           </div>
@@ -84,19 +86,19 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
         <aside className="border border-[var(--border-default)] bg-[var(--surface-1)] lg:sticky lg:top-24">
           <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)]">
             <div className="font-mono text-xs uppercase tracking-wider" style={{ color: '#a855f7' }}>
-              CURRENT FOCUS // SYSTEMS THAT PROVE THEIR STATE
+              CURRENT FOCUS // SYSTEMS IN MOTION
             </div>
           </div>
           <div className="p-6 space-y-5">
             <p className="text-sm leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
               {language === 'en'
-                ? 'My current work combines authoritative runtimes, local-first financial security and operational control planes for AI agents.'
-                : 'Meu trabalho atual combina runtimes autoritativos, segurança financeira local-first e planos de controle operacional para agentes de IA.'}
+                ? 'Current work spans governed web runtimes, bare-metal AI-native computing and field systems that turn research into executable infrastructure.'
+                : 'O trabalho atual atravessa runtimes web governados, computação AI-native bare-metal e sistemas de campo que transformam pesquisa em infraestrutura executável.'}
             </p>
             <div className="grid gap-3">
-              <FocusRow label="VIRA" value={language === 'en' ? 'LIVE + VERIFIABLE' : 'ONLINE + VERIFICÁVEL'} />
-              <FocusRow label="XS WALLET" value="TECHNICAL PRE-BETA" />
-              <FocusRow label="AGENTIC SYSTEMS" value={language === 'en' ? 'PRIVATE R&D' : 'P&D PRIVADO'} />
+              <FocusRow label="GENESIS" value={language === 'en' ? 'ACTIVE R&D' : 'P&D ATIVO'} />
+              <FocusRow label="BRINEOS" value={language === 'en' ? 'BARE-METAL RESEARCH' : 'PESQUISA BARE-METAL'} />
+              <FocusRow label="SNE-FDE" value={language === 'en' ? 'FIELD SYSTEM' : 'SISTEMA DE CAMPO'} />
             </div>
           </div>
         </aside>
@@ -105,9 +107,14 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
   );
 }
 
-function QuickLink({ label, value, url }: { label: string; value: string; url: string }) {
+function QuickLink({ label, value, url, external = true }: { label: string; value: string; url: string; external?: boolean }) {
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[var(--terminal-muted)] hover:text-[var(--electric-blue)] transition-colors">
+    <a
+      href={url}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      className="flex items-center gap-2 text-[var(--terminal-muted)] hover:text-[var(--electric-blue)] transition-colors"
+    >
       <span aria-hidden="true" className="text-[var(--electric-blue)]">→</span>
       <span className="uppercase text-xs">{label}:</span>
       <span>{value}</span>

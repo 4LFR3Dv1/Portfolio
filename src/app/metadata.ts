@@ -26,19 +26,19 @@ export function metadataForRoute(route: PortfolioRoute, language: Language): Por
     return {
       title: language === 'en' ? 'Architecture — Renan Melo' : 'Arquitetura — Renan Melo',
       description: language === 'en'
-        ? 'Explore system architecture across governed settlement, agent operations, real-time products, transactional workflows and verifiable evidence.'
-        : 'Explore arquiteturas de settlement governado, operação agêntica, produtos em tempo real, fluxos transacionais e evidência verificável.',
+        ? 'Explore computing systems, agentic runtimes, operational infrastructure and verifiable architecture.'
+        : 'Explore sistemas computacionais, runtimes agênticos, infraestrutura operacional e arquitetura verificável.',
       canonicalUrl: `${SITE_URL}/architecture`,
     };
   }
 
   return {
     title: language === 'en'
-      ? 'Renan Melo — Blockchain & Agentic Systems Engineer'
-      : 'Renan Melo — Engenheiro de Blockchain e Sistemas Agênticos',
+      ? 'Renan Melo — Computing Systems Engineer'
+      : 'Renan Melo — Engenheiro de Sistemas Computacionais',
     description: language === 'en'
-      ? 'Blockchain and agentic systems engineer building financial products, real-time runtimes, agent platforms and developer tooling.'
-      : 'Engenheiro de blockchain e sistemas agênticos construindo produtos financeiros, runtimes em tempo real, plataformas de agentes e ferramentas para desenvolvedores.',
+      ? 'Computing systems, agent-native runtimes, bare-metal research and applied infrastructure by Renan Melo.'
+      : 'Sistemas computacionais, runtimes agent-native, pesquisa bare-metal e infraestrutura aplicada por Renan Melo.',
     canonicalUrl: `${SITE_URL}/`,
   };
 }

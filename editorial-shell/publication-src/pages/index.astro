@@ -1,0 +1,30 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import { publications } from '../data/publications';
+
+const canonicalUrl = new URL('/editorial/', Astro.site).toString();
+---
+<PublicationLayout
+  title="Editorial — Renan Melo"
+  description="Sistemas, pesquisas, ensaios e notas do trabalho atual de Renan Melo."
+  canonicalUrl={canonicalUrl}
+>
+  <section class="index-header">
+    <p class="kicker">EDITORIAL // RENAN MELO</p>
+    <h1>Pesquisa que vira sistema. Sistemas que geram novas perguntas.</h1>
+    <p class="dek">Publicações sobre computação, runtimes agent-native, infraestrutura experimental e os sistemas em desenvolvimento na SNE Labs.</p>
+  </section>
+
+  <div class="publication-list">
+    {publications.map((publication) => (
+      <a class="publication-row" href={`/editorial/${publication.slug}/`}>
+        <span class="type">{publication.kind}<br />{publication.updatedAt}</span>
+        <span>
+          <h2>{publication.title}</h2>
+          <p>{publication.copy.pt.summary}</p>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    ))}
+  </div>
+</PublicationLayout>
