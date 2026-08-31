@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "editorial-route-runtime-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.3-2026-08-30",
+  "materialization": {
+    "commit": "99943c68be9b800a2242d13adb498cbadb0c42ff",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33343235212,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/route-runtime.v0.json",
+    "manifestBlobSha": "3f19d88dc369a5bd5276c3d35b833fd352120419"
+  },
+  "effectiveRouteRuntime": {
+    "bornSystemRecords": 28,
+    "routedSystemRecords": 5,
+    "bornSystemsWithoutRoute": 23,
+    "canonicalRouteBindings": 10,
+    "aliasRouteBindings": 0,
+    "cancelledAgenticPlans": 2,
+    "unbirthedRepresentationRoutesAdmitted": false,
+    "runtimePathInferenceAllowed": false,
+    "languageRealizationsAdmitted": false,
+    "languageFallbackAllowed": false,
+    "legacyCompatibilityEnacted": false,
+    "publicProjectionCountChanged": false,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "acceptance": {
+    "r1_2Complete": true,
+    "r1_3Complete": true,
+    "routeRuntimeReconstructs": true,
+    "routeAdmissionExplicit": true,
+    "historicalPathReassignmentForbidden": true,
+    "unknownPathRemainsUnresolved": true,
+    "currentPublicProjectionCount": 0,
+    "nextRequiredCut": "R1.4 — Language Runtime"
+  }
+}
