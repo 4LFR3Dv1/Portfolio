@@ -1,4 +1,4 @@
-/* global console */
+/* global console, fetch, URLSearchParams */
 import { createCurrentCommissionedRuntime } from '../runtime/current-commissioned-runtime.mjs';
 
 const EXPECTED_PUBLICATION_DIGEST = 'sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32';
