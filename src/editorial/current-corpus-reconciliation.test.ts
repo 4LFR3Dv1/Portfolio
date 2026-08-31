@@ -30,6 +30,7 @@ interface ReconciliationConstitution {
     historicalMigrationPlanIsPerpetualPublicAuthority: boolean;
     genericBirthSummaryAllowedAsCurrentPublicSummary: boolean;
     privateEvidencePublicByDefault: boolean;
+    existingGovernanceIdentityMustBePreserved: boolean;
     currentPublicationValidityGatesCutover: boolean;
   };
   currentState: {
@@ -44,10 +45,14 @@ interface ReconciliationConstitution {
     newRecordBirthCount: number;
     currentRevisionMaterializationComplete: boolean;
     evidenceMaturityReconciliationComplete: boolean;
+    evidenceMaturityCorrectionActive: boolean;
     currentEvidenceObservationCount: number;
     currentMaturityClassifiedCount: number;
     currentMaturityUnclassifiedCount: number;
     currentMaturityConflictCount: number;
+    currentMaturityGovernanceBirthCount: number;
+    currentMaturityGovernanceSuccessorCount: number;
+    maturityIdentityReplacementCount: number;
     staleMaturityInheritanceCount: number;
     currentPublicationValid: boolean;
     cutoverReady: boolean;
@@ -447,7 +452,7 @@ describe('R1-A2 current corpus reconciliation', () => {
     expect(identity.laws.unresolvedRelationMayBePreservedWithoutIdentityReplacement).toBe(true);
   });
 
-  it('preserves the R1-A2.2 seal after A2.4 advances current revision and governance state', () => {
+  it('preserves earlier seals while reopening only A2.4 current acceptance for governance-lineage correction', () => {
     expect(identity.currentState).toMatchObject({
       existingBirthRecordCount: 28,
       reconciledRecordCount: 28,
@@ -502,11 +507,15 @@ describe('R1-A2 current corpus reconciliation', () => {
       recordIdChangeCount: 0,
       newRecordBirthCount: 0,
       currentRevisionMaterializationComplete: true,
-      evidenceMaturityReconciliationComplete: true,
+      evidenceMaturityReconciliationComplete: false,
+      evidenceMaturityCorrectionActive: true,
       currentEvidenceObservationCount: 48,
       currentMaturityClassifiedCount: 8,
       currentMaturityUnclassifiedCount: 19,
       currentMaturityConflictCount: 0,
+      currentMaturityGovernanceBirthCount: 7,
+      currentMaturityGovernanceSuccessorCount: 1,
+      maturityIdentityReplacementCount: 0,
       staleMaturityInheritanceCount: 0,
       currentPublicationValid: false,
       cutoverReady: false,
@@ -515,9 +524,9 @@ describe('R1-A2 current corpus reconciliation', () => {
       r1_a2_1Complete: true,
       r1_a2_2Complete: true,
       r1_a2_3Complete: true,
-      r1_a2_4Complete: true,
+      r1_a2_4Complete: false,
       r1_a2Complete: false,
-      nextRequiredCut: 'R1-A2.5 — Public Disclosure Reauthorization',
+      nextRequiredCut: 'R1-A2.4 — Governance Lineage Correction CI',
     });
     expect(constitution.laws).toMatchObject({
       existingRecordIdentityMustBePreserved: true,
@@ -530,10 +539,11 @@ describe('R1-A2 current corpus reconciliation', () => {
       historicalMigrationPlanIsPerpetualPublicAuthority: false,
       genericBirthSummaryAllowedAsCurrentPublicSummary: false,
       privateEvidencePublicByDefault: false,
+      existingGovernanceIdentityMustBePreserved: true,
       currentPublicationValidityGatesCutover: true,
     });
     expect(r1A2Doc).toContain('R1_A2_2_COMPLETE=true');
     expect(r1A2Doc).toContain('R1_A2_3_COMPLETE=true');
-    expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=true');
+    expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=false');
   });
 });
