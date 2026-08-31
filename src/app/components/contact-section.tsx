@@ -56,7 +56,7 @@ export function ContactSection() {
             <a href="https://github.com/4LFR3Dv1" target="_blank" rel="noopener noreferrer" className="border-t border-[var(--border-default)] py-4 font-mono text-xs text-[var(--terminal-muted)] transition-colors hover:text-[var(--electric-blue)]">
               {copy.github}
             </a>
-            <a href="https://snelabs.space" target="_blank" rel="noopener noreferrer" className="border-y border-[var(--border-default)] py-4 font-mono text-xs text-[var(--terminal-muted)] transition-colors hover:text-[var(--electric-blue)]">
+            <a href="https://home.snelabs.space/" target="_blank" rel="noopener noreferrer" className="border-y border-[var(--border-default)] py-4 font-mono text-xs text-[var(--terminal-muted)] transition-colors hover:text-[var(--electric-blue)]">
               {copy.labs}
             </a>
           </div>
