@@ -10,6 +10,7 @@ import {
   deriveGovernanceProjection,
   serializeGovernancePayload,
   validateGovernanceResolution,
+  validateMaturityContinuity,
   type CurrentGovernanceEntry,
   type GovernanceRevisionIndexEntry,
   type MaturityPayload,
@@ -20,6 +21,7 @@ import {
   isRecordId,
   serializeRevisionMaterial,
   validateBirth,
+  validateSuccessor,
   type PayloadDigest,
   type PinnedRecordRef,
   type RecordRevision,
@@ -57,6 +59,7 @@ export interface CurrentEvidenceMaturityManifest {
     maturityImpliesDisclosure: false;
     observationImpliesDisclosure: false;
     historicalGovernanceSilentInheritance: false;
+    existingMaturityGovernanceIdentityMustContinue: true;
     formalEvidenceBindingToSystemMinted: false;
     privateEvidencePublicByDefault: false;
   };
@@ -75,11 +78,13 @@ export interface CurrentEvidenceMaturityManifest {
     formalEvidenceRecordBirthCount: 0;
     formalEvidenceBindingBirthCount: 0;
     maturityGovernanceBirthCount: number;
+    maturityGovernanceSuccessorCount: number;
   };
   acceptance: {
     allCurrentSuccessorsReconciled: boolean;
     allObservationSourcesTemporallyBound: boolean;
     staleMaturityInheritanceCount: number;
+    maturityIdentityReplacementCount: number;
     maturityConflictCount: number;
     maturityClassifiedCount: number;
     maturityUnclassifiedCount: number;
@@ -97,6 +102,8 @@ interface LegacyGovernanceAssignment {
   kind: 'governance.disclosure' | 'governance.maturity';
   targetRecordId: string;
   basisRevisionId: string;
+  stage?: MaturityStage;
+  rationale: string;
 }
 
 interface CoreEditorialSurfacesManifest {
@@ -121,6 +128,8 @@ export interface MaterializedCurrentMaturityRecord {
   targetRef: PinnedRecordRef;
   stage: MaturityStage;
   confidence: 'high' | 'medium' | 'low';
+  materializationKind: 'birth' | 'successor';
+  previousGovernanceRevisionId: RevisionId | null;
   revision: RecordRevision;
   payload: MaturityPayload;
 }
@@ -167,14 +176,34 @@ function maturityPayload(
   };
 }
 
-function maturityRevision(governanceRecordId: `rec_${string}`, payload: MaturityPayload): RecordRevision {
+function historicalMaturityPayload(legacy: LegacyGovernanceAssignment): MaturityPayload | null {
+  if (legacy.kind !== 'governance.maturity' || !legacy.stage || !isRecordId(legacy.targetRecordId)) return null;
+  return {
+    schemaVersion: 'governance.maturity/v0',
+    targetRef: { type: 'record', recordId: legacy.targetRecordId },
+    basisRef: {
+      type: 'pinned-record',
+      recordId: legacy.targetRecordId,
+      revisionId: legacy.basisRevisionId as RevisionId,
+    },
+    stage: legacy.stage,
+    rationale: legacy.rationale,
+  };
+}
+
+function maturityRevision(
+  governanceRecordId: `rec_${string}`,
+  payload: MaturityPayload,
+  generation: number,
+  previousRevisionId: RevisionId | null,
+): RecordRevision {
   const payloadDigest = `sha256_${sha256(serializeGovernancePayload('governance.maturity', payload))}` as PayloadDigest;
   const material = {
     identitySchemaVersion: IDENTITY_SCHEMA_VERSION,
     recordId: governanceRecordId,
     kind: 'governance.maturity' as const,
-    generation: 0,
-    previousRevisionId: null,
+    generation,
+    previousRevisionId,
     lifecycle: 'active' as const,
     payloadDigest,
   };
@@ -200,10 +229,8 @@ export function materializeCurrentEvidenceMaturity(
   if (!unique(candidateSubjects)) errors.push('duplicate-candidate-subject');
 
   const legacyGovernance = (coreEditorialSurfacesJson as CoreEditorialSurfacesManifest).governanceAssignments;
-  const occupiedRecordIds = new Set([
-    ...current.records.map((record) => record.recordId),
-    ...legacyGovernance.map((entry) => entry.governanceRecordId),
-  ]);
+  const legacyGovernanceById = new Map(legacyGovernance.map((entry) => [entry.governanceRecordId, entry]));
+  const occupiedSystemRecordIds = new Set(current.records.map((record) => record.recordId));
 
   const revisionIndex: GovernanceRevisionIndexEntry[] = current.records.flatMap((record) =>
     record.revisions.map((entry) => ({
@@ -278,7 +305,7 @@ export function materializeCurrentEvidenceMaturity(
       errors.push(`invalid-governance-record-id:${candidate.subjectKey}`);
       continue;
     }
-    if (occupiedRecordIds.has(governanceRecordId) || governanceIds.has(governanceRecordId)) {
+    if (occupiedSystemRecordIds.has(governanceRecordId) || governanceIds.has(governanceRecordId)) {
       errors.push(`governance-record-id-collision:${candidate.subjectKey}`);
       continue;
     }
@@ -295,7 +322,61 @@ export function materializeCurrentEvidenceMaturity(
       continue;
     }
 
-    const revision = maturityRevision(governanceRecordId, payload);
+    const legacy = legacyGovernanceById.get(governanceRecordId);
+    if (legacy) {
+      if (legacy.kind !== 'governance.maturity') {
+        errors.push(`governance-record-kind-collision:${candidate.subjectKey}`);
+        continue;
+      }
+      if (legacy.targetRecordId !== successor.recordId) {
+        errors.push(`maturity-lineage-target-mismatch:${candidate.subjectKey}`);
+        continue;
+      }
+
+      const previousPayload = historicalMaturityPayload(legacy);
+      if (!previousPayload) {
+        errors.push(`historical-maturity-payload:${candidate.subjectKey}`);
+        continue;
+      }
+      const previousResolutionErrors = validateGovernanceResolution('governance.maturity', previousPayload, revisionIndex);
+      if (previousResolutionErrors.length > 0) {
+        errors.push(...previousResolutionErrors.map((error) => `${candidate.subjectKey}:historical:${error}`));
+        continue;
+      }
+      const previousRevision = maturityRevision(governanceRecordId, previousPayload, 0, null);
+      const previousBirthErrors = validateBirth(previousRevision);
+      if (previousBirthErrors.length > 0) {
+        errors.push(...previousBirthErrors.map((error) => `${candidate.subjectKey}:historical-birth:${error}`));
+        continue;
+      }
+      const continuityErrors = validateMaturityContinuity(previousPayload, payload);
+      if (continuityErrors.length > 0) {
+        errors.push(...continuityErrors.map((error) => `${candidate.subjectKey}:maturity-continuity:${error}`));
+        continue;
+      }
+
+      const revision = maturityRevision(governanceRecordId, payload, 1, previousRevision.revisionId);
+      const successorErrors = validateSuccessor(previousRevision, revision);
+      if (successorErrors.length > 0) {
+        errors.push(...successorErrors.map((error) => `${candidate.subjectKey}:successor:${error}`));
+        continue;
+      }
+
+      maturityRecords.push({
+        subjectKey: candidate.subjectKey,
+        governanceRecordId,
+        targetRef: payload.basisRef,
+        stage: payload.stage,
+        confidence: candidate.maturity.confidence,
+        materializationKind: 'successor',
+        previousGovernanceRevisionId: previousRevision.revisionId,
+        revision,
+        payload,
+      });
+      continue;
+    }
+
+    const revision = maturityRevision(governanceRecordId, payload, 0, null);
     const birthErrors = validateBirth(revision);
     if (birthErrors.length > 0) {
       errors.push(...birthErrors.map((error) => `${candidate.subjectKey}:birth:${error}`));
@@ -308,6 +389,8 @@ export function materializeCurrentEvidenceMaturity(
       targetRef: payload.basisRef,
       stage: payload.stage,
       confidence: candidate.maturity.confidence,
+      materializationKind: 'birth',
+      previousGovernanceRevisionId: null,
       revision,
       payload,
     });
@@ -361,6 +444,12 @@ export function materializeCurrentEvidenceMaturity(
   const classifiedCount = maturityResolutions.filter((entry) => entry.state === 'classified').length;
   const unclassifiedCount = maturityResolutions.filter((entry) => entry.state === 'unclassified').length;
   const conflictCount = maturityResolutions.filter((entry) => entry.state === 'conflict').length;
+  const birthCount = maturityRecords.filter((entry) => entry.materializationKind === 'birth').length;
+  const successorCount = maturityRecords.filter((entry) => entry.materializationKind === 'successor').length;
+  const maturityIdentityReplacementCount = maturityRecords.filter((entry) =>
+    entry.materializationKind === 'successor'
+    && entry.previousGovernanceRevisionId === null,
+  ).length;
 
   if (observations.length !== manifest.materialization.observationCount) errors.push('observation-count-contract');
   if (supportCount !== manifest.materialization.supportObservationCount) errors.push('support-count-contract');
@@ -368,8 +457,10 @@ export function materializeCurrentEvidenceMaturity(
   if (contradictionCount !== manifest.materialization.contradictionObservationCount) errors.push('contradiction-count-contract');
   if (classifiedCount !== manifest.materialization.maturityClassifiedCount) errors.push('classified-count-contract');
   if (unclassifiedCount !== manifest.materialization.maturityUnclassifiedCount) errors.push('unclassified-count-contract');
-  if (maturityRecords.length !== manifest.materialization.maturityGovernanceBirthCount) errors.push('governance-birth-count-contract');
+  if (birthCount !== manifest.materialization.maturityGovernanceBirthCount) errors.push('governance-birth-count-contract');
+  if (successorCount !== manifest.materialization.maturityGovernanceSuccessorCount) errors.push('governance-successor-count-contract');
   if (staleMaturityInheritanceCount !== manifest.acceptance.staleMaturityInheritanceCount) errors.push('stale-inheritance-count-contract');
+  if (maturityIdentityReplacementCount !== manifest.acceptance.maturityIdentityReplacementCount) errors.push('maturity-identity-replacement-count-contract');
   if (conflictCount !== manifest.acceptance.maturityConflictCount) errors.push('maturity-conflict-count-contract');
 
   const actualStageCounts: Partial<Record<MaturityStage, number>> = {};
