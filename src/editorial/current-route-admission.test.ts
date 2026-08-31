@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import routeAdmissionJson from '../../docs/editorial/R1-A2.6-current-route-admission.v0.json';
+import routeCompletionJson from '../../docs/editorial/R1-A2.6-completion.v0.json';
 import historicalRouteJson from '../../docs/editorial/route-runtime.v0.json';
 import { CURRENT_ROUTE_LANGUAGE_CANDIDATES } from './current-route-language-candidates';
 import {
@@ -10,6 +11,11 @@ import { materializeCurrentSystemRevisions } from './current-revision-runtime';
 import { materializeCurrentDisclosure } from './current-disclosure-runtime';
 
 const manifest = routeAdmissionJson as CurrentRouteAdmissionManifest;
+const completion = routeCompletionJson as {
+  status: string;
+  candidateWitness: { branchHead: string; verifyRunNumber: number; verifyConclusion: string };
+  acceptance: Record<string, boolean | string>;
+};
 const materialized = materializeCurrentRouteAdmission();
 const revisions = materializeCurrentSystemRevisions();
 const disclosure = materializeCurrentDisclosure();
@@ -126,8 +132,8 @@ describe('R1-A2.6 current bilingual route admission', () => {
     });
   });
 
-  it('keeps A2.6 isolated from surface membership and production while awaiting CI', () => {
-    expect(manifest.status).toBe('materialized-awaiting-ci');
+  it('seals A2.6 with current bilingual routes while leaving public surfaces and production unchanged', () => {
+    expect(manifest.status).toBe('complete');
     expect(manifest.materialization).toMatchObject({
       currentSuccessorSystemCount: 27,
       currentRoutedSystemCount: 27,
@@ -151,8 +157,20 @@ describe('R1-A2.6 current bilingual route admission', () => {
       deferredHistoricalRouteHeadUnavailableCount: 2,
       publicSurfaceMutationCount: 0,
       productionMutationCount: 0,
-      r1_a2_6Complete: false,
+      r1_a2_6Complete: true,
+      nextRequiredAction: 'R1-A2.7 — Current Editorial Surface Reconstruction',
     });
-    expect(manifest.acceptance.nextRequiredAction).toContain('CI must reconstruct');
+    expect(completion.status).toBe('complete');
+    expect(completion.candidateWitness).toEqual({
+      branchHead: 'd31f9797b69435806f0da82bb4f3ef896ca935b7',
+      verifyRunNumber: 310,
+      verifyConclusion: 'success',
+    });
+    expect(completion.acceptance).toMatchObject({
+      r1_a2_6Complete: true,
+      currentPublicationValid: false,
+      cutoverReady: false,
+      nextRequiredCut: 'R1-A2.7 — Current Editorial Surface Reconstruction',
+    });
   });
 });
