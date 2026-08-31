@@ -8,6 +8,7 @@ import {
 } from './current-system-revision-candidates';
 import {
   materializeCurrentSystemRevisions,
+  type CurrentRevisionAssignment,
   type CurrentRevisionManifest,
 } from './current-revision-runtime';
 import type { RecordRegistryManifest } from './record-registry';
@@ -73,7 +74,7 @@ describe('R1-A2.3 current System revisions', () => {
     expect(census.observedAt).toBe('2026-08-31T15:11:00Z');
 
     const censusByRepo = new Map(census.repositories.map((entry) => [entry.repo, entry]));
-    const assignmentByRecordId = new Map(
+    const assignmentByRecordId = new Map<string, CurrentRevisionAssignment>(
       CURRENT_SYSTEM_REVISION_ASSIGNMENTS.map((assignment) => [assignment.recordId, assignment]),
     );
 
