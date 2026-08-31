@@ -32,8 +32,8 @@ export const selectedWork: SelectedWorkItem[] = [
     caseStudyId: 'genesis',
     links: [
       {
-        href: 'https://github.com/SNE-Labs/Genesis-CP',
-        label: local('Public research', 'Pesquisa pública'),
+        href: 'https://genesis.snelabs.space/#genesis',
+        label: local('Open Genesis', 'Abrir Genesis'),
       },
     ],
   },
