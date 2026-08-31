@@ -82,7 +82,7 @@ describe('R2.3 legacy preservation runtime', () => {
     expect(verify?.kind).toBe('legacy-case-study');
     if (!verify || verify.kind !== 'legacy-case-study') throw new Error('verify legacy page missing');
     expect(verify.languages.en.evidence).toContainEqual({
-      label: 'READ PUBLICATION',
+      label: 'Read VERIFY SYSTEMS',
       url: '/docs/Verify_By_Renan_Melo.pdf',
     });
 
