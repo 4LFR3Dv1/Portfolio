@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-current-route-admission/v0",
   "contractId": "PORTFOLIO-R1-A2.6-2026-08-31",
-  "status": "materialized-awaiting-ci",
+  "status": "complete",
   "normative": true,
   "baseline": "ea9ee21cddcb40898d6410e63b80e659efa5020f",
   "preconditions": {
@@ -59,7 +59,7 @@
     "deferredHistoricalRouteHeadUnavailableCount": 2,
     "publicSurfaceMutationCount": 0,
     "productionMutationCount": 0,
-    "r1_a2_6Complete": false,
-    "nextRequiredAction": "CI must reconstruct 54 exact-current bilingual route-language pairs while preserving all historical route identities before acceptance"
+    "r1_a2_6Complete": true,
+    "nextRequiredAction": "R1-A2.7 — Current Editorial Surface Reconstruction"
   }
 }
