@@ -2,15 +2,15 @@ import { describe, expect, it } from 'vitest';
 import { metadataForRoute } from './metadata';
 
 describe('portfolio metadata', () => {
-  it('describes the architecture explorer in public language', () => {
+  it('describes the architecture explorer as a readable thinking map', () => {
     const route = { view: 'architecture' } as const;
 
     expect(metadataForRoute(route, 'en')).toEqual({
       title: 'Architecture — Renan Melo',
-      description: 'A closer look at how product, services, software execution and infrastructure connect across Renan Melo’s work.',
+      description: 'A readable map of the recurring questions and design choices behind Renan Melo’s software systems.',
       canonicalUrl: 'https://renan.snelabs.space/architecture',
     });
-    expect(metadataForRoute(route, 'pt').description).toContain('produto, serviços');
+    expect(metadataForRoute(route, 'pt').description).toContain('perguntas e escolhas de design');
   });
 
   it('describes the portfolio without internal project vocabulary', () => {
