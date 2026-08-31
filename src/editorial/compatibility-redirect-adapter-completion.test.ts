@@ -152,7 +152,7 @@ describe('R2.4 terminal completion seal', () => {
     expect(vercel.rewrites).toEqual([{ source: '/((?!.*\\.).*)', destination: '/index.html' }]);
     expect(r24Doc).toContain('Status: **COMPLETE / DUAL CI WITNESSED**');
     expect(r2Readme).toContain('| R2.4 | Compatibility Redirect Adapter | **COMPLETE** |');
-    expect(r2Readme).toContain('| R2.5 | Static Runtime Commissioning | **NEXT** |');
+    expect(r2Readme).toContain('| R2.5 | Static Runtime Commissioning |');
     expect(r2Readme).toContain('R2_4_COMPLETE=true');
   });
 });

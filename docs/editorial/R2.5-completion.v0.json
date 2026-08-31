@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "editorial-static-runtime-commissioning-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R2.5-2026-08-31",
+  "materialization": {
+    "commit": "e6953d2c6cd160fe91eac488cdb5cc020bd18ef5",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33396220080,
+      "conclusion": "success"
+    },
+    "shellBuild": {
+      "workflow": "Editorial Shell Build",
+      "runId": 33396220090,
+      "conclusion": "success",
+      "artifactId": 9759413009,
+      "artifactDigest": "sha256:e072e3fdb6f8a99dbc016633fdecaf1050edbfd2007b7bc9b566168089111c26"
+    },
+    "manifestPath": "docs/editorial/static-runtime-commissioning.v0.json",
+    "manifestBlobSha": "d203561179865ae8a9fa900fdded24c03f53379c"
+  },
+  "effectiveRuntime": {
+    "canonical200Count": 18,
+    "historical200Count": 4,
+    "handshake200Count": 4,
+    "redirect302Count": 8,
+    "successorLoss503Count": 1,
+    "unknown404Count": 1,
+    "sitemapUrlCount": 18,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 6,
+    "staticAssetCount": 2,
+    "canonicalHeaderMismatchCount": 0,
+    "historicalCanonicalLeakCount": 0,
+    "handshakeCanonicalLeakCount": 0,
+    "contentTypeMismatchCount": 0,
+    "cachePolicyMismatchCount": 0,
+    "successorLossLocationLeakCount": 0,
+    "productionStaticRuntimeActivated": false,
+    "productionRedirectsActivated": false,
+    "legacyPublicSitemapReplaced": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "r2_3Complete": true,
+    "r2_4Complete": true,
+    "r2_5Complete": true,
+    "commissionedRuntimePhysicallyWitnessed": true,
+    "integratedHttpCampaignPassed": true,
+    "canonicalHeaderHtmlConsistencyPreserved": true,
+    "distributionArtifactsPhysicallyServed": true,
+    "staticAssetsPhysicallyReachable": true,
+    "failClosedSuccessorLossWitnessed": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "deploymentMutationCount": 0,
+    "nextRequiredCut": "R2.6 — Shadow / Preview Deployment"
+  }
+}
