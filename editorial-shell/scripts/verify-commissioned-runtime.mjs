@@ -1,5 +1,10 @@
 /* global URL, URLSearchParams, fetch, console */
+import { readdirSync, statSync } from 'node:fs';
+import { join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createCommissionedRuntime } from '../runtime/commissioned-runtime.mjs';
+
+const distRoot = fileURLToPath(new URL('../dist/', import.meta.url));
 
 function requireHeader(response, name, expected, context) {
   const actual = response.headers.get(name);
@@ -15,17 +20,27 @@ function addressPort(address) {
   return address.port;
 }
 
+function walk(directory) {
+  return readdirSync(directory).flatMap((name) => {
+    const path = join(directory, name);
+    return statSync(path).isDirectory() ? walk(path) : [path];
+  });
+}
+
+function htmlFileForRoute(path) {
+  return path === '/' ? 'index.html' : `${path.replace(/^\//, '')}/index.html`;
+}
+
 const runtime = await createCommissionedRuntime();
 const address = await runtime.listen(0);
 const port = addressPort(address);
 
-let assetReferenceCount = 0;
+let staticAssetCount = 0;
 try {
   if (runtime.input.pages.length !== 18) throw new Error(`commissioned-runtime-canonical-count:${runtime.input.pages.length}`);
   if (runtime.input.legacy.pages.length !== 4) throw new Error(`commissioned-runtime-legacy-count:${runtime.input.legacy.pages.length}`);
   if (runtime.adapter.entries.length !== 4) throw new Error(`commissioned-runtime-redirect-count:${runtime.adapter.entries.length}`);
 
-  const assetPaths = new Set();
   for (const page of runtime.input.pages) {
     const response = await fetchFrom(port, page.canonicalPath);
     if (response.status !== 200) throw new Error(`commissioned-runtime-canonical-status:${page.canonicalPath}:${response.status}`);
@@ -44,9 +59,6 @@ try {
     }
     if (!html.includes('name="robots" content="index,follow"')) {
       throw new Error(`commissioned-runtime-html-robots:${page.canonicalPath}`);
-    }
-    for (const match of html.matchAll(/(?:src|href)="(\/_astro\/[^"?#]+)(?:[?#][^"]*)?"/g)) {
-      assetPaths.add(match[1]);
     }
   }
 
@@ -126,16 +138,34 @@ try {
   const searchEntries = await search.json();
   if (!Array.isArray(searchEntries) || searchEntries.length !== 6) throw new Error(`commissioned-runtime-search-count:${searchEntries?.length ?? 'invalid'}`);
 
-  assetReferenceCount = assetPaths.size;
-  if (assetReferenceCount < 1) throw new Error('commissioned-runtime-no-rendered-assets');
-  for (const assetPath of assetPaths) {
+  const semanticFiles = new Set([
+    ...runtime.input.pages.map((page) => htmlFileForRoute(page.canonicalPath)),
+    ...runtime.input.legacy.pages.map((page) => htmlFileForRoute(page.path)),
+    ...runtime.adapter.entries.map((entry) => htmlFileForRoute(entry.legacyPath)),
+    '404.html',
+    'sitemap.xml',
+    'en/rss.xml',
+    'pt-br/rss.xml',
+    'search-index.json',
+  ]);
+  const assetFiles = walk(distRoot)
+    .map((path) => relative(distRoot, path).replaceAll('\\', '/'))
+    .filter((path) => !semanticFiles.has(path));
+  staticAssetCount = assetFiles.length;
+  if (staticAssetCount < 1) throw new Error('commissioned-runtime-no-static-assets');
+
+  for (const assetFile of assetFiles) {
+    const assetPath = `/${assetFile}`;
     const asset = await fetchFrom(port, assetPath);
     if (asset.status !== 200) throw new Error(`commissioned-runtime-asset-status:${assetPath}:${asset.status}`);
-    requireHeader(asset, 'cache-control', 'public, max-age=31536000, immutable', `commissioned-runtime-asset-cache:${assetPath}`);
     requireHeader(asset, 'x-content-type-options', 'nosniff', `commissioned-runtime-asset-nosniff:${assetPath}`);
-    const contentType = asset.headers.get('content-type') ?? '';
-    if (!(contentType.startsWith('text/css') || contentType.startsWith('text/javascript') || contentType.startsWith('image/') || contentType.startsWith('font/'))) {
-      throw new Error(`commissioned-runtime-asset-content-type:${assetPath}:${contentType}`);
+    if (!asset.headers.get('content-type')) throw new Error(`commissioned-runtime-asset-content-type-missing:${assetPath}`);
+    const expectedCache = assetPath.startsWith('/_astro/')
+      ? 'public, max-age=31536000, immutable'
+      : 'no-store';
+    requireHeader(asset, 'cache-control', expectedCache, `commissioned-runtime-asset-cache:${assetPath}`);
+    if (assetPath.endsWith('.pdf') && asset.headers.get('content-type') !== 'application/pdf') {
+      throw new Error(`commissioned-runtime-pdf-content-type:${assetPath}:${asset.headers.get('content-type')}`);
     }
   }
 } finally {
@@ -166,6 +196,6 @@ console.log('unknown_404=1');
 console.log('sitemap_urls=18');
 console.log('rss_feeds=2');
 console.log('search_entries=6');
-console.log(`rendered_asset_references=${assetReferenceCount}`);
+console.log(`static_assets=${staticAssetCount}`);
 console.log('semantic_cache=no-store');
-console.log('asset_cache=public,max-age=31536000,immutable');
+console.log('fingerprinted_asset_cache=public,max-age=31536000,immutable');
