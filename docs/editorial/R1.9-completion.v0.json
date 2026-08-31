@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "editorial-foundation-acceptance-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.9-2026-08-30",
+  "materialization": {
+    "commit": "fd2da5a10d3b39c5fc5fcbaaec15acce700ee719",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33349903022,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/foundation-acceptance.v0.json",
+    "manifestBlobSha": "b58ff4458e2488dda1637872c2ef1600fcad469c"
+  },
+  "effectiveFoundation": {
+    "previousCompletionSealCount": 9,
+    "systemRecordBirthCount": 28,
+    "governanceRecordBirthCount": 6,
+    "routeBindingCount": 10,
+    "languageBindingCount": 33,
+    "publicProjectionCount": 10,
+    "editorialDocumentCount": 6,
+    "coreSurfaceCount": 12,
+    "distributionPageCount": 18,
+    "metadataEntryCount": 18,
+    "hreflangClusterCount": 9,
+    "sitemapEntryCount": 18,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 6,
+    "legacyRouteCount": 8,
+    "redirectReadyLegacyCount": 4,
+    "preservedLegacyCount": 4,
+    "publicLeakCount": 0,
+    "identityReassignmentCount": 0,
+    "crossLanguageFallbackCount": 0,
+    "undistributedRedirectCount": 0,
+    "unknownFutureResolution": "unresolved",
+    "foundationReady": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "publicationShellMaterialized": false,
+    "staticHtmlRenderingEnacted": false,
+    "compatibilityRedirectsEnacted": false,
+    "legacyFallbackRendererEnacted": false,
+    "editorialSitemapDeployed": false,
+    "vercelCutoverEnacted": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1_8Complete": true,
+    "r1_9Complete": true,
+    "r1Complete": true,
+    "foundationReady": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "deploymentMutationCount": 0,
+    "nextRequiredProgram": "R2 — Editorial Publication Shell & Cutover"
+  }
+}
