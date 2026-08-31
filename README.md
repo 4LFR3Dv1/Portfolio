@@ -1,50 +1,54 @@
 # Renan Melo — Portfolio
 
-Public portfolio for Renan Melo, a blockchain and agentic systems engineer building financial products, real-time runtimes, AI agent platforms, and developer tooling.
+Personal portfolio and editorial surface.
 
-## Product surfaces
+## Public product
 
-- Landing page with English and Portuguese content.
-- Shareable case-study routes under `/work/:projectId`.
-- Architecture explorer under `/architecture`.
-- Public evidence room linking to deployments, repositories, endpoints, and documents.
-- Vercel Analytics and SPA rewrites.
+The main portfolio remains a React/Vite application. Astro is used only as the static publication engine under `/editorial/*`.
 
-## Featured work
+```text
+/
+├── selected work
+├── architecture
+├── about
+└── contact
 
-- **VIRA** — synchronized multiplayer football with authoritative state and deterministic replay.
-- **XS Wallet / Domini R&D** — public pre-beta self-custody codebase across Bitcoin, Liquid, and Lightning; no public release.
-- **Agentic Systems & Foundry** — operational control planes for agents, review, and evidence.
-- **SNE OS** — public sovereign-account product surface.
-- **VERIFY SYSTEMS** — technical publication about verifiable and reconcilable systems.
+/editorial/
+├── current studies
+└── published essays
+```
 
-Visibility labels follow the current public evidence surface. Private projects are described at architectural level and are never presented as publicly auditable; public source is not presented as a production release.
+The public-language rule is simple: explain the idea before introducing technical vocabulary. Repository/governance language is not used as a substitute for explanation, and the existence of a project in GitHub does not imply that it belongs on the public site.
 
-## Stack
-
-- React 18 and TypeScript
-- Vite and Tailwind CSS
-- Mermaid loaded on demand with strict rendering
-- Vitest and ESLint
-- Vercel Analytics
-
-## Local development
+## Build
 
 ```bash
 npm ci
-npm run dev
-```
-
-## Verification
-
-```bash
 npm run verify
+npm run build:composed
 ```
 
-The verification gate runs strict TypeScript checks, lint, tests, and the production build. The same gate runs in GitHub Actions for pushes and pull requests.
+`build:composed` builds the Vite portfolio, builds the Astro editorial publication into `dist/editorial/`, and then generates social preview images from the final publication metadata.
 
-## Public links
+## Social metadata
 
-- Portfolio: [renan.snelabs.space](https://renan.snelabs.space)
-- GitHub: [4LFR3Dv1](https://github.com/4LFR3Dv1)
-- LinkedIn: [renan-melo-connexions](https://linkedin.com/in/renan-melo-connexions)
+The root portfolio has current Open Graph and Twitter metadata with a generated `1200×627` fallback image at `/og.png`.
+
+The Editorial index has its own generated image at:
+
+```text
+/editorial/og/editorial.png
+```
+
+Every published essay emits individual metadata and an individual social card:
+
+```text
+/editorial/<slug>/
+/editorial/og/<slug>.png
+```
+
+Article pages include canonical URL, `og:type=article`, title, description, publication time, author, section, topic tags, image dimensions/alt text, Twitter large-card metadata and a LinkedIn share action. Social PNGs are generated deterministically during the composed build rather than maintained manually.
+
+## Preview
+
+The isolated successor preview is served from Railway. Production DNS and `renan.snelabs.space` are intentionally outside the scope of this branch until an explicit cutover decision.
