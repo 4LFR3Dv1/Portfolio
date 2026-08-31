@@ -6,22 +6,22 @@ const canonicalUrl = new URL('/editorial/', Astro.site).toString();
 ---
 <PublicationLayout
   title="Editorial — Renan Melo"
-  description="Sistemas, pesquisas, ensaios e notas do trabalho atual de Renan Melo."
+  description="Ensaios sobre tecnologia, computação, software, hardware e as abstrações que aparecem enquanto construo."
   canonicalUrl={canonicalUrl}
 >
   <section class="index-header">
     <p class="kicker">EDITORIAL // RENAN MELO</p>
-    <h1>Pesquisa que vira sistema. Sistemas que geram novas perguntas.</h1>
-    <p class="dek">Publicações sobre computação, runtimes agent-native, infraestrutura experimental e os sistemas em desenvolvimento na SNE Labs.</p>
+    <h1>Ideias que aparecem enquanto construo.</h1>
+    <p class="dek">Reflexões sobre tecnologia, computação, software, hardware e as abstrações que normalmente só ficam visíveis quando alguma coisa precisa funcionar de verdade.</p>
   </section>
 
   <div class="publication-list">
     {publications.map((publication) => (
       <a class="publication-row" href={`/editorial/${publication.slug}/`}>
-        <span class="type">{publication.kind}<br />{publication.updatedAt}</span>
+        <span class="type">{publication.kind}<br />{publication.dateLabel.pt}<br />{publication.readTime.pt}</span>
         <span>
-          <h2>{publication.title}</h2>
-          <p>{publication.copy.pt.summary}</p>
+          <h2>{publication.title.pt}</h2>
+          <p>{publication.copy.pt.dek}</p>
         </span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>
