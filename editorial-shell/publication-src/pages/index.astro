@@ -1,295 +1,152 @@
 ---
+import EditorialSectionHeading from '../components/EditorialSectionHeading.astro';
 import PublicationLayout from '../layouts/PublicationLayout.astro';
+import {
+  editorialState,
+  getActiveInquiries,
+  getActiveThreads,
+  getInquiryHref,
+  getPrimaryInquiry,
+  getThreadInquiries,
+} from '../data/editorial';
 import { publications } from '../data/publications';
+import '../styles/editorial-index.css';
 
 const canonicalUrl = new URL('/editorial/', Astro.site).toString();
-
-const currentStudies = [
-  {
-    id: 'estudo-navegador-agentes',
-    source: 'GENESIS',
-    workState: 'EM DESENVOLVIMENTO',
-    studyState: 'ENSAIO PUBLICADO',
-    title: 'Quando um navegador deixa de ser uma ferramenta?',
-    description: 'A relação entre agentes de IA e o navegador continua sendo investigada enquanto o sistema muda. Este texto registra uma das perguntas que já saiu da implementação.',
-    href: '/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/',
-  },
-  {
-    id: 'estudo-software-agentes',
-    source: 'FACTORY',
-    workState: 'EM DESENVOLVIMENTO',
-    studyState: 'ESTUDO ABERTO',
-    title: 'O que muda quando produzir software deixa de ser o gargalo?',
-    description: 'Quando agentes conseguem implementar mudanças rapidamente, a pergunta passa a ser como decidir, delimitar, revisar e absorver trabalho sem transformar velocidade em ruído.',
-    href: null,
-  },
-  {
-    id: 'estudo-rede',
-    source: 'COMPUTAÇÃO EXPERIMENTAL',
-    workState: 'PESQUISA ATIVA',
-    studyState: 'ENSAIO PUBLICADO',
-    title: 'Onde existe uma rede?',
-    description: 'Uma investigação sobre o que chamamos de rede quando mudamos o observador: aplicação, sistema operacional, controlador, meio físico ou protocolo.',
-    href: '/editorial/onde-existe-uma-rede/',
-  },
-  {
-    id: 'estudo-estado-tempo',
-    source: 'COMPUTAÇÃO EXPERIMENTAL',
-    workState: 'PESQUISA ATIVA',
-    studyState: 'ENSAIO PUBLICADO',
-    title: 'O passado de um sistema não existe',
-    description: 'Um estudo sobre estado, memória e a diferença entre guardar o passado e preservar rastros suficientes para reconstruí-lo.',
-    href: '/editorial/o-passado-de-um-sistema-nao-existe/',
-  },
-];
+const primaryInquiry = getPrimaryInquiry();
+const activeInquiries = getActiveInquiries();
+const activeThreads = getActiveThreads();
+const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
+  const publication = publications.find((candidate) => candidate.slug === slug);
+  if (!publication) throw new Error(`Editorial state references unknown publication: ${slug}`);
+  return publication;
+});
 ---
 <PublicationLayout
   title="Editorial — Renan Melo"
-  description="Ensaios e estudos atuais sobre tecnologia, computação, software, hardware e as abstrações que aparecem enquanto construo."
+  description="Ensaios e investigações em andamento sobre tecnologia, computação, software, hardware e as abstrações que aparecem enquanto construo."
   canonicalUrl={canonicalUrl}
   ogImagePath="/editorial/og/editorial.png"
-  ogImageAlt="Editorial de Renan Melo — ideias que aparecem enquanto construo"
+  ogImageAlt="Editorial de Renan Melo — perguntas, investigações e ensaios"
 >
-  <section class="index-header">
-    <p class="kicker">EDITORIAL // RENAN MELO</p>
-    <h1>Ideias que aparecem enquanto construo.</h1>
-    <p class="dek">Reflexões sobre tecnologia, computação, software, hardware e as abstrações que normalmente só ficam visíveis quando alguma coisa precisa funcionar de verdade.</p>
-    <div class="index-actions" aria-label="Navegação do Editorial">
-      <a class="index-action primary" href="/">← VOLTAR AO PORTFÓLIO</a>
-      <a class="index-action" href="/#selected-work">VER TRABALHOS</a>
-    </div>
-  </section>
-
-  <section class="current-studies" id="estudos-atuais" aria-labelledby="current-studies-title">
-    <div class="section-heading">
-      <div>
-        <p class="kicker">AGORA // ESTUDOS ATUAIS</p>
-        <h2 id="current-studies-title">Perguntas que ainda estão em movimento.</h2>
+  <div class="editorial-index">
+    <header class="editorial-masthead">
+      <div class="editorial-masthead-copy">
+        <p class="kicker">EDITORIAL // RENAN MELO</p>
+        <h1>Perguntas que continuam mudando enquanto construo.</h1>
+        <p class="dek">O Editorial organiza investigações em andamento e os ensaios que emergem delas. Uma publicação registra uma resposta provisória; a pergunta pode continuar aberta.</p>
       </div>
-      <p>Nem toda investigação abaixo já virou ensaio. O estado mostra o que continua aberto e o que já ganhou uma publicação.</p>
-    </div>
+      <nav class="editorial-masthead-nav" aria-label="Navegação do Editorial">
+        <a href="#agora"><span>AGORA</span><span>01</span></a>
+        <a href="#ensaios"><span>ENSAIOS</span><span>02</span></a>
+        <a href="#em-investigacao"><span>EM INVESTIGAÇÃO</span><span>03</span></a>
+        <a href="#linhas-de-investigacao"><span>LINHAS</span><span>04</span></a>
+        <a href="/"><span>PORTFÓLIO</span><span>↗</span></a>
+      </nav>
+    </header>
 
-    <div class="study-grid">
-      {currentStudies.map((study, index) => (
-        <article class="study-card" id={study.id}>
-          <div class="study-meta">
-            <span>{String(index + 1).padStart(2, '0')} · {study.source}</span>
-            <span class="work-state">{study.workState}</span>
+    <section class="editorial-section" id="agora" aria-labelledby="agora-title">
+      <EditorialSectionHeading
+        index="01"
+        label="AGORA"
+        title="O que estou tentando entender agora."
+        note="Uma pergunta recebe prioridade editorial sem deixar de pertencer às linhas maiores que continuam em movimento."
+      />
+      <div class="editorial-now">
+        <span class="editorial-now-mark" aria-hidden="true"></span>
+        <div>
+          <h3 class="editorial-now-question" id="agora-title">{primaryInquiry.question.pt}</h3>
+          <p class="editorial-now-summary">{primaryInquiry.summary.pt}</p>
+        </div>
+        <aside class="editorial-now-side">
+          <div class="editorial-now-meta">
+            <span>{primaryInquiry.sourceLabel.pt}</span>
+            <strong>INVESTIGAÇÃO ATIVA</strong>
+            <span>{primaryInquiry.threadIds.length} LINHA{primaryInquiry.threadIds.length === 1 ? '' : 'S'} RELACIONADA{primaryInquiry.threadIds.length === 1 ? '' : 'S'}</span>
           </div>
-          <h3>{study.title}</h3>
-          <p>{study.description}</p>
-          <div class="study-footer">
-            <span class:list={['study-state', { open: !study.href }]}>{study.studyState}</span>
-            {study.href ? <a href={study.href}>LER →</a> : <span class="open-label">EM ANDAMENTO</span>}
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
+          <a href={`#${primaryInquiry.anchor}`}>VER NA FILA →</a>
+        </aside>
+      </div>
+    </section>
 
-  <section class="published" aria-labelledby="published-title">
-    <div class="publication-heading">
-      <p class="kicker">PUBLICAÇÕES</p>
-      <h2 id="published-title">Ensaios publicados.</h2>
-    </div>
-    <div class="publication-list">
-      {publications.map((publication) => (
-        <a class="publication-row" href={`/editorial/${publication.slug}/`}>
-          <span class="type">{publication.kind}<br />{publication.dateLabel.pt}<br />{publication.readTime.pt}</span>
-          <span>
-            <h2>{publication.title.pt}</h2>
-            <p>{publication.copy.pt.dek}</p>
-          </span>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-      ))}
-    </div>
-  </section>
+    <section class="editorial-section" id="ensaios" aria-labelledby="ensaios-title">
+      <EditorialSectionHeading
+        index="02"
+        label="ENSAIOS"
+        title="Respostas que já ganharam forma publicável."
+        note="Ensaios não encerram automaticamente a investigação da qual vieram. Eles registram uma posição que pode continuar evoluindo."
+      />
+      <div class="editorial-essay-list" id="ensaios-title">
+        {featuredEssays.map((publication) => (
+          <a class="editorial-essay" href={`/editorial/${publication.slug}/`}>
+            <span class="editorial-essay-meta">
+              {publication.kind}<br />
+              {publication.dateLabel.pt}<br />
+              {publication.readTime.pt}
+            </span>
+            <span>
+              <h3 class="editorial-essay-title">{publication.title.pt}</h3>
+              <p class="editorial-essay-dek">{publication.copy.pt.dek}</p>
+            </span>
+            <span class="editorial-essay-arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="editorial-section" id="em-investigacao" aria-labelledby="investigacao-title">
+      <span id="estudos-atuais" class="editorial-anchor-alias" aria-hidden="true"></span>
+      <EditorialSectionHeading
+        index="03"
+        label="EM INVESTIGAÇÃO"
+        title="Perguntas que ainda existem."
+        note="Algumas já produziram ensaios. Outras ainda não. O estado da pergunta é independente do estado da publicação."
+      />
+      <div class="editorial-inquiry-list" id="investigacao-title">
+        {activeInquiries.map((inquiry, index) => {
+          const publicationSlug = inquiry.publicationSlugs[0];
+          return (
+            <article class="editorial-inquiry" id={inquiry.anchor}>
+              <span class="editorial-inquiry-number">{String(index + 1).padStart(2, '0')}</span>
+              <div class="editorial-inquiry-meta">
+                <span>{inquiry.sourceLabel.pt}</span>
+                <span class="active">ATIVA</span>
+              </div>
+              <div>
+                <h3>{inquiry.question.pt}</h3>
+                <p>{inquiry.summary.pt}</p>
+              </div>
+              <div class="editorial-inquiry-outcome">
+                {publicationSlug
+                  ? <a href={getInquiryHref(inquiry)}>ENSAIO PUBLICADO ↗</a>
+                  : <span>ESTUDO ABERTO</span>}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="editorial-section" id="linhas-de-investigacao" aria-labelledby="linhas-title">
+      <EditorialSectionHeading
+        index="04"
+        label="LINHAS DE INVESTIGAÇÃO"
+        title="Territórios que conectam perguntas diferentes."
+        note="Linhas não são tags. Elas persistem enquanto novas perguntas, experimentos e ensaios podem aparecer dentro do mesmo território."
+      />
+      <div class="editorial-thread-list" id="linhas-title">
+        {activeThreads.map((thread, index) => {
+          const inquiries = getThreadInquiries(thread.id);
+          return (
+            <article class="editorial-thread">
+              <span class="editorial-thread-count">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{thread.title.pt}</h3>
+              <p>{thread.description.pt}</p>
+              <span class="editorial-thread-inquiries">{inquiries.length} PERGUNTA{inquiries.length === 1 ? '' : 'S'}</span>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  </div>
 </PublicationLayout>
-
-<style>
-  .index-header {
-    gap: 14px;
-    margin-bottom: 52px;
-  }
-
-  .index-header h1 {
-    max-width: 780px;
-    margin: 12px 0 8px;
-    font-size: clamp(38px, 5vw, 64px);
-    line-height: 1.02;
-    letter-spacing: -0.045em;
-  }
-
-  .index-header .dek {
-    max-width: 760px;
-    font-size: clamp(17px, 1.7vw, 22px);
-    line-height: 1.55;
-  }
-
-  .index-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 12px;
-  }
-
-  .index-action {
-    display: inline-flex;
-    min-height: 40px;
-    align-items: center;
-    border: 1px solid var(--line);
-    padding: 0 13px;
-    color: var(--muted);
-    font: 600 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-    letter-spacing: .08em;
-    text-decoration: none;
-  }
-
-  .index-action:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-  }
-
-  .index-action.primary {
-    border-color: var(--blue);
-    color: var(--blue);
-  }
-
-  .current-studies {
-    scroll-margin-top: 92px;
-    margin-bottom: 64px;
-    border-top: 1px solid var(--line);
-    padding-top: 30px;
-  }
-
-  .section-heading {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr);
-    gap: 32px;
-    align-items: end;
-    margin-bottom: 24px;
-  }
-
-  .section-heading h2,
-  .publication-heading h2 {
-    margin: 8px 0 0;
-    font-size: clamp(24px, 3vw, 36px);
-    line-height: 1.12;
-    letter-spacing: -.025em;
-  }
-
-  .section-heading > p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.65;
-  }
-
-  .study-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border: 1px solid var(--line);
-    background: var(--line);
-    gap: 1px;
-  }
-
-  .study-card {
-    scroll-margin-top: 92px;
-    display: flex;
-    min-height: 260px;
-    flex-direction: column;
-    background: var(--bg);
-    padding: 24px;
-  }
-
-  .study-meta,
-  .study-footer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    font: 600 9px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
-    letter-spacing: .08em;
-  }
-
-  .study-meta {
-    color: var(--muted);
-  }
-
-  .work-state {
-    color: #00e985;
-  }
-
-  .study-card h3 {
-    max-width: 620px;
-    margin: 30px 0 0;
-    font-size: clamp(19px, 2vw, 25px);
-    line-height: 1.25;
-  }
-
-  .study-card > p {
-    max-width: 650px;
-    margin: 14px 0 0;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.65;
-  }
-
-  .study-footer {
-    margin-top: auto;
-    padding-top: 28px;
-  }
-
-  .study-state {
-    color: #a855f7;
-  }
-
-  .study-state.open {
-    color: #f5b942;
-  }
-
-  .study-footer a,
-  .open-label {
-    color: var(--blue);
-    text-decoration: none;
-  }
-
-  .open-label {
-    color: var(--muted);
-  }
-
-  .published {
-    border-top: 1px solid var(--line);
-    padding-top: 30px;
-  }
-
-  .publication-heading {
-    margin-bottom: 20px;
-  }
-
-  @media (max-width: 760px) {
-    .index-header h1 {
-      font-size: clamp(34px, 11vw, 48px);
-    }
-
-    .index-actions {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .index-action {
-      justify-content: center;
-    }
-
-    .section-heading,
-    .study-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .study-card {
-      min-height: 0;
-    }
-  }
-</style>
