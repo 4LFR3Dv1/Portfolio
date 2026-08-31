@@ -1,4 +1,5 @@
 /* global URL, console */
+import { createHash } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
@@ -11,6 +12,67 @@ const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 const output = fileURLToPath(new URL('../src/generated/accepted-publication-state.json', import.meta.url));
 const witnessPath = fileURLToPath(new URL('../r2-a1-3-current-shell-input-witness.json', import.meta.url));
 
+function escapeXml(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+function artifactDigest(body) {
+  return `sha256:${createHash('sha256').update(body, 'utf8').digest('hex')}`;
+}
+
+function sitemapXml(bundle) {
+  const rows = bundle.sitemap.map((entry) => {
+    const links = entry.alternates
+      .map((link) => `    <xhtml:link rel="alternate" hreflang="${escapeXml(link.language)}" href="${escapeXml(link.href)}" />`)
+      .join('\n');
+    return `  <url>\n    <loc>${escapeXml(entry.loc)}</loc>\n${links}\n  </url>`;
+  });
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${rows.join('\n')}\n</urlset>\n`;
+}
+
+function rssXml(feed) {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>${escapeXml(feed.title)}</title>\n    <link>https://renan.snelabs.space</link>\n    <description>${escapeXml(feed.description)}</description>\n    <language>${feed.language === 'en' ? 'en' : 'pt-BR'}</language>\n  </channel>\n</rss>\n`;
+}
+
+function currentEmission(distribution, distributionDigest) {
+  const artifacts = [
+    {
+      kind: 'sitemap',
+      path: '/sitemap.xml',
+      contentType: 'application/xml; charset=utf-8',
+      body: sitemapXml(distribution),
+    },
+    ...distribution.rss.map((feed) => ({
+      kind: 'rss',
+      path: feed.path,
+      contentType: 'application/rss+xml; charset=utf-8',
+      body: rssXml(feed),
+    })),
+    {
+      kind: 'search-index',
+      path: '/search-index.json',
+      contentType: 'application/json; charset=utf-8',
+      body: `${JSON.stringify(distribution.search, null, 2)}\n`,
+    },
+  ]
+    .map((artifact) => ({ ...artifact, digest: artifactDigest(artifact.body) }))
+    .sort((left, right) => left.path.localeCompare(right.path));
+
+  return {
+    schemaVersion: 'editorial-distribution-emission/v0',
+    sourceBundleDigest: distributionDigest,
+    metadata: distribution.metadata,
+    hreflang: distribution.hreflang,
+    search: distribution.search,
+    artifacts,
+  };
+}
+
 const vite = await createServer({
   root: repoRoot,
   configFile: false,
@@ -22,14 +84,13 @@ const vite = await createServer({
 try {
   const currentInputModule = await vite.ssrLoadModule('/src/editorial/current-renderer-input.ts');
   const currentDistributionModule = await vite.ssrLoadModule('/src/editorial/current-distribution-runtime.ts');
-  const emissionModule = await vite.ssrLoadModule('/src/editorial/distribution-emission.ts');
   const historicalInputModule = await vite.ssrLoadModule('/src/editorial/renderer-input.ts');
 
   const currentInput = currentInputModule.materializeCurrentRendererInput();
   const rendererInputDigest = currentInputModule.currentRendererInputDigest(currentInput);
   const distribution = currentDistributionModule.materializeCurrentDistribution();
   const distributionDigest = currentDistributionModule.currentDistributionDigest(distribution);
-  const reconstructedEmission = emissionModule.reconstructDistributionEmission(distribution, distributionDigest);
+  const emission = currentEmission(distribution, distributionDigest);
   const historicalTransport = historicalInputModule.materializeAcceptedRendererInput();
 
   if (currentInput.source.acceptedPublicationDigest !== ACCEPTED_PUBLICATION_DIGEST) {
@@ -40,9 +101,6 @@ try {
   }
   if (distributionDigest !== ACCEPTED_DISTRIBUTION_DIGEST) {
     throw new Error(`current-shell-distribution-digest:${distributionDigest}`);
-  }
-  if (reconstructedEmission.state !== 'ready' || !reconstructedEmission.emission) {
-    throw new Error(`current-shell-emission-conflict:${reconstructedEmission.errors.join(',')}`);
   }
 
   const distributedPaths = new Set(distribution.pages.map((page) => page.canonicalPath));
@@ -66,7 +124,7 @@ try {
     },
     pages: distribution.pages,
     distribution,
-    emission: reconstructedEmission.emission,
+    emission,
     surfaces: currentInput.surfaces,
     documents: currentInput.documents,
     shellPlan: historicalTransport.shellPlan,
@@ -87,11 +145,14 @@ try {
       rssFeedCount: distribution.rss.length,
       rssItemCount: distribution.rss.flatMap((feed) => feed.items).length,
       searchEntryCount: distribution.search.length,
+      emittedArtifactCount: emission.artifacts.length,
       compatibilityRedirectCount: historicalTransport.redirects.entries.length,
       compatibilityTargetCount: historicalTransport.redirects.entries.length * 2,
       compatibilityMissingTargetCount: 0,
     },
     boundary: {
+      currentDistributionSchema: distribution.schemaVersion,
+      historicalDistributionBundleCoerced: false,
       historicalRendererInputUsedAsSemanticAuthority: false,
       currentStaticRuntimeRecommissioned: false,
       currentPreviewRedeployed: false,
@@ -103,7 +164,9 @@ try {
   console.log(`accepted_publication_digest=${ACCEPTED_PUBLICATION_DIGEST}`);
   console.log(`renderer_input_digest=${rendererInputDigest}`);
   console.log(`distribution_digest=${distributionDigest}`);
+  console.log(`distribution_schema=${distribution.schemaVersion}`);
   console.log(`canonical_pages=${distribution.pages.length}`);
+  console.log(`emitted_artifacts=${emission.artifacts.length}`);
   console.log(`compatibility_redirects=${historicalTransport.redirects.entries.length}`);
   console.log('compatibility_missing_targets=0');
 } finally {
