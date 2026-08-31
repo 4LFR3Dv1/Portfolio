@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / A2.4 CORRECTED AND ACCEPTED**
+Status: **IN PROGRESS / A2.5 ACCEPTED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -49,8 +49,8 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | R1-A2.2 | Existing Identity Reconciliation | **COMPLETE** |
 | R1-A2.3 | Current Revision Materialization | **COMPLETE** |
 | R1-A2.4 | Evidence + Maturity Reconciliation | **COMPLETE / CORRECTED** |
-| R1-A2.5 | Public Disclosure Reauthorization | **NEXT** |
-| R1-A2.6 | Current Route Admission | **NOT STARTED** |
+| R1-A2.5 | Public Disclosure Reauthorization | **COMPLETE** |
+| R1-A2.6 | Current Route Admission | **NEXT** |
 | R1-A2.7 | Current Editorial Surface Reconstruction | **NOT STARTED** |
 | R1-A2.8 | Current Publication Acceptance | **NOT STARTED** |
 
@@ -123,19 +123,7 @@ A2.4 separates observation from governance instead of turning repository impleme
 
 The R0.4 `evidence.binding` contract targets `knowledge.claim` and `knowledge.experiment`; it does not authorize a direct formal EvidenceBinding against `knowledge.system`. A2.4 therefore does not mint artificial Claims or widen that contract. It freezes current-head observations as a temporal reconciliation ledger and uses them only as declared basis for separate `governance.maturity` decisions.
 
-Every observation resolves through the temporal basis already attached to its generation-1 System successor:
-
-```text
-sourceRef
-   ↓
-repository realization
-   ↓
-R1-A2.1 census entry
-   ↓
-default branch + exact observed HEAD + observedAt + visibility
-   ↓
-current System Revision
-```
+Every observation resolves through the temporal basis already attached to its generation-1 System successor.
 
 The accepted ledger contains 48 observations across all 27 current successors:
 
@@ -164,58 +152,10 @@ Nineteen current successors remain explicitly `unclassified`. Terms such as `pre
 
 `production` remains a maturity classification only. It does not prove uptime, runtime health, test success, security, custody safety, SLA or network readiness.
 
-### Governance-lineage correction
-
-The first A2.4 specimen correctly proved exact-head classification and zero silent inheritance, but it made one identity mistake: it minted a new `governance.maturity` Record for XS Wallet even though R1.6 already established the logical maturity governance identity:
-
-```text
-R1.6 maturity governance Record
-rec_3a926254f23e4a0c89102c3fbfe636d6
-        ↓
-old basis = XS Wallet Birth revision
-stage = pre-beta
-```
-
-R0.6 makes `targetRef.recordId` constitutive for a maturity-governance lineage. A changed `basisRef`, stage or rationale therefore produces a successor Revision of that governance Record, not a replacement governance Record.
-
-The accepted corrected A2.4 materialization is:
-
-```text
-7 new governance.maturity Births
-+
-1 governance.maturity successor
-        ↓
-XS Wallet governance RecordId preserved
-rec_3a926254f23e4a0c89102c3fbfe636d6
-        ↓
-generation=1
-previousRevisionId=exact historical governance Birth RevisionId
-basisRef=exact current XS Wallet System generation-1 Revision
-stage=pre-beta
-```
-
-The prior green campaigns remain historical witnesses of their exact superseded specimens:
-
-```text
-candidate f0d3f13...   Verify #268 / Shell #103 / Cutover #34   SUCCESS
-terminal  302dda87...  Verify #276 / Shell #111 / Cutover #42  SUCCESS
-```
-
-The corrected specimen itself was then physically witnessed at `13cbb9855c102f823b59c83433a275730c414412`:
-
-```text
-Verify #286                    SUCCESS
-Editorial Shell Build #121     SUCCESS
-Cutover Readiness #52          SUCCESS
-```
-
-The old witnesses remain historical evidence but do not authorize the corrected specimen; the #286/#121/#52 campaign is the acceptance basis for the corrected lineage.
+A2.4 also corrected governance lineage for XS Wallet: instead of minting a replacement maturity identity, the existing R1.6 `governance.maturity` Record `rec_3a926254f23e4a0c89102c3fbfe636d6` advances to generation 1 and binds the exact current XS Wallet System revision.
 
 ```text
 CURRENT_EVIDENCE_OBSERVATION_COUNT=48
-SUPPORT_OBSERVATION_COUNT=29
-QUALIFICATION_OBSERVATION_COUNT=16
-CONTRADICTION_OBSERVATION_COUNT=3
 CURRENT_MATURITY_CLASSIFIED_COUNT=8
 CURRENT_MATURITY_UNCLASSIFIED_COUNT=19
 CURRENT_MATURITY_CONFLICT_COUNT=0
@@ -227,7 +167,79 @@ FORMAL_EVIDENCE_RECORD_BIRTH_COUNT=0
 FORMAL_EVIDENCE_BINDING_BIRTH_COUNT=0
 ```
 
-No disclosure, route, public-surface or production decision is made by A2.4.
+## R1-A2.5 Public Disclosure reauthorization
+
+A2.5 removes R0.8 as perpetual disclosure authority. Every one of the 27 current generation-1 System heads now receives an explicit current disclosure decision against its exact revision.
+
+The bounded current `knowledge.system` payload contains only `name`, `summary` and `thesis`; source locators, private repository bytes, raw evidence and implementation details are not part of that payload. A2.5 therefore admits all 27 current System payloads as public/full editorial Records while independently preserving source and evidence availability.
+
+This distinction is normative:
+
+```text
+public Record payload
+        !=
+public source repository
+        !=
+public evidence
+```
+
+For example:
+
+```text
+Genesis
+record      public
+mode        full
+source      private
+evidence    private
+```
+
+The runtime derives source availability from the R1-A2.1 temporal repository basis and evidence availability from the current A2.4 observations. Publication policy itself remains an explicit candidate decision and is not derived from those axes.
+
+Accepted availability distribution:
+
+```text
+source public   12
+source partial   2
+source private  13
+
+evidence public   13
+evidence partial   1
+evidence private  13
+```
+
+Four existing disclosure governance identities continue instead of being replaced:
+
+```text
+Foundry Pay  rec_31d32647a6fc43c1b1bc5257aefaf367
+SNE-OS       rec_2821df1a24244689ab76bb5fb697018b
+VIRA         rec_fe675b13970843099b802b2b6d03daf1
+XS Wallet    rec_5bc3c1113cfe4c14b79aaa63f2515d79
+```
+
+Each becomes a generation-1 `governance.disclosure` successor bound to the exact current System revision. The other 23 current Systems receive new disclosure-governance Births. The historical Transactional Support Bot disclosure remains historical only because that System has no admitted current successor.
+
+The A2.5 candidate at `41eb785efbe4e274104c228d0efd813a2490d6c9` passed:
+
+```text
+Verify #298                    SUCCESS
+Editorial Shell Build #133     SUCCESS
+Cutover Readiness #64          SUCCESS
+```
+
+```text
+CURRENT_DISCLOSURE_CLASSIFIED_COUNT=27
+CURRENT_PUBLIC_RECORD_COUNT=27
+CURRENT_PRIVATE_RECORD_COUNT=0
+CURRENT_FULL_DISCLOSURE_COUNT=27
+CURRENT_DISCLOSURE_CONFLICT_COUNT=0
+CURRENT_DISCLOSURE_UNCLASSIFIED_COUNT=0
+CURRENT_DISCLOSURE_GOVERNANCE_BIRTH_COUNT=23
+CURRENT_DISCLOSURE_GOVERNANCE_SUCCESSOR_COUNT=4
+DISCLOSURE_IDENTITY_REPLACEMENT_COUNT=0
+PRIVATE_SOURCE_PROMOTED_TO_PUBLIC_COUNT=0
+```
+
+A2.5 does not create routes, select homepage membership, mutate the existing R1.6 semantic surfaces or touch production.
 
 ## Direction of authority
 
@@ -278,15 +290,20 @@ DEFERRED_CURRENT_REVISION_COUNT=1
 GENERIC_BIRTH_SUMMARY_SUCCESSOR_COUNT=0
 
 EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=true
-EVIDENCE_MATURITY_CORRECTION_ACTIVE=false
 CURRENT_EVIDENCE_OBSERVATION_COUNT=48
 CURRENT_MATURITY_CLASSIFIED_COUNT=8
 CURRENT_MATURITY_UNCLASSIFIED_COUNT=19
 CURRENT_MATURITY_CONFLICT_COUNT=0
-CURRENT_MATURITY_GOVERNANCE_BIRTH_COUNT=7
-CURRENT_MATURITY_GOVERNANCE_SUCCESSOR_COUNT=1
 MATURITY_IDENTITY_REPLACEMENT_COUNT=0
-STALE_MATURITY_INHERITANCE_COUNT=0
+
+CURRENT_DISCLOSURE_REAUTHORIZATION_COMPLETE=true
+CURRENT_DISCLOSURE_CLASSIFIED_COUNT=27
+CURRENT_PUBLIC_RECORD_COUNT=27
+CURRENT_DISCLOSURE_CONFLICT_COUNT=0
+CURRENT_DISCLOSURE_UNCLASSIFIED_COUNT=0
+CURRENT_DISCLOSURE_GOVERNANCE_BIRTH_COUNT=23
+CURRENT_DISCLOSURE_GOVERNANCE_SUCCESSOR_COUNT=4
+DISCLOSURE_IDENTITY_REPLACEMENT_COUNT=0
 
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
@@ -298,6 +315,7 @@ R1_A2_1_COMPLETE=true
 R1_A2_2_COMPLETE=true
 R1_A2_3_COMPLETE=true
 R1_A2_4_COMPLETE=true
+R1_A2_5_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.5 — Public Disclosure Reauthorization
+NEXT=R1-A2.6 — Current Route Admission
 ```
