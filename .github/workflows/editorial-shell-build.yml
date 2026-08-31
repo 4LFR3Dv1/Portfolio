@@ -39,27 +39,27 @@ jobs:
         working-directory: editorial-shell
         run: npm run materialize:current-input
 
-      - name: Build historical static editorial shell
+      - name: Build static editorial shell
         working-directory: editorial-shell
         run: npm run build
 
-      - name: Verify historical physical static output
+      - name: Verify physical static output
         working-directory: editorial-shell
         run: node scripts/verify-output.mjs
 
-      - name: Verify historical compatibility redirect HTTP adapter
+      - name: Verify compatibility redirect HTTP adapter
         working-directory: editorial-shell
         run: node scripts/verify-redirect-adapter.mjs
 
-      - name: Commission historical full static runtime
+      - name: Commission full static runtime
         working-directory: editorial-shell
         run: npm run verify:commissioned
 
-      - name: Verify historical isolated preview binding
+      - name: Verify isolated preview binding
         working-directory: editorial-shell
         run: npm run verify:preview-entrypoint
 
-      - name: Preserve historical accepted public preview provenance
+      - name: Freeze accepted public preview provenance
         run: |
           echo "preview_origin=$R2_6_PREVIEW_ORIGIN"
           echo "deployment_commit=$R2_6_DEPLOYMENT_COMMIT"
@@ -67,14 +67,14 @@ jobs:
           test "$R2_6_PREVIEW_ORIGIN" != "https://renan.snelabs.space"
           test "$R2_6_PREVIEW_ORIGIN" != "https://www.renan.snelabs.space"
 
-      - name: Re-witness historical Internet TLS hosting invariance
+      - name: Witness real Internet TLS hosting invariance
         working-directory: editorial-shell
         env:
           PREVIEW_ORIGIN: ${{ env.R2_6_PREVIEW_ORIGIN }}
           R2_6_WITNESS_PATH: r2-6-preview-witness.json
         run: npm run verify:preview
 
-      - name: Preserve historical shell and current input witness
+      - name: Preserve shell and environmental witness
         if: always()
         uses: actions/upload-artifact@v4
         with:
