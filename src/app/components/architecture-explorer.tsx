@@ -47,6 +47,9 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
         title: 'ARCHITECTURE, WITHOUT THE CEREMONY',
         intro: 'Different products create different constraints, but the questions underneath repeat. Where does a decision live? Where does an effect happen? What do we trust after something fails? This explorer is a map of those recurring choices.',
         back: 'BACK TO PORTFOLIO',
+        questionCount: '05 recurring questions',
+        stageLabel: 'stages',
+        boundaryLabel: 'boundaries',
         principles: [
           ['START', 'Make the intention understandable.'],
           ['MIDDLE', 'Separate decisions from the machinery that performs them.'],
@@ -66,6 +69,9 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
         title: 'ARQUITETURA, SEM CERIMÔNIA',
         intro: 'Produtos diferentes criam restrições diferentes, mas as perguntas por baixo se repetem. Onde uma decisão vive? Onde um efeito acontece? Em que confiamos depois que algo falha? Este explorador é um mapa dessas escolhas recorrentes.',
         back: 'VOLTAR AO PORTFÓLIO',
+        questionCount: '05 perguntas recorrentes',
+        stageLabel: 'etapas',
+        boundaryLabel: 'limites',
         principles: [
           ['COMEÇO', 'Tornar a intenção compreensível.'],
           ['MEIO', 'Separar decisões da máquina que as executa.'],
@@ -88,7 +94,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
           <div className="flex flex-wrap items-center gap-4">
             <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--electric-blue)]">{copy.eyebrow}</p>
             <span className="h-px w-10 bg-[var(--border-strong)]" aria-hidden="true" />
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">05 recurring questions</span>
+            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{copy.questionCount}</span>
           </div>
 
           <h1 className="mt-5 max-w-4xl font-mono text-4xl font-bold leading-[0.98] tracking-[-0.04em] text-[var(--terminal-text)] sm:text-5xl lg:text-6xl">
@@ -170,7 +176,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
         <section className="border-y border-[var(--border-default)] py-10 sm:py-12">
           <div className="mb-8 flex items-baseline justify-between gap-6">
             <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--terminal-text)]">{copy.flow}</h2>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{activeView.steps.length} stages</span>
+            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{activeView.steps.length} {copy.stageLabel}</span>
           </div>
           <ArchitectureMap
             steps={activeView.steps}
@@ -183,7 +189,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
           <section>
             <div className="flex items-baseline justify-between gap-6 border-b border-[var(--border-default)] pb-4">
               <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--electric-blue)]">{copy.decisions}</h2>
-              <span className="font-mono text-[10px] text-[var(--terminal-muted)]">{String(activeView.boundaries.length).padStart(2, '0')} boundaries</span>
+              <span className="font-mono text-[10px] text-[var(--terminal-muted)]">{String(activeView.boundaries.length).padStart(2, '0')} {copy.boundaryLabel}</span>
             </div>
             <ol>
               {activeView.boundaries.map((boundary, index) => (
