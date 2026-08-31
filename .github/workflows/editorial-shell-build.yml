@@ -77,18 +77,18 @@ jobs:
 
       - name: Freeze accepted public preview provenance
         run: |
-          echo "preview_origin=$R2_6_PREVIEW_ORIGIN"
-          echo "deployment_commit=$R2_6_DEPLOYMENT_COMMIT"
-          echo "deployment_id=$R2_6_DEPLOYMENT_ID"
+          echo "historical_r2_6_preview_origin=$R2_6_PREVIEW_ORIGIN"
+          echo "historical_r2_6_deployment_commit=$R2_6_DEPLOYMENT_COMMIT"
+          echo "historical_r2_6_deployment_id=$R2_6_DEPLOYMENT_ID"
           test "$R2_6_PREVIEW_ORIGIN" != "https://renan.snelabs.space"
           test "$R2_6_PREVIEW_ORIGIN" != "https://www.renan.snelabs.space"
 
-      - name: Witness real Internet TLS hosting invariance
+      - name: Witness real Internet TLS hosting invariance — current A2.8 specimen
         working-directory: editorial-shell
         env:
           PREVIEW_ORIGIN: ${{ env.R2_6_PREVIEW_ORIGIN }}
-          R2_6_WITNESS_PATH: r2-6-preview-witness.json
-        run: npm run verify:preview
+          R2_A1_CURRENT_WITNESS_PATH: r2-a1-current-preview-witness.json
+        run: npm run verify:current-preview
 
       - name: Preserve shell and environmental witness
         if: always()
@@ -100,7 +100,7 @@ jobs:
             editorial-shell/dist
             editorial-shell/current-dist
             editorial-shell/current-emission
-            editorial-shell/r2-6-preview-witness.json
+            editorial-shell/r2-a1-current-preview-witness.json
             editorial-shell/r2-a1-1-current-renderer-input-witness.json
             editorial-shell/r2-a1-2-current-distribution-witness.json
             editorial-shell/r2-a1-3-current-shell-input-witness.json
