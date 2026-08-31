@@ -1,4 +1,4 @@
-/* global console */
+/* global console, fetch */
 import { createCurrentCommissionedRuntime } from '../runtime/current-commissioned-runtime.mjs';
 
 const runtime = await createCurrentCommissionedRuntime();
