@@ -12,7 +12,10 @@
     "build": "npm run materialize && astro build",
     "preview": "astro preview",
     "commission": "node runtime/commissioned-runtime.mjs",
-    "verify:commissioned": "node scripts/verify-commissioned-runtime.mjs"
+    "verify:commissioned": "node scripts/verify-commissioned-runtime.mjs",
+    "preview:runtime": "node runtime/preview-runtime.mjs",
+    "verify:preview-entrypoint": "node scripts/verify-preview-entrypoint.mjs",
+    "verify:preview": "node scripts/verify-preview-invariance.mjs"
   },
   "dependencies": {
     "astro": "7.2.9",
