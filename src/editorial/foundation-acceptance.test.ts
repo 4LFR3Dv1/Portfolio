@@ -88,11 +88,17 @@ function previousCutsAreSealed(): boolean {
     && seal.acceptance[`r1_${cut}Complete`] === true);
 }
 
+function registryState(): 'ready' | 'conflict' {
+  return registry.errors.length === 0 && registry.unavailableRecordIds.size === 0
+    ? 'ready'
+    : 'conflict';
+}
+
 function currentSnapshot(): FoundationAcceptanceSnapshot {
   return {
     completionSealCount: completionSeals.length,
     allPreviousCutsSealed: previousCutsAreSealed(),
-    registryState: registry.state,
+    registryState: registryState(),
     routeState: routeRuntime.state,
     languageState: languageRuntime.state,
     surfaceState: surfaces.state,
@@ -137,7 +143,8 @@ describe('R1.9 Foundation Acceptance', () => {
   });
 
   it('reconstructs the complete editorial pipeline from canonical manifests without repair', () => {
-    expect(registry.state).toBe('ready');
+    expect(registry.errors).toEqual([]);
+    expect(registry.unavailableRecordIds.size).toBe(0);
     expect(routeRuntime.state).toBe('ready');
     expect(languageRuntime.state).toBe('ready');
     expect(surfaceState.governance.state).toBe('ready');
