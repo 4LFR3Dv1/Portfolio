@@ -85,20 +85,22 @@ R1-A2 was opened after direct inspection of the R2.6 preview demonstrated that t
 
 R1-A2.1 reobserved the connected corpus and exact repository HEADs. R1-A2.2 reconciled all 28 existing System identities without replacement Birth. R1-A2.3 produced 27 generation-1 current System revisions against those same RecordIds; one historical System remains explicitly deferred.
 
-R1-A2.4 reconstructs 48 current-head observations across those 27 successors and admits eight maturity classifications without translating implementation state into editorial maturity. Its first green specimen incorrectly minted a replacement maturity governance Record for XS Wallet even though R1.6 already established the same logical governance lineage. That specimen and its CI runs remain historical evidence. The corrected A2.4 specimen preserves the existing XS Wallet maturity governance identity and materializes exactly seven new maturity Births plus one successor Revision:
+R1-A2.4 reconstructs 48 current-head observations across those 27 successors and admits eight maturity classifications without translating implementation state into editorial maturity. Its first green specimen incorrectly minted a replacement maturity governance Record for XS Wallet even though R1.6 already established the same logical governance lineage. The corrected A2.4 specimen preserves the existing XS Wallet maturity governance identity and materializes exactly seven new maturity Births plus one successor Revision, with zero maturity identity replacement.
+
+R1-A2.5 then reauthorizes disclosure against the exact current generation-1 heads rather than reusing R0.8 policy. All 27 current System payloads are explicitly admitted as public/full bounded editorial Records. Source and evidence availability remain independent: 13 current Systems retain private source, two have partial source, and private source is never promoted merely because the Record is public.
+
+Four historical disclosure-governance identities continue by successor Revision rather than replacement Birth:
 
 ```text
-7 new governance.maturity Births
-+
-1 governance.maturity successor
-        ↓
-XS Wallet maturity governance identity preserved
-rec_3a926254f23e4a0c89102c3fbfe636d6
+Foundry Pay  rec_31d32647a6fc43c1b1bc5257aefaf367
+SNE-OS       rec_2821df1a24244689ab76bb5fb697018b
+VIRA         rec_fe675b13970843099b802b2b6d03daf1
+XS Wallet    rec_5bc3c1113cfe4c14b79aaa63f2515d79
 ```
 
-The corrected candidate passed Verify #286, Editorial Shell Build #121 and Cutover Readiness #52. A2.4 is therefore accepted again with zero maturity identity replacement, zero silent inheritance and zero disclosure/route/surface/production mutation.
+The other 23 current Systems receive new disclosure-governance Births. Transactional Support Bot remains historical only because it has no admitted current successor. The A2.5 candidate passed Verify #298, Editorial Shell Build #133 and Cutover Readiness #64 with zero disclosure conflict, zero unclassified current successor and zero route/surface/production mutation.
 
-No current disclosure policy is inherited merely because a semantic or maturity successor exists. R1-A2.5 now becomes the next explicit authority boundary.
+A2.5 therefore authorizes representation, not placement. Route admission remains a separate decision frontier in R1-A2.6.
 
 The amendment is intentionally non-destructive:
 
@@ -107,7 +109,6 @@ R1 Birth identity        preserved
 R1 completion history    preserved
 R2.6 transport witness   preserved
 R2.7 infra witness       preserved
-prior A2.4 CI witnesses  preserved as historical specimen evidence
 
 current publication validity   reopened
 current cutover eligibility    revoked
@@ -130,10 +131,13 @@ R1_COMPLETE=true
 R1_A2_ACTIVE=true
 R1_A2_3_COMPLETE=true
 R1_A2_4_COMPLETE=true
+R1_A2_5_COMPLETE=true
 CURRENT_REVISION_MATERIALIZATION_COMPLETE=true
 EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=true
-EVIDENCE_MATURITY_CORRECTION_ACTIVE=false
+CURRENT_DISCLOSURE_REAUTHORIZATION_COMPLETE=true
+CURRENT_DISCLOSURE_CLASSIFIED_COUNT=27
+CURRENT_PUBLIC_RECORD_COUNT=27
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
-NEXT=R1-A2.5 — Public Disclosure Reauthorization
+NEXT=R1-A2.6 — Current Route Admission
 ```
