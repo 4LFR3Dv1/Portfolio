@@ -42,5 +42,6 @@ describe('current architecture reading surface', () => {
     expect(projects.get('Factory')?.links.some((link) => link.href === '/work/factory')).toBe(true);
     expect(projects.get('Lisa')?.links.some((link) => link.href === 'https://assistentelisa.online/')).toBe(true);
     expect(projects.get('Foundry Pay / Channels')?.links).toHaveLength(2);
+    expect(projects.get('Solana Agent')?.links.some((link) => link.href === 'https://github.com/4LFR3Dv1/Solana-Agent')).toBe(true);
   });
 });
