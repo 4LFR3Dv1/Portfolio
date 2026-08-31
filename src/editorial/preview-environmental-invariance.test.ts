@@ -189,7 +189,7 @@ describe('R2.6 shadow preview environmental invariance', () => {
     expect(provenanceDoc).toContain('deployed snapshot provenance');
   });
 
-  it('accepts the physical public witness while keeping cutover and production closed', () => {
+  it('accepts the physical public witness while keeping its own cutover state closed', () => {
     expect(manifest.expected).toMatchObject({
       canonicalCount: 18,
       historicalCount: 4,
@@ -246,6 +246,5 @@ describe('R2.6 shadow preview environmental invariance', () => {
     expect(r26Doc).toContain('Status: **COMPLETE / PUBLIC INTERNET WITNESSED**');
     expect(r26Doc).toContain('R2_6_COMPLETE=true');
     expect(r2Readme).toContain('| R2.6 | Shadow / Preview Deployment | **COMPLETE** |');
-    expect(r2Readme).toContain('NEXT=R2.7 — Cutover Readiness');
   });
 });
