@@ -13,7 +13,9 @@ describe('editorial investigation domain', () => {
     expect(new Set(inquiryIds).size).toBe(inquiryIds.length);
     expect(new Set(anchors).size).toBe(anchors.length);
     expect(new Set(threadIds).size).toBe(threadIds.length);
-    expect(inquiryIds).not.toContain(expect.stringMatching(/^quando-|^onde-|^o-passado/));
+    for (const inquiryId of inquiryIds) {
+      expect(inquiryId).not.toMatch(/^quando-|^onde-|^o-passado/);
+    }
   });
 
   it('accepts the current editorial graph against real publication slugs', () => {
