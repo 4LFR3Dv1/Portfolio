@@ -1,0 +1,56 @@
+name: Editorial Preview Witness
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview_origin:
+        description: Isolated public HTTPS preview origin, for example https://example-preview.provider.dev
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  witness:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: editorial-shell/package-lock.json
+
+      - name: Install locked shell dependencies
+        working-directory: editorial-shell
+        run: npm ci
+
+      - name: Build exact editorial shell
+        working-directory: editorial-shell
+        run: npm run build
+
+      - name: Re-prove R2.5 commissioned baseline
+        working-directory: editorial-shell
+        run: npm run verify:commissioned
+
+      - name: Prove R2.6 deployment binding
+        working-directory: editorial-shell
+        run: npm run verify:preview-entrypoint
+
+      - name: Compare public preview with local commissioned runtime
+        working-directory: editorial-shell
+        env:
+          PREVIEW_ORIGIN: ${{ inputs.preview_origin }}
+          R2_6_WITNESS_PATH: r2-6-preview-witness.json
+        run: npm run verify:preview
+
+      - name: Preserve environmental witness
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-6-preview-witness-${{ github.sha }}
+          path: editorial-shell/r2-6-preview-witness.json
+          if-no-files-found: warn
+          retention-days: 30
