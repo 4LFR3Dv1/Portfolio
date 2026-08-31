@@ -1,4 +1,4 @@
-/* global URL, console, process */
+/* global URL, console */
 import { createHash } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
