@@ -17,6 +17,11 @@
       "4LFR3Dv1/SNE-RADAR-v1.0",
       "4LFR3Dv1/factory-control"
     ],
+    "materialZeroSizeRepository": {
+      "repository": "4LFR3Dv1/ORDM-TESTNET-v.01",
+      "observedHead": "186b1b09f82e92fb13217b48edc956b9d9fa701f",
+      "reason": "default-branch ref is authoritative over repository size metadata"
+    },
     "repositorySizeUsedAsHeadAuthority": false
   },
   "productionBoundary": {
