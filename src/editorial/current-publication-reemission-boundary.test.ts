@@ -22,7 +22,7 @@ const constitution = reemissionConstitutionJson as {
     rootVercelConfigChanged: boolean;
     productionMutationCount: number;
   };
-  currentState: Record<string, boolean | number>;
+  currentState: Record<string, boolean | number | string>;
   acceptance: Record<string, boolean | string>;
 };
 const completion = reemissionCompletionJson as {
@@ -145,23 +145,14 @@ describe('R2-A1.0 current publication physical re-emission boundary', () => {
     });
   });
 
-  it('closes A1.0 and advances only to current renderer input re-emission', () => {
+  it('keeps A1.0 sealed as monotonic history after later physical cuts advance', () => {
     expect(constitution.status).toBe('active');
-    expect(constitution.program.map((entry) => [entry.cut, entry.status])).toEqual([
-      ['R2-A1.0', 'complete'],
-      ['R2-A1.1', 'next'],
-      ['R2-A1.2', 'not-started'],
-      ['R2-A1.3', 'not-started'],
-      ['R2-A1.4', 'not-started'],
-      ['R2-A1.5', 'not-started'],
-    ]);
+    expect(constitution.program.find((entry) => entry.cut === 'R2-A1.0')).toMatchObject({
+      cut: 'R2-A1.0',
+      purpose: 'Physical Re-emission Constitution',
+      status: 'complete',
+    });
     expect(constitution.currentState).toMatchObject({
-      currentSpecimenReemitted: false,
-      currentDistributionEmitted: false,
-      currentStaticRuntimeRecommissioned: false,
-      currentPreviewRedeployed: false,
-      currentPreviewExternallyWitnessed: false,
-      currentCutoverReadinessReevaluated: false,
       cutoverReady: false,
       cutoverAuthorized: false,
       cutoverEnacted: false,
@@ -175,9 +166,15 @@ describe('R2-A1.0 current publication physical re-emission boundary', () => {
       cutoverReady: false,
       cutoverAuthorized: false,
       cutoverEnacted: false,
-      nextRequiredAction: 'R2-A1.1 — Current Renderer Input Re-emission',
     });
     expect(completion.status).toBe('complete');
+    expect(completion.acceptance).toMatchObject({
+      r2_a1_0Complete: true,
+      r2_a1Complete: false,
+      currentPhysicalPublicationValid: false,
+      cutoverReady: false,
+      nextRequiredCut: 'R2-A1.1 — Current Renderer Input Re-emission',
+    });
     expect(completion.candidateWitness).toMatchObject({
       branchHead: '8b98b32d2016822c56201fcb21cc3376e2ec7c0c',
       verifyRunNumber: 347,
