@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "editorial-document-runtime-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.5-2026-08-30",
+  "materialization": {
+    "commit": "b8ed8e96adbca6672dbe25143249cee2fa560763",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33346253580,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/editorial-document-runtime.v0.json",
+    "manifestBlobSha": "6927ef5abc7f391bb34a25cd12af92bbd06783d0"
+  },
+  "effectiveDocumentRuntime": {
+    "publicProjectionCount": 0,
+    "editorialDocumentCount": 0,
+    "systemContentAdapterMaterialized": true,
+    "exactLanguageRealizationRequiredForFullContent": true,
+    "metadataOnlyIncludesSemanticPayload": false,
+    "sanitizedRuntimeTransformationAllowed": false,
+    "redirectBecomesDocument": false,
+    "documentIsRecordAuthority": false,
+    "documentIsLanguageAuthority": false,
+    "rendererMayInferSemanticContent": false,
+    "markdownAuthorityIntroduced": false,
+    "staticHtmlRenderingEnacted": false,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "acceptance": {
+    "r1_4Complete": true,
+    "r1_5Complete": true,
+    "documentRuntimeMaterialized": true,
+    "projectionBoundaryPreserved": true,
+    "exactRevisionLanguageBindingPreserved": true,
+    "runtimeSanitizationForbidden": true,
+    "currentEditorialDocumentCount": 0,
+    "nextRequiredCut": "R1.6 — Core Editorial Surfaces"
+  }
+}
