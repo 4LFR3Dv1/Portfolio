@@ -15,6 +15,7 @@ const completion = completionJson as {
   supersededCandidateWitness: Record<string, unknown>;
   supersededTerminalWitness: Record<string, unknown>;
   correction: Record<string, unknown>;
+  correctedCandidateWitness: Record<string, unknown>;
   materialization: Record<string, unknown>;
   productionBoundary: Record<string, unknown>;
   acceptance: Record<string, unknown>;
@@ -27,7 +28,7 @@ const constitution = constitutionJson as {
 const r1A2Doc = readFileSync(new URL('../../docs/editorial/R1-A2-current-corpus-reconciliation.md', import.meta.url), 'utf8');
 const r1Readme = readFileSync(new URL('../../docs/editorial/R1-README.md', import.meta.url), 'utf8');
 
-describe('R1-A2.4 governance lineage correction candidate', () => {
+describe('R1-A2.4 corrected completion seal', () => {
   it('reconstructs the corrected Evidence + Maturity materialization without identity replacement', () => {
     const materialized = materializeCurrentEvidenceMaturity();
     expect(materialized.errors).toEqual([]);
@@ -46,8 +47,8 @@ describe('R1-A2.4 governance lineage correction candidate', () => {
     expect(xs?.revision.previousRevisionId).toBe(xs?.previousGovernanceRevisionId);
   });
 
-  it('preserves prior green witnesses as historical evidence without letting them authorize the corrected specimen', () => {
-    expect(completion.status).toBe('correction-awaiting-ci');
+  it('preserves prior green witnesses as historical evidence while binding acceptance to the corrected candidate', () => {
+    expect(completion.status).toBe('complete');
     expect(completion.supersededCandidateWitness).toEqual({
       branchHead: 'f0d3f13f0e92b3188a2dd122a30da5ea72b162bc',
       verifyRunId: 33414303736,
@@ -78,10 +79,22 @@ describe('R1-A2.4 governance lineage correction candidate', () => {
       priorWitnessesRemainHistorical: true,
       priorWitnessesAuthorizeCorrectedSpecimen: false,
     });
+    expect(completion.correctedCandidateWitness).toEqual({
+      branchHead: '13cbb9855c102f823b59c83433a275730c414412',
+      verifyRunId: 33415885676,
+      verifyRunNumber: 286,
+      verifyConclusion: 'success',
+      editorialShellBuildRunId: 33415885657,
+      editorialShellBuildRunNumber: 121,
+      editorialShellBuildConclusion: 'success',
+      cutoverReadinessRunId: 33415885909,
+      cutoverReadinessRunNumber: 52,
+      cutoverReadinessConclusion: 'success',
+    });
   });
 
   it('freezes seven births plus one governance successor while production remains untouched', () => {
-    expect(manifest.status).toBe('materialized-awaiting-ci');
+    expect(manifest.status).toBe('complete');
     expect(manifest.materialization).toMatchObject({
       currentSuccessorSystemCount: 27,
       observationCount: 48,
@@ -98,7 +111,8 @@ describe('R1-A2.4 governance lineage correction candidate', () => {
       routeMutationCount: 0,
       publicSurfaceMutationCount: 0,
       productionMutationCount: 0,
-      r1_a2_4Complete: false,
+      r1_a2_4Complete: true,
+      nextRequiredAction: 'R1-A2.5 — Public Disclosure Reauthorization',
     });
     expect(completion.materialization).toMatchObject({
       maturityGovernanceBirthCount: 7,
@@ -123,12 +137,12 @@ describe('R1-A2.4 governance lineage correction candidate', () => {
     });
   });
 
-  it('keeps A2.5 blocked until the corrected A2.4 candidate receives fresh CI', () => {
-    expect(constitution.program.find((entry) => entry.cut === 'R1-A2.4')?.status).toBe('correction-awaiting-ci');
-    expect(constitution.program.find((entry) => entry.cut === 'R1-A2.5')?.status).toBe('not-started');
+  it('advances to A2.5 only after the corrected lineage is accepted', () => {
+    expect(constitution.program.find((entry) => entry.cut === 'R1-A2.4')?.status).toBe('complete');
+    expect(constitution.program.find((entry) => entry.cut === 'R1-A2.5')?.status).toBe('next');
     expect(constitution.currentState).toMatchObject({
-      evidenceMaturityReconciliationComplete: false,
-      evidenceMaturityCorrectionActive: true,
+      evidenceMaturityReconciliationComplete: true,
+      evidenceMaturityCorrectionActive: false,
       currentEvidenceObservationCount: 48,
       currentMaturityClassifiedCount: 8,
       currentMaturityUnclassifiedCount: 19,
@@ -141,20 +155,21 @@ describe('R1-A2.4 governance lineage correction candidate', () => {
       cutoverReady: false,
     });
     expect(constitution.acceptance).toMatchObject({
-      r1_a2_4Complete: false,
+      r1_a2_4Complete: true,
       r1_a2Complete: false,
-      nextRequiredCut: 'R1-A2.4 — Governance Lineage Correction CI',
+      nextRequiredCut: 'R1-A2.5 — Public Disclosure Reauthorization',
     });
     expect(completion.acceptance).toMatchObject({
       existingMaturityGovernanceIdentityPreserved: true,
       maturityIdentityReplacementCount: 0,
-      r1_a2_4Complete: false,
+      r1_a2_4Complete: true,
       currentPublicationValid: false,
       cutoverReady: false,
-      nextRequiredCut: 'R1-A2.4 — Governance Lineage Correction CI',
+      nextRequiredCut: 'R1-A2.5 — Public Disclosure Reauthorization',
     });
-    expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=false');
+    expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=true');
+    expect(r1A2Doc).toContain('NEXT=R1-A2.5 — Public Disclosure Reauthorization');
     expect(r1Readme).toContain('NEXT=R2 — Editorial Publication Shell & Cutover');
-    expect(r1Readme).toContain('NEXT=R1-A2.4 — Governance Lineage Correction CI');
+    expect(r1Readme).toContain('NEXT=R1-A2.5 — Public Disclosure Reauthorization');
   });
 });
