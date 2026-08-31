@@ -1,4 +1,5 @@
 import currentRevisionManifestJson from '../../docs/editorial/R1-A2.3-current-system-revisions.v0.json';
+import currentCensusJson from '../../docs/editorial/R1-A2.1-current-github-census.v0.json';
 import registryManifestJson from '../../docs/editorial/record-registry.v0.json';
 import {
   KNOWLEDGE_REGISTRY_CODECS,
@@ -19,20 +20,28 @@ import type { SystemPayload } from '../app/data/editorial-knowledge-ontology';
 
 export const CURRENT_REVISION_MANIFEST_SCHEMA_VERSION = 'editorial-current-system-revisions/v0' as const;
 
+interface CurrentCensusRepository {
+  repo: string;
+  visibility: 'public' | 'private';
+  defaultBranch: string;
+  observedHead: string | null;
+  state: 'material' | 'empty';
+}
+
+interface CurrentCensus {
+  contractId: string;
+  observedAt: string;
+  repositories: CurrentCensusRepository[];
+}
+
 export interface CurrentRevisionAssignment {
   subjectKey: string;
   recordId: `rec_${string}`;
   lifecycle: RecordLifecycle;
   payload: SystemPayload;
   temporalBasis: {
-    observedAt: string;
-    repositories: Array<{
-      repo: string;
-      visibility: 'public' | 'private';
-      defaultBranch: string;
-      observedHead: string | null;
-      state: 'material' | 'empty';
-    }>;
+    censusContractId: string;
+    repositoryRefs: string[];
   };
   grounding: {
     summaryBasis: string[];
@@ -88,6 +97,7 @@ export interface CurrentRevisionMaterialization {
 export function materializeCurrentSystemRevisions(
   manifest: CurrentRevisionManifest = currentRevisionManifestJson as CurrentRevisionManifest,
   registryManifest: RecordRegistryManifest = registryManifestJson as RecordRegistryManifest,
+  census: CurrentCensus = currentCensusJson as CurrentCensus,
 ): CurrentRevisionMaterialization {
   const errors: string[] = [];
   const records = materializeRegistryRecords(registryManifest).map((record) => ({
@@ -96,6 +106,7 @@ export function materializeCurrentSystemRevisions(
   }));
   const byRecordId = new Map(records.map((record) => [record.recordId, record]));
   const bySubjectKey = new Map(records.map((record) => [record.subjectKey, record]));
+  const censusByRepo = new Map(census.repositories.map((entry) => [entry.repo, entry]));
   const codec = codecMap(KNOWLEDGE_REGISTRY_CODECS).get('knowledge.system');
   if (!codec) throw new Error('current-revision-system-codec-missing');
 
@@ -114,6 +125,18 @@ export function materializeCurrentSystemRevisions(
     }
     assignedRecordIds.add(assignment.recordId);
     assignedSubjectKeys.add(assignment.subjectKey);
+
+    if (assignment.temporalBasis.censusContractId !== census.contractId) {
+      errors.push(`census-contract-mismatch:${assignment.subjectKey}`);
+    }
+    if (assignment.temporalBasis.repositoryRefs.length === 0) {
+      errors.push(`repository-basis-empty:${assignment.subjectKey}`);
+    }
+    for (const repositoryRef of assignment.temporalBasis.repositoryRefs) {
+      if (!censusByRepo.has(repositoryRef)) {
+        errors.push(`repository-basis-unobserved:${assignment.subjectKey}:${repositoryRef}`);
+      }
+    }
 
     const record = byRecordId.get(assignment.recordId);
     const subjectRecord = bySubjectKey.get(assignment.subjectKey);
