@@ -18,16 +18,21 @@ describe('current public presentation posture', () => {
     expect(source).not.toContain('SYSTEM GUARANTEES');
   });
 
-  it('binds architecture to the current public catalog and keeps every question readable without tab interaction', () => {
+  it('presents architecture as one readable page instead of an explorer UI', () => {
     const source = readComponent('architecture-explorer.tsx');
 
-    expect(source).toContain("from '../data/public-architecture'");
-    expect(source).toContain('publicArchitectureViews.map');
-    expect(source).toContain('Cinco perguntas que continuo fazendo enquanto construo.');
-    expect(source).toContain('Uma leitura contínua.');
+    expect(source).toContain("from '../data/architecture-page'");
+    expect(source).toContain('architecturePage.model.steps.map');
+    expect(source).toContain('architecturePage.separations.items.map');
+    expect(source).toContain('architecturePage.contexts.items.map');
+    expect(source).toContain('architecturePage.projects.items.map');
+    expect(source).not.toContain('publicArchitectureViews.map');
+    expect(source).not.toContain('<ArchitectureMap');
     expect(source).not.toContain('role="tab"');
-    expect(source).not.toContain('role="tabpanel"');
     expect(source).not.toContain('role="tablist"');
+    expect(source).not.toContain('role="tabpanel"');
+    expect(source).not.toContain('NEXT QUESTION');
+    expect(source).not.toContain('PRÓXIMA PERGUNTA');
     expect(source).not.toContain('SANITIZED PUBLIC VIEW');
     expect(source).not.toContain('TRUST BOUNDARIES');
   });
