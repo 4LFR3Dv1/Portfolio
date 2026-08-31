@@ -1,0 +1,184 @@
+---
+import type {
+  LegacyResolvedCaseStudy,
+  PreservedLegacyLanguage,
+} from '../../../src/editorial/legacy-preservation-runtime';
+
+interface Props {
+  study: LegacyResolvedCaseStudy;
+  language: PreservedLegacyLanguage;
+}
+
+const { study, language } = Astro.props;
+const en = language === 'en';
+const labels = en
+  ? {
+      caseStudy: 'CASE STUDY',
+      type: 'TYPE',
+      role: 'ROLE',
+      summary: 'SUMMARY',
+      problem: 'PROBLEM',
+      approach: 'APPROACH',
+      context: 'CONTEXT',
+      solution: 'SOLUTION',
+      systemFlow: 'SYSTEM FLOW',
+      engineeringDecisions: 'ENGINEERING DECISIONS',
+      architecture: 'ARCHITECTURE',
+      guarantees: 'GUARANTEES',
+      stateModel: 'STATE MODEL',
+      myRole: 'MY ROLE',
+      evidence: 'PUBLIC EVIDENCE',
+      privateEvidence: 'This is a private technical build. Public evidence is intentionally limited; implementation details are available in an appropriate review context.',
+      learnings: 'LEARNINGS',
+      aiRelevance: 'WHY IT MATTERS FOR AI SYSTEMS',
+      public: 'PUBLIC',
+      casePublic: 'PUBLIC CASE STUDY',
+      private: 'PRIVATE BUILD',
+    }
+  : {
+      caseStudy: 'ESTUDO DE CASO',
+      type: 'TIPO',
+      role: 'PAPEL',
+      summary: 'RESUMO',
+      problem: 'PROBLEMA',
+      approach: 'ABORDAGEM',
+      context: 'CONTEXTO',
+      solution: 'SOLUÇÃO',
+      systemFlow: 'FLUXO DO SISTEMA',
+      engineeringDecisions: 'DECISÕES DE ENGENHARIA',
+      architecture: 'ARQUITETURA',
+      guarantees: 'GARANTIAS',
+      stateModel: 'MODELO DE ESTADOS',
+      myRole: 'MEU PAPEL',
+      evidence: 'EVIDÊNCIA PÚBLICA',
+      privateEvidence: 'Este é um projeto técnico privado. A evidência pública é intencionalmente limitada; detalhes de implementação estão disponíveis em um contexto adequado de revisão.',
+      learnings: 'APRENDIZADOS',
+      aiRelevance: 'POR QUE ISSO IMPORTA PARA SISTEMAS DE IA',
+      public: 'PÚBLICO',
+      casePublic: 'CASE PÚBLICO',
+      private: 'PROJETO PRIVADO',
+    };
+const visibility = study.visibility === 'public'
+  ? labels.public
+  : study.visibility === 'case-study'
+    ? labels.casePublic
+    : labels.private;
+const extended = study.extended;
+---
+<article data-legacy-case-study>
+  <header>
+    <p class="legacy-kicker">{labels.caseStudy} // {study.title}</p>
+    <h1 class="legacy-title">{study.title}</h1>
+    <div class="legacy-meta">
+      <span>{labels.type}: {study.type}</span>
+      <span>{labels.role}: {study.role}</span>
+      <span>{visibility}</span>
+    </div>
+    <div class="legacy-badges">
+      {study.badges.map((badge) => <span class="legacy-badge">{badge}</span>)}
+    </div>
+  </header>
+
+  <section class="legacy-section">
+    <h2 class="legacy-section-title">{labels.summary}</h2>
+    <p class="legacy-copy">{study.summary}</p>
+    {extended && <p class="legacy-disclosure">{extended.disclosure}</p>}
+  </section>
+
+  <section class="legacy-section">
+    <h2 class="legacy-section-title">{extended ? labels.context : labels.problem}</h2>
+    <ul class="legacy-list">
+      {study.problem.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <section class="legacy-section">
+    <h2 class="legacy-section-title">{extended ? labels.solution : labels.approach}</h2>
+    <ul class="legacy-list">
+      {study.approach.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  {extended && (
+    <section class="legacy-section">
+      <h2 class="legacy-section-title">{labels.systemFlow}</h2>
+      <ol class="legacy-flow">
+        {extended.flow.map((step, index) => (
+          <li class="legacy-flow-step">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            {step}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <section class="legacy-section">
+    <h2 class="legacy-section-title">{extended ? labels.engineeringDecisions : labels.architecture}</h2>
+    <div class="legacy-grid">
+      {study.architecture.map((layer) => (
+        <section class="legacy-card">
+          <h3>{layer.name}</h3>
+          <ul>
+            {layer.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      ))}
+    </div>
+    <div class="legacy-badges">
+      {study.guarantees.map((guarantee) => <span class="legacy-badge">{guarantee}</span>)}
+    </div>
+  </section>
+
+  {extended && (
+    <section class="legacy-section">
+      <h2 class="legacy-section-title">{labels.stateModel}</h2>
+      <div class="legacy-state-chain">
+        {extended.stateModel.primary.map((state) => <span class="legacy-state">{state}</span>)}
+      </div>
+      <ul class="legacy-list legacy-branches">
+        {extended.stateModel.branches.map((branch) => <li>{branch}</li>)}
+      </ul>
+      <p class="legacy-disclosure">{extended.stateModel.note}</p>
+    </section>
+  )}
+
+  {extended && (
+    <section class="legacy-section">
+      <h2 class="legacy-section-title">{labels.myRole}</h2>
+      <p class="legacy-copy">{extended.roleDescription}</p>
+    </section>
+  )}
+
+  {!extended && (
+    <section class="legacy-section">
+      <h2 class="legacy-section-title">{labels.evidence}</h2>
+      {study.evidence.length > 0 ? (
+        <div class="legacy-link-list">
+          {study.evidence.map((item) => (
+            <a class="legacy-link" href={item.url} target="_blank" rel="noopener noreferrer">{item.label}</a>
+          ))}
+        </div>
+      ) : <p class="legacy-disclosure">{labels.privateEvidence}</p>}
+    </section>
+  )}
+
+  <section class="legacy-section">
+    <h2 class="legacy-section-title">{labels.learnings}</h2>
+    <ul class="legacy-list">
+      {study.learnings.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  {extended && (
+    <section class="legacy-section">
+      <h2 class="legacy-section-title">{labels.aiRelevance}</h2>
+      <p class="legacy-copy">{extended.aiRelevance}</p>
+    </section>
+  )}
+</article>
+
+<style>
+  .legacy-flow { list-style: none; padding: 0; margin: 0; }
+  .legacy-branches { margin-top: 20px; }
+</style>

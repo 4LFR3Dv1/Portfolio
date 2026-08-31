@@ -1,0 +1,56 @@
+---
+import LegacyArchitecture from '../components/LegacyArchitecture.astro';
+import LegacyLayout from '../layouts/LegacyLayout.astro';
+import { publicationState } from '../lib/publication-state';
+
+const page = publicationState.legacy.pages.find((entry) => entry.path === '/architecture');
+if (!page || page.kind !== 'legacy-architecture') throw new Error('legacy-architecture-state-missing');
+---
+<LegacyLayout
+  title="Architecture Explorer — Renan Melo"
+  description={page.languages.en.description}
+  historicalMeaning={page.historicalMeaning}
+  blocker={page.blocker}
+>
+  <div data-legacy-language-panel="en">
+    <LegacyArchitecture page={page.languages.en} language="en" />
+  </div>
+  <div data-legacy-language-panel="pt" hidden>
+    <LegacyArchitecture page={page.languages.pt} language="pt" />
+  </div>
+
+  <script is:inline>
+    (() => {
+      const allowed = new Set(['systems', 'settlement', 'agents', 'realtime', 'handoff']);
+      const roots = [...document.querySelectorAll('[data-legacy-architecture-root]')];
+
+      const applyView = (requested, updateUrl = true) => {
+        const view = allowed.has(requested) ? requested : 'systems';
+        for (const root of roots) {
+          for (const button of root.querySelectorAll('[data-legacy-view-button]')) {
+            button.setAttribute('aria-pressed', String(button.getAttribute('data-legacy-view-button') === view));
+          }
+          for (const panel of root.querySelectorAll('[data-legacy-view-panel]')) {
+            panel.hidden = panel.getAttribute('data-legacy-view-panel') !== view;
+          }
+        }
+
+        if (updateUrl) {
+          const url = new URL(window.location.href);
+          if (view === 'systems') url.searchParams.delete('view');
+          else url.searchParams.set('view', view);
+          window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+        }
+      };
+
+      for (const root of roots) {
+        for (const button of root.querySelectorAll('[data-legacy-view-button]')) {
+          button.addEventListener('click', () => applyView(button.getAttribute('data-legacy-view-button')));
+        }
+      }
+
+      const initial = new URL(window.location.href).searchParams.get('view') ?? 'systems';
+      applyView(initial);
+    })();
+  </script>
+</LegacyLayout>

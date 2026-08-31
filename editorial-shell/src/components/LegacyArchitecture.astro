@@ -1,0 +1,183 @@
+---
+import type {
+  LegacyResolvedArchitecturePage,
+  PreservedLegacyLanguage,
+} from '../../../src/editorial/legacy-preservation-runtime';
+
+interface Props {
+  page: LegacyResolvedArchitecturePage;
+  language: PreservedLegacyLanguage;
+}
+
+const { page, language } = Astro.props;
+const en = language === 'en';
+---
+<article data-legacy-architecture-root>
+  <header>
+    <p class="legacy-kicker">{en ? 'SYSTEM MAP // PUBLIC' : 'MAPA DE SISTEMAS // PÚBLICO'}</p>
+    <h1 class="legacy-title">{page.title}</h1>
+    <p class="legacy-lede">{page.description}</p>
+    <dl class="architecture-facts">
+      {page.facts.map((fact) => (
+        <div>
+          <dt>{fact.label}</dt>
+          <dd>{fact.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </header>
+
+  <nav class="architecture-tabs" aria-label={en ? 'Architecture views' : 'Visões de arquitetura'}>
+    {page.views.map((view) => (
+      <button
+        type="button"
+        data-legacy-view-button={view.id}
+        aria-pressed={view.id === 'systems' ? 'true' : 'false'}
+      >
+        <span>{view.index}</span>
+        {view.shortLabel}
+      </button>
+    ))}
+  </nav>
+
+  <div class="architecture-panels">
+    {page.views.map((view) => (
+      <section
+        class="architecture-panel"
+        data-legacy-view-panel={view.id}
+        hidden={view.id !== 'systems'}
+      >
+        <header class="architecture-panel-header">
+          <div>
+            <p class="legacy-kicker">{view.index} // {view.shortLabel}</p>
+            <h2>{view.title}</h2>
+            <p>{view.summary}</p>
+          </div>
+          <aside>
+            <strong>{en ? 'GOVERNING PRINCIPLE' : 'PRINCÍPIO DE GOVERNO'}</strong>
+            <p>{view.principle}</p>
+          </aside>
+        </header>
+
+        <section class="legacy-section architecture-flow-section">
+          <h2 class="legacy-section-title">{en ? 'RESPONSIBILITY FLOW' : 'FLUXO DE RESPONSABILIDADES'}</h2>
+          <ol class="architecture-flow">
+            {view.steps.map((step, index) => (
+              <li>
+                <span class={`architecture-kind architecture-kind-${step.kind}`}>{step.kind}</span>
+                <strong>{String(index + 1).padStart(2, '0')} · {step.label}</strong>
+                <p>{step.detail}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <div class="architecture-detail-grid">
+          <section class="legacy-section">
+            <h2 class="legacy-section-title">{en ? 'TRUST BOUNDARIES' : 'FRONTEIRAS DE CONFIANÇA'}</h2>
+            <ol class="architecture-boundaries">
+              {view.boundaries.map((boundary, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{boundary.label}</strong>
+                  <p>{boundary.detail}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <aside class="legacy-section architecture-guarantees">
+            <h2 class="legacy-section-title">{en ? 'SYSTEM GUARANTEES' : 'GARANTIAS DO SISTEMA'}</h2>
+            <div class="legacy-badges">
+              {view.guarantees.map((guarantee) => <span class="legacy-badge">{guarantee}</span>)}
+            </div>
+            <h3>{en ? 'APPLIED IN' : 'APLICADO EM'}</h3>
+            <div class="legacy-badges">
+              {view.examples.map((example) => <span class="legacy-badge architecture-example">{example}</span>)}
+            </div>
+          </aside>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <p class="legacy-disclosure">{page.disclosure}</p>
+</article>
+
+<style>
+  .architecture-facts {
+    margin: 34px 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid #26303a;
+  }
+  .architecture-facts div { padding: 16px; border-right: 1px solid #26303a; }
+  .architecture-facts div:last-child { border-right: 0; }
+  .architecture-facts dt { color: #7d8792; font: 10px ui-monospace, monospace; text-transform: uppercase; letter-spacing: .08em; }
+  .architecture-facts dd { margin: 8px 0 0; color: #dcecff; font: 12px ui-monospace, monospace; }
+
+  .architecture-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 34px;
+  }
+  .architecture-tabs button {
+    min-height: 58px;
+    border: 1px solid #26303a;
+    padding: 12px;
+    background: #0d1117;
+    color: #aab2bb;
+    text-align: left;
+    cursor: pointer;
+    font: 11px ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .architecture-tabs button span { margin-right: 8px; color: #65717d; }
+  .architecture-tabs button[aria-pressed="true"] { border-color: #58a6ff; background: #112033; color: #dcecff; }
+  .architecture-tabs button[aria-pressed="true"] span { color: #58a6ff; }
+
+  .architecture-panels { margin-top: 10px; }
+  .architecture-panel { border: 1px solid #26303a; background: #0b0f14; }
+  .architecture-panel-header { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, .7fr); gap: 30px; padding: 28px; border-bottom: 1px solid #26303a; }
+  .architecture-panel-header h2 { margin: 12px 0; color: #dcecff; font: 600 22px/1.25 ui-monospace, monospace; }
+  .architecture-panel-header p { margin: 0; color: #9da7b1; line-height: 1.65; }
+  .architecture-panel-header aside { align-self: start; border-left: 2px solid #7ee2a8; padding: 16px; background: #0e1419; }
+  .architecture-panel-header aside strong { color: #7ee2a8; font: 10px ui-monospace, monospace; letter-spacing: .08em; }
+  .architecture-panel-header aside p { margin-top: 10px; color: #c5cbd2; font-family: ui-monospace, monospace; font-size: 13px; }
+
+  .architecture-flow-section { margin: 0; padding: 28px; border-top: 0; }
+  .architecture-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+  .architecture-flow li { min-height: 150px; border: 1px solid #26303a; padding: 15px; background: #0d1117; }
+  .architecture-flow strong { display: block; margin: 14px 0 8px; color: #d1d7de; font: 600 12px ui-monospace, monospace; }
+  .architecture-flow p { margin: 0; color: #87919c; font-size: 13px; line-height: 1.55; }
+  .architecture-kind { font: 9px ui-monospace, monospace; text-transform: uppercase; color: #58a6ff; }
+  .architecture-kind-verification { color: #7ee2a8; }
+  .architecture-kind-human { color: #d79a48; }
+
+  .architecture-detail-grid { display: grid; grid-template-columns: 1.25fr .75fr; border-top: 1px solid #26303a; }
+  .architecture-detail-grid > * { margin: 0; padding: 28px; border-top: 0; }
+  .architecture-detail-grid > * + * { border-left: 1px solid #26303a; }
+  .architecture-boundaries { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .architecture-boundaries li { display: grid; grid-template-columns: 32px 180px 1fr; gap: 12px; padding-top: 14px; border-top: 1px solid #26303a; }
+  .architecture-boundaries span { color: #65717d; font: 10px ui-monospace, monospace; }
+  .architecture-boundaries strong { color: #d1d7de; font: 600 12px ui-monospace, monospace; }
+  .architecture-boundaries p { margin: 0; color: #87919c; font-size: 13px; line-height: 1.55; }
+  .architecture-guarantees h3 { margin: 30px 0 0; color: #7d8792; font: 10px ui-monospace, monospace; letter-spacing: .08em; }
+  .architecture-example { color: #aab2bb; }
+
+  @media (max-width: 900px) {
+    .architecture-tabs { grid-template-columns: 1fr 1fr; }
+    .architecture-panel-header, .architecture-detail-grid { grid-template-columns: 1fr; }
+    .architecture-detail-grid > * + * { border-left: 0; border-top: 1px solid #26303a; }
+    .architecture-boundaries li { grid-template-columns: 28px 1fr; }
+    .architecture-boundaries p { grid-column: 2; }
+  }
+  @media (max-width: 620px) {
+    .architecture-facts { grid-template-columns: 1fr; }
+    .architecture-facts div { border-right: 0; border-bottom: 1px solid #26303a; }
+    .architecture-facts div:last-child { border-bottom: 0; }
+    .architecture-tabs { grid-template-columns: 1fr; }
+  }
+</style>

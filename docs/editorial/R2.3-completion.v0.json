@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "editorial-legacy-preservation-runtime-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R2.3-2026-08-31",
+  "materialization": {
+    "commit": "f97c502f518a0b080c8530a2e767ac8f353d93f7",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33392175519,
+      "conclusion": "success"
+    },
+    "shellBuild": {
+      "workflow": "Editorial Shell Build",
+      "runId": 33392175504,
+      "conclusion": "success",
+      "artifactId": 9757884599,
+      "artifactDigest": "sha256:4571f9239fe0d51f1a0de9d6415928d8f16eef3cf648ab3c0514204bc4cca8ba"
+    },
+    "manifestPath": "docs/editorial/legacy-preservation-runtime.v0.json",
+    "manifestBlobSha": "6d468178b25656f8913132aea9556dadb347caa3"
+  },
+  "effectivePreservation": {
+    "canonicalStaticPageCount": 18,
+    "legacyPreservedPageCount": 4,
+    "totalStaticPageCount": 22,
+    "architecturePageCount": 1,
+    "caseStudyPageCount": 3,
+    "languageRealizationCount": 8,
+    "architectureViewCount": 5,
+    "legacyRobotsNoindexCount": 4,
+    "legacyCanonicalMetadataCount": 0,
+    "legacyHreflangLinkCount": 0,
+    "legacySitemapEntryCount": 0,
+    "legacyRssItemCount": 0,
+    "legacySearchEntryCount": 0,
+    "sourceDriftCount": 0,
+    "historicalMeaningRewriteCount": 0,
+    "agenticSystemRebindingCount": 0,
+    "transactionalSupportPrematureSuccessorCount": 0,
+    "verifySystemsPrematurePublicationBindingCount": 0,
+    "architecturePrematureRepresentationBirthCount": 0,
+    "compatibilityRedirectsEnacted": false,
+    "productionStaticHtmlActivated": false,
+    "legacyPublicSitemapReplaced": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "r2_3Complete": true,
+    "legacyPreservationPhysicallyMaterialized": true,
+    "historicalMeaningPreserved": true,
+    "frozenSourceIntegrityPreserved": true,
+    "distributionQuarantinePreserved": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "deploymentMutationCount": 0,
+    "nextRequiredCut": "R2.4 — Compatibility Redirect Adapter"
+  }
+}
