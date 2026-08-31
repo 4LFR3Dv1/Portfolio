@@ -16,10 +16,10 @@ describe('current case studies', () => {
     expect(factory?.caseStudy.evidence).toEqual([]);
   });
 
-  it('links Genesis only to its public research surface', () => {
+  it('links Genesis only to its public site', () => {
     const genesis = getPortfolioProject('genesis');
     expect(genesis?.links.map((link) => link.url)).toEqual([
-      'https://github.com/SNE-Labs/Genesis-CP',
+      'https://genesis.snelabs.space/#genesis',
     ]);
   });
 
