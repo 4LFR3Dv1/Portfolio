@@ -9,6 +9,7 @@ const output = fileURLToPath(new URL('../src/generated/accepted-publication-stat
 
 const server = await createServer({
   root: repoRoot,
+  configFile: false,
   appType: 'custom',
   logLevel: 'error',
   server: { middlewareMode: true },
