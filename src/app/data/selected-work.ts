@@ -105,4 +105,20 @@ export const selectedWork: SelectedWorkItem[] = [
       },
     ],
   },
+  {
+    id: 'solana-agent',
+    title: 'Solana Agent',
+    year: '2026',
+    description: local(
+      'Developer infrastructure for applications and AI agents to prepare and execute Solana operations with narrow permissions, explicit approval and a recovery path when network results are uncertain.',
+      'Infraestrutura para aplicações e agentes de IA prepararem e executarem operações na Solana com permissões limitadas, aprovação explícita e um caminho de recuperação quando o resultado da rede é incerto.',
+    ),
+    topics: [local('Solana', 'Solana'), local('AI agents', 'Agentes de IA'), local('Infrastructure', 'Infraestrutura')],
+    links: [
+      {
+        href: 'https://github.com/4LFR3Dv1/Solana-Agent',
+        label: local('View code', 'Ver código'),
+      },
+    ],
+  },
 ];
