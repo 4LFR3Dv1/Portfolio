@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { ArchitectureLegend, ArchitectureMap } from './architecture-map';
+import { ArchitectureMap } from './architecture-map';
 import { Button } from './button';
 import { useLanguage } from '../context/language-context';
 import { publicArchitectureViews, getPublicArchitectureView, type PublicArchitectureViewId } from '../data/public-architecture';
@@ -82,36 +82,40 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
       };
 
   return (
-    <main className="mx-auto max-w-[1500px] px-4 py-10 sm:px-6 sm:py-16">
-      <header className="border-b border-[var(--border-default)] pb-10">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-4xl">
+    <main className="mx-auto max-w-[1380px] px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+      <header className="grid gap-10 border-b border-[var(--border-default)] pb-12 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-16 lg:pb-16">
+        <div className="max-w-4xl">
+          <div className="flex flex-wrap items-center gap-4">
             <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--electric-blue)]">{copy.eyebrow}</p>
-            <h1 className="mt-4 max-w-3xl font-mono text-3xl font-bold tracking-tight text-[var(--terminal-text)] sm:text-4xl lg:text-5xl">
-              {copy.title}
-            </h1>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-[var(--terminal-muted)] sm:text-lg">{copy.intro}</p>
+            <span className="h-px w-10 bg-[var(--border-strong)]" aria-hidden="true" />
+            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">05 recurring questions</span>
           </div>
 
+          <h1 className="mt-5 max-w-4xl font-mono text-4xl font-bold leading-[0.98] tracking-[-0.04em] text-[var(--terminal-text)] sm:text-5xl lg:text-6xl">
+            {copy.title}
+          </h1>
+          <p className="mt-7 max-w-3xl text-base leading-8 text-[var(--terminal-muted)] sm:text-lg">{copy.intro}</p>
+
           {onBack && (
-            <Button variant="ghost" onClick={onBack} className="min-h-10 self-start lg:self-auto">
+            <Button variant="ghost" onClick={onBack} className="mt-8 min-h-10">
               ← {copy.back}
             </Button>
           )}
         </div>
 
-        <dl className="mt-10 grid gap-px bg-[var(--border-default)] md:grid-cols-3">
-          {copy.principles.map(([label, text]) => (
-            <div key={label} className="bg-[var(--surface-1)] p-5 sm:p-6">
-              <dt className="font-mono text-[10px] uppercase tracking-wider text-[var(--electric-blue)]">{label}</dt>
-              <dd className="mt-3 text-sm leading-relaxed text-[var(--terminal-text)]">{text}</dd>
-            </div>
+        <ol className="self-end border-t border-[var(--border-default)]">
+          {copy.principles.map(([label, text], index) => (
+            <li key={label} className="grid grid-cols-[2.25rem_5.5rem_1fr] gap-3 border-b border-[var(--border-default)] py-4">
+              <span className="font-mono text-[10px] text-[var(--terminal-muted)]">{String(index + 1).padStart(2, '0')}</span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--electric-blue)]">{label}</span>
+              <span className="text-sm leading-6 text-[var(--terminal-text)]">{text}</span>
+            </li>
           ))}
-        </dl>
+        </ol>
       </header>
 
-      <nav className="py-8" aria-label={copy.nav}>
-        <div role="tablist" aria-label={copy.select} className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-5">
+      <nav className="border-b border-[var(--border-default)]" aria-label={copy.nav}>
+        <div role="tablist" aria-label={copy.select} className="flex min-w-0 overflow-x-auto">
           {publicArchitectureViews.map((view, index) => {
             const isActive = view.id === activeViewId;
             return (
@@ -126,14 +130,15 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => setActiveViewId(view.id)}
                 onKeyDown={(event) => handleTabKeyDown(event, index)}
-                className={`min-h-16 border px-4 py-3 text-left transition-colors duration-100 focus-visible:ring-2 focus-visible:ring-[var(--electric-blue)] ${
+                className={`relative min-w-[190px] flex-1 px-2 py-6 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] sm:px-4 ${
                   isActive
-                    ? 'border-[var(--electric-blue)] bg-[var(--surface-2)] text-[var(--terminal-text)]'
-                    : 'border-[var(--border-default)] bg-[var(--surface-1)] text-[var(--terminal-muted)] hover:border-[var(--border-strong)] hover:text-[var(--terminal-text)]'
+                    ? 'text-[var(--terminal-text)]'
+                    : 'text-[var(--terminal-muted)] hover:text-[var(--terminal-text)]'
                 }`}
               >
-                <span className="mr-3 font-mono text-[10px] text-[var(--electric-blue)]">{view.index}</span>
-                <span className="text-xs leading-snug">{view.shortLabel[language]}</span>
+                <span className="block font-mono text-[10px] text-[var(--electric-blue)]">{view.index}</span>
+                <span className="mt-2 block max-w-[12rem] text-sm leading-snug">{view.shortLabel[language]}</span>
+                {isActive && <span className="absolute inset-x-2 bottom-0 h-0.5 bg-[var(--electric-blue)] sm:inset-x-4" aria-hidden="true" />}
               </button>
             );
           })}
@@ -144,79 +149,80 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
         role="tabpanel"
         id={`architecture-panel-${activeView.id}`}
         aria-labelledby={`architecture-tab-${activeView.id}`}
-        className="border border-[var(--border-default)] bg-[var(--surface-1)]"
       >
-        <div className="border-b border-[var(--border-default)] p-5 sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
-            <div className="max-w-4xl">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--electric-blue)]">
-                {activeView.index} // {activeView.shortLabel[language]}
-              </p>
-              <h2 className="mt-4 max-w-3xl font-mono text-2xl font-semibold leading-tight text-[var(--terminal-text)] sm:text-3xl">
-                {activeView.title[language]}
-              </h2>
-              <p className="mt-5 max-w-3xl text-base leading-relaxed text-[var(--terminal-muted)]">{activeView.summary[language]}</p>
-            </div>
-
-            <aside className="border-l-2 border-[var(--electric-green)] bg-[var(--surface-2)] p-5">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--electric-green)]">{copy.rule}</p>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--terminal-text)]">{activeView.principle[language]}</p>
-            </aside>
+        <div className="grid gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16 lg:py-16">
+          <div className="max-w-4xl">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--electric-blue)]">
+              {activeView.index} / {activeView.shortLabel[language]}
+            </p>
+            <h2 className="mt-4 max-w-4xl font-mono text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-[var(--terminal-text)] sm:text-4xl">
+              {activeView.title[language]}
+            </h2>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--terminal-muted)] sm:text-lg">{activeView.summary[language]}</p>
           </div>
+
+          <aside className="self-end border-l-2 border-[var(--electric-green)] pl-5">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--electric-green)]">{copy.rule}</p>
+            <p className="mt-3 text-base leading-7 text-[var(--terminal-text)]">{activeView.principle[language]}</p>
+          </aside>
         </div>
 
-        <div className="p-5 sm:p-8 lg:p-10">
-          <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-text)]">{copy.flow}</h2>
-            <ArchitectureLegend language={language} />
+        <section className="border-y border-[var(--border-default)] py-10 sm:py-12">
+          <div className="mb-8 flex items-baseline justify-between gap-6">
+            <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--terminal-text)]">{copy.flow}</h2>
+            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{activeView.steps.length} stages</span>
           </div>
           <ArchitectureMap
             steps={activeView.steps}
             language={language}
             label={`${activeView.title[language]} — ${copy.flow.toLowerCase()}`}
           />
-        </div>
+        </section>
 
-        <div className="grid border-t border-[var(--border-default)] lg:grid-cols-[1.25fr_0.75fr]">
-          <section className="border-b border-[var(--border-default)] p-5 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
-            <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--electric-blue)]">{copy.decisions}</h2>
-            <ol className="mt-6 space-y-5">
+        <div className="grid gap-12 py-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)] lg:gap-20 lg:py-16">
+          <section>
+            <div className="flex items-baseline justify-between gap-6 border-b border-[var(--border-default)] pb-4">
+              <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--electric-blue)]">{copy.decisions}</h2>
+              <span className="font-mono text-[10px] text-[var(--terminal-muted)]">{String(activeView.boundaries.length).padStart(2, '0')} boundaries</span>
+            </div>
+            <ol>
               {activeView.boundaries.map((boundary, index) => (
-                <li key={boundary.label.en} className="grid gap-3 border-t border-[var(--border-default)] pt-5 sm:grid-cols-[2rem_12rem_1fr]">
+                <li key={boundary.label.en} className="grid gap-3 border-b border-[var(--border-default)] py-6 sm:grid-cols-[2.5rem_minmax(150px,0.38fr)_minmax(0,1fr)] sm:gap-6">
                   <span className="font-mono text-[10px] text-[var(--terminal-muted)]">{String(index + 1).padStart(2, '0')}</span>
-                  <h3 className="font-mono text-sm font-semibold text-[var(--terminal-text)]">{boundary.label[language]}</h3>
-                  <p className="text-sm leading-relaxed text-[var(--terminal-muted)]">{boundary.detail[language]}</p>
+                  <h3 className="font-mono text-sm font-semibold leading-6 text-[var(--terminal-text)]">{boundary.label[language]}</h3>
+                  <p className="text-sm leading-7 text-[var(--terminal-muted)]">{boundary.detail[language]}</p>
                 </li>
               ))}
             </ol>
           </section>
 
-          <aside className="p-5 sm:p-8 lg:p-10">
-            <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--electric-green)]">{copy.preserve}</h2>
-            <ul className="mt-5 space-y-3">
-              {activeView.guarantees[language].map((item) => (
-                <li key={item} className="border-t border-[var(--border-default)] pt-3 text-sm leading-relaxed text-[var(--terminal-text)]">
-                  {item}
+          <aside>
+            <h2 className="border-b border-[var(--border-default)] pb-4 font-mono text-xs uppercase tracking-[0.14em] text-[var(--electric-green)]">{copy.preserve}</h2>
+            <ul>
+              {activeView.guarantees[language].map((item, index) => (
+                <li key={item} className="grid grid-cols-[2rem_1fr] gap-4 border-b border-[var(--border-default)] py-4 text-sm leading-6 text-[var(--terminal-text)]">
+                  <span className="font-mono text-[10px] text-[var(--electric-green)]">{String(index + 1).padStart(2, '0')}</span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
 
             {activeView.examples.length > 0 && (
-              <>
-                <h2 className="mt-9 font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">{copy.examples}</h2>
-                <ul className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-10">
+                <h2 className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--terminal-muted)]">{copy.examples}</h2>
+                <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-3">
                   {activeView.examples.map((example) => (
-                    <li key={example} className="border border-[var(--border-default)] px-3 py-2 font-mono text-[10px] text-[var(--terminal-text)]">{example}</li>
+                    <li key={example} className="font-mono text-xs text-[var(--terminal-text)]">{example}</li>
                   ))}
                 </ul>
-              </>
+              </div>
             )}
           </aside>
         </div>
       </section>
 
-      <footer className="mt-6 border-l-2 border-[var(--border-strong)] px-4 py-2">
-        <p className="max-w-4xl text-sm leading-relaxed text-[var(--terminal-muted)]">{copy.note}</p>
+      <footer className="border-t border-[var(--border-default)] pt-6">
+        <p className="max-w-4xl text-sm leading-7 text-[var(--terminal-muted)]">{copy.note}</p>
       </footer>
     </main>
   );
