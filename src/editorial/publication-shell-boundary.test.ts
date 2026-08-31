@@ -63,6 +63,14 @@ function cloneCompatibility(): LegacyCompatibilityManifest {
   return JSON.parse(JSON.stringify(compatibilityManifest)) as LegacyCompatibilityManifest;
 }
 
+type MutableAdmission = Omit<
+  PublicationShellBoundaryManifest['admission'],
+  'directRegistryReadAllowedByRenderer' | 'runtimeSemanticRepairAllowed'
+> & {
+  directRegistryReadAllowedByRenderer: boolean;
+  runtimeSemanticRepairAllowed: boolean;
+};
+
 describe('R2.0 Publication Shell Boundary', () => {
   it('derives the physical shell plan only from accepted distribution and compatibility outputs', () => {
     const result = reconstructPublicationShellBoundary(shellManifest, distribution.bundle!, compatibilityManifest);
@@ -119,8 +127,9 @@ describe('R2.0 Publication Shell Boundary', () => {
 
   it('fails closed if the renderer is granted direct semantic authority', () => {
     const manifest = cloneManifest();
-    manifest.admission.directRegistryReadAllowedByRenderer = true;
-    manifest.admission.runtimeSemanticRepairAllowed = true;
+    const admission = manifest.admission as unknown as MutableAdmission;
+    admission.directRegistryReadAllowedByRenderer = true;
+    admission.runtimeSemanticRepairAllowed = true;
 
     const result = reconstructPublicationShellBoundary(manifest, distribution.bundle!, compatibilityManifest);
     expect(result.state).toBe('conflict');
