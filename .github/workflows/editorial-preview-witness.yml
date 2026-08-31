@@ -1,0 +1,73 @@
+name: Editorial Preview Witness
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/editorial-preview-witness.yml'
+  workflow_dispatch:
+    inputs:
+      preview_origin:
+        description: Isolated public HTTPS preview origin
+        required: false
+        default: https://r2-6-preview-production.up.railway.app
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  R2_6_ACCEPTED_PREVIEW_ORIGIN: https://r2-6-preview-production.up.railway.app
+  R2_6_ACCEPTED_DEPLOYMENT_COMMIT: 17f3f01f06876811e6ca2f8a48c2de8da9b0efbf
+  R2_6_ACCEPTED_DEPLOYMENT_ID: 52b5b9ef-a80a-4ee2-8c54-20aa25975553
+
+jobs:
+  witness:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: editorial-shell/package-lock.json
+
+      - name: Freeze accepted public specimen
+        run: |
+          echo "preview_origin=$R2_6_ACCEPTED_PREVIEW_ORIGIN"
+          echo "deployment_commit=$R2_6_ACCEPTED_DEPLOYMENT_COMMIT"
+          echo "deployment_id=$R2_6_ACCEPTED_DEPLOYMENT_ID"
+          test "$R2_6_ACCEPTED_PREVIEW_ORIGIN" != "https://renan.snelabs.space"
+          test "$R2_6_ACCEPTED_PREVIEW_ORIGIN" != "https://www.renan.snelabs.space"
+
+      - name: Install locked shell dependencies
+        working-directory: editorial-shell
+        run: npm ci
+
+      - name: Build exact editorial shell
+        working-directory: editorial-shell
+        run: npm run build
+
+      - name: Re-prove R2.5 commissioned baseline
+        working-directory: editorial-shell
+        run: npm run verify:commissioned
+
+      - name: Prove R2.6 deployment binding
+        working-directory: editorial-shell
+        run: npm run verify:preview-entrypoint
+
+      - name: Compare public preview with local commissioned runtime
+        working-directory: editorial-shell
+        env:
+          PREVIEW_ORIGIN: ${{ inputs.preview_origin || env.R2_6_ACCEPTED_PREVIEW_ORIGIN }}
+          R2_6_WITNESS_PATH: r2-6-preview-witness.json
+        run: npm run verify:preview
+
+      - name: Preserve environmental witness
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-6-preview-witness-${{ github.sha }}
+          path: editorial-shell/r2-6-preview-witness.json
+          if-no-files-found: warn
+          retention-days: 30

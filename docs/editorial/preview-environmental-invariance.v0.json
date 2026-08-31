@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "editorial-preview-environmental-invariance/v0",
+  "contractId": "PORTFOLIO-R2.6-2026-08-31",
+  "status": "accepted",
+  "normative": true,
+  "baseline": "089f99298e895f299711449516efa55099f987f0",
+  "preconditions": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "r2_3Complete": true,
+    "r2_4Complete": true,
+    "r2_5Complete": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "sourceSpecimen": {
+    "runtime": "editorial-shell/runtime/commissioned-runtime.mjs",
+    "completion": "docs/editorial/R2.5-completion.v0.json",
+    "acceptedArtifactDigest": "sha256:e072e3fdb6f8a99dbc016633fdecaf1050edbfd2007b7bc9b566168089111c26",
+    "deploymentMutationAllowed": false
+  },
+  "previewAdapter": {
+    "entrypoint": "editorial-shell/runtime/preview-runtime.mjs",
+    "container": "editorial-shell/preview.Dockerfile",
+    "listenHost": "0.0.0.0",
+    "listenPortSource": "PORT",
+    "semanticRuntimeReplacementAllowed": false,
+    "providerGeneratedHttpsOriginPreferred": true,
+    "productionOriginForbidden": "renan.snelabs.space"
+  },
+  "acceptedDeployment": {
+    "provider": "Railway",
+    "origin": "https://r2-6-preview-production.up.railway.app",
+    "repository": "4LFR3Dv1/Portfolio",
+    "branch": "r2/shadow-preview-deployment",
+    "commit": "17f3f01f06876811e6ca2f8a48c2de8da9b0efbf",
+    "deploymentId": "52b5b9ef-a80a-4ee2-8c54-20aa25975553"
+  },
+  "comparison": {
+    "transportNormalization": {
+      "contentEncodingMayDiffer": true,
+      "httpProtocolMayDiffer": true,
+      "providerHeadersMayBeAdded": true,
+      "dateHeaderMayDiffer": true
+    },
+    "semanticInvariants": {
+      "decodedBodySha256": "equal",
+      "httpStatus": "equal",
+      "canonicalLink": "equal-or-absent-identically",
+      "contentLanguage": "equal-or-absent-identically",
+      "robots": "equal-or-absent-identically",
+      "redirectLocation": "equal-or-absent-identically",
+      "contentType": "equal-after-normalization",
+      "cacheControl": "remote-retains-all-local-directives",
+      "nosniff": "equal"
+    },
+    "publicTlsRequired": true,
+    "warmRepeatRequired": true
+  },
+  "expected": {
+    "canonicalCount": 18,
+    "historicalCount": 4,
+    "handshakeCount": 4,
+    "redirectCount": 8,
+    "unknownStatus": 404,
+    "sitemapUrlCount": 18,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 6,
+    "minimumStaticAssetCount": 1,
+    "semanticDifferenceCount": 0,
+    "productionMutationCount": 0
+  },
+  "currentState": {
+    "previewAdapterMaterialized": true,
+    "providerNeutralContainerMaterialized": true,
+    "localPreviewBindingWitnessed": true,
+    "publicPreviewDeployed": true,
+    "publicTlsWitnessed": true,
+    "internetComparisonWitnessed": true,
+    "semanticDifferenceCount": 0,
+    "productionDeploymentChanged": false,
+    "productionDnsChanged": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false
+  },
+  "physicalWitness": {
+    "githubRunId": 33399572149,
+    "githubJobId": 99512283933,
+    "artifactId": 9760687747,
+    "artifactZipSha256": "sha256:02ea838294bf76fce6cdd1ff9983af13a0070ea2f431fde32de54508829374cd",
+    "tlsAuthorized": true,
+    "tlsProtocol": "TLSv1.3",
+    "staticAssetCount": 2,
+    "semanticDifferenceCount": 0
+  },
+  "acceptance": {
+    "sameCommissionedRuntimeRequired": true,
+    "isolatedPublicOriginRequired": true,
+    "httpsRequired": true,
+    "semanticDifferenceCountRequired": 0,
+    "productionMutationCountRequired": 0,
+    "r2_6Complete": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "nextRequiredCut": "R2.7 — Cutover Readiness"
+  }
+}
