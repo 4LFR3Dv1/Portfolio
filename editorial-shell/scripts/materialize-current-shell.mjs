@@ -1,6 +1,7 @@
 /* global URL, console */
 import { createHash } from 'node:crypto';
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
 
@@ -132,6 +133,7 @@ try {
     redirects: historicalTransport.redirects,
   };
 
+  mkdirSync(dirname(output), { recursive: true });
   writeFileSync(output, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
   writeFileSync(witnessPath, `${JSON.stringify({
     schemaVersion: 'editorial-current-shell-input-physical-witness/v0',
