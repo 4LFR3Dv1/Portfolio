@@ -251,7 +251,7 @@ describe('R1.9 terminal completion seal', () => {
     expect(r1Readme).toContain('R1_COMPLETE=true');
     expect(r1Readme).toContain('NEXT=R2 — Editorial Publication Shell & Cutover');
     expect(r19Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
-    expect(r19Doc).toContain('Verify run `33349903022`: **SUCCESS**');
+    expect(r19Doc).toContain('passed `Verify` run `33349903022`: **SUCCESS**');
     expect(r19Doc).toContain('R1_COMPLETE                                       true');
     expect(completion.effectiveFoundation.publicationShellMaterialized).toBe(false);
     expect(completion.effectiveFoundation.vercelCutoverEnacted).toBe(false);
