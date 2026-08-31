@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / A2.6 ACCEPTED**
+Status: **IN PROGRESS / A2.7 ACCEPTED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -52,8 +52,8 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | R1-A2.4 | Evidence + Maturity Reconciliation | **COMPLETE / CORRECTED** |
 | R1-A2.5 | Public Disclosure Reauthorization | **COMPLETE** |
 | R1-A2.6 | Current Route Admission | **COMPLETE** |
-| R1-A2.7 | Current Editorial Surface Reconstruction | **NEXT** |
-| R1-A2.8 | Current Publication Acceptance | **NOT STARTED** |
+| R1-A2.7 | Current Editorial Surface Reconstruction | **COMPLETE** |
+| R1-A2.8 | Current Publication Acceptance | **NEXT** |
 
 ## R1-A2.1 physical census
 
@@ -212,15 +212,91 @@ HISTORICAL_ADMISSION_BASIS_REWRITE_COUNT=0
 STALE_TRANSLATION_INHERITANCE_COUNT=0
 ```
 
-The A2.6 candidate at `d31f9797b69435806f0da82bb4f3ef896ca935b7` passed:
-
-```text
-Verify #310                    SUCCESS
-Editorial Shell Build #145     SUCCESS
-Cutover Readiness #76          SUCCESS
-```
+The A2.6 candidate at `d31f9797b69435806f0da82bb4f3ef896ca935b7` passed Verify #310, Editorial Shell Build #145 and Cutover Readiness #76. After the completion-test monotonicity corrections, the terminal A2.6 head `099fa7cd4a81020599dbbe5230e293359aa35403` passed Verify #320, Editorial Shell Build #155 and Cutover Readiness #86.
 
 Route admission still does not imply Home membership or ranking. That authority begins only in A2.7.
+
+## R1-A2.7 Current Editorial Surface Reconstruction
+
+A2.7 reconstructs the semantic publication surface from the current A2.3–A2.6 state instead of mutating the historical R1.6 surface runtime. The current authority path is:
+
+```text
+current System Revision
+        +
+current disclosure governance
+        +
+current maturity governance or explicit unclassified state
+        +
+current exact language realization
+        +
+current canonical route
+        ↓
+PublicProjection
+        ↓
+EditorialDocument
+        ↓
+explicit current surface selection
+```
+
+All 27 current Systems produce one EN and one PT-BR public projection and semantic EditorialDocument. Therefore:
+
+```text
+CURRENT_PUBLIC_PROJECTION_COUNT=54
+CURRENT_PROJECTION_OMISSION_COUNT=0
+CURRENT_EDITORIAL_DOCUMENT_COUNT=54
+CURRENT_SEMANTIC_DOCUMENT_COUNT=54
+CURRENT_DOCUMENT_OMISSION_COUNT=0
+GENERIC_BIRTH_SUMMARY_EMISSION_COUNT=0
+```
+
+The canonical `Systems` surface is the complete current System corpus and has 27 items per language. Its order is explicitly authored and is not repository order, maturity order, recency order or renderer output.
+
+Home is a smaller explicit editorial selection. Its Systems section contains:
+
+```text
+Genesis
+Brine
+Lisa
+Factory
+Foundry
+SNE-FDE
+AgentHub
+```
+
+Its Research section contains:
+
+```text
+BrineOS
+WER-ESK
+SNE Trading
+ORDM
+SNE Observatório
+```
+
+The same Record identities appear in the same order in EN and PT-BR. Research membership is not derived from maturity: WER-ESK is intentionally admitted to Research while its current maturity remains `unclassified`.
+
+Archive remains empty because no current successor has an admitted `archived` lifecycle and A2.7 has no authority to rewrite lifecycle. Essays and Notes remain empty because this amendment has not admitted current `representation.publication` Records of those kinds. Historical prose is not converted into new publication Records merely to populate a surface.
+
+```text
+CURRENT_CORE_SURFACE_COUNT=12
+CURRENT_SYSTEMS_PER_LANGUAGE=27
+CURRENT_RESEARCH_PER_LANGUAGE=5
+CURRENT_ARCHIVE_PER_LANGUAGE=0
+CURRENT_HOME_SYSTEMS_PER_LANGUAGE=7
+CURRENT_HOME_RESEARCH_PER_LANGUAGE=5
+CURRENT_CROSS_LANGUAGE_SURFACE_DRIFT_COUNT=0
+CURRENT_RANKING_INFERENCE_COUNT=0
+```
+
+The first A2.7 candidate `4c912481aa6167d455169d60ce484792b8c36fe2` was rejected before semantic tests because TypeScript `noUnusedLocals` found one unused local variable. No semantic contract failed. After removing that variable, candidate `d764c401e2d624f67f3eb5ef955781c591670e2b` passed:
+
+```text
+Verify #325                    SUCCESS
+Editorial Shell Build #160     SUCCESS
+Cutover Readiness #91          SUCCESS
+```
+
+A2.7 changes no deployed HTML, production DNS, Railway target, Vercel configuration, disclosure policy, route identity or maturity decision. It only reconstructs the current renderer-neutral publication state. Publication validity remains deliberately closed until A2.8 evaluates the complete A2 chain as one accepted current specimen.
 
 ## Direction of authority
 
@@ -241,9 +317,11 @@ explicit current disclosure decision
         ↓
 explicit current bilingual route + language admission
         ↓
-current editorial documents + surfaces
+current PublicProjections + EditorialDocuments
         ↓
-new distribution digest
+explicit current editorial surfaces
+        ↓
+R1-A2.8 current publication acceptance
         ↓
 R2-A1 re-emission / commissioning / preview / witness
 ```
@@ -295,6 +373,22 @@ PRESERVED_HISTORICAL_ROUTE_BINDING_COUNT=10
 DEFERRED_HISTORICAL_ROUTE_BINDING_COUNT=2
 NEW_ROUTE_BINDING_COUNT=46
 
+CURRENT_EDITORIAL_SURFACE_RECONSTRUCTION_COMPLETE=true
+CURRENT_PUBLIC_PROJECTION_COUNT=54
+CURRENT_PROJECTION_OMISSION_COUNT=0
+CURRENT_EDITORIAL_DOCUMENT_COUNT=54
+CURRENT_SEMANTIC_DOCUMENT_COUNT=54
+CURRENT_DOCUMENT_OMISSION_COUNT=0
+CURRENT_CORE_SURFACE_COUNT=12
+CURRENT_SYSTEMS_PER_LANGUAGE=27
+CURRENT_RESEARCH_PER_LANGUAGE=5
+CURRENT_ARCHIVE_PER_LANGUAGE=0
+CURRENT_HOME_SYSTEMS_PER_LANGUAGE=7
+CURRENT_HOME_RESEARCH_PER_LANGUAGE=5
+CURRENT_GENERIC_BIRTH_SUMMARY_EMISSION_COUNT=0
+CURRENT_CROSS_LANGUAGE_SURFACE_DRIFT_COUNT=0
+CURRENT_RANKING_INFERENCE_COUNT=0
+
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
@@ -307,6 +401,7 @@ R1_A2_3_COMPLETE=true
 R1_A2_4_COMPLETE=true
 R1_A2_5_COMPLETE=true
 R1_A2_6_COMPLETE=true
+R1_A2_7_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.7 — Current Editorial Surface Reconstruction
+NEXT=R1-A2.8 — Current Publication Acceptance
 ```
