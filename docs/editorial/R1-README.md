@@ -25,8 +25,8 @@ R1 materializes the editorial world already defined by R0 and grounded across th
 | R1.5 | Editorial Document Runtime | **COMPLETE** |
 | R1.6 | Core Editorial Surfaces | **COMPLETE** |
 | R1.7 | Distribution Foundation | **COMPLETE** |
-| R1.8 | Legacy Compatibility | **NEXT** |
-| R1.9 | Foundation Acceptance | NOT STARTED |
+| R1.8 | Legacy Compatibility | **COMPLETE** |
+| R1.9 | Foundation Acceptance | **NEXT** |
 
 ## Execution boundary
 
@@ -62,6 +62,8 @@ R1.6 admitted only the explicit R0.8 governance required for the five still-vali
 
 R1.7 derives canonical metadata, hreflang clusters, a future editorial sitemap, language-specific RSS envelopes, semantic search entries and one deterministic structured distribution bundle from the exact same authorized R1.6 surfaces and R1.5 documents. It keeps the existing deployed sitemap and React/Vite runtime untouched, refuses to infer freshness, priority, chronology or x-default, and indexes neither unprojected Records nor sanitized document omissions.
 
+R1.8 grounds the physical legacy React/Vite route, language, sitemap and Vercel behavior and materializes a finite compatibility resolver for the eight frozen public locators. Four routes are redirect-ready only because both locale-specific successors already exist in R1.7 distribution; four routes remain frozen legacy representations because their successor is absent, disclosure-unsafe or semantically non-equivalent. Unknown future routes resolve `unresolved`, Agentic Systems is never rebound to a modern System, and no compatibility behavior is enacted in the deployed runtime by this cut.
+
 ```text
 R1_0_COMPLETE=true
 R1_1_COMPLETE=true
@@ -71,5 +73,6 @@ R1_4_COMPLETE=true
 R1_5_COMPLETE=true
 R1_6_COMPLETE=true
 R1_7_COMPLETE=true
-NEXT=R1.8 — Legacy Compatibility
+R1_8_COMPLETE=true
+NEXT=R1.9 — Foundation Acceptance
 ```

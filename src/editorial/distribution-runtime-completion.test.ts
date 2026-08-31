@@ -186,7 +186,7 @@ describe('R1.7 terminal completion seal', () => {
     });
   });
 
-  it('advances the shared R1 program to Legacy Compatibility without changing deployed distribution', () => {
+  it('seals the R1.7 boundary without constraining later R1 program status', () => {
     expect(completion.acceptance).toEqual({
       r1_6Complete: true,
       r1_7Complete: true,
@@ -200,7 +200,6 @@ describe('R1.7 terminal completion seal', () => {
       nextRequiredCut: 'R1.8 — Legacy Compatibility',
     });
     expect(r1Readme).toContain('| R1.7 | Distribution Foundation | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.8 | Legacy Compatibility | **NEXT** |');
     expect(r1Readme).toContain('R1_7_COMPLETE=true');
     expect(r17Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r17Doc).toContain('Materialization `Verify` run `33347509760`: **SUCCESS**.');
