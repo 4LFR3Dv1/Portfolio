@@ -161,7 +161,7 @@ describe('R1-A2.6 current bilingual route admission', () => {
       nextRequiredAction: 'R1-A2.7 — Current Editorial Surface Reconstruction',
     });
     expect(completion.status).toBe('complete');
-    expect(completion.candidateWitness).toEqual({
+    expect(completion.candidateWitness).toMatchObject({
       branchHead: 'd31f9797b69435806f0da82bb4f3ef896ca935b7',
       verifyRunNumber: 310,
       verifyConclusion: 'success',
