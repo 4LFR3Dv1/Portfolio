@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "editorial-publication-shell-boundary/v0",
+  "contractId": "PORTFOLIO-R2.0-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "3408e7726076f52ac18c6e6376b699e8dae9be2a",
+  "preconditions": {
+    "r1Complete": true,
+    "foundationReady": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "runtime": {
+    "targetFramework": "astro-static",
+    "reactIslandsAllowed": true,
+    "rendererAuthority": "consumer-only",
+    "canonicalPageSource": "r1.7-distribution-bundle",
+    "legacyCompatibilitySource": "r1.8-legacy-compatibility",
+    "unknownRouteOutcome": "404"
+  },
+  "admission": {
+    "manualPageDiscoveryAllowed": false,
+    "directRegistryReadAllowedByRenderer": false,
+    "directEvidenceReadAllowedByRenderer": false,
+    "directGovernanceReadAllowedByRenderer": false,
+    "runtimeSemanticRepairAllowed": false,
+    "runtimeSanitizationAllowed": false,
+    "languageFallbackAllowed": false,
+    "legacyMeaningRewriteAllowed": false
+  },
+  "expectedPlan": {
+    "canonicalStaticPageCount": 18,
+    "legacyPreservedPageCount": 4,
+    "compatibilityRedirectCount": 4,
+    "distributionArtifactCount": 4,
+    "rssArtifactCount": 2
+  },
+  "currentState": {
+    "publicationShellBoundaryMaterialized": true,
+    "astroDependencyMaterialized": false,
+    "astroBuildEnacted": false,
+    "staticHtmlRenderingEnacted": false,
+    "compatibilityRedirectsEnacted": false,
+    "legacyFallbackRendererEnacted": false,
+    "editorialSitemapDeployed": false,
+    "vercelCutoverEnacted": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1AcceptedStateIsOnlySemanticInput": true,
+    "canonicalPagesDerivedFromDistributionOnly": true,
+    "legacyPagesDerivedFromCompatibilityOnly": true,
+    "redirectTargetsRequireDistributedCanonicalPage": true,
+    "unknownRouteBecomes404": true,
+    "rendererCanMintRecord": false,
+    "rendererCanChangeDisclosure": false,
+    "rendererCanInferLanguage": false,
+    "r2_0Complete": false,
+    "nextRequiredCut": "R2.1 — Astro Shell Materialization & Editorial Renderer"
+  }
+}
