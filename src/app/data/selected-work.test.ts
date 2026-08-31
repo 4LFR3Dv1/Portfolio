@@ -2,13 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { selectedWork } from './selected-work';
 
 describe('selected work curation', () => {
-  it('publishes the current five-item selection', () => {
+  it('publishes the current six-item selection', () => {
     expect(selectedWork.map((item) => item.id)).toEqual([
       'genesis',
       'factory',
       'lisa',
       'vira',
       'foundry-pay-channels',
+      'solana-agent',
     ]);
 
     expect(selectedWork.some((item) => item.id === 'foundry')).toBe(false);
@@ -40,6 +41,13 @@ describe('selected work curation', () => {
     expect(payments?.links?.map((link) => link.href)).toEqual([
       'https://github.com/4LFR3Dv1/Foundry-Pay',
       'https://github.com/4LFR3Dv1/Foundry-Channels',
+    ]);
+  });
+
+  it('publishes Solana Agent as public developer infrastructure', () => {
+    const solanaAgent = selectedWork.find((item) => item.id === 'solana-agent');
+    expect(solanaAgent?.links?.map((link) => link.href)).toEqual([
+      'https://github.com/4LFR3Dv1/Solana-Agent',
     ]);
   });
 });
