@@ -10,7 +10,7 @@ export interface CurrentStudyLink {
 
 export interface CurrentFocusItem {
   id: string;
-  name: string;
+  name: Localized;
   state: Localized;
   description: Localized;
   studies: CurrentStudyLink[];
@@ -21,7 +21,7 @@ const local = (en: string, pt: string): Localized => ({ en, pt });
 export const currentFocus: CurrentFocusItem[] = [
   {
     id: 'genesis',
-    name: 'Genesis',
+    name: local('Genesis', 'Genesis'),
     state: local('IN DEVELOPMENT', 'EM DESENVOLVIMENTO'),
     description: local(
       'An experimental browser exploring how AI can understand pages, act inside real software and continue work without reducing the web to automated clicks.',
@@ -40,7 +40,7 @@ export const currentFocus: CurrentFocusItem[] = [
   },
   {
     id: 'factory',
-    name: 'Factory',
+    name: local('Factory', 'Factory'),
     state: local('IN DEVELOPMENT', 'EM DESENVOLVIMENTO'),
     description: local(
       'A software-production environment for delegating implementation to AI agents while keeping scope, review and integration visible.',
@@ -59,7 +59,7 @@ export const currentFocus: CurrentFocusItem[] = [
   },
   {
     id: 'experimental-computing',
-    name: 'Computação experimental',
+    name: local('Experimental computing', 'Computação experimental'),
     state: local('ACTIVE RESEARCH', 'PESQUISA ATIVA'),
     description: local(
       'Networks, state, time and abstraction investigated through concrete software and hardware experiments.',
