@@ -1,4 +1,4 @@
-/* global URL, console, fetch */
+/* global URL, URLSearchParams, console, fetch */
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { createServer as createViteServer } from 'vite';
