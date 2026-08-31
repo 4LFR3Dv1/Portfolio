@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-r2-a1-reemission-constitution/v0",
   "contractId": "PORTFOLIO-R2-A1-2026-08-31",
-  "status": "materialized-awaiting-ci",
+  "status": "active",
   "normative": true,
   "baseline": "81f6d8d5b5c5bd0d3ef52d038eaa4337ad9df84f",
   "preconditions": {
@@ -43,12 +43,12 @@
     {
       "cut": "R2-A1.0",
       "purpose": "Physical Re-emission Constitution",
-      "status": "materialized-awaiting-ci"
+      "status": "complete"
     },
     {
       "cut": "R2-A1.1",
       "purpose": "Current Renderer Input Re-emission",
-      "status": "not-started"
+      "status": "next"
     },
     {
       "cut": "R2-A1.2",
@@ -100,13 +100,13 @@
     "productionMutationCount": 0
   },
   "acceptance": {
-    "r2_a1_0Complete": false,
+    "r2_a1_0Complete": true,
     "r2_a1Complete": false,
     "currentPublicationValid": true,
     "currentPhysicalPublicationValid": false,
     "cutoverReady": false,
     "cutoverAuthorized": false,
     "cutoverEnacted": false,
-    "nextRequiredAction": "CI must prove the R2-A1 boundary is bound to the exact A2.8 digest while historical transport witnesses and production remain excluded"
+    "nextRequiredAction": "R2-A1.1 — Current Renderer Input Re-emission"
   }
 }
