@@ -53,6 +53,7 @@ interface ReconciliationConstitution {
     r1_a2_0Materialized: boolean;
     r1_a2_1Complete: boolean;
     r1_a2_2Complete: boolean;
+    r1_a2_3Complete: boolean;
     r1_a2Complete: boolean;
     currentPublicationValid: boolean;
     cutoverReady: boolean;
@@ -439,7 +440,7 @@ describe('R1-A2 current corpus reconciliation', () => {
     expect(identity.laws.unresolvedRelationMayBePreservedWithoutIdentityReplacement).toBe(true);
   });
 
-  it('seals R1-A2.2 while leaving Revision, disclosure, routes and surfaces ahead', () => {
+  it('preserves the R1-A2.2 seal after A2.3 advances the current revision state', () => {
     expect(identity.currentState).toMatchObject({
       existingBirthRecordCount: 28,
       reconciledRecordCount: 28,
@@ -493,15 +494,16 @@ describe('R1-A2 current corpus reconciliation', () => {
       preservedRecordIdCount: 28,
       recordIdChangeCount: 0,
       newRecordBirthCount: 0,
-      currentRevisionMaterializationComplete: false,
+      currentRevisionMaterializationComplete: true,
       currentPublicationValid: false,
       cutoverReady: false,
     });
     expect(constitution.acceptance).toMatchObject({
       r1_a2_1Complete: true,
       r1_a2_2Complete: true,
+      r1_a2_3Complete: true,
       r1_a2Complete: false,
-      nextRequiredCut: 'R1-A2.3 — Current Revision Materialization',
+      nextRequiredCut: 'R1-A2.4 — Evidence + Maturity Reconciliation',
     });
     expect(constitution.laws).toMatchObject({
       existingRecordIdentityMustBePreserved: true,
@@ -517,5 +519,6 @@ describe('R1-A2 current corpus reconciliation', () => {
       currentPublicationValidityGatesCutover: true,
     });
     expect(r1A2Doc).toContain('R1_A2_2_COMPLETE=true');
+    expect(r1A2Doc).toContain('R1_A2_3_COMPLETE=true');
   });
 });
