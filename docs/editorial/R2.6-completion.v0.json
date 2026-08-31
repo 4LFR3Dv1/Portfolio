@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "editorial-r2-6-completion/v0",
+  "contractId": "PORTFOLIO-R2.6-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "089f99298e895f299711449516efa55099f987f0",
+  "acceptedPreviewSpecimen": {
+    "repository": "4LFR3Dv1/Portfolio",
+    "branch": "r2/shadow-preview-deployment",
+    "commit": "17f3f01f06876811e6ca2f8a48c2de8da9b0efbf",
+    "provider": "Railway",
+    "projectId": "b447a912-19fc-47f5-a1ed-67974522f29c",
+    "serviceId": "21734e1d-7580-4bb7-b809-8744ac4d3f09",
+    "environmentId": "5d1e1f99-122c-4f07-8741-56fc55e08ef5",
+    "deploymentId": "52b5b9ef-a80a-4ee2-8c54-20aa25975553",
+    "origin": "https://r2-6-preview-production.up.railway.app",
+    "targetPort": 8080
+  },
+  "provenance": {
+    "exactBranchMatched": true,
+    "exactCommitMatched": true,
+    "rejectedDeployments": [
+      {
+        "deploymentId": "4579a74f-a000-4a82-8b8c-ff0519854b89",
+        "branch": "main",
+        "commit": "089f99298e895f299711449516efa55099f987f0",
+        "reason": "provider snapshot did not contain the R2.6 branch specimen"
+      },
+      {
+        "deploymentId": "d3a0869e-8998-4608-8aa7-037f6bf5e8b7",
+        "branch": "main",
+        "commit": "089f99298e895f299711449516efa55099f987f0",
+        "reason": "redeploy reused the rejected main snapshot"
+      }
+    ]
+  },
+  "githubWitness": {
+    "workflow": "Editorial Shell Build",
+    "runId": 33399572149,
+    "jobId": 99512283933,
+    "pullRequest": 36,
+    "branchHead": "c15c092053eddd97d1a071cf1ae3c10d87bd860a",
+    "mergeWitnessSha": "7f71852674643246dba9188ecdd25a25c3a103f7",
+    "artifactId": 9760687747,
+    "artifactZipSha256": "sha256:02ea838294bf76fce6cdd1ff9983af13a0070ea2f431fde32de54508829374cd",
+    "environmentalWitnessGeneratedAt": "2026-08-31T13:55:01.083Z"
+  },
+  "tls": {
+    "authorized": true,
+    "authorizationError": null,
+    "protocol": "TLSv1.3",
+    "subjectCN": "*.up.railway.app",
+    "issuerCN": "YE1",
+    "validFrom": "Jul 29 02:40:55 2026 GMT",
+    "validTo": "Oct 27 02:40:54 2026 GMT",
+    "fingerprint256": "E7:A6:72:94:98:60:B9:29:A7:90:F8:2D:D2:15:0D:1A:3F:C0:8C:5A:82:3A:6D:0F:C7:F3:A6:3B:95:9D:05:11"
+  },
+  "transport": {
+    "observedServer": "railway-hikari",
+    "providerHeadersObserved": true,
+    "providerHeadersSemanticAuthority": false
+  },
+  "comparison": {
+    "localBaseline": "R2.5 commissioned runtime",
+    "canonicalCount": 18,
+    "historicalCount": 4,
+    "handshakeCount": 4,
+    "redirectCount": 8,
+    "staticAssetCount": 2,
+    "warmRepeatWitnessed": true,
+    "semanticDifferenceCount": 0,
+    "differences": [],
+    "decodedBodiesEqual": true,
+    "statusesEqual": true,
+    "canonicalHeadersEqual": true,
+    "languageHeadersEqual": true,
+    "robotsHeadersEqual": true,
+    "redirectLocationsEqual": true,
+    "contentTypesEqual": true,
+    "requiredCacheDirectivesPreserved": true,
+    "nosniffPreserved": true
+  },
+  "productionBoundary": {
+    "productionOrigin": "https://renan.snelabs.space",
+    "productionOriginContacted": false,
+    "productionDnsChanged": false,
+    "productionDomainChanged": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "previewPublic": true,
+    "previewIsolated": true,
+    "deploymentProvenanceAccepted": true,
+    "publicTlsWitnessed": true,
+    "internetComparisonWitnessed": true,
+    "localRemoteSemanticEquivalence": true,
+    "hostingReinterpretationObserved": false,
+    "semanticDifferenceCount": 0,
+    "productionMutationCount": 0,
+    "r2_6Complete": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "nextRequiredCut": "R2.7 — Cutover Readiness"
+  }
+}
