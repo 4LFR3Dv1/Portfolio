@@ -1,11 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import rendererInputManifestJson from '../../docs/editorial/R2-A1.1-current-renderer-input.v0.json';
+import rendererInputCompletionJson from '../../docs/editorial/R2-A1.1-completion.v0.json';
 import {
   ACCEPTED_CURRENT_PUBLICATION_DIGEST,
   currentRendererInputDigest,
   materializeCurrentRendererInput,
   serializeCurrentRendererInput,
 } from './current-renderer-input';
+
+const RENDERER_INPUT_DIGEST = 'sha256_4b2bc45e2127befd4f7be0aaf7b4a2cebe0ad7ab9da7a7fa774414af155d73e6';
 
 const manifest = rendererInputManifestJson as {
   status: string;
@@ -14,6 +17,14 @@ const manifest = rendererInputManifestJson as {
   expectedMaterialization: Record<string, number | string | null>;
   physicalOutput: Record<string, boolean | string>;
   acceptance: Record<string, boolean | number | string>;
+};
+const completion = rendererInputCompletionJson as {
+  status: string;
+  sourceIdentity: Record<string, string>;
+  candidateWitness: Record<string, string | number>;
+  physicalWitness: Record<string, string | number | boolean>;
+  productionBoundary: Record<string, boolean | number>;
+  acceptance: Record<string, boolean | string>;
 };
 
 function surface(id: string, language: 'en' | 'pt-BR') {
@@ -50,15 +61,15 @@ describe('R2-A1.1 current renderer input re-emission', () => {
     expect(enHome?.sections.find((entry) => entry.id === 'research')?.items).toHaveLength(5);
   });
 
-  it('produces deterministic physical input bytes without historical renderer/distribution authority', () => {
+  it('freezes deterministic physical input bytes without historical renderer/distribution authority', () => {
     const first = materializeCurrentRendererInput();
     const second = materializeCurrentRendererInput();
     const firstDigest = currentRendererInputDigest(first);
-    const secondDigest = currentRendererInputDigest(second);
 
-    expect(secondDigest).toBe(firstDigest);
-    expect(firstDigest).toMatch(/^sha256_[0-9a-f]{64}$/);
+    expect(currentRendererInputDigest(second)).toBe(firstDigest);
+    expect(firstDigest).toBe(RENDERER_INPUT_DIGEST);
     expect(serializeCurrentRendererInput(second)).toBe(serializeCurrentRendererInput(first));
+    expect(manifest.expectedMaterialization.rendererInputDigest).toBe(RENDERER_INPUT_DIGEST);
     expect(manifest.laws).toMatchObject({
       rendererInputConsumesCurrentSemanticSpecimenOnly: true,
       acceptedPublicationDigestMustBeEmbedded: true,
@@ -69,11 +80,15 @@ describe('R2-A1.1 current renderer input re-emission', () => {
       rendererInferenceAllowed: false,
       productionMutationAllowed: false,
     });
-    process.stdout.write(`R2_A1_1_RENDERER_INPUT_DIGEST=${firstDigest}\n`);
+    expect(completion.sourceIdentity).toMatchObject({
+      acceptedPublicationDigest: ACCEPTED_CURRENT_PUBLICATION_DIGEST,
+      rendererInputDigest: RENDERER_INPUT_DIGEST,
+      generatedByteDigest: 'sha256_43021b2d7007c3452ec7bbc8654fc0b3e9fdc8b9efc15e97f02eb88a627a3c36',
+    });
   });
 
-  it('keeps A1.1 bounded before distribution, runtime, preview or cutover', () => {
-    expect(manifest.status).toBe('materialized-awaiting-ci');
+  it('seals A1.1 while distribution, runtime, preview and cutover remain closed', () => {
+    expect(manifest.status).toBe('complete');
     expect(manifest.preconditions).toEqual({
       r2_a1_0Complete: true,
       r1_a2Complete: true,
@@ -89,29 +104,45 @@ describe('R2-A1.1 current renderer input re-emission', () => {
       researchPerLanguage: 5,
       homeSystemsPerLanguage: 7,
       homeResearchPerLanguage: 5,
-      rendererInputDigest: null,
+      rendererInputDigest: RENDERER_INPUT_DIGEST,
     });
     expect(manifest.physicalOutput).toEqual({
       generatedPath: 'editorial-shell/src/generated/current-publication-state.json',
       witnessPath: 'editorial-shell/r2-a1-1-current-renderer-input-witness.json',
       generatedPathCommitted: false,
-      witnessProducedByCi: false,
+      witnessProducedByCi: true,
     });
     expect(manifest.acceptance).toMatchObject({
-      exactAcceptedPublicationDigestEmbedded: true,
-      allCurrentSurfacesMaterialized: true,
-      allCurrentSemanticDocumentsMaterialized: true,
-      historicalRendererInputAuthorityCount: 0,
-      historicalDistributionAuthorityCount: 0,
-      semanticMutationCount: 0,
-      productionMutationCount: 0,
-      r2_a1_1Complete: false,
-      currentSpecimenReemitted: false,
+      r2_a1_1Complete: true,
+      currentSpecimenReemitted: true,
       currentDistributionEmitted: false,
       currentPhysicalPublicationValid: false,
       cutoverReady: false,
       cutoverAuthorized: false,
       cutoverEnacted: false,
+      nextRequiredAction: 'R2-A1.2 — Current Distribution Emission',
+    });
+    expect(completion.status).toBe('complete');
+    expect(completion.candidateWitness).toMatchObject({
+      branchHead: 'c1ada26b0391ec65fde78de9c8e930dd60211499',
+      verifyRunNumber: 359,
+      verifyConclusion: 'success',
+      editorialShellBuildRunNumber: 194,
+      editorialShellBuildConclusion: 'success',
+      cutoverReadinessRunNumber: 125,
+      cutoverReadinessConclusion: 'success',
+    });
+    expect(completion.physicalWitness).toMatchObject({
+      surfaceCount: 12,
+      documentCount: 54,
+      artifactId: 9772638124,
+      artifactZipSha256: '9ae2f952c4d2d45a874b5ae92946baccb5866be61252c6013153e42af89c9211',
+    });
+    expect(completion.productionBoundary).toMatchObject({
+      distributionSwitchedToCurrentInput: false,
+      staticRuntimeRecommissionedForCurrentInput: false,
+      previewRedeployedForCurrentInput: false,
+      productionMutationCount: 0,
     });
   });
 });
