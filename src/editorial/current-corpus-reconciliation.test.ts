@@ -38,6 +38,11 @@ interface ReconciliationConstitution {
     materialHeadCount: number;
     emptyRepositoryCount: number;
     identityReconciliationComplete: boolean;
+    reconciledSystemRecordCount: number;
+    preservedRecordIdCount: number;
+    recordIdChangeCount: number;
+    newRecordBirthCount: number;
+    currentRevisionMaterializationComplete: boolean;
     currentPublicationValid: boolean;
     cutoverReady: boolean;
     cutoverAuthorized: boolean;
@@ -47,6 +52,7 @@ interface ReconciliationConstitution {
   acceptance: {
     r1_a2_0Materialized: boolean;
     r1_a2_1Complete: boolean;
+    r1_a2_2Complete: boolean;
     r1_a2Complete: boolean;
     currentPublicationValid: boolean;
     cutoverReady: boolean;
@@ -94,9 +100,87 @@ interface CurrentCensus {
   };
 }
 
+interface PreviousCensus {
+  repositories: Array<{ repo: string }>;
+}
+
 interface RegistryManifest {
   birthProfile: { summary: string; thesis: string | null };
   admission: { systemBirthCount: number };
+  assignments: Array<{
+    subjectKey: string;
+    name: string;
+    subjectClass: string;
+    recordId: string;
+    groundingCluster: string | null;
+  }>;
+}
+
+interface IdentityRecord {
+  subjectKey: string;
+  recordId: string;
+  birthName: string;
+  subjectClass: string;
+  groundingCluster: string | null;
+  repositoryRealizations: string[];
+  identityDisposition: string;
+  continuityDecision: string;
+  confidence: 'high' | 'medium' | 'low';
+  currentSemanticEvidence: string[];
+  newRecordRequired: boolean;
+  currentRevisionCandidate: boolean;
+  canonicalNameResolved?: boolean;
+  crossSystemContinuityResolved?: boolean;
+  requiresDeepRevisionGrounding?: boolean;
+}
+
+interface IdentityReconciliation {
+  status: string;
+  laws: {
+    recordIdReplacementAllowed: boolean;
+    repositoryIdentityIsSystemIdentity: boolean;
+    repositoryMutationMayMintSystem: boolean;
+    currentHeadIsEvidenceNotIdentity: boolean;
+    unresolvedRelationMayBePreservedWithoutIdentityReplacement: boolean;
+    currentRevisionMaterializationBelongsToR1A23: boolean;
+    publicDisclosureBelongsToR1A25: boolean;
+  };
+  records: IdentityRecord[];
+  nonBirthFindings: {
+    currentRepositoryInventoryDrift: boolean;
+    newRepositorySubjectsDetected: number;
+    newRecordBirthAuthorized: number;
+    existingRecordDeletionAuthorized: number;
+    recordIdReassignmentAuthorized: number;
+    unbornPriorCandidatesRemainOutsideAutomaticBirth: boolean;
+  };
+  unresolvedButNonBlockingIdentityRelations: string[];
+  currentState: {
+    existingBirthRecordCount: number;
+    reconciledRecordCount: number;
+    preservedRecordIdCount: number;
+    recordIdChangeCount: number;
+    newRecordBirthCount: number;
+    currentRevisionMaterializedCount: number;
+    publicDisclosureDecisionCount: number;
+    routeMutationCount: number;
+    publicSurfaceMutationCount: number;
+    productionMutationCount: number;
+  };
+  acceptance: {
+    allExistingSystemRecordsReconciled: boolean;
+    identityContinuityPreserved: boolean;
+    recordIdChangeCount: number;
+    newRecordBirthCount: number;
+    repositoryToSystemShortcutCount: number;
+    unresolvedRelationsPreservedExplicitly: boolean;
+    r1_a2_2Complete: boolean;
+    currentRevisionMaterializationComplete: boolean;
+    currentPublicationValid: boolean;
+    cutoverReady: boolean;
+    cutoverAuthorized: boolean;
+    nextRequiredCut: string;
+  };
 }
 
 interface RouteManifest {
@@ -136,6 +220,37 @@ interface R1A21Completion {
   };
 }
 
+interface R1A22Completion {
+  status: string;
+  materialization: {
+    existingBirthRecordCount: number;
+    reconciledRecordCount: number;
+    preservedRecordIdCount: number;
+    recordIdChangeCount: number;
+    newRecordBirthCount: number;
+    repositoryToSystemShortcutCount: number;
+    currentRevisionMaterializedCount: number;
+    publicDisclosureDecisionCount: number;
+    routeMutationCount: number;
+    publicSurfaceMutationCount: number;
+  };
+  explicitlyUnresolved: string[];
+  productionBoundary: { productionMutationCount: number };
+  acceptance: {
+    allExistingSystemRecordsReconciled: boolean;
+    identityContinuityPreserved: boolean;
+    recordIdChangeCount: number;
+    newRecordBirthCount: number;
+    unresolvedRelationsPreservedExplicitly: boolean;
+    r1_a2_2Complete: boolean;
+    currentRevisionMaterializationComplete: boolean;
+    currentPublicationValid: boolean;
+    cutoverReady: boolean;
+    cutoverAuthorized: boolean;
+    nextRequiredCut: string;
+  };
+}
+
 function readRepoFile(path: string): string {
   return readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 }
@@ -146,7 +261,10 @@ function readJson<T>(path: string): T {
 
 const constitution = readJson<ReconciliationConstitution>('docs/editorial/R1-A2-reconciliation-constitution.v0.json');
 const census = readJson<CurrentCensus>('docs/editorial/R1-A2.1-current-github-census.v0.json');
-const completion = readJson<R1A21Completion>('docs/editorial/R1-A2.1-completion.v0.json');
+const previousCensus = readJson<PreviousCensus>('docs/editorial/github-corpus-census.v0.json');
+const censusCompletion = readJson<R1A21Completion>('docs/editorial/R1-A2.1-completion.v0.json');
+const identity = readJson<IdentityReconciliation>('docs/editorial/R1-A2.2-identity-reconciliation.v0.json');
+const identityCompletion = readJson<R1A22Completion>('docs/editorial/R1-A2.2-completion.v0.json');
 const registry = readJson<RegistryManifest>('docs/editorial/record-registry.v0.json');
 const routes = readJson<RouteManifest>('docs/editorial/route-runtime.v0.json');
 const surfaces = readJson<SurfaceManifest>('docs/editorial/core-editorial-surfaces.v0.json');
@@ -203,9 +321,14 @@ describe('R1-A2 current corpus reconciliation', () => {
     expect(census.repositories
       .filter((entry) => entry.state === 'empty')
       .every((entry) => entry.observedHead === null)).toBe(true);
+
+    const previousNames = [...previousCensus.repositories.map((entry) => entry.repo)].sort();
+    const currentNames = [...census.repositories.map((entry) => entry.repo)].sort();
+    expect(currentNames).toEqual(previousNames);
+    expect(census.comparisonToR1Pre.repositoryInventoryDrift).toBe(false);
   });
 
-  it('pins the current frontier realization heads instead of relying on the August 30 census', () => {
+  it('pins current frontier realization heads instead of relying on the August 30 census', () => {
     const byRepo = new Map(census.repositories.map((entry) => [entry.repo, entry]));
     expect(byRepo.get('4LFR3Dv1/Genesis')?.observedHead).toBe('ffbba53257a0b8e9c147977cc63aa05bacd1161b');
     expect(byRepo.get('4LFR3Dv1/BrineOS')?.observedHead).toBe('54be6e6512c47fc0e99e85a850bd0b44f9dc54c5');
@@ -234,16 +357,16 @@ describe('R1-A2 current corpus reconciliation', () => {
     });
   });
 
-  it('closes only census observation and keeps every semantic/publication mutation ahead', () => {
-    expect(completion.status).toBe('complete');
-    expect(completion.observation).toMatchObject({
+  it('closes census observation without performing semantic or publication mutation', () => {
+    expect(censusCompletion.status).toBe('complete');
+    expect(censusCompletion.observation).toMatchObject({
       repositoryCount: 54,
       materialHeadCount: 52,
       emptyRepositoryCount: 2,
       emptyRepositories: ['4LFR3Dv1/SNE-RADAR-v1.0', '4LFR3Dv1/factory-control'],
       repositorySizeUsedAsHeadAuthority: false,
     });
-    expect(completion.productionBoundary.productionMutationCount).toBe(0);
+    expect(censusCompletion.productionBoundary.productionMutationCount).toBe(0);
     expect(census.acceptance).toMatchObject({
       currentCorpusCensusComplete: true,
       r1_a2_1Complete: true,
@@ -254,11 +377,131 @@ describe('R1-A2 current corpus reconciliation', () => {
       publicSurfaceChanged: false,
       nextRequiredCut: 'R1-A2.2 — Existing Identity Reconciliation',
     });
-    expect(completion.acceptance).toMatchObject({
-      r1_a2_1Complete: true,
+  });
+
+  it('reconciles exactly the 28 born Record identities without changing or duplicating any RecordId', () => {
+    expect(identity.status).toBe('reconciled');
+    expect(identity.records).toHaveLength(28);
+    expect(registry.assignments).toHaveLength(28);
+
+    const birthIds = [...registry.assignments.map((entry) => entry.recordId)].sort();
+    const reconciledIds = [...identity.records.map((entry) => entry.recordId)].sort();
+    expect(new Set(reconciledIds).size).toBe(28);
+    expect(reconciledIds).toEqual(birthIds);
+
+    const birthByKey = new Map(registry.assignments.map((entry) => [entry.subjectKey, entry]));
+    for (const record of identity.records) {
+      const birth = birthByKey.get(record.subjectKey);
+      expect(birth).toBeDefined();
+      expect(record.recordId).toBe(birth?.recordId);
+      expect(record.birthName).toBe(birth?.name);
+      expect(record.subjectClass).toBe(birth?.subjectClass);
+      expect(record.groundingCluster).toBe(birth?.groundingCluster);
+      expect(record.newRecordRequired).toBe(false);
+    }
+  });
+
+  it('binds every current repository realization to the observed census instead of inventing locators', () => {
+    const currentRepos = new Set(census.repositories.map((entry) => entry.repo));
+    for (const record of identity.records) {
+      for (const repository of record.repositoryRealizations) {
+        expect(currentRepos.has(repository)).toBe(true);
+      }
+    }
+
+    const lisa = identity.records.find((entry) => entry.subjectKey === 'lisa');
+    expect(lisa?.repositoryRealizations).toEqual([
+      '4LFR3Dv1/lisa-web',
+      '4LFR3Dv1/lisa-app',
+      '4LFR3Dv1/lisa-runtime',
+    ]);
+    expect(lisa?.identityDisposition).toBe('preserve-existing-record');
+
+    const radar = identity.records.find((entry) => entry.subjectKey === 'sne-radar');
+    expect(radar?.repositoryRealizations).toHaveLength(6);
+    expect(radar?.requiresDeepRevisionGrounding).toBe(true);
+
+    const transactional = identity.records.find((entry) => entry.subjectKey === 'transactional-support-bot');
+    expect(transactional?.repositoryRealizations).toEqual([]);
+    expect(transactional?.currentRevisionCandidate).toBe(false);
+  });
+
+  it('preserves ambiguity as evidence state rather than resolving it through identity mutation', () => {
+    expect(identity.unresolvedButNonBlockingIdentityRelations).toEqual([
+      'XS Wallet / Domini canonical public name',
+      'ORDM internal PoC/testnet exact continuity',
+      'SNE Vault material migration relationship to SNE-OS',
+      'SNE Observatorio relationship to SNE Radar',
+    ]);
+    expect(identity.records.find((entry) => entry.subjectKey === 'xs-wallet')?.canonicalNameResolved).toBe(false);
+    expect(identity.records.find((entry) => entry.subjectKey === 'sne-vault')?.crossSystemContinuityResolved).toBe(false);
+    expect(identity.records.find((entry) => entry.subjectKey === 'sne-observatorio')?.crossSystemContinuityResolved).toBe(false);
+    expect(identity.laws.unresolvedRelationMayBePreservedWithoutIdentityReplacement).toBe(true);
+  });
+
+  it('seals R1-A2.2 while leaving Revision, disclosure, routes and surfaces ahead', () => {
+    expect(identity.currentState).toMatchObject({
+      existingBirthRecordCount: 28,
+      reconciledRecordCount: 28,
+      preservedRecordIdCount: 28,
+      recordIdChangeCount: 0,
+      newRecordBirthCount: 0,
+      currentRevisionMaterializedCount: 0,
+      publicDisclosureDecisionCount: 0,
+      routeMutationCount: 0,
+      publicSurfaceMutationCount: 0,
+      productionMutationCount: 0,
+    });
+    expect(identity.nonBirthFindings).toMatchObject({
+      currentRepositoryInventoryDrift: false,
+      newRepositorySubjectsDetected: 0,
+      newRecordBirthAuthorized: 0,
+      existingRecordDeletionAuthorized: 0,
+      recordIdReassignmentAuthorized: 0,
+      unbornPriorCandidatesRemainOutsideAutomaticBirth: true,
+    });
+    expect(identityCompletion.status).toBe('complete');
+    expect(identityCompletion.materialization).toMatchObject({
+      existingBirthRecordCount: 28,
+      reconciledRecordCount: 28,
+      preservedRecordIdCount: 28,
+      recordIdChangeCount: 0,
+      newRecordBirthCount: 0,
+      repositoryToSystemShortcutCount: 0,
+      currentRevisionMaterializedCount: 0,
+      publicDisclosureDecisionCount: 0,
+      routeMutationCount: 0,
+      publicSurfaceMutationCount: 0,
+    });
+    expect(identityCompletion.productionBoundary.productionMutationCount).toBe(0);
+    expect(identityCompletion.acceptance).toMatchObject({
+      allExistingSystemRecordsReconciled: true,
+      identityContinuityPreserved: true,
+      recordIdChangeCount: 0,
+      newRecordBirthCount: 0,
+      unresolvedRelationsPreservedExplicitly: true,
+      r1_a2_2Complete: true,
+      currentRevisionMaterializationComplete: false,
       currentPublicationValid: false,
       cutoverReady: false,
-      nextRequiredCut: 'R1-A2.2 — Existing Identity Reconciliation',
+      cutoverAuthorized: false,
+      nextRequiredCut: 'R1-A2.3 — Current Revision Materialization',
+    });
+    expect(constitution.currentState).toMatchObject({
+      identityReconciliationComplete: true,
+      reconciledSystemRecordCount: 28,
+      preservedRecordIdCount: 28,
+      recordIdChangeCount: 0,
+      newRecordBirthCount: 0,
+      currentRevisionMaterializationComplete: false,
+      currentPublicationValid: false,
+      cutoverReady: false,
+    });
+    expect(constitution.acceptance).toMatchObject({
+      r1_a2_1Complete: true,
+      r1_a2_2Complete: true,
+      r1_a2Complete: false,
+      nextRequiredCut: 'R1-A2.3 — Current Revision Materialization',
     });
     expect(constitution.laws).toMatchObject({
       existingRecordIdentityMustBePreserved: true,
@@ -273,6 +516,6 @@ describe('R1-A2 current corpus reconciliation', () => {
       privateEvidencePublicByDefault: false,
       currentPublicationValidityGatesCutover: true,
     });
-    expect(r1A2Doc).toContain('R1_A2_1_COMPLETE=true');
+    expect(r1A2Doc).toContain('R1_A2_2_COMPLETE=true');
   });
 });
