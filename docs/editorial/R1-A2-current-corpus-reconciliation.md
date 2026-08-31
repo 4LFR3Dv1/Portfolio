@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / A2.7 ACCEPTED**
+Status: **COMPLETE / CURRENT PUBLICATION ACCEPTED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -16,7 +16,7 @@ Durable System subject admitted from the connected GitHub corpus grounding.
 
 The repository already contains 28 born System Records. R1.3 routes only five R0.8 migration targets and R1.6 reuses the R0.8 disclosure plan, leaving 23 born Systems unrouted and only three full-disclosure Systems on semantic surfaces.
 
-Therefore:
+Therefore the amendment opened under:
 
 ```text
 R2.7 historical infrastructure readiness = true
@@ -39,7 +39,7 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 9. **Private evidence stays private by default.** Public representation may cite conclusions derived from admissible evidence without leaking private source content.
 10. **Governance identity is monotonic.** Existing logical governance Records advance by Revision rather than replacement Birth.
 11. **Historical route identity is monotonic.** Existing public paths cannot be dropped, reassigned or have their admission basis silently rewritten.
-12. **Current publication validity gates cutover.** No R2.8 authorization is possible while `CURRENT_PUBLICATION_VALID=false`.
+12. **Current publication validity gates cutover.** A semantically valid current publication is necessary but not sufficient for physical cutover readiness.
 
 ## Program
 
@@ -53,7 +53,7 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | R1-A2.5 | Public Disclosure Reauthorization | **COMPLETE** |
 | R1-A2.6 | Current Route Admission | **COMPLETE** |
 | R1-A2.7 | Current Editorial Surface Reconstruction | **COMPLETE** |
-| R1-A2.8 | Current Publication Acceptance | **NEXT** |
+| R1-A2.8 | Current Publication Acceptance | **COMPLETE** |
 
 ## R1-A2.1 physical census
 
@@ -214,31 +214,11 @@ STALE_TRANSLATION_INHERITANCE_COUNT=0
 
 The A2.6 candidate at `d31f9797b69435806f0da82bb4f3ef896ca935b7` passed Verify #310, Editorial Shell Build #145 and Cutover Readiness #76. After the completion-test monotonicity corrections, the terminal A2.6 head `099fa7cd4a81020599dbbe5230e293359aa35403` passed Verify #320, Editorial Shell Build #155 and Cutover Readiness #86.
 
-Route admission still does not imply Home membership or ranking. That authority begins only in A2.7.
-
 ## R1-A2.7 Current Editorial Surface Reconstruction
 
-A2.7 reconstructs the semantic publication surface from the current A2.3–A2.6 state instead of mutating the historical R1.6 surface runtime. The current authority path is:
+A2.7 reconstructs the semantic publication surface from the current A2.3–A2.6 state instead of mutating the historical R1.6 surface runtime.
 
-```text
-current System Revision
-        +
-current disclosure governance
-        +
-current maturity governance or explicit unclassified state
-        +
-current exact language realization
-        +
-current canonical route
-        ↓
-PublicProjection
-        ↓
-EditorialDocument
-        ↓
-explicit current surface selection
-```
-
-All 27 current Systems produce one EN and one PT-BR public projection and semantic EditorialDocument. Therefore:
+All 27 current Systems produce one EN and one PT-BR public projection and semantic EditorialDocument:
 
 ```text
 CURRENT_PUBLIC_PROJECTION_COUNT=54
@@ -251,31 +231,9 @@ GENERIC_BIRTH_SUMMARY_EMISSION_COUNT=0
 
 The canonical `Systems` surface is the complete current System corpus and has 27 items per language. Its order is explicitly authored and is not repository order, maturity order, recency order or renderer output.
 
-Home is a smaller explicit editorial selection. Its Systems section contains:
+Home is a smaller explicit editorial selection. Its Systems section contains Genesis, Brine, Lisa, Factory, Foundry, SNE-FDE and AgentHub. Its Research section contains BrineOS, WER-ESK, SNE Trading, ORDM and SNE Observatório. The same Record identities appear in the same order in EN and PT-BR. Research membership is not derived from maturity: WER-ESK is intentionally admitted while its current maturity remains `unclassified`.
 
-```text
-Genesis
-Brine
-Lisa
-Factory
-Foundry
-SNE-FDE
-AgentHub
-```
-
-Its Research section contains:
-
-```text
-BrineOS
-WER-ESK
-SNE Trading
-ORDM
-SNE Observatório
-```
-
-The same Record identities appear in the same order in EN and PT-BR. Research membership is not derived from maturity: WER-ESK is intentionally admitted to Research while its current maturity remains `unclassified`.
-
-Archive remains empty because no current successor has an admitted `archived` lifecycle and A2.7 has no authority to rewrite lifecycle. Essays and Notes remain empty because this amendment has not admitted current `representation.publication` Records of those kinds. Historical prose is not converted into new publication Records merely to populate a surface.
+Archive remains empty because no current successor has an admitted `archived` lifecycle. Essays and Notes remain empty because this amendment has not admitted current `representation.publication` Records of those kinds.
 
 ```text
 CURRENT_CORE_SURFACE_COUNT=12
@@ -288,45 +246,100 @@ CURRENT_CROSS_LANGUAGE_SURFACE_DRIFT_COUNT=0
 CURRENT_RANKING_INFERENCE_COUNT=0
 ```
 
-The first A2.7 candidate `4c912481aa6167d455169d60ce484792b8c36fe2` was rejected before semantic tests because TypeScript `noUnusedLocals` found one unused local variable. No semantic contract failed. After removing that variable, candidate `d764c401e2d624f67f3eb5ef955781c591670e2b` passed:
+Candidate `d764c401e2d624f67f3eb5ef955781c591670e2b` passed Verify #325, Editorial Shell Build #160 and Cutover Readiness #91. The sealed A2.7 state at `4d1553622ee4b88841e40b0ba0e9981e4f7791c9` then passed Verify #332, Editorial Shell Build #167 and Cutover Readiness #98.
+
+## R1-A2.8 Current Publication Acceptance
+
+A2.8 introduces no new editorial meaning. It reconstructs A2.1–A2.7 as one exact specimen and fails closed if any accepted count, identity, route, projection, document, surface or privacy boundary differs.
+
+The acceptance snapshot proves:
 
 ```text
-Verify #325                    SUCCESS
-Editorial Shell Build #160     SUCCESS
-Cutover Readiness #91          SUCCESS
+COMPLETION_SEAL_COUNT=7
+BORN_SYSTEM_RECORD_COUNT=28
+CURRENT_SUCCESSOR_SYSTEM_COUNT=27
+DEFERRED_CURRENT_SYSTEM_COUNT=1
+EVIDENCE_OBSERVATION_COUNT=48
+MATURITY_CLASSIFIED_COUNT=8
+MATURITY_UNCLASSIFIED_COUNT=19
+DISCLOSURE_CLASSIFIED_COUNT=27
+PUBLIC_FULL_DISCLOSURE_COUNT=27
+CURRENT_ROUTE_LANGUAGE_PAIR_COUNT=54
+CURRENT_LANGUAGE_BINDING_COUNT=54
+TOTAL_ROUTE_BINDING_COUNT=56
+PUBLIC_PROJECTION_COUNT=54
+SEMANTIC_DOCUMENT_COUNT=54
+CORE_SURFACE_COUNT=12
+SYSTEMS_PER_LANGUAGE=27
+RESEARCH_PER_LANGUAGE=5
+HOME_SYSTEMS_PER_LANGUAGE=7
+HOME_RESEARCH_PER_LANGUAGE=5
 ```
 
-A2.7 changes no deployed HTML, production DNS, Railway target, Vercel configuration, disclosure policy, route identity or maturity decision. It only reconstructs the current renderer-neutral publication state. Publication validity remains deliberately closed until A2.8 evaluates the complete A2 chain as one accepted current specimen.
+It also reconstructs every required zero:
 
-## Direction of authority
+```text
+RECORD_IDENTITY_REPLACEMENT_COUNT=0
+MATURITY_IDENTITY_REPLACEMENT_COUNT=0
+DISCLOSURE_IDENTITY_REPLACEMENT_COUNT=0
+HISTORICAL_PATH_DROP_COUNT=0
+HISTORICAL_PATH_REASSIGNMENT_COUNT=0
+HISTORICAL_ADMISSION_BASIS_REWRITE_COUNT=0
+CURRENT_PROJECTION_OMISSION_COUNT=0
+CURRENT_DOCUMENT_OMISSION_COUNT=0
+GENERIC_BIRTH_SUMMARY_EMISSION_COUNT=0
+CROSS_LANGUAGE_IDENTITY_DRIFT_COUNT=0
+DEFERRED_CURRENT_SYSTEM_EXPOSURE_COUNT=0
+PRIVATE_SOURCE_LOCATOR_LEAK_COUNT=0
+PRIVATE_EVIDENCE_LOCATOR_LEAK_COUNT=0
+RANKING_INFERENCE_COUNT=0
+ARCHIVE_INFERENCE_COUNT=0
+PRODUCTION_MUTATION_COUNT=0
+```
+
+The full semantic specimen is recursively canonicalized with sorted object keys and preserved array order, then hashed with SHA-256. Its accepted identity is:
+
+```text
+CURRENT_PUBLICATION_DIGEST=
+sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
+```
+
+The A2.8 candidate `38267dea5d9b4bde33a787ef93dbc3ecdf9059df` passed:
+
+```text
+Verify #335                    SUCCESS
+Editorial Shell Build #170     SUCCESS
+Cutover Readiness #101         SUCCESS
+64 test files / 424 tests      PASS
+```
+
+This acceptance restores current semantic publication validity. It does **not** inherit the historical R2.6 preview or R2.7 cutover-readiness witness onto the new digest. The physical publication pipeline must be re-emitted and revalidated against this exact accepted specimen before cutover readiness can be reconsidered.
+
+## Terminal authority direction
 
 ```text
 current connected GitHub installation
         ↓
-repository + default branch + observed HEAD
+A2.1 current repository observation
         ↓
-current evidence reconstruction
+A2.2 preserved System identity
         ↓
-existing System identity
+A2.3 current System Revision
         ↓
-current System Revision
+A2.4 current evidence + maturity governance
         ↓
-current evidence + maturity governance lineage
+A2.5 current disclosure governance
         ↓
-explicit current disclosure decision
+A2.6 current bilingual language + route admission
         ↓
-explicit current bilingual route + language admission
+A2.7 current PublicProjections + EditorialDocuments + surfaces
         ↓
-current PublicProjections + EditorialDocuments
+A2.8 accepted publication digest
         ↓
-explicit current editorial surfaces
-        ↓
-R1-A2.8 current publication acceptance
-        ↓
-R2-A1 re-emission / commissioning / preview / witness
+R2-A1 — Current Publication Re-emission & Physical Revalidation
 ```
 
-## Immediate state
+## Terminal state
 
 ```text
 R1_COMPLETE=true
@@ -389,10 +402,15 @@ CURRENT_GENERIC_BIRTH_SUMMARY_EMISSION_COUNT=0
 CURRENT_CROSS_LANGUAGE_SURFACE_DRIFT_COUNT=0
 CURRENT_RANKING_INFERENCE_COUNT=0
 
-CURRENT_PUBLICATION_VALID=false
+CURRENT_PUBLICATION_ACCEPTANCE_COMPLETE=true
+CURRENT_PUBLICATION_SPECIMEN_DETERMINISTIC=true
+CURRENT_PUBLICATION_VALID=true
+CURRENT_PUBLICATION_DIGEST=sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
+
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
 CUTOVER_ENACTED=false
+PRODUCTION_MUTATION_COUNT=0
 
 R1_A2_0_MATERIALIZED=true
 R1_A2_1_COMPLETE=true
@@ -402,6 +420,7 @@ R1_A2_4_COMPLETE=true
 R1_A2_5_COMPLETE=true
 R1_A2_6_COMPLETE=true
 R1_A2_7_COMPLETE=true
-R1_A2_COMPLETE=false
-NEXT=R1-A2.8 — Current Publication Acceptance
+R1_A2_8_COMPLETE=true
+R1_A2_COMPLETE=true
+NEXT=R2-A1 — Current Publication Re-emission & Physical Revalidation
 ```
