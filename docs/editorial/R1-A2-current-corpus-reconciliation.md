@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / A2.5 ACCEPTED**
+Status: **IN PROGRESS / A2.6 ACCEPTED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -37,8 +37,9 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 7. **Historical migration plans are not perpetual public truth.** R0.8 may remain evidence of historical intent but cannot be the sole authority for current disclosure, routes, summaries, maturity or surface membership.
 8. **Generic Birth copy is not current editorial content.** Generation-zero placeholders may remain historical payload but MUST NOT be emitted as the current public summary after R1-A2 acceptance.
 9. **Private evidence stays private by default.** Public representation may cite conclusions derived from admissible evidence without leaking private source content.
-10. **Governance identity is also monotonic.** If a logical governance Record already exists for a target, a changed basis or decision advances that governance lineage by Revision rather than minting a replacement governance identity.
-11. **Current publication validity gates cutover.** No R2.8 authorization is possible while `CURRENT_PUBLICATION_VALID=false`.
+10. **Governance identity is monotonic.** Existing logical governance Records advance by Revision rather than replacement Birth.
+11. **Historical route identity is monotonic.** Existing public paths cannot be dropped, reassigned or have their admission basis silently rewritten.
+12. **Current publication validity gates cutover.** No R2.8 authorization is possible while `CURRENT_PUBLICATION_VALID=false`.
 
 ## Program
 
@@ -50,8 +51,8 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | R1-A2.3 | Current Revision Materialization | **COMPLETE** |
 | R1-A2.4 | Evidence + Maturity Reconciliation | **COMPLETE / CORRECTED** |
 | R1-A2.5 | Public Disclosure Reauthorization | **COMPLETE** |
-| R1-A2.6 | Current Route Admission | **NEXT** |
-| R1-A2.7 | Current Editorial Surface Reconstruction | **NOT STARTED** |
+| R1-A2.6 | Current Route Admission | **COMPLETE** |
+| R1-A2.7 | Current Editorial Surface Reconstruction | **NEXT** |
 | R1-A2.8 | Current Publication Acceptance | **NOT STARTED** |
 
 ## R1-A2.1 physical census
@@ -87,26 +88,7 @@ NEW_RECORD_BIRTH_COUNT=0
 
 R1-A2.3 preserves every R1 Birth revision and materializes current semantic payload only as a successor of that identity. The exact existing R1.1 digest and revision algorithms are reused.
 
-```text
-Birth revision generation=0
-        ↓
-same RecordId + same RecordKind
-        ↓
-current knowledge.system payload
-        ↓
-generation=1
-previousRevisionId=exact Birth RevisionId
-        ↓
-canonical RevisionId
-        ↓
-validateSuccessor()
-```
-
-Twenty-seven Systems have generation-1 current successors. Transactional Support Bot remains explicitly deferred at its historical Birth revision because no current repository successor or new semantic evidence was admitted.
-
-Every successor resolves its repository realization through the exact R1-A2.1 census, inheriting repository, visibility, default branch, observed HEAD and `observedAt`.
-
-The A2.3 candidate passed `Verify` run `33411967644` / #255 and the accepted terminal state later passed `Verify` run `33412743780` / #264.
+Twenty-seven Systems have generation-1 current successors. Transactional Support Bot remains explicitly deferred at its historical Birth revision because no current repository successor or new semantic evidence was admitted. Every successor resolves its repository realization through the exact R1-A2.1 census.
 
 ```text
 BORN_SYSTEM_RECORD_COUNT=28
@@ -119,13 +101,7 @@ GENERIC_BIRTH_SUMMARY_SUCCESSOR_COUNT=0
 
 ## R1-A2.4 Evidence + Maturity reconciliation
 
-A2.4 separates observation from governance instead of turning repository implementation into an editorial status shortcut.
-
-The R0.4 `evidence.binding` contract targets `knowledge.claim` and `knowledge.experiment`; it does not authorize a direct formal EvidenceBinding against `knowledge.system`. A2.4 therefore does not mint artificial Claims or widen that contract. It freezes current-head observations as a temporal reconciliation ledger and uses them only as declared basis for separate `governance.maturity` decisions.
-
-Every observation resolves through the temporal basis already attached to its generation-1 System successor.
-
-The accepted ledger contains 48 observations across all 27 current successors:
+A2.4 separates observation from governance instead of turning repository implementation into an editorial status shortcut. The accepted ledger contains 48 observations across all 27 current successors:
 
 ```text
 supports       29
@@ -133,9 +109,7 @@ qualifies      16
 contradicts     3
 ```
 
-Contradictions remain explicit for SNE-FDE, SNE Radar and ViewCounter.
-
-Eight current heads receive an admitted R0.6 maturity classification:
+Contradictions remain explicit for SNE-FDE, SNE Radar and ViewCounter. Eight current heads receive an admitted R0.6 maturity classification:
 
 ```text
 BrineOS            research
@@ -148,11 +122,7 @@ ORDM               research
 SNE Observatorio   research
 ```
 
-Nineteen current successors remain explicitly `unclassified`. Terms such as `pre-alpha`, `experimental`, `scaffold`, launch-critical architecture, implemented code or testnet deployment are not automatically translated into `prototype`, `beta` or `production`.
-
-`production` remains a maturity classification only. It does not prove uptime, runtime health, test success, security, custody safety, SLA or network readiness.
-
-A2.4 also corrected governance lineage for XS Wallet: instead of minting a replacement maturity identity, the existing R1.6 `governance.maturity` Record `rec_3a926254f23e4a0c89102c3fbfe636d6` advances to generation 1 and binds the exact current XS Wallet System revision.
+Nineteen current successors remain explicitly `unclassified`. A2.4 also corrected governance lineage for XS Wallet: the existing R1.6 maturity governance Record advances to generation 1 instead of being replaced.
 
 ```text
 CURRENT_EVIDENCE_OBSERVATION_COUNT=48
@@ -163,37 +133,17 @@ CURRENT_MATURITY_GOVERNANCE_BIRTH_COUNT=7
 CURRENT_MATURITY_GOVERNANCE_SUCCESSOR_COUNT=1
 MATURITY_IDENTITY_REPLACEMENT_COUNT=0
 STALE_MATURITY_INHERITANCE_COUNT=0
-FORMAL_EVIDENCE_RECORD_BIRTH_COUNT=0
-FORMAL_EVIDENCE_BINDING_BIRTH_COUNT=0
 ```
 
 ## R1-A2.5 Public Disclosure reauthorization
 
-A2.5 removes R0.8 as perpetual disclosure authority. Every one of the 27 current generation-1 System heads now receives an explicit current disclosure decision against its exact revision.
+A2.5 removes R0.8 as perpetual disclosure authority. Every one of the 27 current generation-1 System heads receives an explicit current disclosure decision against its exact revision.
 
-The bounded current `knowledge.system` payload contains only `name`, `summary` and `thesis`; source locators, private repository bytes, raw evidence and implementation details are not part of that payload. A2.5 therefore admits all 27 current System payloads as public/full editorial Records while independently preserving source and evidence availability.
-
-This distinction is normative:
+The bounded current `knowledge.system` payload contains only `name`, `summary` and `thesis`; source locators, private repository bytes, raw evidence and implementation details are not part of that payload. All 27 current System payloads are admitted as public/full editorial Records while source and evidence availability remain independent.
 
 ```text
-public Record payload
-        !=
-public source repository
-        !=
-public evidence
+public Record payload != public source repository != public evidence
 ```
-
-For example:
-
-```text
-Genesis
-record      public
-mode        full
-source      private
-evidence    private
-```
-
-The runtime derives source availability from the R1-A2.1 temporal repository basis and evidence availability from the current A2.4 observations. Publication policy itself remains an explicit candidate decision and is not derived from those axes.
 
 Accepted availability distribution:
 
@@ -207,39 +157,70 @@ evidence partial   1
 evidence private  13
 ```
 
-Four existing disclosure governance identities continue instead of being replaced:
+Four existing disclosure governance identities continue by successor Revision: Foundry Pay, SNE-OS, VIRA and XS Wallet. The other 23 current Systems receive new disclosure-governance Births. Transactional Support Bot remains historical only.
 
-```text
-Foundry Pay  rec_31d32647a6fc43c1b1bc5257aefaf367
-SNE-OS       rec_2821df1a24244689ab76bb5fb697018b
-VIRA         rec_fe675b13970843099b802b2b6d03daf1
-XS Wallet    rec_5bc3c1113cfe4c14b79aaa63f2515d79
-```
-
-Each becomes a generation-1 `governance.disclosure` successor bound to the exact current System revision. The other 23 current Systems receive new disclosure-governance Births. The historical Transactional Support Bot disclosure remains historical only because that System has no admitted current successor.
-
-The A2.5 candidate at `41eb785efbe4e274104c228d0efd813a2490d6c9` passed:
-
-```text
-Verify #298                    SUCCESS
-Editorial Shell Build #133     SUCCESS
-Cutover Readiness #64          SUCCESS
-```
+The A2.5 candidate `41eb785efbe4e274104c228d0efd813a2490d6c9` passed Verify #298, Editorial Shell Build #133 and Cutover Readiness #64. Its terminal monotonic state at `ea9ee21cddcb40898d6410e63b80e659efa5020f` passed Verify #306, Shell #141 and Cutover #72.
 
 ```text
 CURRENT_DISCLOSURE_CLASSIFIED_COUNT=27
 CURRENT_PUBLIC_RECORD_COUNT=27
-CURRENT_PRIVATE_RECORD_COUNT=0
-CURRENT_FULL_DISCLOSURE_COUNT=27
 CURRENT_DISCLOSURE_CONFLICT_COUNT=0
 CURRENT_DISCLOSURE_UNCLASSIFIED_COUNT=0
 CURRENT_DISCLOSURE_GOVERNANCE_BIRTH_COUNT=23
 CURRENT_DISCLOSURE_GOVERNANCE_SUCCESSOR_COUNT=4
 DISCLOSURE_IDENTITY_REPLACEMENT_COUNT=0
-PRIVATE_SOURCE_PROMOTED_TO_PUBLIC_COUNT=0
 ```
 
-A2.5 does not create routes, select homepage membership, mutate the existing R1.6 semantic surfaces or touch production.
+## R1-A2.6 Current Route Admission
+
+A2.6 admits only routes that can resolve against an exact current language realization. It therefore materializes the current language layer together with route admission rather than creating deliberately `language-unavailable` public paths.
+
+Every one of the 27 current System successors receives:
+
+```text
+1 exact-current canonical EN LanguageBinding
+1 explicit PT-BR translation LanguageBinding
+1 /en/systems/... canonical route
+1 /pt-br/systems/... canonical route
+```
+
+The PT-BR realization is an explicit translation of the bounded current `knowledge.system` payload. It is not an inferred translation of repository source or private evidence and does not inherit any of the five generic R0.8 translations.
+
+R1.3 historical route identity is preserved exactly. Its ten bindings remain in the route registry with the same path, target, language, role and `admittedAgainst` value. Eight of those paths belong to VIRA, XS Wallet, SNE-OS and Foundry Pay and now resolve against their current heads plus current language realizations. The two Transactional Support Bot paths remain present but return `head-unavailable` because no current successor is admitted.
+
+The remaining 23 current Systems receive 46 new route bindings, one per language.
+
+```text
+CURRENT_ROUTED_SYSTEM_COUNT=27
+CURRENT_UNROUTED_SYSTEM_COUNT=0
+CURRENT_ROUTE_LANGUAGE_PAIR_COUNT=54
+CURRENT_ENGLISH_ROUTE_COUNT=27
+CURRENT_PORTUGUESE_ROUTE_COUNT=27
+CURRENT_LANGUAGE_BINDING_COUNT=54
+CURRENT_CANONICAL_ENGLISH_BINDING_COUNT=27
+CURRENT_PORTUGUESE_TRANSLATION_BINDING_COUNT=27
+
+PRESERVED_HISTORICAL_ROUTE_BINDING_COUNT=10
+PRESERVED_HISTORICAL_ROUTE_FOR_CURRENT_SYSTEM_COUNT=8
+DEFERRED_HISTORICAL_ROUTE_BINDING_COUNT=2
+NEW_ROUTE_BINDING_COUNT=46
+TOTAL_ROUTE_BINDING_COUNT=56
+
+HISTORICAL_PATH_DROP_COUNT=0
+HISTORICAL_PATH_REASSIGNMENT_COUNT=0
+HISTORICAL_ADMISSION_BASIS_REWRITE_COUNT=0
+STALE_TRANSLATION_INHERITANCE_COUNT=0
+```
+
+The A2.6 candidate at `d31f9797b69435806f0da82bb4f3ef896ca935b7` passed:
+
+```text
+Verify #310                    SUCCESS
+Editorial Shell Build #145     SUCCESS
+Cutover Readiness #76          SUCCESS
+```
+
+Route admission still does not imply Home membership or ranking. That authority begins only in A2.7.
 
 ## Direction of authority
 
@@ -258,7 +239,7 @@ current evidence + maturity governance lineage
         ↓
 explicit current disclosure decision
         ↓
-explicit current route admission
+explicit current bilingual route + language admission
         ↓
 current editorial documents + surfaces
         ↓
@@ -305,6 +286,15 @@ CURRENT_DISCLOSURE_GOVERNANCE_BIRTH_COUNT=23
 CURRENT_DISCLOSURE_GOVERNANCE_SUCCESSOR_COUNT=4
 DISCLOSURE_IDENTITY_REPLACEMENT_COUNT=0
 
+CURRENT_ROUTE_ADMISSION_COMPLETE=true
+CURRENT_ROUTED_SYSTEM_COUNT=27
+CURRENT_UNROUTED_SYSTEM_COUNT=0
+CURRENT_ROUTE_LANGUAGE_PAIR_COUNT=54
+CURRENT_LANGUAGE_BINDING_COUNT=54
+PRESERVED_HISTORICAL_ROUTE_BINDING_COUNT=10
+DEFERRED_HISTORICAL_ROUTE_BINDING_COUNT=2
+NEW_ROUTE_BINDING_COUNT=46
+
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
@@ -316,6 +306,7 @@ R1_A2_2_COMPLETE=true
 R1_A2_3_COMPLETE=true
 R1_A2_4_COMPLETE=true
 R1_A2_5_COMPLETE=true
+R1_A2_6_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.6 — Current Route Admission
+NEXT=R1-A2.7 — Current Editorial Surface Reconstruction
 ```
