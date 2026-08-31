@@ -26,18 +26,35 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          essay='dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html'
+
           test -f dist/index.html
+          test -f dist/og.png
           test -f dist/editorial/index.html
-          test -f dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
-          test -f dist/editorial/onde-existe-uma-rede/index.html
-          test -f dist/editorial/o-passado-de-um-sistema-nao-existe/index.html
+          test -f dist/editorial/og/editorial.png
+          test -f "$essay"
+          test -f dist/editorial/og/quando-um-navegador-deixa-de-ser-uma-ferramenta.png
+          test -f dist/editorial/og/onde-existe-uma-rede.png
+          test -f dist/editorial/og/o-passado-de-um-sistema-nao-existe.png
           test ! -e dist/editorial/systems/brineos
           test ! -e dist/editorial/systems/genesis
-          grep -F 'https://renan.snelabs.space/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/' dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
-          grep -F 'og:title' dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
-          grep -F 'www.linkedin.com/sharing/share-offsite' dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
+
+          file dist/og.png | grep -F '1200 x 627'
+          file dist/editorial/og/editorial.png | grep -F '1200 x 627'
+          file dist/editorial/og/quando-um-navegador-deixa-de-ser-uma-ferramenta.png | grep -F '1200 x 627'
+
+          grep -F 'Renan Melo — Software, Product &amp; Computing' dist/index.html
+          grep -F 'https://renan.snelabs.space/og.png' dist/index.html
+          grep -F 'https://renan.snelabs.space/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/' "$essay"
+          grep -F 'https://renan.snelabs.space/editorial/og/quando-um-navegador-deixa-de-ser-uma-ferramenta.png' "$essay"
+          grep -F 'article:published_time' "$essay"
+          grep -F 'article:author' "$essay"
+          grep -F 'article:tag' "$essay"
+          grep -F 'og:image:width' "$essay"
+          grep -F 'og:image:height' "$essay"
+          grep -F 'www.linkedin.com/sharing/share-offsite' "$essay"
           grep -R -F 'Projeto e construo sistemas de software.' dist/assets
-          echo 'PORTFOLIO + ESSAY EDITORIAL COMPOSED BUILD: PASS'
+          echo 'PORTFOLIO + ESSAY EDITORIAL + SOCIAL CARDS: PASS'
       - name: Witness composed preview routing
         shell: bash
         run: |
@@ -57,6 +74,8 @@ jobs:
           curl -fsS http://127.0.0.1:4173/work/vira >/tmp/work.html
           curl -fsS http://127.0.0.1:4173/editorial/ >/tmp/editorial.html
           curl -fsS http://127.0.0.1:4173/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/ >/tmp/essay.html
+          curl -fsS http://127.0.0.1:4173/og.png >/tmp/root-og.png
+          curl -fsS http://127.0.0.1:4173/editorial/og/quando-um-navegador-deixa-de-ser-uma-ferramenta.png >/tmp/essay-og.png
 
           root_sha=$(sha256sum /tmp/root.html | cut -d' ' -f1)
           architecture_sha=$(sha256sum /tmp/architecture.html | cut -d' ' -f1)
@@ -66,7 +85,9 @@ jobs:
 
           grep -F 'EDITORIAL // RENAN MELO' /tmp/editorial.html
           grep -F 'Quando um navegador deixa de ser uma ferramenta?' /tmp/essay.html
-          grep -F 'og:title' /tmp/essay.html
+          grep -F 'editorial/og/quando-um-navegador-deixa-de-ser-uma-ferramenta.png' /tmp/essay.html
+          file /tmp/root-og.png | grep -F '1200 x 627'
+          file /tmp/essay-og.png | grep -F '1200 x 627'
 
           brine_status=$(curl -sS -o /tmp/brine.html -w '%{http_code}' http://127.0.0.1:4173/editorial/systems/brineos/)
           test "$brine_status" = '404'
@@ -74,8 +95,10 @@ jobs:
           test "$missing_status" = '404'
 
           echo "react_spa_root_sha256=sha256:$root_sha"
+          echo 'root_og_status=200'
+          echo 'editorial_og_status=200'
           echo 'editorial_index_status=200'
           echo 'editorial_essay_status=200'
           echo 'editorial_brine_status=404'
           echo 'editorial_missing_status=404'
-          echo 'PORTFOLIO + EDITORIAL ROUTING: PASS'
+          echo 'PORTFOLIO + EDITORIAL ROUTING + SOCIAL CARDS: PASS'
