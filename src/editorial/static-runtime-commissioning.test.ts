@@ -142,13 +142,14 @@ describe('R2.5 static runtime commissioning materialization', () => {
     expect(manifest.acceptance.deploymentMutationCount).toBe(0);
   });
 
-  it('keeps the program in R2.5 until the physical dual witness closes it', () => {
+  it('preserves the frozen pre-witness materialization state after later program advancement', () => {
     expect(manifest.currentState.commissionedRuntimeMaterialized).toBe(true);
     expect(manifest.currentState.physicalRuntimeWitnessed).toBe(false);
     expect(manifest.acceptance.r2_5Complete).toBe(false);
     expect(manifest.acceptance.nextRequiredCut).toBe('R2.6 — Shadow / Preview Deployment');
-    expect(r25Doc).toContain('Status: **MATERIALIZED / AWAITING DUAL CI WITNESS**');
-    expect(r2Readme).toContain('| R2.5 | Static Runtime Commissioning | **MATERIALIZED / AWAITING WITNESS** |');
-    expect(r2Readme).toContain('R2_5_COMPLETE=false');
+    expect(r25Doc).toContain('Baseline: `main@d5f6f530effc411a718eae60dae613cc13b8a5a4`');
+    expect(r25Doc).toContain('## 9. Accepted materialization witness');
+    expect(r2Readme).toContain('| R2.5 | Static Runtime Commissioning |');
+    expect(r2Readme).toContain('R2_4_COMPLETE=true');
   });
 });
