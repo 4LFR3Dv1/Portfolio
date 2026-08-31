@@ -20,16 +20,18 @@ R2 turns accepted editorial state into a physical publication runtime without al
 
 ## Program
 
+The table preserves the exact terminal completion markers of the historical R2 cuts. Their specimen scope is described separately below; historical completion is not rewritten merely because a newer semantic specimen now exists.
+
 | Cut | Purpose | Status |
 | --- | --- | --- |
-| R2.0 | Publication Shell Boundary | **COMPLETE / HISTORICAL SPECIMEN** |
-| R2.1 | Astro Shell Materialization & Editorial Renderer | **COMPLETE / HISTORICAL SPECIMEN** |
-| R2.2 | Distribution Emission | **COMPLETE / HISTORICAL SPECIMEN** |
-| R2.3 | Legacy Preservation Runtime | **COMPLETE / HISTORICAL SPECIMEN** |
-| R2.4 | Compatibility Redirect Adapter | **COMPLETE / HISTORICAL SPECIMEN** |
-| R2.5 | Static Runtime Commissioning | **COMPLETE / HISTORICAL SPECIMEN** |
-| R2.6 | Shadow / Preview Deployment | **COMPLETE / HISTORICAL TRANSPORT WITNESS** |
-| R2.7 | Cutover Readiness | **COMPLETE / HISTORICAL INFRASTRUCTURE WITNESS** |
+| R2.0 | Publication Shell Boundary | **COMPLETE** |
+| R2.1 | Astro Shell Materialization & Editorial Renderer | **COMPLETE** |
+| R2.2 | Distribution Emission | **COMPLETE** |
+| R2.3 | Legacy Preservation Runtime | **COMPLETE** |
+| R2.4 | Compatibility Redirect Adapter | **COMPLETE** |
+| R2.5 | Static Runtime Commissioning | **COMPLETE** |
+| R2.6 | Shadow / Preview Deployment | **COMPLETE** |
+| R2.7 | Cutover Readiness | **COMPLETE** |
 | R2-A1 | Current Publication Re-emission & Physical Revalidation | **NEXT** |
 | R2.8 | Public Cutover | **BLOCKED PENDING R2-A1** |
 | R2.9 | Physical Acceptance | **NOT STARTED** |
@@ -76,13 +78,13 @@ Cutover Readiness #101         SUCCESS
 64 test files / 424 tests      PASS
 ```
 
-This changes the decision state from:
+This changes the decision state from the R1-A2 reopening state:
 
 ```text
 CURRENT_PUBLICATION_VALID=false
 ```
 
-to:
+to the accepted A2.8 state:
 
 ```text
 CURRENT_PUBLICATION_VALID=true
@@ -152,6 +154,21 @@ cutover enacted
 
 The incumbent React/Vite Vercel deployment remains authoritative. R1-A2 and A2.8 changed no production DNS, Railway target, Vercel configuration or deployed public runtime.
 
+The historical terminal markers remain present exactly as accepted so later amendments do not rewrite their completion history:
+
+```text
+R2_0_COMPLETE=true
+R2_1_COMPLETE=true
+R2_2_COMPLETE=true
+R2_3_COMPLETE=true
+R2_4_COMPLETE=true
+R2_5_COMPLETE=true
+R2_6_COMPLETE=true
+R2_7_COMPLETE=true
+```
+
+Their current role is explicitly historical:
+
 ```text
 R2_0_HISTORICAL_COMPLETE=true
 R2_1_HISTORICAL_COMPLETE=true
@@ -161,6 +178,11 @@ R2_4_HISTORICAL_COMPLETE=true
 R2_5_HISTORICAL_COMPLETE=true
 R2_6_HISTORICAL_COMPLETE=true
 R2_7_HISTORICAL_COMPLETE=true
+```
+
+Current frontier:
+
+```text
 R1_A2_COMPLETE=true
 CURRENT_PUBLICATION_VALID=true
 CURRENT_PUBLICATION_DIGEST=sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
