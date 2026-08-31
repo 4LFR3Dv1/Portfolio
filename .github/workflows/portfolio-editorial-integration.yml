@@ -43,7 +43,7 @@ jobs:
           file dist/editorial/og/editorial.png | grep -F '1200 x 627'
           file dist/editorial/og/quando-um-navegador-deixa-de-ser-uma-ferramenta.png | grep -F '1200 x 627'
 
-          grep -F 'Renan Melo — Software, Product &amp; Computing' dist/index.html
+          grep -F 'Renan Melo — Software, Product & Computing' dist/index.html
           grep -F 'https://renan.snelabs.space/og.png' dist/index.html
           grep -F 'https://renan.snelabs.space/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/' "$essay"
           grep -F 'https://renan.snelabs.space/editorial/og/quando-um-navegador-deixa-de-ser-uma-ferramenta.png' "$essay"
