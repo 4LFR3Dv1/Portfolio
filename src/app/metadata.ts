@@ -1,5 +1,5 @@
 import type { Language } from './context/language-context';
-import { getProject } from './data/projects';
+import { getPortfolioProject } from './data/current-case-studies';
 import { routePath, type PortfolioRoute } from './routing';
 
 const SITE_URL = 'https://renan.snelabs.space';
@@ -12,7 +12,7 @@ export interface PortfolioMetadata {
 
 export function metadataForRoute(route: PortfolioRoute, language: Language): PortfolioMetadata {
   if (route.view === 'case-study') {
-    const project = getProject(route.projectId);
+    const project = getPortfolioProject(route.projectId);
     if (project) {
       return {
         title: project.seo?.title[language] ?? `${project.title} — Renan Melo`,
