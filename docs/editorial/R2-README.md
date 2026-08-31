@@ -26,10 +26,12 @@ R2 turns the accepted editorial foundation into a physical publication runtime w
 | R2.3 | Legacy Preservation Runtime | **COMPLETE** |
 | R2.4 | Compatibility Redirect Adapter | **COMPLETE** |
 | R2.5 | Static Runtime Commissioning | **COMPLETE** |
-| R2.6 | Shadow / Preview Deployment | **COMPLETE / HISTORICAL SPECIMEN** |
+| R2.6 | Shadow / Preview Deployment | **COMPLETE** |
 | R2.7 | Cutover Readiness | **COMPLETE / HISTORICAL INFRASTRUCTURE WITNESS** |
 | R2.8 | Public Cutover | **BLOCKED BY R1-A2 CURRENT PUBLICATION RECONCILIATION** |
 | R2.9 | Physical Acceptance | **NOT STARTED** |
+
+R2.6 remains complete for the exact preview specimen it witnessed. R1-A2 changes that specimen's **current publication eligibility**, not the historical completion state of the R2.6 environmental-invariance experiment.
 
 ## Authority boundary
 
