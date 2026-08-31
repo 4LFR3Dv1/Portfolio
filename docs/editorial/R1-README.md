@@ -75,7 +75,7 @@ CUTOVER AUTHORIZED=false
 DEPLOYED RUNTIME CHANGED=false
 ```
 
-Therefore `R1_COMPLETE=true` means the editorial foundation was coherent at its accepted historical basis. It does not mean that its public representations remain temporally current forever.
+Therefore `R1_COMPLETE=true` means the editorial foundation was coherent at its accepted historical basis. It does not mean that its public representations remain temporally current forever. The R1.9 terminal program marker remains historically preserved as `NEXT=R2 — Editorial Publication Shell & Cutover`; the current amendment frontier is tracked separately below.
 
 ## Post-freeze amendments
 
