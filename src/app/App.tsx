@@ -3,11 +3,9 @@ import { Analytics } from '@vercel/analytics/react';
 import { AboutSection } from '@/app/components/about-section';
 import { CommandPalette } from '@/app/components/command-palette';
 import { ContactSection } from '@/app/components/contact-section';
-import { EvidenceRoom } from '@/app/components/evidence-room';
+import { EditorialSection } from '@/app/components/editorial-section';
 import { HeroSection } from '@/app/components/hero-section';
-import { PublicationsSection } from '@/app/components/publications-section';
 import { SelectedWorkSection } from '@/app/components/selected-work-section';
-import { TechTicker } from '@/app/components/tech-ticker';
 import { TerminalTopBar } from '@/app/components/terminal-topbar';
 import { useLanguage } from '@/app/context/language-context';
 import { applyMetadata, metadataForRoute } from '@/app/metadata';
@@ -78,6 +76,10 @@ export default function App() {
   };
 
   const handlePaletteNavigate = (section: string) => {
+    if (section === 'editorial') {
+      window.location.assign('/editorial/');
+      return;
+    }
     if (section === 'home') {
       window.history.pushState({}, '', '/');
       setRoute({ view: 'landing' });
@@ -88,8 +90,6 @@ export default function App() {
       work: 'selected-work',
       about: 'about',
       contact: 'contact',
-      evidence: 'evidence',
-      publications: 'publications',
     };
     if (sections[section]) navigateToSection(sections[section]);
   };
@@ -101,6 +101,7 @@ export default function App() {
         route={route}
         onNavigate={handlePaletteNavigate}
         onArchitecture={() => navigate({ view: 'architecture' })}
+        onEditorial={() => window.location.assign('/editorial/')}
         onOpenPalette={openPalette}
       />
       <CommandPalette
@@ -116,17 +117,13 @@ export default function App() {
           <>
             <HeroSection
               onViewProjects={() => navigateToSection('selected-work')}
-              onArchitecture={() => navigate({ view: 'architecture' })}
               onContact={() => navigateToSection('contact')}
             />
-            <TechTicker />
             <SelectedWorkSection
               onCaseStudy={(projectId) => navigate({ view: 'case-study', projectId })}
               onOpen={(url) => window.open(url, '_blank', 'noopener,noreferrer')}
-              onEvidence={() => navigateToSection('evidence')}
             />
-            <EvidenceRoom />
-            <PublicationsSection onCaseStudy={(projectId) => navigate({ view: 'case-study', projectId })} />
+            <EditorialSection />
             <SystemArchitecture onOpen={() => navigate({ view: 'architecture' })} />
             <AboutSection />
             <ContactSection />
@@ -145,7 +142,6 @@ export default function App() {
           <ArchitectureExplorer onBack={() => navigate({ view: 'landing' })} />
         )}
       </Suspense>
-
     </div>
   );
 }

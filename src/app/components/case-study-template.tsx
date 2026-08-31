@@ -1,6 +1,5 @@
-import { getProject } from '../data/projects';
+import { getPortfolioProject } from '../data/current-case-studies';
 import { useLanguage } from '../context/language-context';
-import { Badge } from './badge';
 import { Button } from './button';
 
 interface CaseStudyTemplateProps {
@@ -11,208 +10,269 @@ interface CaseStudyTemplateProps {
 
 export function CaseStudyTemplate({ projectId, onBack, onArchitecture }: CaseStudyTemplateProps) {
   const { language } = useLanguage();
-  const project = getProject(projectId);
-  const labels = language === 'en'
+  const project = getPortfolioProject(projectId);
+  const copy = language === 'en'
     ? {
         back: 'BACK TO PORTFOLIO',
-        caseStudy: 'CASE STUDY',
-        type: 'TYPE',
-        role: 'ROLE',
-        summary: 'SUMMARY',
-        problem: 'PROBLEM',
-        approach: 'APPROACH',
-        context: 'CONTEXT',
-        solution: 'SOLUTION',
-        systemFlow: 'SYSTEM FLOW',
-        engineeringDecisions: 'ENGINEERING DECISIONS',
-        stateModel: 'STATE MODEL',
-        myRole: 'MY ROLE',
-        aiRelevance: 'WHY IT MATTERS FOR AI SYSTEMS',
-        architecture: 'ARCHITECTURE',
-        guarantees: 'GUARANTEES',
-        evidence: 'PUBLIC EVIDENCE',
-        privateEvidence: 'This is a private technical build. Public evidence is intentionally limited; implementation details are available in an appropriate review context.',
-        learnings: 'LEARNINGS',
-        explorer: 'ARCHITECTURE EXPLORER',
-        contact: 'CONTACT',
+        eyebrow: 'SELECTED WORK',
+        what: 'WHAT I BUILT',
+        problem: 'THE PROBLEM',
+        choices: 'WHAT I CHOSE TO DO',
+        works: 'HOW IT WORKS',
+        learned: 'WHAT I LEARNED',
+        links: 'OPEN THE WORK',
+        details: 'TECHNICAL NOTES',
+        detailsHint: 'Architecture, state, implementation constraints and supporting links.',
+        flow: 'FLOW',
+        state: 'STATE MODEL',
+        constraints: 'CONSTRAINTS I WANTED TO PRESERVE',
+        supporting: 'SUPPORTING LINKS',
+        scope: 'SCOPE NOTE',
+        role: 'My role',
+        status: 'Current status',
+        public: 'Public project',
+        caseStudy: 'Public case study',
+        private: 'Private work',
+        architecture: 'SEE HOW I THINK ABOUT ARCHITECTURE →',
+        contact: 'START A CONVERSATION →',
+        missing: 'Case study not found.',
       }
     : {
         back: 'VOLTAR AO PORTFÓLIO',
-        caseStudy: 'ESTUDO DE CASO',
-        type: 'TIPO',
-        role: 'PAPEL',
-        summary: 'RESUMO',
-        problem: 'PROBLEMA',
-        approach: 'ABORDAGEM',
-        context: 'CONTEXTO',
-        solution: 'SOLUÇÃO',
-        systemFlow: 'FLUXO DO SISTEMA',
-        engineeringDecisions: 'DECISÕES DE ENGENHARIA',
-        stateModel: 'MODELO DE ESTADOS',
-        myRole: 'MEU PAPEL',
-        aiRelevance: 'POR QUE ISSO IMPORTA PARA SISTEMAS DE IA',
-        architecture: 'ARQUITETURA',
-        guarantees: 'GARANTIAS',
-        evidence: 'EVIDÊNCIA PÚBLICA',
-        privateEvidence: 'Este é um projeto técnico privado. A evidência pública é intencionalmente limitada; detalhes de implementação estão disponíveis em um contexto adequado de revisão.',
-        learnings: 'APRENDIZADOS',
-        explorer: 'EXPLORADOR DE ARQUITETURA',
-        contact: 'CONTATO',
+        eyebrow: 'TRABALHO SELECIONADO',
+        what: 'O QUE EU CONSTRUÍ',
+        problem: 'O PROBLEMA',
+        choices: 'O QUE EU ESCOLHI FAZER',
+        works: 'COMO FUNCIONA',
+        learned: 'O QUE EU APRENDI',
+        links: 'ABRIR O TRABALHO',
+        details: 'NOTAS TÉCNICAS',
+        detailsHint: 'Arquitetura, estados, restrições de implementação e links de apoio.',
+        flow: 'FLUXO',
+        state: 'MODELO DE ESTADOS',
+        constraints: 'RESTRIÇÕES QUE EU QUERIA PRESERVAR',
+        supporting: 'LINKS DE APOIO',
+        scope: 'NOTA DE ESCOPO',
+        role: 'Meu papel',
+        status: 'Estado atual',
+        public: 'Projeto público',
+        caseStudy: 'Case study público',
+        private: 'Trabalho privado',
+        architecture: 'VER COMO EU PENSO ARQUITETURA →',
+        contact: 'COMEÇAR UMA CONVERSA →',
+        missing: 'Estudo de caso não encontrado.',
       };
 
   if (!project) {
     return (
-      <section className="max-w-[900px] mx-auto px-6 py-24 text-center">
-        <p style={{ color: 'var(--terminal-text)' }}>
-          {language === 'en' ? 'Case study not found.' : 'Estudo de caso não encontrado.'}
-        </p>
-        {onBack && <Button className="mt-6" variant="secondary" onClick={onBack}>{labels.back}</Button>}
+      <section className="mx-auto max-w-[900px] px-6 py-24 text-center">
+        <p className="text-[var(--terminal-text)]">{copy.missing}</p>
+        {onBack && <Button className="mt-6" variant="secondary" onClick={onBack}>{copy.back}</Button>}
       </section>
     );
   }
 
   const study = project.caseStudy;
   const extended = study.extended;
+  const status = project.visibility === 'public'
+    ? copy.public
+    : project.visibility === 'case-study'
+      ? copy.caseStudy
+      : copy.private;
 
   return (
-    <article className="max-w-[1200px] mx-auto px-6 py-16">
+    <article className="mx-auto max-w-[1180px] px-4 py-12 sm:px-6 sm:py-16">
       {onBack && (
         <button
           type="button"
           onClick={onBack}
-          className="min-h-10 font-mono text-sm mb-8 text-[var(--terminal-muted)] hover:text-[var(--electric-blue)] transition-colors duration-100"
+          className="mb-10 min-h-10 font-mono text-xs tracking-wider text-[var(--terminal-muted)] transition-colors duration-100 hover:text-[var(--electric-blue)]"
         >
-          ← {labels.back}
+          ← {copy.back}
         </button>
       )}
 
-      <header className="mb-12 pb-8 border-b border-[var(--border-default)]">
-        <div className="flex flex-wrap items-start justify-between gap-5 mb-6">
+      <header className="border-b border-[var(--border-default)] pb-12">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--electric-blue)]">{copy.eyebrow}</p>
+        <h1 className="mt-4 max-w-4xl font-mono text-4xl font-bold tracking-tight text-[var(--terminal-text)] sm:text-5xl lg:text-6xl">
+          {project.title}
+        </h1>
+        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--terminal-muted)] sm:text-xl">
+          {project.subtitle[language]}
+        </p>
+
+        <dl className="mt-8 grid max-w-4xl gap-5 border-t border-[var(--border-subtle)] pt-6 sm:grid-cols-3">
           <div>
-            <h1 className="font-mono font-bold mb-3" style={{ color: 'var(--electric-blue)' }}>
-              {labels.caseStudy} // {project.title}
-            </h1>
-            <p className="font-mono text-sm mb-2" style={{ color: 'var(--terminal-muted)' }}>
-              {labels.type}: {study.type[language]}
-            </p>
-            <p className="font-mono text-sm" style={{ color: 'var(--terminal-muted)' }}>
-              {labels.role}: {study.role[language]}
-            </p>
+            <dt className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{copy.role}</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-[var(--terminal-text)]">{study.role[language]}</dd>
           </div>
-          <Badge variant={project.visibility === 'private' ? 'default' : 'green'}>
-            {project.visibility === 'public'
-              ? (language === 'en' ? 'PUBLIC' : 'PÚBLICO')
-              : project.visibility === 'case-study'
-                ? (language === 'en' ? 'PUBLIC CASE STUDY' : 'CASE PÚBLICO')
-                : (language === 'en' ? 'PRIVATE BUILD' : 'PROJETO PRIVADO')}
-          </Badge>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {project.badges.map((badge) => <Badge key={badge} variant="blue">{badge}</Badge>)}
-        </div>
+          <div>
+            <dt className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{copy.status}</dt>
+            <dd className="mt-2 text-sm text-[var(--terminal-text)]">{status}</dd>
+          </div>
+          <div>
+            <dt className="font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{language === 'en' ? 'Why it mattered' : 'Por que importou'}</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-[var(--terminal-text)]">{project.impact[language]}</dd>
+          </div>
+        </dl>
+
+        {project.links.length > 0 && (
+          <div className="mt-8 flex flex-wrap gap-3">
+            {project.links.map((link, index) => (
+              <Button
+                key={link.url}
+                variant={index === 0 ? 'primary' : 'secondary'}
+                onClick={() => window.open(link.url, '_blank', 'noopener,noreferrer')}
+              >
+                {link.label[language]} ↗
+              </Button>
+            ))}
+          </div>
+        )}
       </header>
 
-      <section className="mb-12">
-        <h2 className="font-mono text-lg font-semibold mb-4" style={{ color: 'var(--electric-blue)' }}>{labels.summary}</h2>
-        <p className="text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>{study.summary[language]}</p>
-        {extended && (
-          <p className="mt-5 border-l-2 border-[var(--amber)] pl-4 text-sm leading-relaxed" style={{ color: 'var(--terminal-muted)' }}>
-            {extended.disclosure[language]}
+      <div className="grid gap-14 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(260px,0.42fr)] lg:gap-20">
+        <div>
+          <TextSection title={copy.what} text={study.summary[language]} large />
+          {extended && (
+            <div className="mb-12 border-l-2 border-[var(--amber)] pl-5">
+              <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--amber)]">{copy.scope}</p>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--terminal-muted)]">{extended.disclosure[language]}</p>
+            </div>
+          )}
+          <ListSection title={copy.problem} items={study.problem[language]} />
+          <ListSection title={copy.choices} items={study.approach[language]} />
+        </div>
+
+        <aside className="lg:border-l lg:border-[var(--border-default)] lg:pl-8">
+          <p className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">
+            {language === 'en' ? 'A few things worth noticing' : 'Algumas coisas que valem notar'}
           </p>
-        )}
-      </section>
+          <ul className="mt-5 space-y-5">
+            {project.highlights[language].map((highlight, index) => (
+              <li key={highlight} className="border-t border-[var(--border-default)] pt-4">
+                <span className="font-mono text-[10px] text-[var(--electric-blue)]">{String(index + 1).padStart(2, '0')}</span>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--terminal-text)]">{highlight}</p>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
 
-      <ListSection title={extended ? labels.context : labels.problem} items={study.problem[language]} color="var(--red)" />
-      <ListSection title={extended ? labels.solution : labels.approach} items={study.approach[language]} color="var(--electric-blue)" />
-
-      {extended && <SystemFlow title={labels.systemFlow} steps={extended.flow[language]} />}
-
-      <section className="mb-12">
-        <h2 className="font-mono text-lg font-semibold mb-6" style={{ color: 'var(--electric-blue)' }}>
-          {extended ? labels.engineeringDecisions : labels.architecture}
-        </h2>
-        <div className="grid md:grid-cols-3 gap-5">
-          {study.architecture[language].map((layer) => (
-            <div key={layer.name} className="border border-[var(--border-default)] bg-[var(--surface-1)]">
-              <div className="border-b border-[var(--border-default)] px-4 py-3 bg-[var(--surface-2)]">
-                <h3 className="font-mono text-xs font-semibold" style={{ color: 'var(--electric-green)' }}>{layer.name}</h3>
-              </div>
-              <ul className="p-4 space-y-2">
-                {layer.items.map((item) => <li key={item} className="text-sm" style={{ color: 'var(--terminal-text)' }}>• {item}</li>)}
+      <section className="border-y border-[var(--border-default)] py-14">
+        <p className="font-mono text-xs uppercase tracking-wider text-[var(--electric-blue)]">{copy.works}</p>
+        <div className="mt-7 grid gap-px bg-[var(--border-default)] md:grid-cols-3">
+          {study.architecture[language].map((layer, index) => (
+            <div key={layer.name} className="bg-[var(--surface-1)] p-5 sm:p-6">
+              <span className="font-mono text-[10px] text-[var(--terminal-muted)]">{String(index + 1).padStart(2, '0')}</span>
+              <h2 className="mt-3 font-mono text-sm font-semibold text-[var(--terminal-text)]">{layer.name}</h2>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-[var(--terminal-muted)]">
+                {layer.items.map((item) => <li key={item}>{item}</li>)}
               </ul>
             </div>
           ))}
         </div>
-        <div className="mt-6">
-          <div className="font-mono text-[10px] uppercase tracking-wider mb-3" style={{ color: 'var(--terminal-muted)' }}>{labels.guarantees}</div>
-          <div className="flex flex-wrap gap-2">
-            {study.guarantees.map((guarantee) => <Badge key={guarantee} variant="green">{guarantee}</Badge>)}
-          </div>
+      </section>
+
+      <section className="py-14">
+        <p className="font-mono text-xs uppercase tracking-wider text-[var(--electric-blue)]">{copy.learned}</p>
+        <div className="mt-7 grid gap-5 md:grid-cols-3">
+          {study.learnings[language].map((learning) => (
+            <p key={learning} className="border-t border-[var(--border-default)] pt-4 text-base leading-relaxed text-[var(--terminal-text)]">
+              {learning}
+            </p>
+          ))}
         </div>
       </section>
 
-      {extended && (
-        <>
-          <StateModel
-            title={labels.stateModel}
-            primary={extended.stateModel.primary[language]}
-            branches={extended.stateModel.branches[language]}
-            note={extended.stateModel.note[language]}
-          />
-          <TextSection title={labels.myRole} text={extended.roleDescription[language]} />
-        </>
-      )}
+      <details className="group border border-[var(--border-default)] bg-[var(--surface-1)]">
+        <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 px-5 py-4 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--electric-blue)] sm:px-6">
+          <span>
+            <span className="block font-mono text-xs font-semibold tracking-wider text-[var(--terminal-text)]">{copy.details}</span>
+            <span className="mt-1 block text-sm text-[var(--terminal-muted)]">{copy.detailsHint}</span>
+          </span>
+          <span className="font-mono text-lg text-[var(--electric-blue)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+        </summary>
 
-      {!extended && (
-        <section className="mb-12">
-          <h2 className="font-mono text-lg font-semibold mb-4" style={{ color: 'var(--electric-blue)' }}>{labels.evidence}</h2>
-          {study.evidence.length > 0 ? (
-            <div className="flex flex-wrap gap-3">
-              {study.evidence.map((item) => (
-                <Button key={item.url} variant="secondary" onClick={() => window.open(item.url, '_blank', 'noopener,noreferrer')}>
-                  {item.label[language]}
-                </Button>
+        <div className="border-t border-[var(--border-default)] px-5 py-8 sm:px-6">
+          {extended && <SystemFlow title={copy.flow} steps={extended.flow[language]} />}
+          {extended && (
+            <StateModel
+              title={copy.state}
+              primary={extended.stateModel.primary[language]}
+              branches={extended.stateModel.branches[language]}
+              note={extended.stateModel.note[language]}
+            />
+          )}
+
+          <div className="mb-10">
+            <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">{copy.constraints}</h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {study.guarantees.map((guarantee) => (
+                <span key={guarantee} className="border border-[var(--border-default)] px-3 py-2 font-mono text-[10px] tracking-wider text-[var(--terminal-text)]">
+                  {guarantee}
+                </span>
               ))}
             </div>
-          ) : (
-            <p className="text-sm border-l-2 border-[var(--amber)] pl-4" style={{ color: 'var(--terminal-muted)' }}>{labels.privateEvidence}</p>
+          </div>
+
+          {study.evidence.length > 0 && (
+            <div>
+              <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">{copy.supporting}</h2>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {study.evidence.map((item) => (
+                  <Button key={item.url} variant="ghost" onClick={() => window.open(item.url, '_blank', 'noopener,noreferrer')}>
+                    {item.label[language]} ↗
+                  </Button>
+                ))}
+              </div>
+            </div>
           )}
-        </section>
-      )}
+        </div>
+      </details>
 
-      <ListSection title={labels.learnings} items={study.learnings[language]} color="var(--electric-green)" />
-
-      {extended && <TextSection title={labels.aiRelevance} text={extended.aiRelevance[language]} accent />}
-
-      <footer className="pt-8 border-t border-[var(--border-default)] flex flex-wrap gap-4">
-        <Button variant="secondary" onClick={onArchitecture}>{labels.explorer}</Button>
-        <Button variant="ghost" onClick={() => window.open('mailto:byrenanmelo@gmail.com', '_self')}>{labels.contact}</Button>
+      <footer className="mt-12 flex flex-wrap gap-3 border-t border-[var(--border-default)] pt-8">
+        {onArchitecture && <Button variant="secondary" onClick={onArchitecture}>{copy.architecture}</Button>}
+        <Button variant="ghost" onClick={() => window.open('mailto:byrenanmelo@gmail.com', '_self')}>{copy.contact}</Button>
       </footer>
     </article>
   );
 }
 
-function SystemFlow({ title, steps }: { title: string; steps: string[] }) {
+function TextSection({ title, text, large = false }: { title: string; text: string; large?: boolean }) {
   return (
     <section className="mb-12">
-      <h2 className="font-mono text-lg font-semibold mb-6" style={{ color: 'var(--electric-blue)' }}>{title}</h2>
-      <ol className="flex flex-col lg:flex-row gap-3" aria-label={title}>
+      <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--electric-blue)]">{title}</h2>
+      <p className={`mt-4 max-w-[72ch] leading-relaxed text-[var(--terminal-text)] ${large ? 'text-lg sm:text-xl' : 'text-base'}`}>{text}</p>
+    </section>
+  );
+}
+
+function ListSection({ title, items }: { title: string; items: string[] }) {
+  return (
+    <section className="mb-12">
+      <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--electric-blue)]">{title}</h2>
+      <ul className="mt-4 space-y-4">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-4 text-base leading-relaxed text-[var(--terminal-text)]">
+            <span aria-hidden="true" className="mt-[0.7em] h-px w-4 shrink-0 bg-[var(--border-strong)]" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function SystemFlow({ title, steps }: { title: string; steps: string[] }) {
+  return (
+    <section className="mb-10">
+      <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">{title}</h2>
+      <ol className="mt-4 grid gap-3 lg:grid-cols-4">
         {steps.map((step, index) => (
-          <li key={step} className="flex flex-col lg:flex-row lg:min-w-0 lg:flex-1 items-stretch gap-3">
-            <div className="flex-1 border border-[var(--border-default)] bg-[var(--surface-1)] p-4">
-              <span className="block font-mono text-[10px] mb-3" style={{ color: 'var(--electric-green)' }}>
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="block text-sm leading-snug" style={{ color: 'var(--terminal-text)' }}>{step}</span>
-            </div>
-            {index < steps.length - 1 && (
-              <span
-                aria-hidden="true"
-                className="self-center font-mono text-base text-[var(--electric-blue)] rotate-90 lg:rotate-0"
-              >
-                →
-              </span>
-            )}
+          <li key={step} className="border border-[var(--border-default)] bg-[var(--surface-2)] p-4">
+            <span className="font-mono text-[10px] text-[var(--electric-blue)]">{String(index + 1).padStart(2, '0')}</span>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--terminal-text)]">{step}</p>
           </li>
         ))}
       </ol>
@@ -220,73 +280,24 @@ function SystemFlow({ title, steps }: { title: string; steps: string[] }) {
   );
 }
 
-function StateModel({
-  title,
-  primary,
-  branches,
-  note,
-}: {
-  title: string;
-  primary: string[];
-  branches: string[];
-  note: string;
-}) {
+function StateModel({ title, primary, branches, note }: { title: string; primary: string[]; branches: string[]; note: string }) {
   return (
-    <section className="mb-12">
-      <h2 className="font-mono text-lg font-semibold mb-6" style={{ color: 'var(--electric-blue)' }}>{title}</h2>
-      <div className="border border-[var(--border-default)] bg-[var(--surface-1)]">
-        <div className="p-5 sm:p-6 border-b border-[var(--border-default)]">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 font-mono text-sm">
-            {primary.map((state, index) => (
-              <div key={state} className="contents">
-                <span className="border border-[var(--electric-green)] bg-[rgba(0,255,136,0.08)] px-4 py-3 text-center text-[var(--electric-green)]">
-                  {state}
-                </span>
-                {index < primary.length - 1 && (
-                  <span aria-hidden="true" className="self-center rotate-90 sm:rotate-0 text-[var(--electric-blue)]">→</span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-        <ul className="grid md:grid-cols-3 gap-px bg-[var(--border-default)]">
-          {branches.map((branch) => (
-            <li key={branch} className="bg-[var(--surface-2)] px-5 py-4 font-mono text-xs text-[var(--terminal-text)]">
-              {branch}
-            </li>
+    <section className="mb-10">
+      <h2 className="font-mono text-xs uppercase tracking-wider text-[var(--terminal-muted)]">{title}</h2>
+      <div className="mt-4 border border-[var(--border-default)] bg-[var(--surface-2)] p-5">
+        <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[var(--terminal-text)]">
+          {primary.map((state, index) => (
+            <span key={state} className="contents">
+              <span className="border border-[var(--border-strong)] px-3 py-2">{state}</span>
+              {index < primary.length - 1 && <span className="text-[var(--terminal-muted)]" aria-hidden="true">→</span>}
+            </span>
           ))}
+        </div>
+        <ul className="mt-5 grid gap-2 md:grid-cols-3">
+          {branches.map((branch) => <li key={branch} className="text-xs text-[var(--terminal-muted)]">{branch}</li>)}
         </ul>
-        <p className="px-5 py-4 text-sm border-t border-[var(--border-default)]" style={{ color: 'var(--terminal-muted)' }}>
-          {note}
-        </p>
+        <p className="mt-5 border-t border-[var(--border-default)] pt-4 text-sm leading-relaxed text-[var(--terminal-muted)]">{note}</p>
       </div>
-    </section>
-  );
-}
-
-function TextSection({ title, text, accent = false }: { title: string; text: string; accent?: boolean }) {
-  return (
-    <section className="mb-12">
-      <h2 className="font-mono text-lg font-semibold mb-4" style={{ color: 'var(--electric-blue)' }}>{title}</h2>
-      <div className={accent ? 'border-l-2 border-[var(--electric-green)] pl-5' : undefined}>
-        <p className="text-base leading-relaxed max-w-[75ch]" style={{ color: 'var(--terminal-text)' }}>{text}</p>
-      </div>
-    </section>
-  );
-}
-
-function ListSection({ title, items, color }: { title: string; items: string[]; color: string }) {
-  return (
-    <section className="mb-12">
-      <h2 className="font-mono text-lg font-semibold mb-4" style={{ color: 'var(--electric-blue)' }}>{title}</h2>
-      <ul className="space-y-3">
-        {items.map((item) => (
-          <li key={item} className="flex items-start gap-3 text-base">
-            <span aria-hidden="true" className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
-            <span style={{ color: 'var(--terminal-text)' }}>{item}</span>
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

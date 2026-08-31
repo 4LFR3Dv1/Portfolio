@@ -1,0 +1,73 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import { publications, type EditorialPublication } from '../data/publications';
+
+export function getStaticPaths() {
+  return publications.map((publication) => ({
+    params: { slug: publication.slug },
+    props: { publication },
+  }));
+}
+
+interface Props { publication: EditorialPublication; }
+const { publication } = Astro.props as Props;
+const copy = publication.copy.pt;
+const title = publication.title.pt;
+const canonicalUrl = new URL(`/editorial/${publication.slug}/`, Astro.site).toString();
+const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`;
+const publishedAt = `${publication.publishedAt}T12:00:00-03:00`;
+const ogImagePath = `/editorial/og/${publication.slug}.png`;
+---
+<PublicationLayout
+  title={`${title} — Renan Melo`}
+  description={copy.dek}
+  canonicalUrl={canonicalUrl}
+  kind={publication.kind}
+  publishedAt={publishedAt}
+  ogImagePath={ogImagePath}
+  ogImageAlt={`${title} — Editorial de Renan Melo`}
+  topics={publication.topics.pt}
+>
+  <p class="kicker">{publication.kind} // EDITORIAL</p>
+  <h1>{title}</h1>
+  <p class="dek">{copy.dek}</p>
+  <div class="meta-row">
+    <span>RENAN MELO</span>
+    <span>{publication.dateLabel.pt}</span>
+    <span>{publication.readTime.pt}</span>
+  </div>
+
+  <div class="article-grid">
+    <article>
+      {copy.sections.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </section>
+      ))}
+      <div class="tags">
+        {publication.topics.pt.map((topic) => <span class="tag">{topic}</span>)}
+      </div>
+    </article>
+
+    <aside>
+      <div class="share-label">COMPARTILHAR</div>
+      <div class="share-actions">
+        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+        <button type="button" data-copy-link data-url={canonicalUrl}>COPIAR LINK</button>
+      </div>
+    </aside>
+  </div>
+</PublicationLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const url = button.dataset.url;
+      if (!url) return;
+      await navigator.clipboard.writeText(url);
+      button.textContent = 'LINK COPIADO ✓';
+      window.setTimeout(() => { button.textContent = 'COPIAR LINK'; }, 1800);
+    });
+  });
+</script>

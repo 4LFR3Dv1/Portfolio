@@ -3,7 +3,7 @@ import { resolveActiveNavigation } from './terminal-topbar';
 
 describe('header navigation state', () => {
   it('uses the visible section on the landing route', () => {
-    expect(resolveActiveNavigation({ view: 'landing' }, 'evidence')).toBe('evidence');
+    expect(resolveActiveNavigation({ view: 'landing' }, 'editorial')).toBe('editorial');
     expect(resolveActiveNavigation({ view: 'landing' }, 'about')).toBe('about');
   });
 

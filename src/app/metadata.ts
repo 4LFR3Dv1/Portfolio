@@ -1,5 +1,5 @@
 import type { Language } from './context/language-context';
-import { getProject } from './data/projects';
+import { getPortfolioProject } from './data/current-case-studies';
 import { routePath, type PortfolioRoute } from './routing';
 
 const SITE_URL = 'https://renan.snelabs.space';
@@ -12,7 +12,7 @@ export interface PortfolioMetadata {
 
 export function metadataForRoute(route: PortfolioRoute, language: Language): PortfolioMetadata {
   if (route.view === 'case-study') {
-    const project = getProject(route.projectId);
+    const project = getPortfolioProject(route.projectId);
     if (project) {
       return {
         title: project.seo?.title[language] ?? `${project.title} — Renan Melo`,
@@ -26,19 +26,19 @@ export function metadataForRoute(route: PortfolioRoute, language: Language): Por
     return {
       title: language === 'en' ? 'Architecture — Renan Melo' : 'Arquitetura — Renan Melo',
       description: language === 'en'
-        ? 'Explore system architecture across governed settlement, agent operations, real-time products, transactional workflows and verifiable evidence.'
-        : 'Explore arquiteturas de settlement governado, operação agêntica, produtos em tempo real, fluxos transacionais e evidência verificável.',
+        ? 'A readable map of the recurring questions and design choices behind Renan Melo’s software systems.'
+        : 'Um mapa legível das perguntas e escolhas de design que se repetem nos sistemas de software de Renan Melo.',
       canonicalUrl: `${SITE_URL}/architecture`,
     };
   }
 
   return {
     title: language === 'en'
-      ? 'Renan Melo — Blockchain & Agentic Systems Engineer'
-      : 'Renan Melo — Engenheiro de Blockchain e Sistemas Agênticos',
+      ? 'Renan Melo — Software, Product & Computing'
+      : 'Renan Melo — Software, Produto e Computação',
     description: language === 'en'
-      ? 'Blockchain and agentic systems engineer building financial products, real-time runtimes, agent platforms and developer tooling.'
-      : 'Engenheiro de blockchain e sistemas agênticos construindo produtos financeiros, runtimes em tempo real, plataformas de agentes e ferramentas para desenvolvedores.',
+      ? 'Software, products and experiments by Renan Melo, plus essays on technology, computing and the questions that appear while building.'
+      : 'Software, produtos e experimentos de Renan Melo, além de ensaios sobre tecnologia, computação e as perguntas que aparecem enquanto constrói.',
     canonicalUrl: `${SITE_URL}/`,
   };
 }
