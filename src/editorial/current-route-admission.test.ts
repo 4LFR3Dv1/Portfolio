@@ -14,7 +14,7 @@ const manifest = routeAdmissionJson as CurrentRouteAdmissionManifest;
 const completion = routeCompletionJson as {
   status: string;
   candidateWitness: { branchHead: string; verifyRunNumber: number; verifyConclusion: string };
-  acceptance: Record<string, boolean | string>;
+  acceptance: Record<string, boolean | string | number>;
 };
 const materialized = materializeCurrentRouteAdmission();
 const revisions = materializeCurrentSystemRevisions();
