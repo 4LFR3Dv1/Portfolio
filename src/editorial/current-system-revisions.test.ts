@@ -144,9 +144,9 @@ describe('R1-A2.3 current System revisions', () => {
     ]);
   });
 
-  it('keeps A2.3 unaccepted until CI witnesses this exact candidate', () => {
-    expect(manifest.status).toBe('materialized-awaiting-ci');
-    expect(manifest.acceptance.r1_a2_3Complete).toBe(false);
-    expect(manifest.acceptance.nextRequiredAction).toContain('CI must recompute');
+  it('accepts A2.3 only after the deterministic candidate received a successful CI witness', () => {
+    expect(manifest.status).toBe('complete');
+    expect(manifest.acceptance.r1_a2_3Complete).toBe(true);
+    expect(manifest.acceptance.nextRequiredAction).toBe('R1-A2.4 — Evidence + Maturity Reconciliation');
   });
 });
