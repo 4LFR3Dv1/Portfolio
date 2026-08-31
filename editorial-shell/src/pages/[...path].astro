@@ -13,6 +13,11 @@ export function getStaticPaths() {
 }
 
 const { page } = Astro.props as Props;
+const metadata = publicationState.emission.metadata.find((entry) => entry.canonicalPath === page.canonicalPath) ?? null;
+if (!metadata) throw new Error(`editorial-shell-metadata-missing:${page.canonicalPath}`);
+if (metadata.canonicalUrl !== page.canonicalUrl) throw new Error(`editorial-shell-canonical-mismatch:${page.canonicalPath}`);
+if (metadata.language !== page.language) throw new Error(`editorial-shell-metadata-language-mismatch:${page.canonicalPath}`);
+
 const surface = page.source === 'surface'
   ? publicationState.surfaces.find((entry) => entry.path === page.canonicalPath) ?? null
   : null;
@@ -30,7 +35,14 @@ const eyebrow = page.source === 'surface'
 const emptyCopy = isPt ? 'Nenhuma publicação admitida nesta superfície ainda.' : 'No admitted publications on this surface yet.';
 const maturity = document?.maturity.state === 'classified' ? document.maturity.stage : document?.maturity.state ?? 'unclassified';
 ---
-<EditorialLayout title={page.title} description={page.description} language={page.language}>
+<EditorialLayout
+  title={metadata.title}
+  description={metadata.description}
+  language={metadata.language}
+  canonicalUrl={metadata.canonicalUrl}
+  robots={metadata.robots}
+  alternates={metadata.alternates}
+>
   <p class="eyebrow">{eyebrow}</p>
   <h1>{page.title}</h1>
   <p class="lede">{page.description}</p>

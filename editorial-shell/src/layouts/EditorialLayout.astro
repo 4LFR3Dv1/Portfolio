@@ -1,11 +1,19 @@
 ---
+interface AlternateLink {
+  language: 'en' | 'pt-BR';
+  href: string;
+}
+
 interface Props {
   title: string;
   description: string;
   language: 'en' | 'pt-BR';
+  canonicalUrl: string;
+  robots: 'index,follow';
+  alternates: AlternateLink[];
 }
 
-const { title, description, language } = Astro.props;
+const { title, description, language, canonicalUrl, robots, alternates } = Astro.props;
 const prefix = language === 'pt-BR' ? '/pt-br' : '/en';
 const labels = language === 'pt-BR'
   ? {
@@ -31,7 +39,12 @@ const labels = language === 'pt-BR'
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <title>{title} · Renan Melo</title>
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonicalUrl} />
+    {alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.language} href={alternate.href} />
+    ))}
+    <title>{title}</title>
   </head>
   <body>
     <header class="site-header">

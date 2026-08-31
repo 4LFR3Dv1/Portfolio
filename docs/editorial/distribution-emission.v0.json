@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "editorial-distribution-emission/v0",
+  "contractId": "PORTFOLIO-R2.2-2026-08-31",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "4c55124624c332fb9071dfd1033861a6778111f6",
+  "preconditions": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "shellPhysicallyMaterialized": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "authority": {
+    "source": "r1.7-distribution-bundle-via-bounded-renderer-input",
+    "manualPageDiscoveryAllowed": false,
+    "manualMetadataRegistryAllowed": false,
+    "rendererDirectInstitutionalReadAllowed": false,
+    "crossLanguageFallbackAllowed": false,
+    "xDefaultInferenceAllowed": false,
+    "lastModifiedInferenceAllowed": false,
+    "priorityInferenceAllowed": false,
+    "publicationChronologyInferenceAllowed": false
+  },
+  "metadata": {
+    "pageCount": 18,
+    "canonicalEntryCount": 18,
+    "robotsEntryCount": 18,
+    "hreflangClusterCount": 9,
+    "uniqueHreflangLinkCount": 18,
+    "xDefaultLinkCount": 0
+  },
+  "artifacts": {
+    "artifactCount": 4,
+    "sitemapPath": "/sitemap.xml",
+    "sitemapEntryCount": 18,
+    "sitemapLastmodCount": 0,
+    "sitemapPriorityCount": 0,
+    "sitemapChangefreqCount": 0,
+    "rssPaths": [
+      "/en/rss.xml",
+      "/pt-br/rss.xml"
+    ],
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchPath": "/search-index.json",
+    "searchEntryCount": 6,
+    "sanitizedSearchLeakCount": 0
+  },
+  "currentState": {
+    "distributionEmissionRuntimeMaterialized": true,
+    "boundedEmissionIncludedInRendererInput": true,
+    "canonicalMetadataRenderedInBuild": true,
+    "distributionArtifactsRenderedInBuild": true,
+    "legacyPublicSitemapReplaced": false,
+    "productionDistributionActivated": false,
+    "compatibilityRedirectsEnacted": false,
+    "legacyFallbackRendererEnacted": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "distributionConsumesAuthorizedOutputsOnly": true,
+    "canonicalMetadataCount": 18,
+    "physicalArtifactCount": 4,
+    "unprojectedRecordIndexCount": 0,
+    "omittedDocumentIndexCount": 0,
+    "crossLanguageFallbackCount": 0,
+    "sanitizedSemanticLeakCount": 0,
+    "deploymentMutationCount": 0,
+    "r2_2Complete": false,
+    "nextRequiredCut": "R2.3 — Legacy Preservation Runtime"
+  }
+}

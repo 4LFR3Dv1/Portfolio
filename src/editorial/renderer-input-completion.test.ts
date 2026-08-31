@@ -120,6 +120,7 @@ describe('R2.1 terminal completion seal', () => {
     expect(existsSync(repoUrl('editorial-shell/src/generated/accepted-publication-state.json'))).toBe(false);
     expect(existsSync(repoUrl('editorial-shell/src/lib/accepted-state.ts'))).toBe(false);
     expect(completion.acceptance.r2_1Complete).toBe(true);
+    expect(completion.acceptance.nextRequiredCut).toBe('R2.2 — Distribution Emission');
     expect(completion.acceptance.cutoverReady).toBe(false);
     expect(completion.acceptance.cutoverAuthorized).toBe(false);
     expect(completion.effectiveShell.productionStaticHtmlActivated).toBe(false);
@@ -127,7 +128,6 @@ describe('R2.1 terminal completion seal', () => {
     expect(completion.effectiveShell.deployedRuntimeChanged).toBe(false);
     expect(r21Doc).toContain('Status: **COMPLETE / DUAL CI WITNESSED**');
     expect(r2Readme).toContain('| R2.1 | Astro Shell Materialization & Editorial Renderer | **COMPLETE** |');
-    expect(r2Readme).toContain('| R2.2 | Distribution Emission | **NEXT** |');
     expect(r2Readme).toContain('R2_1_COMPLETE=true');
   });
 });
