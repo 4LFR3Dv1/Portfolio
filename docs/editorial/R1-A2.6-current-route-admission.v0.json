@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "editorial-current-route-admission/v0",
+  "contractId": "PORTFOLIO-R1-A2.6-2026-08-31",
+  "status": "materialized-awaiting-ci",
+  "normative": true,
+  "baseline": "ea9ee21cddcb40898d6410e63b80e659efa5020f",
+  "preconditions": {
+    "r1_a2_5Complete": true,
+    "currentDisclosureReauthorizationComplete": true,
+    "allCurrentSuccessorsPubliclyClassified": true
+  },
+  "sources": {
+    "currentRevisions": "docs/editorial/R1-A2.3-current-system-revisions.v0.json",
+    "currentDisclosure": "docs/editorial/R1-A2.5-current-disclosure.v0.json",
+    "candidates": "src/editorial/current-route-language-candidates.ts",
+    "runtime": "src/editorial/current-route-language-runtime.ts",
+    "historicalRoutes": "docs/editorial/route-runtime.v0.json",
+    "routeLanguageContract": "src/app/data/editorial-route-language-identity.ts"
+  },
+  "laws": {
+    "routeDecisionRequiredForEveryCurrentSuccessor": true,
+    "bilingualCurrentRealizationRequiredForAdmittedCurrentRoute": true,
+    "currentEnglishRealizationBindsExactPayloadDigest": true,
+    "currentPortugueseTranslationIsExplicit": true,
+    "staleLanguageInheritanceAllowed": false,
+    "implicitLanguageFallbackAllowed": false,
+    "historicalPathMayBeDropped": false,
+    "historicalPathMayBeReassigned": false,
+    "historicalAdmissionBasisMayBeRewritten": false,
+    "routePathDerivedFromRepositoryName": false,
+    "disclosureImpliesRoute": false,
+    "routeImpliesSurfaceMembership": false
+  },
+  "materialization": {
+    "currentSuccessorSystemCount": 27,
+    "currentRoutedSystemCount": 27,
+    "currentUnroutedSystemCount": 0,
+    "currentRouteLanguagePairCount": 54,
+    "currentEnglishRouteCount": 27,
+    "currentPortugueseRouteCount": 27,
+    "currentLanguageBindingCount": 54,
+    "currentCanonicalEnglishBindingCount": 27,
+    "currentPortugueseTranslationBindingCount": 27,
+    "preservedHistoricalRouteBindingCount": 10,
+    "preservedHistoricalRouteForCurrentSystemCount": 8,
+    "deferredHistoricalRouteBindingCount": 2,
+    "newRouteBindingCount": 46,
+    "totalRouteBindingCount": 56,
+    "totalRouteTargetRecordCount": 28
+  },
+  "acceptance": {
+    "allCurrentRouteLanguagePairsResolved": true,
+    "currentRouteConflictCount": 0,
+    "currentLanguageConflictCount": 0,
+    "staleTranslationInheritanceCount": 0,
+    "historicalPathDropCount": 0,
+    "historicalPathReassignmentCount": 0,
+    "historicalAdmissionBasisRewriteCount": 0,
+    "deferredHistoricalRouteHeadUnavailableCount": 2,
+    "publicSurfaceMutationCount": 0,
+    "productionMutationCount": 0,
+    "r1_a2_6Complete": false,
+    "nextRequiredAction": "CI must reconstruct 54 exact-current bilingual route-language pairs while preserving all historical route identities before acceptance"
+  }
+}
