@@ -23,6 +23,7 @@ const MIME = new Map([
   ['.webp', 'image/webp'],
   ['.ico', 'image/x-icon'],
   ['.woff2', 'font/woff2'],
+  ['.pdf', 'application/pdf'],
 ]);
 
 function normalizedRequestPath(pathname) {
