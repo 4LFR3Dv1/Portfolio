@@ -136,7 +136,7 @@ describe('R0.0 current surface freeze', () => {
       name: 'RENAN MELO',
       role: 'Blockchain & Agentic Systems Engineer',
       author: 'Author of VERIFY SYSTEMS',
-      siteName: 'Renan Melo',
+      siteName: 'Renan Melo — Portfolio',
     });
     expect(manifest.sourceBlobs['src/app/components/hero-section.tsx']).toMatch(/^[0-9a-f]{40}$/);
     expect(index).toContain(manifest.identityClaims.siteName);
