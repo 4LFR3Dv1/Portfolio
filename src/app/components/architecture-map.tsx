@@ -38,31 +38,34 @@ const kindStyles: Record<ArchitectureStepKind, { marker: string; border: string;
 
 export function ArchitectureMap({ steps, language, label, compact = false }: ArchitectureMapProps) {
   return (
-    <div className="overflow-x-auto pb-3" role="img" aria-label={label}>
-      <ol className={`flex min-w-full flex-col md:flex-row md:items-stretch ${compact ? 'gap-2' : 'gap-3'}`}>
+    <div className="overflow-x-auto pb-2" role="img" aria-label={label}>
+      <ol className={`flex min-w-full flex-col md:flex-row ${compact ? 'gap-4' : 'gap-6 lg:gap-8'}`}>
         {steps.map((step, index) => {
           const style = kindStyles[step.kind];
           return (
-            <li key={step.id} className="flex min-w-0 flex-1 flex-col md:flex-row md:items-stretch">
-              <article className={`min-w-44 flex-1 border-l-2 bg-[var(--surface-1)] ${style.border} ${compact ? 'p-4' : 'p-5'}`}>
-                <div className="mb-4 flex items-center justify-between gap-3">
-                  <span className="font-mono text-xs text-[var(--terminal-muted)]">{String(index + 1).padStart(2, '0')}</span>
+            <li key={step.id} className="relative min-w-0 flex-1">
+              <article className={`h-full border-l-2 pl-4 md:border-l-0 md:border-t-2 md:pl-0 ${style.border} ${compact ? 'md:pt-3' : 'md:pt-4'}`}>
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-[10px] text-[var(--terminal-muted)]">{String(index + 1).padStart(2, '0')}</span>
                   <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">
-                    <span className={`h-2 w-2 ${style.marker}`} aria-hidden="true" />
+                    <span className={`h-1.5 w-1.5 ${style.marker}`} aria-hidden="true" />
                     {style.label[language]}
                   </span>
                 </div>
-                <h3 className={`${compact ? 'text-sm' : 'text-base'} font-mono font-semibold text-[var(--terminal-text)]`}>
+
+                <h3 className={`${compact ? 'mt-3 text-sm' : 'mt-4 text-base'} font-mono font-semibold leading-snug text-[var(--terminal-text)]`}>
                   {step.label[language]}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--terminal-muted)]">{step.detail[language]}</p>
+                <p className={`${compact ? 'mt-2' : 'mt-3'} text-sm leading-6 text-[var(--terminal-muted)]`}>{step.detail[language]}</p>
               </article>
 
               {index < steps.length - 1 && (
-                <div className="flex h-8 shrink-0 items-center justify-center font-mono text-[var(--border-strong)] md:h-auto md:w-6" aria-hidden="true">
-                  <span className="md:hidden">↓</span>
-                  <span className="hidden md:inline">→</span>
-                </div>
+                <span
+                  className="absolute -right-5 top-0 hidden font-mono text-xs text-[var(--border-strong)] md:block lg:-right-6"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
               )}
             </li>
           );
