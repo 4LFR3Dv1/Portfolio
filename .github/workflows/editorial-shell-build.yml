@@ -39,6 +39,10 @@ jobs:
         working-directory: editorial-shell
         run: npm run materialize:current-input
 
+      - name: Emit A2.8 current distribution
+        working-directory: editorial-shell
+        run: npm run materialize:current-distribution
+
       - name: Build static editorial shell
         working-directory: editorial-shell
         run: npm run build
@@ -82,7 +86,9 @@ jobs:
           path: |
             editorial-shell/package-lock.json
             editorial-shell/dist
+            editorial-shell/current-emission
             editorial-shell/r2-6-preview-witness.json
             editorial-shell/r2-a1-1-current-renderer-input-witness.json
+            editorial-shell/r2-a1-2-current-distribution-witness.json
           if-no-files-found: warn
           retention-days: 30
