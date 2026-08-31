@@ -15,13 +15,18 @@ const copy = publication.copy.pt;
 const title = publication.title.pt;
 const canonicalUrl = new URL(`/editorial/${publication.slug}/`, Astro.site).toString();
 const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`;
+const publishedAt = `${publication.publishedAt}T12:00:00-03:00`;
+const ogImagePath = `/editorial/og/${publication.slug}.png`;
 ---
 <PublicationLayout
   title={`${title} — Renan Melo`}
   description={copy.dek}
   canonicalUrl={canonicalUrl}
   kind={publication.kind}
-  updatedAt={publication.dateLabel.pt}
+  publishedAt={publishedAt}
+  ogImagePath={ogImagePath}
+  ogImageAlt={`${title} — Editorial de Renan Melo`}
+  topics={publication.topics.pt}
 >
   <p class="kicker">{publication.kind} // EDITORIAL</p>
   <h1>{title}</h1>
