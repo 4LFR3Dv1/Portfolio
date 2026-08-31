@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "editorial-current-system-revisions/v0",
+  "contractId": "PORTFOLIO-R1-A2.3-2026-08-31",
+  "status": "materialized-awaiting-ci",
+  "normative": true,
+  "baseline": "1ad9128328ed702d0c160be5acca5a4874674d25",
+  "preconditions": {
+    "r1_a2_1Complete": true,
+    "r1_a2_2Complete": true,
+    "identityContinuityPreserved": true
+  },
+  "sources": {
+    "registry": "docs/editorial/record-registry.v0.json",
+    "census": "docs/editorial/R1-A2.1-current-github-census.v0.json",
+    "assignments": "src/editorial/current-system-revision-candidates.ts",
+    "runtime": "src/editorial/current-revision-runtime.ts"
+  },
+  "laws": {
+    "replaceBirthRevisionAllowed": false,
+    "successorGeneration": 1,
+    "payloadSchemaVersion": "knowledge.system/v0",
+    "repositoryReferenceMustResolveInCurrentCensus": true,
+    "temporalObservationInheritedFromCensus": true,
+    "evidenceFieldsAllowedInsidePayload": false,
+    "genericBirthSummaryAllowedAsSuccessor": false,
+    "disclosureDecisionImplied": false,
+    "routeDecisionImplied": false,
+    "publicSurfaceDecisionImplied": false
+  },
+  "materialization": {
+    "bornSystemRecordCount": 28,
+    "successorRevisionCount": 27,
+    "deferredRevisionCount": 1,
+    "deferredSubjectKeys": ["transactional-support-bot"],
+    "recordIdChangeCount": 0,
+    "newRecordBirthCount": 0,
+    "genericBirthSummarySuccessorCount": 0
+  },
+  "acceptance": {
+    "successorRevisionCount": 27,
+    "deferredRevisionCount": 1,
+    "genericBirthSummarySuccessorCount": 0,
+    "recordIdChangeCount": 0,
+    "newRecordBirthCount": 0,
+    "publicDisclosureDecisionCount": 0,
+    "routeMutationCount": 0,
+    "publicSurfaceMutationCount": 0,
+    "productionMutationCount": 0,
+    "r1_a2_3Complete": false,
+    "nextRequiredAction": "CI must recompute every generation-1 successor and temporal census binding"
+  }
+}
