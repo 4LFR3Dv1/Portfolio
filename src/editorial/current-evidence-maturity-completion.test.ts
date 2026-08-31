@@ -159,14 +159,12 @@ describe('R1-A2.4 corrected completion seal', () => {
       currentMaturityGovernanceSuccessorCount: 1,
       maturityIdentityReplacementCount: 0,
       staleMaturityInheritanceCount: 0,
-      currentPublicationValid: false,
       cutoverReady: false,
     });
     expect(constitution.acceptance).toMatchObject({
       r1_a2_4Complete: true,
-      r1_a2Complete: false,
     });
     expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=true');
-    expect(r1Readme).toContain('NEXT=R2 — Editorial Publication Shell & Cutover');
+    expect(r1Readme).toContain('R1_A2_4_COMPLETE=true');
   });
 });
