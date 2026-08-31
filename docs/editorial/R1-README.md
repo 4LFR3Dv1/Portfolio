@@ -21,8 +21,8 @@ R1 materializes the editorial world already defined by R0 and grounded across th
 | R1.1 | Record Registry | **COMPLETE** |
 | R1.2 | Projection Engine | **COMPLETE** |
 | R1.3 | Route Runtime | **COMPLETE** |
-| R1.4 | Language Runtime | **NEXT** |
-| R1.5 | Editorial Document Runtime | NOT STARTED |
+| R1.4 | Language Runtime | **COMPLETE** |
+| R1.5 | Editorial Document Runtime | **NEXT** |
 | R1.6 | Core Editorial Surfaces | NOT STARTED |
 | R1.7 | Distribution Foundation | NOT STARTED |
 | R1.8 | Legacy Compatibility | NOT STARTED |
@@ -54,10 +54,13 @@ R1.2 materialized the deterministic public projection boundary. A Record reaches
 
 R1.3 materialized the Record-route runtime from explicit, already-frozen migration plans only. Five born Systems receive ten canonical EN/PT-BR RouteBindings; twenty-three born Systems remain intentionally unrouted rather than receiving inferred paths. The retired Agentic plans stay cancelled, held representation reservations receive no routes, legacy `/work/...` compatibility remains deferred, and route resolution still does not assert that a requested language realization exists.
 
+R1.4 materialized exact-revision language realization. All 28 born System revisions receive an explicit canonical EN binding to their exact R1.1 payload bytes, while only five Systems receive PT-BR translations because only those effective R0.8 plans explicitly admit PT-BR realization. Route existence does not imply content existence, stale realizations do not survive a Record head change, and missing translations return `language-unavailable` without implicit fallback. Language authority remains separate from disclosure, public projection and document rendering.
+
 ```text
 R1_0_COMPLETE=true
 R1_1_COMPLETE=true
 R1_2_COMPLETE=true
 R1_3_COMPLETE=true
-NEXT=R1.4 — Language Runtime
+R1_4_COMPLETE=true
+NEXT=R1.5 — Editorial Document Runtime
 ```

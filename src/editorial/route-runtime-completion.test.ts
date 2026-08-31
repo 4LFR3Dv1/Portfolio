@@ -122,7 +122,7 @@ describe('R1.3 terminal completion seal', () => {
     });
   });
 
-  it('advances R1 to Language Runtime without weakening route or projection boundaries', () => {
+  it('preserves the sealed R1.3 boundary as later R1 cuts advance', () => {
     expect(completion.acceptance).toEqual({
       r1_2Complete: true,
       r1_3Complete: true,
@@ -134,7 +134,6 @@ describe('R1.3 terminal completion seal', () => {
       nextRequiredCut: 'R1.4 — Language Runtime',
     });
     expect(r1Readme).toContain('| R1.3 | Route Runtime | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.4 | Language Runtime | **NEXT** |');
     expect(r1Readme).toContain('R1_3_COMPLETE=true');
     expect(r13Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r13Doc).toContain('Verify run 33343235212');

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "editorial-language-runtime-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.4-2026-08-30",
+  "materialization": {
+    "commit": "445cb152b20772c0029c3bdbd2867e443ea2707d",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33344300340,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/language-runtime.v0.json",
+    "manifestBlobSha": "bce4ad6a9a4015c52894ffce02597f5cc20618b2"
+  },
+  "effectiveLanguageRuntime": {
+    "bornSystemRecords": 28,
+    "canonicalEnRealizations": 28,
+    "explicitPtBrTranslations": 5,
+    "languageBindings": 33,
+    "routedLanguagePairsResolved": 10,
+    "translationInferenceAllowed": false,
+    "implicitFallbackAllowed": false,
+    "staleRealizationInheritanceAllowed": false,
+    "languageImpliesDisclosure": false,
+    "languageImpliesPublicProjection": false,
+    "documentRenderingEnacted": false,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "acceptance": {
+    "r1_3Complete": true,
+    "r1_4Complete": true,
+    "languageRuntimeReconstructs": true,
+    "exactRevisionBindingRequired": true,
+    "routeDoesNotImplyRealization": true,
+    "missingTranslationPreserved": true,
+    "staleRealizationInheritanceForbidden": true,
+    "implicitFallbackForbidden": true,
+    "currentPublicProjectionCount": 0,
+    "nextRequiredCut": "R1.5 — Editorial Document Runtime"
+  }
+}
