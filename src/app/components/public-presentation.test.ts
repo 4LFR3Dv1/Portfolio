@@ -22,10 +22,18 @@ describe('current public presentation posture', () => {
     const source = readComponent('architecture-explorer.tsx');
 
     expect(source).toContain("from '../data/public-architecture'");
-    expect(source).toContain('ARCHITECTURE, WITHOUT THE CEREMONY');
-    expect(source).toContain('WHERE I DRAW THE LINE');
     expect(source).not.toContain('SANITIZED PUBLIC VIEW');
     expect(source).not.toContain('TRUST BOUNDARIES');
+  });
+
+  it('keeps About present-focused and photo-free', () => {
+    const source = readComponent('about-section.tsx');
+
+    expect(source).toContain('I BUILD SOFTWARE TO UNDERSTAND SYSTEMS.');
+    expect(source).toContain('CONSTRUO SOFTWARE PARA ENTENDER SISTEMAS.');
+    expect(source).not.toContain('<img');
+    expect(source).not.toContain('I started in design');
+    expect(source).not.toContain('Comecei no design');
   });
 
   it('presents contact as one conversation instead of recruitment routing', () => {
