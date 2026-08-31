@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "editorial-foundation-acceptance/v0",
+  "contractId": "PORTFOLIO-R1.9-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "a24492651a39235d683dc5796b008d0973910c7b",
+  "preconditions": {
+    "r0EffectiveComplete": true,
+    "r1PreComplete": true,
+    "r1_0Complete": true,
+    "r1_1Complete": true,
+    "r1_2Complete": true,
+    "r1_3Complete": true,
+    "r1_4Complete": true,
+    "r1_5Complete": true,
+    "r1_6Complete": true,
+    "r1_7Complete": true,
+    "r1_8Complete": true
+  },
+  "boundary": {
+    "foundationAcceptanceOnly": true,
+    "publicCutoverAuthorizationIncluded": false,
+    "deploymentMutationAllowed": false,
+    "ontologyMutationAllowed": false,
+    "semanticRepairAllowed": false
+  },
+  "expectedState": {
+    "completionSealCount": 9,
+    "systemRecordBirthCount": 28,
+    "governanceRecordBirthCount": 6,
+    "routeBindingCount": 10,
+    "languageBindingCount": 33,
+    "publicProjectionCount": 10,
+    "editorialDocumentCount": 6,
+    "coreSurfaceCount": 12,
+    "distributionPageCount": 18,
+    "metadataEntryCount": 18,
+    "hreflangClusterCount": 9,
+    "sitemapEntryCount": 18,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 6,
+    "legacyRouteCount": 8,
+    "redirectReadyLegacyCount": 4,
+    "preservedLegacyCount": 4
+  },
+  "cutoverState": {
+    "publicationShellMaterialized": false,
+    "staticHtmlRenderingEnacted": false,
+    "compatibilityRedirectsEnacted": false,
+    "legacyFallbackRendererEnacted": false,
+    "editorialSitemapDeployed": false,
+    "vercelCutoverEnacted": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "previousCutsSealed": true,
+    "endToEndReconstructionRequired": true,
+    "authorityDirectionPreserved": true,
+    "publicLeakCount": 0,
+    "identityReassignmentCount": 0,
+    "crossLanguageFallbackCount": 0,
+    "undistributedRedirectCount": 0,
+    "unknownFutureResolution": "unresolved",
+    "foundationReady": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "r1Complete": false,
+    "r1_9Complete": false,
+    "nextRequiredProgram": "R2 — Editorial Publication Shell & Cutover"
+  }
+}

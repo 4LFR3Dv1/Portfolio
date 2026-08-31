@@ -171,7 +171,7 @@ describe('R1.8 terminal completion seal', () => {
     });
   });
 
-  it('advances the shared R1 program to Foundation Acceptance without cutting over deployment', () => {
+  it('records Foundation Acceptance as the historical next cut without requiring it to remain NEXT forever', () => {
     expect(completion.acceptance).toEqual({
       r1_7Complete: true,
       r1_8Complete: true,
@@ -182,7 +182,7 @@ describe('R1.8 terminal completion seal', () => {
       nextRequiredCut: 'R1.9 — Foundation Acceptance',
     });
     expect(r1Readme).toContain('| R1.8 | Legacy Compatibility | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.9 | Foundation Acceptance | **NEXT** |');
+    expect(r1Readme).toContain('| R1.9 | Foundation Acceptance |');
     expect(r1Readme).toContain('R1_8_COMPLETE=true');
     expect(r18Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r18Doc).toContain('Materialization `Verify` run `33348025484`: **SUCCESS**.');
