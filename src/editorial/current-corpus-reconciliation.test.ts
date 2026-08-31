@@ -27,20 +27,7 @@ interface Constitution {
     r2_7HistoricalComplete: boolean;
     r2_7InfrastructureWitnessPreserved: boolean;
   };
-  laws: {
-    existingRecordIdentityMustBePreserved: boolean;
-    currentChangeProducesRevisionByDefault: boolean;
-    repositoryIdentityIsSystemIdentity: boolean;
-    repositoryMutationMayMintSystemAutomatically: boolean;
-    temporalRepositoryHeadBindingRequired: boolean;
-    groundingImpliesDisclosure: boolean;
-    birthImpliesRoute: boolean;
-    historicalMigrationPlanIsPerpetualPublicAuthority: boolean;
-    genericBirthSummaryAllowedAsCurrentPublicSummary: boolean;
-    privateEvidencePublicByDefault: boolean;
-    existingGovernanceIdentityMustBePreserved: boolean;
-    currentPublicationValidityGatesCutover: boolean;
-  };
+  laws: Record<string, boolean>;
   currentState: Record<string, boolean | number>;
   acceptance: Record<string, boolean | string>;
 }
@@ -109,6 +96,7 @@ const a22 = readJson<Completion>('docs/editorial/R1-A2.2-completion.v0.json');
 const a23 = readJson<Completion>('docs/editorial/R1-A2.3-completion.v0.json');
 const a24 = readJson<Completion>('docs/editorial/R1-A2.4-completion.v0.json');
 const a25 = readJson<Completion>('docs/editorial/R1-A2.5-completion.v0.json');
+const a26 = readJson<Completion>('docs/editorial/R1-A2.6-completion.v0.json');
 const r1A2Doc = readRepoFile('docs/editorial/R1-A2-current-corpus-reconciliation.md');
 const r2Readme = readRepoFile('docs/editorial/R2-README.md');
 
@@ -212,7 +200,7 @@ describe('R1-A2 current corpus reconciliation', () => {
     ]);
   });
 
-  it('treats earlier completion seals as monotonic history rather than global NEXT authority', () => {
+  it('treats every earlier completion seal as monotonic history rather than global NEXT authority', () => {
     expect(a21.status).toBe('complete');
     expect(a21.acceptance).toMatchObject({ r1_a2_1Complete: true, nextRequiredCut: 'R1-A2.2 — Existing Identity Reconciliation' });
     expect(a22.status).toBe('complete');
@@ -223,9 +211,11 @@ describe('R1-A2 current corpus reconciliation', () => {
     expect(a24.acceptance).toMatchObject({ r1_a2_4Complete: true, nextRequiredCut: 'R1-A2.5 — Public Disclosure Reauthorization' });
     expect(a25.status).toBe('complete');
     expect(a25.acceptance).toMatchObject({ r1_a2_5Complete: true, nextRequiredCut: 'R1-A2.6 — Current Route Admission' });
+    expect(a26.status).toBe('complete');
+    expect(a26.acceptance).toMatchObject({ r1_a2_6Complete: true, nextRequiredCut: 'R1-A2.7 — Current Editorial Surface Reconstruction' });
   });
 
-  it('advances the current constitution through A2.5 while leaving publication validity closed', () => {
+  it('advances the current constitution through A2.6 while leaving publication validity closed', () => {
     expect(constitution.currentState).toMatchObject({
       currentCorpusCensusComplete: true,
       currentRepositoryCount: 54,
@@ -246,6 +236,19 @@ describe('R1-A2 current corpus reconciliation', () => {
       currentDisclosureGovernanceBirthCount: 23,
       currentDisclosureGovernanceSuccessorCount: 4,
       disclosureIdentityReplacementCount: 0,
+      currentRouteAdmissionComplete: true,
+      currentRoutedSystemCount: 27,
+      currentUnroutedSystemCount: 0,
+      currentRouteLanguagePairCount: 54,
+      currentLanguageBindingCount: 54,
+      currentEnglishRouteCount: 27,
+      currentPortugueseRouteCount: 27,
+      newRouteBindingCount: 46,
+      preservedHistoricalRouteBindingCount: 10,
+      deferredHistoricalRouteBindingCount: 2,
+      historicalPathDropCount: 0,
+      historicalPathReassignmentCount: 0,
+      historicalAdmissionBasisRewriteCount: 0,
       currentPublicationValid: false,
       cutoverReady: false,
       productionMutationCount: 0,
@@ -256,11 +259,12 @@ describe('R1-A2 current corpus reconciliation', () => {
       r1_a2_3Complete: true,
       r1_a2_4Complete: true,
       r1_a2_5Complete: true,
+      r1_a2_6Complete: true,
       r1_a2Complete: false,
       currentPublicationValid: false,
       cutoverReady: false,
       cutoverAuthorized: false,
-      nextRequiredCut: 'R1-A2.6 — Current Route Admission',
+      nextRequiredCut: 'R1-A2.7 — Current Editorial Surface Reconstruction',
     });
     expect(constitution.laws).toMatchObject({
       existingRecordIdentityMustBePreserved: true,
@@ -274,9 +278,10 @@ describe('R1-A2 current corpus reconciliation', () => {
       genericBirthSummaryAllowedAsCurrentPublicSummary: false,
       privateEvidencePublicByDefault: false,
       existingGovernanceIdentityMustBePreserved: true,
+      historicalRouteIdentityMustBePreserved: true,
       currentPublicationValidityGatesCutover: true,
     });
-    expect(r1A2Doc).toContain('R1_A2_5_COMPLETE=true');
-    expect(r1A2Doc).toContain('NEXT=R1-A2.6 — Current Route Admission');
+    expect(r1A2Doc).toContain('R1_A2_6_COMPLETE=true');
+    expect(r1A2Doc).toContain('NEXT=R1-A2.7 — Current Editorial Surface Reconstruction');
   });
 });
