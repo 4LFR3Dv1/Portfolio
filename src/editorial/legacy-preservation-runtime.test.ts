@@ -12,7 +12,8 @@ function readJson<T>(path: string): T {
 
 const input = materializeAcceptedRendererInput();
 const legacy = input.legacy;
-const paths = legacy.pages.map((page) => page.path).sort();
+const paths: string[] = legacy.pages.map((page) => page.path).sort();
+const legacyPathSet = new Set<string>(paths);
 
 describe('R2.3 legacy preservation runtime', () => {
   it('materializes exactly the four R1.8 preservation exceptions from frozen R0.0 sources', () => {
@@ -106,9 +107,9 @@ describe('R2.3 legacy preservation runtime', () => {
       searchEligible: false,
       canonicalRecordBindingAllowed: false,
     });
-    expect(input.pages.some((page) => paths.includes(page.canonicalPath))).toBe(false);
-    expect(input.emission.metadata.some((entry) => paths.includes(entry.canonicalPath))).toBe(false);
-    expect(input.emission.search.some((entry) => paths.includes(entry.canonicalPath))).toBe(false);
+    expect(input.pages.some((page) => legacyPathSet.has(page.canonicalPath))).toBe(false);
+    expect(input.emission.metadata.some((entry) => legacyPathSet.has(entry.canonicalPath))).toBe(false);
+    expect(input.emission.search.some((entry) => legacyPathSet.has(entry.canonicalPath))).toBe(false);
     const emittedBodies = input.emission.artifacts.map((artifact) => artifact.body).join('\n');
     for (const path of paths) expect(emittedBodies).not.toContain(path);
 
