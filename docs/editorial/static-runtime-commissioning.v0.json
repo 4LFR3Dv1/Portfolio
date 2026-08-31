@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "editorial-static-runtime-commissioning/v0",
+  "contractId": "PORTFOLIO-R2.5-2026-08-31",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "d5f6f530effc411a718eae60dae613cc13b8a5a4",
+  "preconditions": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "r2_3Complete": true,
+    "r2_4Complete": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "runtime": {
+    "transport": "local-http",
+    "host": "127.0.0.1",
+    "portMode": "ephemeral-for-witness",
+    "unknownRouteOutcome": 404,
+    "semanticCacheControl": "no-store",
+    "assetCacheControl": "public, max-age=31536000, immutable",
+    "contentTypePolicy": {
+      "html": "text/html; charset=utf-8",
+      "sitemap": "application/xml; charset=utf-8",
+      "rss": "application/rss+xml; charset=utf-8",
+      "search": "application/json; charset=utf-8"
+    },
+    "canonicalHeaderPolicy": {
+      "canonicalPages": "Link rel=canonical + Content-Language + X-Robots-Tag index,follow",
+      "historicalAndHandshakePages": "no canonical Link + X-Robots-Tag noindex,follow"
+    },
+    "faultInjection": {
+      "successorWithdrawal": true,
+      "scope": "commissioning-only"
+    }
+  },
+  "expected": {
+    "canonical200Count": 18,
+    "historical200Count": 4,
+    "handshake200Count": 4,
+    "redirect302Count": 8,
+    "successorLoss503Count": 1,
+    "unknown404Count": 1,
+    "sitemapUrlCount": 18,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 6,
+    "minimumRenderedAssetReferenceCount": 1
+  },
+  "currentState": {
+    "commissionedRuntimeMaterialized": true,
+    "physicalRuntimeWitnessed": false,
+    "productionStaticRuntimeActivated": false,
+    "productionRedirectsActivated": false,
+    "legacyPublicSitemapReplaced": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "singleRuntimeCompositionRequired": true,
+    "canonicalHeaderHtmlConsistencyRequired": true,
+    "assetGraphReachabilityRequired": true,
+    "contentTypeCorrectnessRequired": true,
+    "cachePolicyExplicitRequired": true,
+    "failClosedSuccessorLossRequired": true,
+    "deploymentMutationCount": 0,
+    "r2_5Complete": false,
+    "nextRequiredCut": "R2.6 — Shadow / Preview Deployment"
+  }
+}
