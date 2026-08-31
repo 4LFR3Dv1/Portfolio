@@ -1,0 +1,52 @@
+name: Editorial Shell Build
+
+on:
+  pull_request:
+    paths:
+      - 'editorial-shell/**'
+      - 'src/editorial/**'
+      - 'src/app/data/editorial-*.ts'
+      - 'docs/editorial/**'
+      - '.github/workflows/editorial-shell-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: editorial-shell/package-lock.json
+
+      - name: Materialize exact shell dependency graph
+        working-directory: editorial-shell
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Install shell dependencies
+        working-directory: editorial-shell
+        run: npm ci
+
+      - name: Build static editorial shell
+        working-directory: editorial-shell
+        run: npm run build
+
+      - name: Verify physical static output
+        working-directory: editorial-shell
+        run: node scripts/verify-output.mjs
+
+      - name: Preserve shell witness
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-1-editorial-shell-${{ github.sha }}
+          path: |
+            editorial-shell/package-lock.json
+            editorial-shell/dist
+          if-no-files-found: error
+          retention-days: 14
