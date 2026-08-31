@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "editorial-r2-7-completion/v0",
+  "contractId": "PORTFOLIO-R2.7-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "1479b5ce092655c770bc24dee8c94fc825db931e",
+  "acceptedTarget": {
+    "provider": "Railway",
+    "projectId": "b447a912-19fc-47f5-a1ed-67974522f29c",
+    "serviceId": "21734e1d-7580-4bb7-b809-8744ac4d3f09",
+    "environmentId": "5d1e1f99-122c-4f07-8741-56fc55e08ef5",
+    "deploymentId": "52b5b9ef-a80a-4ee2-8c54-20aa25975553",
+    "origin": "https://r2-6-preview-production.up.railway.app",
+    "targetPort": 8080,
+    "freshTlsAuthorized": true,
+    "freshTlsProtocol": "TLSv1.3",
+    "freshSemanticDifferenceCount": 0,
+    "customProductionDomainAttached": false
+  },
+  "productionBaseline": {
+    "origin": "https://renan.snelabs.space",
+    "observationMode": "read-only",
+    "dns": {
+      "cname": [
+        "d27855497dcf813a.vercel-dns-017.com"
+      ],
+      "a": [
+        {
+          "address": "216.150.1.1",
+          "ttl": 300
+        },
+        {
+          "address": "216.150.16.1",
+          "ttl": 300
+        }
+      ],
+      "aaaa": [],
+      "nameservers": [
+        "maceio.ns.porkbun.com",
+        "curitiba.ns.porkbun.com",
+        "salvador.ns.porkbun.com",
+        "fortaleza.ns.porkbun.com"
+      ],
+      "soa": {
+        "nsname": "curitiba.ns.porkbun.com",
+        "hostmaster": "dns.cloudflare.com",
+        "serial": 2413528021,
+        "refresh": 10000,
+        "retry": 2400,
+        "expire": 604800,
+        "minttl": 1800
+      }
+    },
+    "http": {
+      "root": {
+        "status": 200,
+        "server": "Vercel",
+        "contentType": "text/html; charset=utf-8",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "bodySha256": "sha256:1b1140b646d40fb3f52d874d13faa85bbb90857623f9c4bdc81733749fb25740",
+        "bodyBytes": 2952
+      },
+      "robots": {
+        "status": 200,
+        "contentType": "text/plain; charset=utf-8",
+        "bodySha256": "sha256:36200b969b920ee39c65a672699d6098403a48d7263b9312de72459f9964d697",
+        "bodyBytes": 73
+      },
+      "sitemap": {
+        "status": 200,
+        "contentType": "application/xml",
+        "bodySha256": "sha256:15e9f32727b55bb0be9dfac2097d1b3ea8efe904e56b11740af5c7fc21e50633",
+        "bodyBytes": 1217
+      }
+    },
+    "repositoryContract": {
+      "rootBuildScript": "vite build",
+      "vercelRewrites": [
+        {
+          "source": "/((?!.*\\.).*)",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  },
+  "githubWitness": {
+    "workflow": "Editorial Cutover Readiness",
+    "runId": 33401682696,
+    "jobId": 99519244166,
+    "pullRequest": 38,
+    "branchHead": "d6151b964a4ac6f27ce7163719fb770ad0435ea1",
+    "mergeWitnessSha": "1baaaff6be5c35e1d84a2387272ce813d9a4f17a",
+    "artifactId": 9761473698,
+    "artifactZipSha256": "sha256:bf4092408258c6e728aaefa015a936cd0e25e9d14d9efd41c90adee7f03f895b",
+    "generatedAt": "2026-08-31T14:16:57.780Z"
+  },
+  "cutoverTransaction": {
+    "strategy": "domain-handoff-to-accepted-r2-6-service",
+    "runtimeMutationAllowed": false,
+    "repositoryProductionConfigMutationAllowed": false,
+    "preDnsProviderDomainAttachmentRequired": true,
+    "dnsMutationScope": [
+      "renan.snelabs.space"
+    ],
+    "apexMutationAllowed": false,
+    "wildcardMutationAllowed": false,
+    "wwwMutationAllowed": false,
+    "oldProductionRuntimeMustRemainAvailable": true,
+    "rollbackBeforeDestructiveCleanup": true
+  },
+  "rollback": {
+    "exactCnameToRestore": "d27855497dcf813a.vercel-dns-017.com",
+    "observedTtlSeconds": 300,
+    "expectedIncumbentServer": "Vercel",
+    "expectedRootBodySha256": "sha256:1b1140b646d40fb3f52d874d13faa85bbb90857623f9c4bdc81733749fb25740",
+    "oldProductionSourcePreserved": true,
+    "oldProductionVercelConfigPreserved": true,
+    "restoreBeforeTargetCleanup": true
+  },
+  "productionBoundary": {
+    "productionDnsChanged": false,
+    "productionDomainChanged": false,
+    "railwayCustomProductionDomainAttached": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "acceptedTargetStillEquivalent": true,
+    "currentProductionDnsCaptured": true,
+    "currentProductionHttpCaptured": true,
+    "rollbackBaselineCaptured": true,
+    "cutoverWriteSetBounded": true,
+    "productionMutationCount": 0,
+    "r2_7Complete": true,
+    "cutoverReady": true,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "nextRequiredCut": "R2.8 — Public Cutover"
+  }
+}

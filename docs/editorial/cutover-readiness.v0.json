@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "editorial-cutover-readiness/v0",
+  "contractId": "PORTFOLIO-R2.7-2026-08-31",
+  "status": "accepted",
+  "normative": true,
+  "baseline": "1479b5ce092655c770bc24dee8c94fc825db931e",
+  "preconditions": {
+    "r2_6Complete": true,
+    "previewPublic": true,
+    "previewIsolated": true,
+    "localRemoteSemanticEquivalence": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "acceptedTarget": {
+    "source": "docs/editorial/R2.6-completion.v0.json",
+    "provider": "Railway",
+    "deploymentId": "52b5b9ef-a80a-4ee2-8c54-20aa25975553",
+    "origin": "https://r2-6-preview-production.up.railway.app",
+    "semanticRuntimeReplacementAllowed": false,
+    "redeployRequiredForCutover": false
+  },
+  "productionBaseline": {
+    "origin": "https://renan.snelabs.space",
+    "dnsName": "renan.snelabs.space",
+    "zoneName": "snelabs.space",
+    "observationMode": "read-only",
+    "dnsSnapshotRequired": true,
+    "httpFingerprintRequired": true,
+    "rootBuildContractRequired": "vite build",
+    "rootVercelRewriteMustRemainUnchanged": true,
+    "completionEvidence": "docs/editorial/R2.7-completion.v0.json"
+  },
+  "cutoverTransaction": {
+    "strategy": "domain-handoff-to-accepted-r2-6-service",
+    "runtimeMutationAllowed": false,
+    "repositoryProductionConfigMutationAllowed": false,
+    "preDnsProviderDomainAttachmentRequired": true,
+    "dnsMutationScope": [
+      "renan.snelabs.space"
+    ],
+    "apexMutationAllowed": false,
+    "wildcardMutationAllowed": false,
+    "wwwMutationAllowed": false,
+    "oldProductionRuntimeMustRemainAvailable": true,
+    "rollbackBeforeDestructiveCleanup": true
+  },
+  "rollback": {
+    "exactPreCutoverDnsSnapshotRequired": true,
+    "acceptedCnameRollbackTarget": "d27855497dcf813a.vercel-dns-017.com",
+    "observedTtlSeconds": 300,
+    "oldProductionSourcePreserved": true,
+    "oldProductionVercelConfigPreserved": true,
+    "rollbackInstruction": "restore the exact pre-cutover DNS state for renan.snelabs.space, verify the accepted Vercel fingerprint, then and only then clean up a failed target binding"
+  },
+  "readinessWitness": {
+    "workflow": ".github/workflows/editorial-cutover-readiness.yml",
+    "runId": 33401682696,
+    "artifactId": 9761473698,
+    "targetFreshInternetWitnessRequired": true,
+    "productionReadOnlyDnsWitnessRequired": true,
+    "productionReadOnlyHttpWitnessRequired": true,
+    "productionMutationCountRequired": 0
+  },
+  "authorizationBoundary": {
+    "r2_7MayAuthorizeCutover": false,
+    "r2_8RequiresExplicitAuthorization": true,
+    "domainOrDnsWriteAllowedInR2_7": false
+  },
+  "currentState": {
+    "cutoverPlanMaterialized": true,
+    "freshTargetWitnessed": true,
+    "productionDnsSnapshotCaptured": true,
+    "productionHttpFingerprintCaptured": true,
+    "rollbackBaselineCaptured": true,
+    "railwayCustomProductionDomainAttached": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "r2_7Complete": true,
+    "cutoverReady": true,
+    "cutoverAuthorized": false,
+    "productionMutationCountRequired": 0,
+    "nextRequiredCut": "R2.8 — Public Cutover"
+  }
+}
