@@ -1,134 +1,105 @@
-import { Badge } from './badge';
 import { Button } from './button';
 import { useLanguage } from '../context/language-context';
 
 interface HeroSectionProps {
   onViewProjects?: () => void;
-  onArchitecture?: () => void;
   onContact?: () => void;
 }
 
-export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroSectionProps) {
-  const { language, t } = useLanguage();
+export function HeroSection({ onViewProjects, onContact }: HeroSectionProps) {
+  const { language } = useLanguage();
   const copy = language === 'en'
     ? {
-        role: 'Computing Systems Engineer',
-        author: 'SNE Labs',
-        description: 'I design and build software systems, developer tools and experimental computing projects, with a current focus on AI, browsers and infrastructure.',
-        focus: ['Browser and web systems', 'Tools for working with AI', 'Developer infrastructure', 'Applied computing research'],
-        quick: 'CURRENT SURFACES',
-        portfolio: 'PERSONAL GITHUB',
-        editorial: 'EDITORIAL',
-        lab: 'SNE LABS',
-        current: 'CURRENT WORK',
-        currentDescription: 'I am currently focused on Genesis, Foundry and SNE Labs projects that explore better ways for AI to work inside real software systems.',
+        eyebrow: 'SOFTWARE · PRODUCT · COMPUTING',
+        lead: 'I design and build software systems.',
+        description: 'My work moves between product, infrastructure, AI and experimental computing. I usually start with a question, build until the problem becomes concrete, and then try to explain what I learned without hiding the idea behind jargon.',
+        work: 'VIEW WORK',
+        editorial: 'READ EDITORIAL',
+        contact: 'CONTACT',
+        now: 'NOW',
+        nowItems: [
+          'Building an experimental browser for AI-assisted work.',
+          'Developing tools for software work carried out with AI.',
+          'Writing about technology, computing and the abstractions we depend on.',
+        ],
+        links: 'ELSEWHERE',
       }
     : {
-        role: 'Engenheiro de Sistemas Computacionais',
-        author: 'SNE Labs',
-        description: 'Projeto e construo sistemas de software, ferramentas para desenvolvimento e projetos experimentais de computação, com foco atual em IA, navegadores e infraestrutura.',
-        focus: ['Sistemas para navegador e web', 'Ferramentas para trabalhar com IA', 'Infraestrutura para desenvolvimento', 'Pesquisa aplicada em computação'],
-        quick: 'SUPERFÍCIES ATUAIS',
-        portfolio: 'GITHUB PESSOAL',
-        editorial: 'EDITORIAL',
-        lab: 'SNE LABS',
-        current: 'TRABALHO ATUAL',
-        currentDescription: 'Hoje estou focado em Genesis, Foundry e projetos da SNE Labs que exploram formas melhores de integrar IA a sistemas de software reais.',
+        eyebrow: 'SOFTWARE · PRODUTO · COMPUTAÇÃO',
+        lead: 'Projeto e construo sistemas de software.',
+        description: 'Meu trabalho passa por produto, infraestrutura, IA e computação experimental. Normalmente começo por uma pergunta, construo até o problema ficar concreto e depois tento explicar o que aprendi sem esconder a ideia atrás de jargão.',
+        work: 'VER TRABALHOS',
+        editorial: 'LER EDITORIAL',
+        contact: 'CONTATO',
+        now: 'AGORA',
+        nowItems: [
+          'Construindo um navegador experimental para trabalho assistido por IA.',
+          'Desenvolvendo ferramentas para trabalho de software realizado com IA.',
+          'Escrevendo sobre tecnologia, computação e as abstrações das quais dependemos.',
+        ],
+        links: 'OUTROS LUGARES',
       };
 
   return (
-    <section className="max-w-[1600px] mx-auto px-6 py-16 lg:py-24">
-      <div className="grid lg:grid-cols-2 gap-12 items-start">
-        <div className="space-y-8">
-          <div className="space-y-3">
-            <h1 className="font-mono font-bold tracking-tight text-4xl lg:text-5xl" style={{ color: 'var(--electric-blue)' }}>
-              RENAN MELO
-            </h1>
-            <div className="font-mono text-sm lg:text-base tracking-wide flex flex-wrap items-center gap-2">
-              <span style={{ color: 'var(--terminal-text)' }}>{copy.role}</span>
-              <span style={{ color: 'var(--border-strong)' }}>|</span>
-              <span style={{ color: '#a855f7' }}>{copy.author}</span>
-            </div>
+    <section className="mx-auto max-w-[1600px] px-6 py-16 lg:py-28">
+      <div className="grid gap-14 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,.65fr)] lg:items-start">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--terminal-muted)]">
+            {copy.eyebrow}
+          </div>
+          <h1 className="mt-5 font-mono text-4xl font-bold tracking-[-0.04em] text-[var(--electric-blue)] sm:text-5xl lg:text-7xl">
+            RENAN MELO
+          </h1>
+          <p className="mt-8 max-w-4xl text-2xl font-medium leading-tight text-[var(--terminal-text)] sm:text-3xl lg:text-4xl">
+            {copy.lead}
+          </p>
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-[var(--terminal-muted)] sm:text-lg">
+            {copy.description}
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Button variant="primary" onClick={onViewProjects}>{copy.work}</Button>
+            <a
+              href="/editorial/"
+              className="inline-flex min-h-10 items-center justify-center border border-[var(--border-default)] bg-[var(--surface-1)] px-4 font-mono text-xs text-[var(--terminal-text)] transition-colors hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)]"
+            >
+              {copy.editorial}
+            </a>
+            <Button variant="ghost" onClick={onContact}>{copy.contact}</Button>
           </div>
 
-          <div className="space-y-4 max-w-2xl">
-            <p className="text-base leading-relaxed" style={{ color: 'var(--terminal-text)' }}>{copy.description}</p>
-            <div className="grid sm:grid-cols-2 gap-2 font-mono text-xs pl-4 border-l-2 border-[var(--border-default)]">
-              {copy.focus.map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <span aria-hidden="true" style={{ color: 'var(--electric-blue)' }}>▸</span>
-                  <span style={{ color: 'var(--terminal-muted)' }}>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <Badge variant="green">COMPUTING SYSTEMS</Badge>
-            <Badge variant="blue">AI + SOFTWARE</Badge>
-            <Badge variant="purple">RESEARCH + ENGINEERING</Badge>
-            <Badge variant="amber">PRODUCT + INFRASTRUCTURE</Badge>
-          </div>
-
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Button variant="primary" onClick={onViewProjects}>{t('hero.cta.work')}</Button>
-            <Button variant="secondary" onClick={onArchitecture}>{t('hero.cta.architecture')}</Button>
-            <Button variant="ghost" onClick={onContact}>{t('hero.cta.contact')}</Button>
-          </div>
-
-          <div className="pt-8 border-t border-[var(--border-subtle)]">
-            <div className="font-mono text-[10px] uppercase tracking-wider mb-4" style={{ color: 'var(--terminal-muted)' }}>{copy.quick}</div>
-            <div className="grid sm:grid-cols-2 gap-3 font-mono text-sm">
-              <QuickLink label={copy.portfolio} value="4LFR3Dv1" url="https://github.com/4LFR3Dv1" />
-              <QuickLink label={copy.editorial} value="renan.snelabs.space/editorial" url="/editorial/" external={false} />
-              <QuickLink label={copy.lab} value="snelabs.space" url="https://snelabs.space" />
-              <QuickLink label="LINKEDIN" value="renan-melo-connexions" url="https://linkedin.com/in/renan-melo-connexions" />
+          <div className="mt-12 border-t border-[var(--border-subtle)] pt-5">
+            <div className="mb-4 font-mono text-[10px] uppercase tracking-wider text-[var(--terminal-muted)]">{copy.links}</div>
+            <div className="flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs">
+              <QuickLink label="GITHUB" url="https://github.com/4LFR3Dv1" />
+              <QuickLink label="SNE LABS" url="https://snelabs.space" />
+              <QuickLink label="LINKEDIN" url="https://linkedin.com/in/renan-melo-connexions" />
             </div>
           </div>
         </div>
 
-        <aside className="border border-[var(--border-default)] bg-[var(--surface-1)] lg:sticky lg:top-24">
-          <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)]">
-            <div className="font-mono text-xs uppercase tracking-wider" style={{ color: '#a855f7' }}>
-              {copy.current}
-            </div>
+        <aside className="border border-[var(--border-default)] bg-[var(--surface-1)]">
+          <div className="border-b border-[var(--border-default)] bg-[var(--surface-2)] px-6 py-4 font-mono text-xs text-[#a855f7]">
+            {copy.now}
           </div>
-          <div className="p-6 space-y-5">
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
-              {copy.currentDescription}
-            </p>
-            <div className="grid gap-3">
-              <FocusRow label="GENESIS" value={language === 'en' ? 'BROWSER + AI' : 'NAVEGADOR + IA'} />
-              <FocusRow label="FOUNDRY" value={language === 'en' ? 'AI DEVELOPMENT TOOLS' : 'FERRAMENTAS PARA IA'} />
-              <FocusRow label="SNE LABS" value={language === 'en' ? 'APPLIED COMPUTING' : 'COMPUTAÇÃO APLICADA'} />
-            </div>
-          </div>
+          <ol className="divide-y divide-[var(--border-subtle)]">
+            {copy.nowItems.map((item, index) => (
+              <li key={item} className="grid grid-cols-[32px_1fr] gap-4 px-6 py-5 text-sm leading-relaxed text-[var(--terminal-text)]">
+                <span className="font-mono text-xs text-[var(--terminal-muted)]">{String(index + 1).padStart(2, '0')}</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ol>
         </aside>
       </div>
     </section>
   );
 }
 
-function QuickLink({ label, value, url, external = true }: { label: string; value: string; url: string; external?: boolean }) {
+function QuickLink({ label, url }: { label: string; url: string }) {
   return (
-    <a
-      href={url}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      className="flex items-center gap-2 text-[var(--terminal-muted)] hover:text-[var(--electric-blue)] transition-colors"
-    >
-      <span aria-hidden="true" className="text-[var(--electric-blue)]">→</span>
-      <span className="uppercase text-xs">{label}:</span>
-      <span>{value}</span>
+    <a href={url} target="_blank" rel="noopener noreferrer" className="text-[var(--terminal-muted)] transition-colors hover:text-[var(--electric-blue)]">
+      {label} ↗
     </a>
-  );
-}
-
-function FocusRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between gap-4 text-xs font-mono border-t border-[var(--border-subtle)] pt-3">
-      <span style={{ color: 'var(--terminal-muted)' }}>{label}</span>
-      <span style={{ color: 'var(--electric-green)' }}>{value}</span>
-    </div>
   );
 }
