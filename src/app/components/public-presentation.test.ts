@@ -18,10 +18,16 @@ describe('current public presentation posture', () => {
     expect(source).not.toContain('SYSTEM GUARANTEES');
   });
 
-  it('binds the explorer to the current public architecture instead of the frozen legacy catalog', () => {
+  it('binds architecture to the current public catalog and keeps every question readable without tab interaction', () => {
     const source = readComponent('architecture-explorer.tsx');
 
     expect(source).toContain("from '../data/public-architecture'");
+    expect(source).toContain('publicArchitectureViews.map');
+    expect(source).toContain('Cinco perguntas que continuo fazendo enquanto construo.');
+    expect(source).toContain('Uma leitura contínua.');
+    expect(source).not.toContain('role="tab"');
+    expect(source).not.toContain('role="tabpanel"');
+    expect(source).not.toContain('role="tablist"');
     expect(source).not.toContain('SANITIZED PUBLIC VIEW');
     expect(source).not.toContain('TRUST BOUNDARIES');
   });
