@@ -28,7 +28,7 @@ interface R25Manifest {
     rssFeedCount: 2;
     rssItemCount: 0;
     searchEntryCount: 6;
-    minimumRenderedAssetReferenceCount: 1;
+    minimumStaticAssetCount: 1;
   };
   currentState: {
     commissionedRuntimeMaterialized: true;
@@ -107,20 +107,21 @@ describe('R2.5 static runtime commissioning materialization', () => {
       rssFeedCount: 2,
       rssItemCount: 0,
       searchEntryCount: 6,
-      minimumRenderedAssetReferenceCount: 1,
+      minimumStaticAssetCount: 1,
     });
-    expect(runtimeSource).toContain("createCommissionedRuntime");
-    expect(runtimeSource).toContain("X-Commissioned-Runtime");
-    expect(runtimeSource).toContain("public, max-age=31536000, immutable");
-    expect(runtimeSource).toContain("no-store");
-    expect(runtimeSource).toContain("404.html");
-    expect(runtimeSource).toContain("resolveCompatibilityRedirectRequest");
-    expect(verifierSource).toContain("canonical_200=18");
-    expect(verifierSource).toContain("redirect_302=8");
-    expect(verifierSource).toContain("successor_loss_503=1");
-    expect(verifierSource).toContain("random-path-that-does-not-exist");
-    expect(verifierSource).toContain("application/rss+xml");
-    expect(verifierSource).toContain("rendered_asset_references");
+    expect(runtimeSource).toContain('createCommissionedRuntime');
+    expect(runtimeSource).toContain('X-Commissioned-Runtime');
+    expect(runtimeSource).toContain('public, max-age=31536000, immutable');
+    expect(runtimeSource).toContain('no-store');
+    expect(runtimeSource).toContain('404.html');
+    expect(runtimeSource).toContain('resolveCompatibilityRedirectRequest');
+    expect(runtimeSource).toContain('application/pdf');
+    expect(verifierSource).toContain('canonical_200=18');
+    expect(verifierSource).toContain('redirect_302=8');
+    expect(verifierSource).toContain('successor_loss_503=1');
+    expect(verifierSource).toContain('random-path-that-does-not-exist');
+    expect(verifierSource).toContain('application/rss+xml');
+    expect(verifierSource).toContain('static_assets=');
   });
 
   it('wires commissioning into the isolated shell pipeline without changing production', () => {
