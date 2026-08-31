@@ -14,18 +14,10 @@
     "materialHeadCount": 52,
     "emptyRepositoryCount": 2,
     "emptyRepositories": [
-      "4LFR3Dv1/ORDM-TESTNET-v.01",
       "4LFR3Dv1/SNE-RADAR-v1.0",
       "4LFR3Dv1/factory-control"
     ],
-    "note": "ORDM-TESTNET-v.01 exposes a material ref despite size=0 in installation metadata; therefore emptiness is determined by ref observation, not repository size. The authoritative census marks only refs that returned empty-repository responses as empty."
-  },
-  "correction": {
-    "authoritativeEmptyRepositoryCount": 2,
-    "authoritativeEmptyRepositories": [
-      "4LFR3Dv1/SNE-RADAR-v1.0",
-      "4LFR3Dv1/factory-control"
-    ]
+    "repositorySizeUsedAsHeadAuthority": false
   },
   "productionBoundary": {
     "publicRuntimeChanged": false,
