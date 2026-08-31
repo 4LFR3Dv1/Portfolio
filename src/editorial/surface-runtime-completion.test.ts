@@ -168,7 +168,7 @@ describe('R1.6 terminal completion seal', () => {
     });
   });
 
-  it('advances the shared R1 program to Distribution Foundation without cutting over deployment', () => {
+  it('seals R1.6 own boundary without constraining later R1 progress', () => {
     expect(completion.acceptance).toEqual({
       r1_5Complete: true,
       r1_6Complete: true,
@@ -182,7 +182,7 @@ describe('R1.6 terminal completion seal', () => {
       nextRequiredCut: 'R1.7 — Distribution Foundation',
     });
     expect(r1Readme).toContain('| R1.6 | Core Editorial Surfaces | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.7 | Distribution Foundation | **NEXT** |');
+    expect(r1Readme).toMatch(/\| R1\.7 \| Distribution Foundation \| \*\*(?:NEXT|COMPLETE)\*\* \|/);
     expect(r1Readme).toContain('R1_6_COMPLETE=true');
     expect(r16Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r16Doc).toContain('Materialization `Verify` run `33346924011`: **SUCCESS**.');
