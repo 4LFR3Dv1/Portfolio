@@ -1,4 +1,4 @@
-import { featuredPublications } from '../../../editorial-shell/publication-src/data/publications';
+import { featuredPublications } from '../data/editorial-publications';
 import { useLanguage } from '../context/language-context';
 
 export function EditorialSection() {

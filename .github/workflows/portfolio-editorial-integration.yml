@@ -37,5 +37,5 @@ jobs:
           grep -F 'https://renan.snelabs.space/editorial/systems/genesis/' dist/editorial/systems/genesis/index.html
           grep -F 'og:title' dist/editorial/systems/genesis/index.html
           grep -F 'www.linkedin.com/sharing/share-offsite' dist/editorial/systems/genesis/index.html
-          grep -F 'RENAN MELO' dist/index.html
+          grep -R -F 'Computing Systems Engineer' dist/assets
           echo 'PORTFOLIO + EDITORIAL COMPOSED BUILD: PASS'
