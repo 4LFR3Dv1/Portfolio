@@ -1,0 +1,23 @@
+---
+import CompatibilityRedirectLayout from '../../layouts/CompatibilityRedirectLayout.astro';
+import { publicationState } from '../../lib/publication-state';
+import type { CompatibilityRedirectEntry } from '../../../../src/editorial/compatibility-redirect-adapter';
+
+interface Props { entry: CompatibilityRedirectEntry; }
+
+export function getStaticPaths() {
+  return publicationState.redirects.entries
+    .filter((entry) => entry.legacyPath.startsWith('/work/'))
+    .map((entry) => ({
+      params: { redirect: entry.legacyPath.slice('/work/'.length) },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props as Props;
+---
+<CompatibilityRedirectLayout
+  entry={entry}
+  endpoint={publicationState.redirects.http.endpoint}
+  storageKey={publicationState.redirects.language.storageKey}
+/>
