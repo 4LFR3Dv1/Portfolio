@@ -1,6 +1,6 @@
 # R1 — Editorial Foundation
 
-Status: **COMPLETE / FROZEN — POST-FREEZE RECONCILIATION ACTIVE**
+Status: **COMPLETE / FROZEN** — POST-FREEZE RECONCILIATION ACTIVE
 
 Effective constitutional preconditions:
 
@@ -112,5 +112,5 @@ R1_COMPLETE=true
 R1_A2_ACTIVE=true
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
-NEXT=R1-A2.1 — Current GitHub Census + HEAD Observation
+NEXT=R1-A2.3 — Current Revision Materialization
 ```
