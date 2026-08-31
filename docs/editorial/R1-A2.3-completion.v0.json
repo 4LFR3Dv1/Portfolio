@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "editorial-r1-a2-3-completion/v0",
+  "contractId": "PORTFOLIO-R1-A2.3-COMPLETION-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "1ad9128328ed702d0c160be5acca5a4874674d25",
+  "revisionManifest": "docs/editorial/R1-A2.3-current-system-revisions.v0.json",
+  "candidateWitness": {
+    "headSha": "a38d185184d437a71bd9de7f71b6f59267ebd5e1",
+    "prMergeSha": "c2cc44cc6ef812f603fde0b3036927183f4b8dfe",
+    "verifyRunId": 33411967644,
+    "verifyRunNumber": 255,
+    "conclusion": "success",
+    "witnessedProperties": [
+      "27 generation-1 System successors reconstruct deterministically",
+      "all successor RecordIds equal their Birth RecordIds",
+      "all successor predecessor refs equal exact Birth RevisionIds",
+      "all current repository refs resolve through the R1-A2.1 census",
+      "generic Birth summary successor count is zero",
+      "one historical System remains explicitly deferred without identity deletion",
+      "no disclosure, route, public surface or production mutation is implied"
+    ]
+  },
+  "materialization": {
+    "bornSystemRecordCount": 28,
+    "successorRevisionCount": 27,
+    "deferredRevisionCount": 1,
+    "preservedRecordIdCount": 28,
+    "recordIdChangeCount": 0,
+    "newRecordBirthCount": 0,
+    "genericBirthSummarySuccessorCount": 0
+  },
+  "productionBoundary": {
+    "publicRuntimeChanged": false,
+    "productionDnsChanged": false,
+    "railwayTargetChanged": false,
+    "vercelConfigurationChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "r1_a2_3Complete": true,
+    "currentRevisionMaterializationComplete": true,
+    "evidenceMaturityReconciliationComplete": false,
+    "currentDisclosureReauthorized": false,
+    "currentRoutesAdmitted": false,
+    "currentEditorialSurfacesReconstructed": false,
+    "currentPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "nextRequiredCut": "R1-A2.4 — Evidence + Maturity Reconciliation"
+  }
+}
