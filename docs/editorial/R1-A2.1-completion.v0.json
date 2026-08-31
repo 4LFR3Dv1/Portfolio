@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "editorial-r1-a2-1-completion/v0",
+  "contractId": "PORTFOLIO-R1-A2.1-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "1ad9128328ed702d0c160be5acca5a4874674d25",
+  "constitution": "docs/editorial/R1-A2-reconciliation-constitution.v0.json",
+  "census": "docs/editorial/R1-A2.1-current-github-census.v0.json",
+  "observation": {
+    "source": "connected-github-installations",
+    "accountCount": 2,
+    "repositoryCount": 54,
+    "ownerCounts": {"4LFR3Dv1":39,"SNE-Labs":15},
+    "materialHeadCount": 52,
+    "emptyRepositoryCount": 2,
+    "emptyRepositories": [
+      "4LFR3Dv1/ORDM-TESTNET-v.01",
+      "4LFR3Dv1/SNE-RADAR-v1.0",
+      "4LFR3Dv1/factory-control"
+    ],
+    "note": "ORDM-TESTNET-v.01 exposes a material ref despite size=0 in installation metadata; therefore emptiness is determined by ref observation, not repository size. The authoritative census marks only refs that returned empty-repository responses as empty."
+  },
+  "correction": {
+    "authoritativeEmptyRepositoryCount": 2,
+    "authoritativeEmptyRepositories": [
+      "4LFR3Dv1/SNE-RADAR-v1.0",
+      "4LFR3Dv1/factory-control"
+    ]
+  },
+  "productionBoundary": {
+    "publicRuntimeChanged": false,
+    "productionDnsChanged": false,
+    "railwayTargetChanged": false,
+    "vercelConfigurationChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "currentCorpusCensusComplete": true,
+    "defaultBranchObservedForEveryRepository": true,
+    "allDefaultBranchRefsResolvedOrExplicitlyEmpty": true,
+    "r1_a2_1Complete": true,
+    "identityReconciliationComplete": false,
+    "currentPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "nextRequiredCut": "R1-A2.2 — Existing Identity Reconciliation"
+  }
+}
