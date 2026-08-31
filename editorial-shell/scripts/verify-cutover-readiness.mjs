@@ -1,8 +1,8 @@
+/* global URL, fetch, process, Buffer, console */
 import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { resolve4, resolve6, resolveAny, resolveCname, resolveNs, resolveSoa } from 'node:dns/promises'
 
-const repoRoot = new URL('../../', import.meta.url)
 const contract = JSON.parse(readFileSync(new URL('../../docs/editorial/cutover-readiness.v0.json', import.meta.url), 'utf8'))
 const r26 = JSON.parse(readFileSync(new URL('../../docs/editorial/R2.6-completion.v0.json', import.meta.url), 'utf8'))
 const targetWitnessPath = process.env.R2_7_TARGET_WITNESS_PATH ?? 'r2-7-target-witness.json'
