@@ -24,8 +24,8 @@ R2 turns the accepted editorial foundation into a physical publication runtime w
 | R2.2 | Distribution Emission | **COMPLETE** |
 | R2.3 | Legacy Preservation Runtime | **COMPLETE** |
 | R2.4 | Compatibility Redirect Adapter | **COMPLETE** |
-| R2.5 | Static Runtime Commissioning | **MATERIALIZED / AWAITING WITNESS** |
-| R2.6 | Shadow / Preview Deployment | **NOT STARTED** |
+| R2.5 | Static Runtime Commissioning | **COMPLETE** |
+| R2.6 | Shadow / Preview Deployment | **NEXT** |
 | R2.7 | Cutover Readiness | **NOT STARTED** |
 | R2.8 | Public Cutover | **NOT STARTED** |
 | R2.9 | Physical Acceptance | **NOT STARTED** |
@@ -54,7 +54,7 @@ future preview / deployment adapter
 
 The renderer and commissioned server are consumers. They cannot mint Records, rewrite Evidence, change disclosure, infer translations, invent routes or reinterpret legacy identities.
 
-R2.0 froze the renderer-facing shell boundary. R2.1 physically materialized an isolated Astro 7.2.9 shell with a committed dependency lock and a prebuild adapter that passes only bounded public DTOs into Astro. R2.2 physically emits canonical/robots/hreflang metadata for all 18 canonical pages plus the accepted sitemap, two empty language RSS feeds and the six-entry semantic search index. R2.3 physically preserves the four R1.8 historical exceptions from the exact frozen R0.0 source blobs, keeps their shared-path EN/PT client-state behavior and quarantines them from canonical distribution. R2.4 physically witnesses all eight language-specific successors through a bounded HTTP 302 adapter, with client-side `portfolio-language` handshakes and fail-closed 503 behavior if a successor stops being distributed. R2.5 now composes canonical pages, historical pages, handshakes, redirect behavior, distribution artifacts, assets and the 404 into one local HTTP runtime with explicit MIME, canonical header and cache behavior. The production React/Vite runtime and legacy public sitemap remain unchanged.
+R2.0 froze the renderer-facing shell boundary. R2.1 physically materialized an isolated Astro 7.2.9 shell with a committed dependency lock and a prebuild adapter that passes only bounded public DTOs into Astro. R2.2 physically emits canonical/robots/hreflang metadata for all 18 canonical pages plus the accepted sitemap, two empty language RSS feeds and the six-entry semantic search index. R2.3 physically preserves the four R1.8 historical exceptions from the exact frozen R0.0 source blobs, keeps their shared-path EN/PT client-state behavior and quarantines them from canonical distribution. R2.4 physically witnesses all eight language-specific successors through a bounded HTTP 302 adapter, with client-side `portfolio-language` handshakes and fail-closed 503 behavior if a successor stops being distributed. R2.5 composes canonical pages, historical pages, handshakes, redirect behavior, distribution artifacts, two physical static assets and the 404 into one locally commissioned HTTP runtime, with all canonical pages, redirects, distribution artifacts, assets, failure paths and cache/content-type rules physically witnessed. The production React/Vite runtime and legacy public sitemap remain unchanged.
 
 ## Deployment rule
 
@@ -90,6 +90,6 @@ R2_1_COMPLETE=true
 R2_2_COMPLETE=true
 R2_3_COMPLETE=true
 R2_4_COMPLETE=true
-R2_5_COMPLETE=false
-NEXT=R2.5 — Static Runtime Commissioning acceptance
+R2_5_COMPLETE=true
+NEXT=R2.6 — Shadow / Preview Deployment
 ```
