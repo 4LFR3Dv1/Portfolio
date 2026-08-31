@@ -8,6 +8,7 @@
   },
   "scripts": {
     "materialize": "node scripts/materialize-input.mjs",
+    "materialize:current-input": "node scripts/materialize-current-input.mjs",
     "dev": "npm run materialize && astro dev",
     "build": "npm run materialize && astro build",
     "preview": "astro preview",
