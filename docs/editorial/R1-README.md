@@ -23,8 +23,8 @@ R1 materializes the editorial world already defined by R0 and grounded across th
 | R1.3 | Route Runtime | **COMPLETE** |
 | R1.4 | Language Runtime | **COMPLETE** |
 | R1.5 | Editorial Document Runtime | **COMPLETE** |
-| R1.6 | Core Editorial Surfaces | **NEXT** |
-| R1.7 | Distribution Foundation | NOT STARTED |
+| R1.6 | Core Editorial Surfaces | **COMPLETE** |
+| R1.7 | Distribution Foundation | **NEXT** |
 | R1.8 | Legacy Compatibility | NOT STARTED |
 | R1.9 | Foundation Acceptance | NOT STARTED |
 
@@ -56,7 +56,9 @@ R1.3 materialized the Record-route runtime from explicit, already-frozen migrati
 
 R1.4 materialized exact-revision language realization. All 28 born System revisions receive an explicit canonical EN binding to their exact R1.1 payload bytes, while only five Systems receive PT-BR translations because only those effective R0.8 plans explicitly admit PT-BR realization. Route existence does not imply content existence, stale realizations do not survive a Record head change, and missing translations return `language-unavailable` without implicit fallback. Language authority remains separate from disclosure, public projection and document rendering.
 
-R1.5 materialized the renderer-neutral Editorial Document DTO boundary. Documents require an upstream public projection; full semantic content requires the exact R1.4 realization for the projected Record revision and language; metadata-only never carries semantic payload; sanitized content is never derived by runtime redaction. The current effective document count remains zero because no disclosure authority has yet made the new editorial substrate public. No Astro rendering or framework cutover is enacted by this cut.
+R1.5 materialized the renderer-neutral Editorial Document DTO boundary. Documents require an upstream public projection; full semantic content requires the exact R1.4 realization for the projected Record revision and language; metadata-only never carries semantic payload; sanitized content is never derived by runtime redaction. The current effective document count remained zero at the R1.5 cut because no disclosure authority had yet made the new editorial substrate public. No Astro rendering or framework cutover was enacted by that cut.
+
+R1.6 admitted only the explicit R0.8 governance required for the five still-valid routed Systems, bound each decision to the exact R1.1 target revision, and materialized deterministic renderer-neutral Home, Systems, Archive, Research, Essays and Notes surfaces in EN and PT-BR. Ten routed language pairs now produce ten public projections, but only the six full-disclosure VIRA / XS Wallet / SNE-OS documents reach semantic surfaces; the four sanitized Transactional Support Bot / Foundry Pay realizations remain omitted until a separate disclosure-safe authority exists. Surface materialization still does not cut the deployed React/Vite runtime over to Astro.
 
 ```text
 R1_0_COMPLETE=true
@@ -65,5 +67,6 @@ R1_2_COMPLETE=true
 R1_3_COMPLETE=true
 R1_4_COMPLETE=true
 R1_5_COMPLETE=true
-NEXT=R1.6 — Core Editorial Surfaces
+R1_6_COMPLETE=true
+NEXT=R1.7 — Distribution Foundation
 ```

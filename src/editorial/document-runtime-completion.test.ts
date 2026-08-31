@@ -122,7 +122,7 @@ describe('R1.5 terminal completion seal', () => {
     });
   });
 
-  it('advances the shared R1 program to Core Editorial Surfaces', () => {
+  it('seals R1.5 own boundary without constraining later R1 progress', () => {
     expect(completion.acceptance).toEqual({
       r1_4Complete: true,
       r1_5Complete: true,
@@ -134,7 +134,6 @@ describe('R1.5 terminal completion seal', () => {
       nextRequiredCut: 'R1.6 — Core Editorial Surfaces',
     });
     expect(r1Readme).toContain('| R1.5 | Editorial Document Runtime | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.6 | Core Editorial Surfaces | **NEXT** |');
     expect(r1Readme).toContain('R1_5_COMPLETE=true');
     expect(r15Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r15Doc).toContain('Materialization `Verify` run `33346253580`: **SUCCESS**.');

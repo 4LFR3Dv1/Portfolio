@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "editorial-core-surfaces/v0",
+  "contractId": "PORTFOLIO-R1.6-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "89d279400a497b794310543a074462ef10b9d65b",
+  "preconditions": {
+    "r1_5Complete": true,
+    "r1_4Complete": true,
+    "r1_3Complete": true,
+    "r1_2Complete": true,
+    "r1_1Complete": true,
+    "r0EffectiveComplete": true
+  },
+  "governanceAdmission": {
+    "source": "r0.8-explicit-public-plans",
+    "policyInferenceAllowed": false,
+    "assignmentCount": 6,
+    "disclosureBirthCount": 5,
+    "maturityBirthCount": 1
+  },
+  "governanceAssignments": [
+    {
+      "governanceRecordId": "rec_fe675b13970843099b802b2b6d03daf1",
+      "kind": "governance.disclosure",
+      "targetRecordId": "rec_c844725e35cf61830221efc597612017",
+      "basisRevisionId": "rev_sha256_be74fa16fc7822712210948f6d598aef7c66f983e0cb4f19298275dc46530c35",
+      "visibility": {"record":"public","source":"public","evidence":"public"},
+      "disclosure": "full",
+      "rationale": "Enacts only the explicit VIRA public/full disclosure plan frozen by R0.8 against the exact R1.1 Birth revision.",
+      "source": "R0.8 projectMappings:vira"
+    },
+    {
+      "governanceRecordId": "rec_5bc3c1113cfe4c14b79aaa63f2515d79",
+      "kind": "governance.disclosure",
+      "targetRecordId": "rec_724d518ee338e32eb06e79077ad01f3d",
+      "basisRevisionId": "rev_sha256_4c17ee90cffb5931cb7431645811095d4474ea0726bc3eb92ee19bb209155526",
+      "visibility": {"record":"public","source":"public","evidence":"public"},
+      "disclosure": "full",
+      "rationale": "Enacts only the explicit XS Wallet public/full disclosure plan frozen by R0.8 against the exact R1.1 Birth revision.",
+      "source": "R0.8 projectMappings:xs-wallet"
+    },
+    {
+      "governanceRecordId": "rec_d69c49de2cd2457094a71f03fa189a52",
+      "kind": "governance.disclosure",
+      "targetRecordId": "rec_c5a75fd5ecae0565aaa0c96f0ad53227",
+      "basisRevisionId": "rev_sha256_ee35670f4489f811707e08bed269f8288ba3211b2198f417e3955913dc472c96",
+      "visibility": {"record":"public","source":"private","evidence":"private"},
+      "disclosure": "sanitized",
+      "rationale": "Preserves the R0.8 sanitized public plan for the historical Transactional Support Bot without authorizing private source or evidence disclosure.",
+      "source": "R0.8 projectMappings:transactional-support-bot"
+    },
+    {
+      "governanceRecordId": "rec_2821df1a24244689ab76bb5fb697018b",
+      "kind": "governance.disclosure",
+      "targetRecordId": "rec_499f928363217da10f93cd54aead0101",
+      "basisRevisionId": "rev_sha256_daf8ce80d30913b9a27e01063b2297c4219ff3824201ba2b6b3e49638958d5a0",
+      "visibility": {"record":"public","source":"unknown","evidence":"public"},
+      "disclosure": "full",
+      "rationale": "Enacts only the explicit SNE-OS public/full disclosure plan frozen by R0.8 while preserving unknown source availability.",
+      "source": "R0.8 projectMappings:sne-os"
+    },
+    {
+      "governanceRecordId": "rec_31d32647a6fc43c1b1bc5257aefaf367",
+      "kind": "governance.disclosure",
+      "targetRecordId": "rec_0e6beb6a5f17831616af328fe8f2afb2",
+      "basisRevisionId": "rev_sha256_907c47166386b03ef538d1a6b6c2d5f31c30dd50066d16726b16df54662b6b9c",
+      "visibility": {"record":"public","source":"unknown","evidence":"unknown"},
+      "disclosure": "sanitized",
+      "rationale": "Preserves the R0.8 sanitized Foundry Pay plan without inventing a disclosure-safe public content representation.",
+      "source": "R0.8 supportingSystemMappings:foundry-pay"
+    },
+    {
+      "governanceRecordId": "rec_3a926254f23e4a0c89102c3fbfe636d6",
+      "kind": "governance.maturity",
+      "targetRecordId": "rec_724d518ee338e32eb06e79077ad01f3d",
+      "basisRevisionId": "rev_sha256_4c17ee90cffb5931cb7431645811095d4474ea0726bc3eb92ee19bb209155526",
+      "stage": "pre-beta",
+      "rationale": "Enacts the explicit XS Wallet pre-beta maturity plan from R0.8 without treating maturity as operational evidence.",
+      "source": "R0.8 projectMappings:xs-wallet"
+    }
+  ],
+  "surfaceAdmission": {
+    "languages": ["en", "pt-BR"],
+    "surfaces": ["home", "systems", "archive", "research", "essays", "notes"],
+    "rankingInferenceAllowed": false,
+    "chronologyInferenceAllowed": false,
+    "surfacePathInferenceAllowed": false
+  },
+  "currentState": {
+    "routedSystemRecords": 5,
+    "publicProjectionCount": 10,
+    "editorialDocumentCount": 6,
+    "sanitizedDocumentOmissions": 4,
+    "coreSurfaceCount": 12,
+    "systemsPerLanguage": 3,
+    "frameworkCutoverEnacted": false,
+    "staticHtmlRenderingEnacted": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "governanceRecordsMaterialized": true,
+    "governanceExactRevisionBindingRequired": true,
+    "surfaceRuntimeMaterialized": true,
+    "surfacesConsumeDocumentsOnly": true,
+    "crossLanguageMixingForbidden": true,
+    "sanitizedContentLeakCount": 0,
+    "currentPublicProjectionCount": 10,
+    "currentEditorialDocumentCount": 6,
+    "coreSurfaceCount": 12,
+    "r1_6Complete": false
+  }
+}

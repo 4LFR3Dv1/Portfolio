@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "editorial-core-surfaces-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.6-2026-08-30",
+  "materialization": {
+    "commit": "fba289bec802518e3af2f6520ad8a5cb39708db4",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33346924011,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/core-editorial-surfaces.v0.json",
+    "manifestBlobSha": "9924202c22191aa92c1dad9598073950aa860e5a"
+  },
+  "effectiveCoreSurfaces": {
+    "governanceRecordBirths": 6,
+    "disclosureRecordBirths": 5,
+    "maturityRecordBirths": 1,
+    "routedSystemRecords": 5,
+    "publicProjectionCount": 10,
+    "editorialDocumentCount": 6,
+    "sanitizedDocumentOmissions": 4,
+    "sanitizedContentLeakCount": 0,
+    "coreSurfaceCount": 12,
+    "systemsPerLanguage": 3,
+    "researchItemsPerLanguage": 0,
+    "essayItemsPerLanguage": 0,
+    "noteItemsPerLanguage": 0,
+    "rankingInferenceAllowed": false,
+    "chronologyInferenceAllowed": false,
+    "crossLanguageFallbackAllowed": false,
+    "staticHtmlRenderingEnacted": false,
+    "frameworkCutoverEnacted": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1_5Complete": true,
+    "r1_6Complete": true,
+    "governanceExactRevisionBindingRequired": true,
+    "surfaceRuntimeMaterialized": true,
+    "surfacesConsumeDocumentsOnly": true,
+    "sanitizedContentLeakCount": 0,
+    "currentPublicProjectionCount": 10,
+    "currentEditorialDocumentCount": 6,
+    "coreSurfaceCount": 12,
+    "nextRequiredCut": "R1.7 — Distribution Foundation"
+  }
+}
