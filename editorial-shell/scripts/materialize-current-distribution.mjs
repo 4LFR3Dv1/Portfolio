@@ -1,4 +1,5 @@
 /* global URL, console */
+import { Buffer } from 'node:buffer';
 import { createHash } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
