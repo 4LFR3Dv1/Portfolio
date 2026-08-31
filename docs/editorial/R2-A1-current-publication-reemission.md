@@ -1,6 +1,6 @@
 # R2-A1 — Current Publication Re-emission & Physical Revalidation
 
-Status: **IN PROGRESS / A1.0 MATERIALIZED**
+Status: **IN PROGRESS / A1.0 ACCEPTED**
 
 Parent semantic authority:
 
@@ -63,12 +63,24 @@ The following remain useful historical implementations or evidence, but none may
 
 They may be reused as implementation substrate only where R2-A1 proves that the resulting bytes bind to the A2.8 digest.
 
+## R2-A1.0 accepted boundary
+
+The A1.0 candidate `8b98b32d2016822c56201fcb21cc3376e2ec7c0c` passed:
+
+```text
+Verify #347                    SUCCESS
+Editorial Shell Build #182     SUCCESS
+Cutover Readiness #113         SUCCESS
+```
+
+The accepted boundary fixes the A2.8 publication digest as physical source identity, preserves historical R2.6/R2.7 only as evidence, forbids semantic mutation inside R2-A1 and keeps production excluded.
+
 ## Program
 
 | Cut | Purpose | Status |
 | --- | --- | --- |
-| R2-A1.0 | Physical Re-emission Constitution | **MATERIALIZED / AWAITING CI** |
-| R2-A1.1 | Current Renderer Input Re-emission | **NOT STARTED** |
+| R2-A1.0 | Physical Re-emission Constitution | **COMPLETE** |
+| R2-A1.1 | Current Renderer Input Re-emission | **NEXT** |
 | R2-A1.2 | Current Distribution Emission | **NOT STARTED** |
 | R2-A1.3 | Compatibility + Static Runtime Recommissioning | **NOT STARTED** |
 | R2-A1.4 | Isolated Current Preview Deployment | **NOT STARTED** |
@@ -92,7 +104,7 @@ Read-only observation of production is permitted only when a later R2-A1 readine
 ## Immediate state
 
 ```text
-R2_A1_0_COMPLETE=false
+R2_A1_0_COMPLETE=true
 R2_A1_COMPLETE=false
 CURRENT_PUBLICATION_VALID=true
 CURRENT_PHYSICAL_PUBLICATION_VALID=false
@@ -105,5 +117,5 @@ CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
 CUTOVER_ENACTED=false
 PRODUCTION_MUTATION_COUNT=0
-NEXT=R2-A1.0 CI acceptance
+NEXT=R2-A1.1 — Current Renderer Input Re-emission
 ```
