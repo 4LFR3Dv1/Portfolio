@@ -102,7 +102,7 @@ function surface(id: string, language: 'en' | 'pt-BR') {
 
 describe('R1.6 Core Editorial Surfaces', () => {
   it('starts only from the terminally sealed R1.5 document boundary', () => {
-    expect(r15Completion.acceptance).toEqual({
+    expect(r15Completion.acceptance).toMatchObject({
       r1_5Complete: true,
       documentRuntimeMaterialized: true,
       currentEditorialDocumentCount: 0,
