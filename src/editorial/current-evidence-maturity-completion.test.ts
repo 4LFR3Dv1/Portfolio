@@ -137,7 +137,7 @@ describe('R1-A2.4 corrected completion seal', () => {
     });
   });
 
-  it('preserves A2.4 historical frontier after the current program advances through A2.5', () => {
+  it('keeps A2.4 completion authoritative only for A2.4 after later cuts advance', () => {
     expect(completion.acceptance).toMatchObject({
       existingMaturityGovernanceIdentityPreserved: true,
       maturityIdentityReplacementCount: 0,
@@ -148,8 +148,6 @@ describe('R1-A2.4 corrected completion seal', () => {
     });
 
     expect(constitution.program.find((entry) => entry.cut === 'R1-A2.4')?.status).toBe('complete');
-    expect(constitution.program.find((entry) => entry.cut === 'R1-A2.5')?.status).toBe('complete');
-    expect(constitution.program.find((entry) => entry.cut === 'R1-A2.6')?.status).toBe('next');
     expect(constitution.currentState).toMatchObject({
       evidenceMaturityReconciliationComplete: true,
       evidenceMaturityCorrectionActive: false,
@@ -161,21 +159,14 @@ describe('R1-A2.4 corrected completion seal', () => {
       currentMaturityGovernanceSuccessorCount: 1,
       maturityIdentityReplacementCount: 0,
       staleMaturityInheritanceCount: 0,
-      currentDisclosureReauthorizationComplete: true,
-      currentDisclosureClassifiedCount: 27,
       currentPublicationValid: false,
       cutoverReady: false,
     });
     expect(constitution.acceptance).toMatchObject({
       r1_a2_4Complete: true,
-      r1_a2_5Complete: true,
       r1_a2Complete: false,
-      nextRequiredCut: 'R1-A2.6 — Current Route Admission',
     });
     expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=true');
-    expect(r1A2Doc).toContain('R1_A2_5_COMPLETE=true');
-    expect(r1A2Doc).toContain('NEXT=R1-A2.6 — Current Route Admission');
     expect(r1Readme).toContain('NEXT=R2 — Editorial Publication Shell & Cutover');
-    expect(r1Readme).toContain('NEXT=R1-A2.6 — Current Route Admission');
   });
 });
