@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import currentSurfaceManifestJson from '../../docs/editorial/R1-A2.7-current-editorial-surfaces.v0.json';
+import currentSurfaceCompletionJson from '../../docs/editorial/R1-A2.7-completion.v0.json';
 import { CURRENT_SURFACE_SELECTION } from './current-surface-candidates';
 import {
   materializeCurrentEditorialSurfaces,
@@ -9,6 +10,13 @@ import { materializeCurrentSystemRevisions } from './current-revision-runtime';
 import { materializeCurrentEvidenceMaturity } from './current-evidence-maturity-runtime';
 
 const manifest = currentSurfaceManifestJson as CurrentEditorialSurfaceManifest;
+const completion = currentSurfaceCompletionJson as {
+  status: string;
+  candidateWitness: Record<string, string | number>;
+  materialization: Record<string, string | number | boolean>;
+  productionBoundary: Record<string, string | number | boolean>;
+  acceptance: Record<string, string | number | boolean>;
+};
 const materialized = materializeCurrentEditorialSurfaces();
 const revisions = materializeCurrentSystemRevisions();
 const maturity = materializeCurrentEvidenceMaturity();
@@ -135,8 +143,8 @@ describe('R1-A2.7 current editorial surface reconstruction', () => {
     expect(enSystems.filter((item) => item.maturity.state === 'unclassified')).toHaveLength(19);
   });
 
-  it('materializes exactly twelve current semantic surfaces while production remains untouched awaiting CI', () => {
-    expect(manifest.status).toBe('materialized-awaiting-ci');
+  it('seals exactly twelve current semantic surfaces while production remains untouched', () => {
+    expect(manifest.status).toBe('complete');
     expect(materialized.surfaces).toHaveLength(12);
     expect(new Set(materialized.surfaces.map((entry) => entry.path)).size).toBe(12);
     expect(manifest.selection).toMatchObject({
@@ -175,9 +183,36 @@ describe('R1-A2.7 current editorial surface reconstruction', () => {
       surfaceRouteIdentityMutationCount: 0,
       deployedPublicSurfaceMutationCount: 0,
       productionMutationCount: 0,
-      r1_a2_7Complete: false,
+      r1_a2_7Complete: true,
       currentPublicationValid: false,
       cutoverReady: false,
+      nextRequiredAction: 'R1-A2.8 — Current Publication Acceptance',
+    });
+    expect(completion.status).toBe('complete');
+    expect(completion.candidateWitness).toMatchObject({
+      branchHead: 'd764c401e2d624f67f3eb5ef955781c591670e2b',
+      verifyRunNumber: 325,
+      verifyConclusion: 'success',
+      editorialShellBuildRunNumber: 160,
+      editorialShellBuildConclusion: 'success',
+      cutoverReadinessRunNumber: 91,
+      cutoverReadinessConclusion: 'success',
+    });
+    expect(completion.productionBoundary).toMatchObject({
+      publicRuntimeChanged: false,
+      productionDnsChanged: false,
+      railwayTargetChanged: false,
+      vercelConfigurationChanged: false,
+      deployedPublicSurfaceMutationCount: 0,
+      productionMutationCount: 0,
+    });
+    expect(completion.acceptance).toMatchObject({
+      r1_a2_7Complete: true,
+      currentPublicationValid: false,
+      cutoverReady: false,
+      cutoverAuthorized: false,
+      cutoverEnacted: false,
+      nextRequiredCut: 'R1-A2.8 — Current Publication Acceptance',
     });
   });
 });
