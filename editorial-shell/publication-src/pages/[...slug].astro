@@ -12,39 +12,36 @@ export function getStaticPaths() {
 interface Props { publication: EditorialPublication; }
 const { publication } = Astro.props as Props;
 const copy = publication.copy.pt;
+const title = publication.title.pt;
 const canonicalUrl = new URL(`/editorial/${publication.slug}/`, Astro.site).toString();
 const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`;
 ---
 <PublicationLayout
-  title={`${publication.title} — Renan Melo`}
-  description={copy.summary}
+  title={`${title} — Renan Melo`}
+  description={copy.dek}
   canonicalUrl={canonicalUrl}
   kind={publication.kind}
-  updatedAt={publication.updatedAt}
+  updatedAt={publication.dateLabel.pt}
 >
   <p class="kicker">{publication.kind} // EDITORIAL</p>
-  <h1>{publication.title}</h1>
-  <p class="dek">{copy.summary}</p>
+  <h1>{title}</h1>
+  <p class="dek">{copy.dek}</p>
   <div class="meta-row">
     <span>RENAN MELO</span>
-    <span>{publication.updatedAt}</span>
-    <span>{publication.tags.join(' · ')}</span>
+    <span>{publication.dateLabel.pt}</span>
+    <span>{publication.readTime.pt}</span>
   </div>
 
   <div class="article-grid">
     <article>
-      <h2>O que é</h2>
-      <p>{copy.summary}</p>
-      {copy.thesis && (
-        <>
-          <h2>Tese</h2>
-          <p>{copy.thesis}</p>
-        </>
-      )}
-      <h2>Estado editorial</h2>
-      <p>Esta página é uma representação pública e compartilhável do sistema ou linha de pesquisa atual. O conteúdo pode evoluir sem perder este locator público.</p>
+      {copy.sections.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </section>
+      ))}
       <div class="tags">
-        {publication.tags.map((tag) => <span class="tag">{tag}</span>)}
+        {publication.topics.pt.map((topic) => <span class="tag">{topic}</span>)}
       </div>
     </article>
 
