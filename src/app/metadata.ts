@@ -26,19 +26,19 @@ export function metadataForRoute(route: PortfolioRoute, language: Language): Por
     return {
       title: language === 'en' ? 'Architecture — Renan Melo' : 'Arquitetura — Renan Melo',
       description: language === 'en'
-        ? 'Explore system architecture across governed settlement, agent operations, real-time products, transactional workflows and verifiable evidence.'
-        : 'Explore arquiteturas de settlement governado, operação agêntica, produtos em tempo real, fluxos transacionais e evidência verificável.',
+        ? 'A closer look at how product, services, software execution and infrastructure connect across Renan Melo’s work.'
+        : 'Uma visão mais próxima de como produto, serviços, execução de software e infraestrutura se conectam no trabalho de Renan Melo.',
       canonicalUrl: `${SITE_URL}/architecture`,
     };
   }
 
   return {
     title: language === 'en'
-      ? 'Renan Melo — Computing Systems Engineer'
-      : 'Renan Melo — Engenheiro de Sistemas Computacionais',
+      ? 'Renan Melo — Software, Product & Computing'
+      : 'Renan Melo — Software, Produto e Computação',
     description: language === 'en'
-      ? 'Computing systems, agent-native runtimes, bare-metal research and applied infrastructure by Renan Melo.'
-      : 'Sistemas computacionais, runtimes agent-native, pesquisa bare-metal e infraestrutura aplicada por Renan Melo.',
+      ? 'Software, products and experiments by Renan Melo, plus essays on technology, computing and the questions that appear while building.'
+      : 'Software, produtos e experimentos de Renan Melo, além de ensaios sobre tecnologia, computação e as perguntas que aparecem enquanto constrói.',
     canonicalUrl: `${SITE_URL}/`,
   };
 }
