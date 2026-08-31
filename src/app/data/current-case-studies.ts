@@ -41,8 +41,8 @@ export const currentCaseStudies: PortfolioProject[] = [
     visibility: 'case-study',
     links: [
       {
-        label: local('PUBLIC RESEARCH', 'PESQUISA PÚBLICA'),
-        url: 'https://github.com/SNE-Labs/Genesis-CP',
+        label: local('OPEN GENESIS', 'ABRIR GENESIS'),
+        url: 'https://genesis.snelabs.space/#genesis',
       },
     ],
     caseStudy: {
@@ -91,8 +91,8 @@ export const currentCaseStudies: PortfolioProject[] = [
       guarantees: ['OBSERVE BEFORE ACT', 'EXPLICIT ACTIONS', 'RECOVERABLE SESSION', 'NO BLIND RETRY'],
       evidence: [
         {
-          label: local('Open Genesis public research', 'Abrir pesquisa pública de Genesis'),
-          url: 'https://github.com/SNE-Labs/Genesis-CP',
+          label: local('Open Genesis', 'Abrir Genesis'),
+          url: 'https://genesis.snelabs.space/#genesis',
         },
       ],
       learnings: {
