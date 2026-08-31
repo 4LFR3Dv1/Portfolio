@@ -24,8 +24,8 @@ R1 materializes the editorial world already defined by R0 and grounded across th
 | R1.4 | Language Runtime | **COMPLETE** |
 | R1.5 | Editorial Document Runtime | **COMPLETE** |
 | R1.6 | Core Editorial Surfaces | **COMPLETE** |
-| R1.7 | Distribution Foundation | **NEXT** |
-| R1.8 | Legacy Compatibility | NOT STARTED |
+| R1.7 | Distribution Foundation | **COMPLETE** |
+| R1.8 | Legacy Compatibility | **NEXT** |
 | R1.9 | Foundation Acceptance | NOT STARTED |
 
 ## Execution boundary
@@ -60,6 +60,8 @@ R1.5 materialized the renderer-neutral Editorial Document DTO boundary. Document
 
 R1.6 admitted only the explicit R0.8 governance required for the five still-valid routed Systems, bound each decision to the exact R1.1 target revision, and materialized deterministic renderer-neutral Home, Systems, Archive, Research, Essays and Notes surfaces in EN and PT-BR. Ten routed language pairs now produce ten public projections, but only the six full-disclosure VIRA / XS Wallet / SNE-OS documents reach semantic surfaces; the four sanitized Transactional Support Bot / Foundry Pay realizations remain omitted until a separate disclosure-safe authority exists. Surface materialization still does not cut the deployed React/Vite runtime over to Astro.
 
+R1.7 derives canonical metadata, hreflang clusters, a future editorial sitemap, language-specific RSS envelopes, semantic search entries and one deterministic structured distribution bundle from the exact same authorized R1.6 surfaces and R1.5 documents. It keeps the existing deployed sitemap and React/Vite runtime untouched, refuses to infer freshness, priority, chronology or x-default, and indexes neither unprojected Records nor sanitized document omissions.
+
 ```text
 R1_0_COMPLETE=true
 R1_1_COMPLETE=true
@@ -68,5 +70,6 @@ R1_3_COMPLETE=true
 R1_4_COMPLETE=true
 R1_5_COMPLETE=true
 R1_6_COMPLETE=true
-NEXT=R1.7 — Distribution Foundation
+R1_7_COMPLETE=true
+NEXT=R1.8 — Legacy Compatibility
 ```
