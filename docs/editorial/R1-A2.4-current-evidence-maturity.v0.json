@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-current-evidence-maturity/v0",
   "contractId": "PORTFOLIO-R1-A2.4-2026-08-31",
-  "status": "complete",
+  "status": "materialized-awaiting-ci",
   "normative": true,
   "baseline": "1ad7886793f67531f060976b640e535f5390bfc4",
   "preconditions": {
@@ -27,6 +27,7 @@
     "maturityImpliesDisclosure": false,
     "observationImpliesDisclosure": false,
     "historicalGovernanceSilentInheritance": false,
+    "existingMaturityGovernanceIdentityMustContinue": true,
     "formalEvidenceBindingToSystemMinted": false,
     "privateEvidencePublicByDefault": false
   },
@@ -49,12 +50,14 @@
     },
     "formalEvidenceRecordBirthCount": 0,
     "formalEvidenceBindingBirthCount": 0,
-    "maturityGovernanceBirthCount": 8
+    "maturityGovernanceBirthCount": 7,
+    "maturityGovernanceSuccessorCount": 1
   },
   "acceptance": {
     "allCurrentSuccessorsReconciled": true,
     "allObservationSourcesTemporallyBound": true,
     "staleMaturityInheritanceCount": 0,
+    "maturityIdentityReplacementCount": 0,
     "maturityConflictCount": 0,
     "maturityClassifiedCount": 8,
     "maturityUnclassifiedCount": 19,
@@ -62,7 +65,7 @@
     "routeMutationCount": 0,
     "publicSurfaceMutationCount": 0,
     "productionMutationCount": 0,
-    "r1_a2_4Complete": true,
-    "nextRequiredAction": "R1-A2.5 — Public Disclosure Reauthorization"
+    "r1_a2_4Complete": false,
+    "nextRequiredAction": "CI must witness seven new maturity births plus the generation-1 successor of the existing XS Wallet maturity governance Record"
   }
 }
