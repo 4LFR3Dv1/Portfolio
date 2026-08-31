@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "editorial-publication-shell-boundary-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R2.0-2026-08-30",
+  "materialization": {
+    "commit": "64f617adc9e3de6ec98ead7dc1d814f9ba1d6934",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33350672725,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/publication-shell-boundary.v0.json",
+    "manifestBlobSha": "6be4d50585de0fe3b62619ee6333ff9a31c5caad"
+  },
+  "effectivePlan": {
+    "framework": "astro-static",
+    "canonicalStaticPageCount": 18,
+    "legacyPreservedPageCount": 4,
+    "compatibilityRedirectCount": 4,
+    "distributionArtifactCount": 4,
+    "rssArtifactCount": 2,
+    "unknownRouteOutcome": "404",
+    "rendererAuthority": "consumer-only",
+    "astroDependencyMaterialized": false,
+    "astroBuildEnacted": false,
+    "staticHtmlRenderingEnacted": false,
+    "compatibilityRedirectsEnacted": false,
+    "legacyFallbackRendererEnacted": false,
+    "editorialSitemapDeployed": false,
+    "vercelCutoverEnacted": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "shellBoundaryReady": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "deploymentMutationCount": 0,
+    "nextRequiredCut": "R2.1 — Astro Shell Materialization & Editorial Renderer"
+  }
+}
