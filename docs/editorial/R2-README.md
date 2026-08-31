@@ -1,6 +1,6 @@
 # R2 — Editorial Publication Shell & Cutover
 
-Status: **IN PROGRESS / CUTOVER ELIGIBILITY REVOKED BY R1-A2**
+Status: **IN PROGRESS / CURRENT PUBLICATION VALID — PHYSICAL RE-EMISSION REQUIRED**
 
 Effective preconditions:
 
@@ -9,129 +9,168 @@ R0_EFFECTIVE_COMPLETE=true
 R1_PRE_COMPLETE=true
 R1_COMPLETE=true
 FOUNDATION_READY=true
-CURRENT_PUBLICATION_VALID=false
+R1_A2_COMPLETE=true
+CURRENT_PUBLICATION_VALID=true
+CURRENT_PUBLICATION_DIGEST=sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
 ```
 
-R2 turns the accepted editorial foundation into a physical publication runtime without allowing presentation, framework or deployment convenience to become semantic authority.
+R2 turns accepted editorial state into a physical publication runtime without allowing presentation, framework or deployment convenience to become semantic authority.
 
 ## Program
 
 | Cut | Purpose | Status |
 | --- | --- | --- |
-| R2.0 | Publication Shell Boundary | **COMPLETE** |
-| R2.1 | Astro Shell Materialization & Editorial Renderer | **COMPLETE** |
-| R2.2 | Distribution Emission | **COMPLETE** |
-| R2.3 | Legacy Preservation Runtime | **COMPLETE** |
-| R2.4 | Compatibility Redirect Adapter | **COMPLETE** |
-| R2.5 | Static Runtime Commissioning | **COMPLETE** |
-| R2.6 | Shadow / Preview Deployment | **COMPLETE** |
+| R2.0 | Publication Shell Boundary | **COMPLETE / HISTORICAL SPECIMEN** |
+| R2.1 | Astro Shell Materialization & Editorial Renderer | **COMPLETE / HISTORICAL SPECIMEN** |
+| R2.2 | Distribution Emission | **COMPLETE / HISTORICAL SPECIMEN** |
+| R2.3 | Legacy Preservation Runtime | **COMPLETE / HISTORICAL SPECIMEN** |
+| R2.4 | Compatibility Redirect Adapter | **COMPLETE / HISTORICAL SPECIMEN** |
+| R2.5 | Static Runtime Commissioning | **COMPLETE / HISTORICAL SPECIMEN** |
+| R2.6 | Shadow / Preview Deployment | **COMPLETE / HISTORICAL TRANSPORT WITNESS** |
 | R2.7 | Cutover Readiness | **COMPLETE / HISTORICAL INFRASTRUCTURE WITNESS** |
-| R2.8 | Public Cutover | **BLOCKED BY R1-A2 CURRENT PUBLICATION RECONCILIATION** |
+| R2-A1 | Current Publication Re-emission & Physical Revalidation | **NEXT** |
+| R2.8 | Public Cutover | **BLOCKED PENDING R2-A1** |
 | R2.9 | Physical Acceptance | **NOT STARTED** |
 
-R2.6 remains complete for the exact preview specimen it witnessed. R1-A2 changes that specimen's **current publication eligibility**, not the historical completion state of the R2.6 environmental-invariance experiment.
+R2.0–R2.7 remain historically complete for the exact semantic specimen they materialized and witnessed. R1-A2 does not falsify those physical results; it establishes a **new accepted semantic specimen** whose physical publication chain has not yet been emitted or witnessed.
 
-## Authority boundary
+## Historical authority boundary
 
 ```text
-accepted R1 state
+historical accepted R1 state
       ↓
-Publication Shell Plan
+R2.0–R2.5 publication shell + static runtime
       ↓
-bounded renderer input
+R2.6 isolated Railway HTTPS preview
       ↓
-Astro static renderer
+R2.6 transport invariance witness
       ↓
-HTML + emitted distribution artifacts
-      +
-bounded historical compatibility pages
-      +
-bounded redirect handshake state
+R2.7 infrastructure readiness witness
       ↓
-commissioned local HTTP runtime
-      ↓
-isolated preview binding
-      ↓
-public HTTPS hosting transport
-      ↓
-external environmental witness
-      ↓
-accepted R2.6 target
-      +
-read-only current production observation
-      ↓
-historical R2.7 infrastructure readiness
-      +
-later publication-validity contradiction
+human semantic contradiction
       ↓
 R1-A2 current corpus reconciliation
 ```
 
 The renderer, commissioned server, preview binding and hosting layer are consumers. They cannot mint Records, rewrite Evidence, change disclosure, infer translations, invent routes or reinterpret legacy identities.
 
-R2.0 froze the renderer-facing shell boundary. R2.1 physically materialized an isolated Astro 7.2.9 shell with a committed dependency lock and a prebuild adapter that passes only bounded public DTOs into Astro. R2.2 physically emits canonical/robots/hreflang metadata for all 18 canonical pages plus the accepted sitemap, two empty language RSS feeds and the six-entry semantic search index. R2.3 physically preserves the four R1.8 historical exceptions from the exact frozen R0.0 source blobs, keeps their shared-path EN/PT client-state behavior and quarantines them from canonical distribution. R2.4 physically witnesses all eight language-specific successors through a bounded HTTP 302 adapter, with client-side `portfolio-language` handshakes and fail-closed 503 behavior if a successor stops being distributed. R2.5 composes canonical pages, historical pages, handshakes, redirect behavior, distribution artifacts, two physical static assets and the 404 into one locally commissioned HTTP runtime. R2.6 deploys that semantic runtime through a bounded `0.0.0.0:$PORT` adapter to an isolated Railway HTTPS origin and physically compares the public environment against a fresh local R2.5 runtime from a GitHub-hosted external observer. R2.7 then re-proves that accepted target, captures the exact incumbent production CNAME/A/NS/SOA and HTTP fingerprints read-only, preserves the existing Vercel runtime as rollback and proves that the exact R2.6 specimen was technically cutover-ready.
+## Post-R1-A2 accepted state
 
-## Post-R2.7 publication-validity reopening
+R1-A2 reconstructed the connected corpus, preserved all existing System identities, admitted 27 exact current System successors, rebuilt evidence/maturity governance, reauthorized disclosure, admitted 54 current bilingual route-language pairs, reconstructed 54 semantic EditorialDocuments and rebuilt the 12 current renderer-neutral core surfaces.
 
-Direct human inspection of the accepted R2.6 preview exposed a semantic contradiction that the transport/infrastructure campaign was not designed to detect: the renderer was faithfully serving stale R0.8-era public selection and generation-zero placeholder summaries. The repository already contains 28 born System Records, but R1.3 routes only five historical migration targets, leaves 23 born Systems unrouted, and R1.6 reuses the R0.8 disclosure plan such that only three full-disclosure Systems reach semantic surfaces.
-
-This new evidence does not make the R2.6 or R2.7 physical witnesses false. It changes the eligibility of their specimen:
+A2.8 then reconstructed the entire current semantic chain as one deterministic specimen and froze its identity as:
 
 ```text
-R2_6_TRANSPORT_INVARIANCE=true
-R2_7_HISTORICAL_INFRASTRUCTURE_READINESS=true
-CURRENT_PUBLICATION_VALID=false
-CUTOVER_READY=false
+CURRENT_PUBLICATION_DIGEST=
+sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
 ```
 
-`docs/editorial/R2.7-completion.v0.json` remains immutable historical evidence for the specimen it accepted. R1-A2 supersedes only the current decision to publish that specimen.
+The A2.8 candidate passed:
+
+```text
+Verify #335                    SUCCESS
+Editorial Shell Build #170     SUCCESS
+Cutover Readiness #101         SUCCESS
+64 test files / 424 tests      PASS
+```
+
+This changes the decision state from:
+
+```text
+CURRENT_PUBLICATION_VALID=false
+```
+
+to:
+
+```text
+CURRENT_PUBLICATION_VALID=true
+```
+
+It does **not** restore `CUTOVER_READY=true`, because the R2.6 and R2.7 witnesses were produced for the older specimen. They cannot be inherited onto the new digest by semantic equivalence, branch ancestry or historical success.
+
+Therefore:
+
+```text
+historical R2.6 preview witness
+        !=
+physical witness of current accepted digest
+
+historical R2.7 readiness
+        !=
+cutover readiness of current accepted digest
+```
+
+## R2-A1 required boundary
+
+R2-A1 must bind physical publication to the exact A2.8 digest and then re-prove the transport chain without touching production until a later explicit cutover authorization.
+
+At minimum the new chain must establish:
+
+```text
+accepted A2.8 publication digest
+        ↓
+current renderer input re-emission
+        ↓
+current static distribution emission
+        ↓
+current compatibility reconciliation
+        ↓
+local static runtime commissioning
+        ↓
+isolated public preview deployment
+        ↓
+external TLS / Internet / hosting invariance witness
+        ↓
+current cutover-readiness reevaluation
+```
+
+No R2-A1 step may silently substitute the historical 18-page / six-search-entry distribution for the newly accepted 54 current semantic documents and current surfaces.
 
 ## Deployment rule
 
-R2 separates physical readiness from activation:
+R2 continues to separate semantic validity, physical readiness and activation:
 
 ```text
-shell materialized
+current publication valid
       !=
-distribution emitted in build
+current distribution emitted
       !=
-legacy compatibility rendered in build
+current runtime commissioned
       !=
-redirect adapter materialized and witnessed
+current preview deployed
       !=
-redirect adapter activated in production
+current preview externally witnessed
       !=
-static runtime commissioned locally
-      !=
-preview adapter materialized
-      !=
-preview publicly deployed and witnessed
-      !=
-infrastructure cutover readiness
-      !=
-current publication validity
+current cutover ready
       !=
 cutover authorized
       !=
 cutover enacted
 ```
 
-The current React/Vite Vercel deploy remains authoritative. No R2.8 action is authorized while R1-A2 is incomplete or `CURRENT_PUBLICATION_VALID=false`.
+The incumbent React/Vite Vercel deployment remains authoritative. R1-A2 and A2.8 changed no production DNS, Railway target, Vercel configuration or deployed public runtime.
 
 ```text
-R2_0_COMPLETE=true
-R2_1_COMPLETE=true
-R2_2_COMPLETE=true
-R2_3_COMPLETE=true
-R2_4_COMPLETE=true
-R2_5_COMPLETE=true
+R2_0_HISTORICAL_COMPLETE=true
+R2_1_HISTORICAL_COMPLETE=true
+R2_2_HISTORICAL_COMPLETE=true
+R2_3_HISTORICAL_COMPLETE=true
+R2_4_HISTORICAL_COMPLETE=true
+R2_5_HISTORICAL_COMPLETE=true
 R2_6_HISTORICAL_COMPLETE=true
 R2_7_HISTORICAL_COMPLETE=true
-CURRENT_PUBLICATION_VALID=false
+R1_A2_COMPLETE=true
+CURRENT_PUBLICATION_VALID=true
+CURRENT_PUBLICATION_DIGEST=sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
+CURRENT_SPECIMEN_REEMITTED=false
+CURRENT_STATIC_RUNTIME_RECOMMISSIONED=false
+CURRENT_PREVIEW_REDEPLOYED=false
+CURRENT_PREVIEW_EXTERNALLY_WITNESSED=false
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
 CUTOVER_ENACTED=false
-NEXT=R1-A2 — Current Corpus Reconciliation
+PRODUCTION_MUTATION_COUNT=0
+NEXT=R2-A1 — Current Publication Re-emission & Physical Revalidation
 ```
