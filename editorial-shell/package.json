@@ -10,7 +10,9 @@
     "materialize": "node scripts/materialize-input.mjs",
     "dev": "npm run materialize && astro dev",
     "build": "npm run materialize && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "commission": "node runtime/commissioned-runtime.mjs",
+    "verify:commissioned": "node scripts/verify-commissioned-runtime.mjs"
   },
   "dependencies": {
     "astro": "7.2.9",
