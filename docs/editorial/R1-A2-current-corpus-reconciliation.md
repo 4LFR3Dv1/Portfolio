@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / CURRENT CENSUS COMPLETE**
+Status: **IN PROGRESS / IDENTITIES RECONCILED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -45,8 +45,8 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | --- | --- | --- |
 | R1-A2.0 | Reconciliation Constitution + Cutover Eligibility Revocation | **MATERIALIZED** |
 | R1-A2.1 | Current GitHub Census + HEAD Observation | **COMPLETE** |
-| R1-A2.2 | Existing Identity Reconciliation | **NEXT** |
-| R1-A2.3 | Current Revision Materialization | **NOT STARTED** |
+| R1-A2.2 | Existing Identity Reconciliation | **COMPLETE** |
+| R1-A2.3 | Current Revision Materialization | **NEXT** |
 | R1-A2.4 | Evidence + Maturity Reconciliation | **NOT STARTED** |
 | R1-A2.5 | Public Disclosure Reauthorization | **NOT STARTED** |
 | R1-A2.6 | Current Route Admission | **NOT STARTED** |
@@ -57,7 +57,37 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 
 The connected GitHub installation was re-enumerated rather than inferred from the R1-PRE file. The inventory still contains 54 repositories: 39 under `4LFR3Dv1` and 15 under `SNE-Labs`. Every default branch ref was queried directly. Fifty-two repositories have a material HEAD; `4LFR3Dv1/SNE-RADAR-v1.0` and `4LFR3Dv1/factory-control` are explicitly empty.
 
-The frozen observation is `docs/editorial/R1-A2.1-current-github-census.v0.json`. It records repository, visibility, default branch and exact observed HEAD. Inventory equality with R1-PRE is not treated as semantic equality; R1-A2.2 must now reconcile those observed repository realizations against existing Record identities.
+The frozen observation is `docs/editorial/R1-A2.1-current-github-census.v0.json`. It records repository, visibility, default branch and exact observed HEAD. Inventory equality with R1-PRE is not treated as semantic equality.
+
+## R1-A2.2 identity reconciliation
+
+All 28 born System Records were reconciled against the current repository realization set. No RecordId changed and no repository observation automatically minted a new Record.
+
+Key continuity findings include:
+
+- Genesis remains the same substrate-independent institutional web runtime subject.
+- BrineOS remains distinct from the host-level Brine runtime.
+- Lisa remains one System across `lisa-web`, `lisa-app` and `lisa-runtime`.
+- Factory remains external production infrastructure, distinct from Brine, Foundry and every target product.
+- AgentHub remains an independent product rather than a Foundry runtime component.
+- Foundry Channels explicitly remains distinct from Foundry Pay protocol authority and Solana-Agent execution infrastructure.
+- SNE-FDE remains current field authority while Public-Surface remains a historical presentation predecessor.
+- SNE Trading remains an independent tribunal/replay/risk/execution plane rather than a Radar component.
+- XS Wallet / Domini remains one Record with its canonical public name still explicitly unresolved.
+- SNE Vault and SNE Observatorio retain historical Record identities while their cross-system lineage questions remain explicit rather than being silently collapsed.
+- Transactional Support Bot retains its historical Record even though no current repository successor is admitted.
+
+The reconciliation is frozen in `docs/editorial/R1-A2.2-identity-reconciliation.v0.json` and sealed by `docs/editorial/R1-A2.2-completion.v0.json`.
+
+```text
+EXISTING_BIRTH_RECORD_COUNT=28
+RECONCILED_RECORD_COUNT=28
+PRESERVED_RECORD_ID_COUNT=28
+RECORD_ID_CHANGE_COUNT=0
+NEW_RECORD_BIRTH_COUNT=0
+```
+
+R1-A2.2 does not yet create current payload revisions. That belongs to R1-A2.3.
 
 ## Direction of authority
 
@@ -97,9 +127,12 @@ R2_7_HISTORICAL_COMPLETE=true
 
 CURRENT_CORPUS_CENSUS_COMPLETE=true
 CURRENT_REPOSITORY_COUNT=54
-MATERIAL_HEAD_COUNT=52
-EMPTY_REPOSITORY_COUNT=2
+IDENTITY_RECONCILIATION_COMPLETE=true
+RECONCILED_SYSTEM_RECORD_COUNT=28
+RECORD_ID_CHANGE_COUNT=0
+NEW_RECORD_BIRTH_COUNT=0
 
+CURRENT_REVISION_MATERIALIZATION_COMPLETE=false
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
@@ -107,6 +140,7 @@ CUTOVER_ENACTED=false
 
 R1_A2_0_MATERIALIZED=true
 R1_A2_1_COMPLETE=true
+R1_A2_2_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.2 — Existing Identity Reconciliation
+NEXT=R1-A2.3 — Current Revision Materialization
 ```
