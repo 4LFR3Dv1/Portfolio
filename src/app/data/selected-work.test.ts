@@ -20,6 +20,13 @@ describe('selected work curation', () => {
     expect(selectedWork.find((item) => item.id === 'factory')?.caseStudyId).toBe('factory');
   });
 
+  it('links Genesis to its public Genesis surface', () => {
+    const genesis = selectedWork.find((item) => item.id === 'genesis');
+    expect(genesis?.links?.map((link) => link.href)).toEqual([
+      'https://genesis.snelabs.space/#genesis',
+    ]);
+  });
+
   it('publishes Lisa official site and app links', () => {
     const lisa = selectedWork.find((item) => item.id === 'lisa');
     expect(lisa?.links?.map((link) => link.href)).toEqual([
