@@ -1,5 +1,10 @@
 {
+  "buildCommand": "npm run build:composed",
+  "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/((?!.*\\.).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!editorial(?:/|$)|.*\\.).*)",
+      "destination": "/index.html"
+    }
   ]
 }
