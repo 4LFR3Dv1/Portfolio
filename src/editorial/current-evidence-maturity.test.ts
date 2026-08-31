@@ -177,8 +177,8 @@ describe('R1-A2.4 current Evidence + Maturity reconciliation', () => {
     expect(manifest.laws.existingMaturityGovernanceIdentityMustContinue).toBe(true);
   });
 
-  it('keeps corrected A2.4 isolated from disclosure, routes, public surfaces and production until CI reacceptance', () => {
-    expect(manifest.status).toBe('materialized-awaiting-ci');
+  it('accepts corrected A2.4 without changing disclosure, routes, public surfaces or production', () => {
+    expect(manifest.status).toBe('complete');
     expect(manifest.acceptance).toMatchObject({
       allCurrentSuccessorsReconciled: true,
       allObservationSourcesTemporallyBound: true,
@@ -191,8 +191,8 @@ describe('R1-A2.4 current Evidence + Maturity reconciliation', () => {
       routeMutationCount: 0,
       publicSurfaceMutationCount: 0,
       productionMutationCount: 0,
-      r1_a2_4Complete: false,
+      r1_a2_4Complete: true,
+      nextRequiredAction: 'R1-A2.5 — Public Disclosure Reauthorization',
     });
-    expect(manifest.acceptance.nextRequiredAction).toContain('generation-1 successor');
   });
 });
