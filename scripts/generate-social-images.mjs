@@ -171,41 +171,44 @@ function wrap(text, maxChars) {
 function drawGrid(pixels) {
   for (let x = 0; x < WIDTH; x += 48) rect(pixels, x, 0, 1, HEIGHT, COLORS.grid);
   for (let y = 0; y < HEIGHT; y += 48) rect(pixels, 0, y, WIDTH, 1, COLORS.grid);
-  rect(pixels, 0, 0, WIDTH, 8, COLORS.blue);
-  rect(pixels, 72, 72, 42, 42, COLORS.surface);
-  rect(pixels, 72, 72, 42, 2, COLORS.blue);
-  rect(pixels, 72, 112, 42, 2, COLORS.blue);
-  rect(pixels, 72, 72, 2, 42, COLORS.blue);
-  rect(pixels, 112, 72, 2, 42, COLORS.blue);
-  drawText(pixels, 'RM', 80, 84, 3, COLORS.blue);
+  rect(pixels, 0, 0, WIDTH, 6, COLORS.blue);
+  rect(pixels, 72, 70, 42, 42, COLORS.surface);
+  rect(pixels, 72, 70, 42, 2, COLORS.blue);
+  rect(pixels, 72, 110, 42, 2, COLORS.blue);
+  rect(pixels, 72, 70, 2, 42, COLORS.blue);
+  rect(pixels, 112, 70, 2, 42, COLORS.blue);
+  drawText(pixels, 'RM', 80, 82, 3, COLORS.blue);
 }
 
 function titleScale(title) {
   const length = normalizeText(title).length;
-  if (length <= 28) return 9;
-  if (length <= 48) return 7;
-  if (length <= 72) return 6;
-  return 5;
+  if (length <= 26) return 6;
+  if (length <= 48) return 5;
+  return 4;
 }
 
 function drawCard({ label, title, meta, accent = COLORS.purple }) {
   const pixels = makeCanvas();
   drawGrid(pixels);
-  drawText(pixels, label, 144, 82, 3, accent);
 
+  drawText(pixels, label, 144, 82, 3, accent);
+  drawText(pixels, 'OG / 1200X627', 906, 82, 2, COLORS.muted);
+
+  rect(pixels, 72, 170, 4, 236, accent);
   const scale = titleScale(title);
-  const maxChars = Math.max(18, Math.floor(1020 / (scale * 6)));
-  const lines = wrap(title, maxChars).slice(0, 4);
-  const lineHeight = scale * 9;
-  let y = 180;
+  const maxChars = Math.max(24, Math.floor(930 / (scale * 6)));
+  const lines = wrap(title, maxChars).slice(0, 3);
+  const lineHeight = scale * 11;
+  let y = 188;
   for (const line of lines) {
-    drawText(pixels, line, 72, y, scale, COLORS.text);
+    drawText(pixels, line, 104, y, scale, COLORS.text);
     y += lineHeight;
   }
 
-  rect(pixels, 72, 515, 1056, 1, COLORS.grid);
-  drawText(pixels, meta, 72, 548, 3, COLORS.muted);
-  drawText(pixels, 'RENAN.SNELABS.SPACE', 792, 548, 3, COLORS.blue);
+  drawText(pixels, 'RENAN MELO / EDITORIAL', 104, 420, 2, COLORS.muted);
+  rect(pixels, 72, 506, 1056, 1, COLORS.grid);
+  drawText(pixels, meta, 72, 542, 2, COLORS.muted);
+  drawText(pixels, 'RENAN.SNELABS.SPACE', 858, 542, 2, COLORS.blue);
   return pixels;
 }
 
