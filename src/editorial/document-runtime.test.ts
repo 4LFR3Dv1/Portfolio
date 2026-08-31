@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { RecordId, RevisionId } from '../app/data/editorial-record-identity';
+import type { SystemPayload } from '../app/data/editorial-knowledge-ontology';
 import type {
   DisclosureMode,
   DisclosurePayload,
@@ -98,6 +99,7 @@ const vira = records.find((record) => record.subjectKey === 'vira');
 if (!vira) throw new Error('missing-vira');
 const viraEntry = vira.revisions[0];
 const viraRevision = viraEntry.revision;
+const viraPayload = viraEntry.payload as SystemPayload;
 
 function targetForVira(): ProjectionTargetHead {
   return {
@@ -177,9 +179,11 @@ describe('R1.5 Editorial Document Runtime', () => {
     expect(decision.document.language).toBe('en');
     expect(decision.document.content).toEqual({
       type: 'knowledge.system',
-      ...viraEntry.payload,
-      schemaVersion: undefined,
+      name: viraPayload.name,
+      summary: viraPayload.summary,
+      thesis: viraPayload.thesis,
     });
+    expect(decision.document.realization?.digest).toBe(viraRevision.payloadDigest);
   });
 
   it('carries the exact PT-BR realization rather than falling back to EN', () => {
@@ -234,7 +238,7 @@ describe('R1.5 Editorial Document Runtime', () => {
     if (decision.state !== 'document') return;
     expect(decision.document.content).toEqual({ type: 'metadata-only' });
     expect(decision.document.realization).toBeNull();
-    expect(JSON.stringify(decision.document)).not.toContain(viraEntry.payload.summary);
+    expect(JSON.stringify(decision.document)).not.toContain(viraPayload.summary);
   });
 
   it('refuses to derive sanitized content from the canonical realization at runtime', () => {
