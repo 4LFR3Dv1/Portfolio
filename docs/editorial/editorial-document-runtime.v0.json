@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "editorial-document-runtime/v0",
+  "contractId": "PORTFOLIO-R1.5-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "aa068a32fad8d87f90c40267cd45005595f202f0",
+  "preconditions": {
+    "r1_4Complete": true,
+    "r1_3Complete": true,
+    "r1_2Complete": true,
+    "r1_1Complete": true,
+    "r0EffectiveComplete": true
+  },
+  "authority": {
+    "projectionSource": "r1.2-public-record-projection",
+    "languageSource": "r1.4-exact-language-realization",
+    "documentIsRecordAuthority": false,
+    "documentIsLanguageAuthority": false,
+    "rendererMayInferSemanticContent": false,
+    "runtimeSanitizationAllowed": false
+  },
+  "contentAdapters": {
+    "knowledge.system": {
+      "status": "materialized",
+      "fullDisclosureUsesExactLanguageRealization": true,
+      "metadataOnlyIncludesSemanticPayload": false,
+      "sanitizedCanonicalPayloadReuseAllowed": false
+    },
+    "otherRecordKinds": {
+      "status": "deferred",
+      "requiresExplicitAdapter": true
+    }
+  },
+  "currentState": {
+    "publicProjectionCount": 0,
+    "editorialDocumentCount": 0,
+    "frameworkCutoverEnacted": false,
+    "staticHtmlRenderingEnacted": false,
+    "markdownAuthorityIntroduced": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false
+  },
+  "acceptance": {
+    "documentRuntimeMaterialized": true,
+    "projectionRequired": true,
+    "exactLanguageRealizationRequiredForFullContent": true,
+    "metadataOnlySemanticPayloadForbidden": true,
+    "sanitizedRuntimeTransformationForbidden": true,
+    "redirectDoesNotBecomeDocument": true,
+    "currentEditorialDocumentCount": 0,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false,
+    "r1_5Complete": false
+  }
+}

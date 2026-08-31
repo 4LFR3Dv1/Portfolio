@@ -119,7 +119,7 @@ describe('R1.4 terminal completion seal', () => {
     });
   });
 
-  it('advances the shared R1 program to Editorial Document Runtime', () => {
+  it('preserves the R1.4 terminal boundary after later R1 cuts advance', () => {
     expect(completion.acceptance).toEqual({
       r1_3Complete: true,
       r1_4Complete: true,
@@ -133,7 +133,6 @@ describe('R1.4 terminal completion seal', () => {
       nextRequiredCut: 'R1.5 — Editorial Document Runtime',
     });
     expect(r1Readme).toContain('| R1.4 | Language Runtime | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.5 | Editorial Document Runtime | **NEXT** |');
     expect(r1Readme).toContain('R1_4_COMPLETE=true');
     expect(r14Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r14Doc).toContain('Verify run 33344300340');
