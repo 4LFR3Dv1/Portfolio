@@ -27,7 +27,7 @@
   },
   "repositories": [
     {"repo":"4LFR3Dv1/ordm","visibility":"private","defaultBranch":"main","observedHead":"1f3d3d5ffe38d227628ab4764ae6a382995fba93","state":"material"},
-    {"repo":"4LFR3Dv1/ORDM-TESTNET-v.01","visibility":"private","defaultBranch":"main","observedHead":null,"state":"empty"},
+    {"repo":"4LFR3Dv1/ORDM-TESTNET-v.01","visibility":"private","defaultBranch":"main","observedHead":"186b1b09f82e92fb13217b48edc956b9d9fa701f","state":"material"},
     {"repo":"4LFR3Dv1/ordm-testnet","visibility":"public","defaultBranch":"main","observedHead":"2a454f027eb5b7c30ecef37c2542cb7b5ff4f7f8","state":"material"},
     {"repo":"4LFR3Dv1/OBSERVATORIO-SNE","visibility":"public","defaultBranch":"main","observedHead":"f1481e40e87909b19f2bf556b4012ddfedcfeb3b","state":"material"},
     {"repo":"4LFR3Dv1/SNE-RADAR-v1.0","visibility":"public","defaultBranch":"main","observedHead":null,"state":"empty"},
