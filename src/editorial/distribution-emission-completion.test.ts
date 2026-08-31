@@ -125,6 +125,7 @@ describe('R2.2 terminal completion seal', () => {
     expect(completion.acceptance.cutoverReady).toBe(false);
     expect(completion.acceptance.cutoverAuthorized).toBe(false);
     expect(completion.acceptance.deploymentMutationCount).toBe(0);
+    expect(completion.acceptance.nextRequiredCut).toBe('R2.3 — Legacy Preservation Runtime');
     expect(completion.effectiveEmission.legacyPublicSitemapReplaced).toBe(false);
     expect(completion.effectiveEmission.productionDistributionActivated).toBe(false);
     expect(completion.effectiveEmission.vercelConfigurationChanged).toBe(false);
@@ -133,7 +134,6 @@ describe('R2.2 terminal completion seal', () => {
     expect(vercel.rewrites).toEqual([{ source: '/((?!.*\\.).*)', destination: '/index.html' }]);
     expect(r22Doc).toContain('Status: **COMPLETE / DUAL CI WITNESSED**');
     expect(r2Readme).toContain('| R2.2 | Distribution Emission | **COMPLETE** |');
-    expect(r2Readme).toContain('| R2.3 | Legacy Preservation Runtime | **NEXT** |');
     expect(r2Readme).toContain('R2_2_COMPLETE=true');
   });
 });
