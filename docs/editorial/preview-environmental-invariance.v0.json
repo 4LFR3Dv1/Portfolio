@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-preview-environmental-invariance/v0",
   "contractId": "PORTFOLIO-R2.6-2026-08-31",
-  "status": "materialized",
+  "status": "accepted",
   "normative": true,
   "baseline": "089f99298e895f299711449516efa55099f987f0",
   "preconditions": {
@@ -29,6 +29,14 @@
     "semanticRuntimeReplacementAllowed": false,
     "providerGeneratedHttpsOriginPreferred": true,
     "productionOriginForbidden": "renan.snelabs.space"
+  },
+  "acceptedDeployment": {
+    "provider": "Railway",
+    "origin": "https://r2-6-preview-production.up.railway.app",
+    "repository": "4LFR3Dv1/Portfolio",
+    "branch": "r2/shadow-preview-deployment",
+    "commit": "17f3f01f06876811e6ca2f8a48c2de8da9b0efbf",
+    "deploymentId": "52b5b9ef-a80a-4ee2-8c54-20aa25975553"
   },
   "comparison": {
     "transportNormalization": {
@@ -68,14 +76,25 @@
   "currentState": {
     "previewAdapterMaterialized": true,
     "providerNeutralContainerMaterialized": true,
-    "localPreviewBindingWitnessed": false,
-    "publicPreviewDeployed": false,
-    "publicTlsWitnessed": false,
-    "internetComparisonWitnessed": false,
+    "localPreviewBindingWitnessed": true,
+    "publicPreviewDeployed": true,
+    "publicTlsWitnessed": true,
+    "internetComparisonWitnessed": true,
+    "semanticDifferenceCount": 0,
     "productionDeploymentChanged": false,
     "productionDnsChanged": false,
     "vercelConfigurationChanged": false,
     "rootBuildScriptChanged": false
+  },
+  "physicalWitness": {
+    "githubRunId": 33399572149,
+    "githubJobId": 99512283933,
+    "artifactId": 9760687747,
+    "artifactZipSha256": "sha256:02ea838294bf76fce6cdd1ff9983af13a0070ea2f431fde32de54508829374cd",
+    "tlsAuthorized": true,
+    "tlsProtocol": "TLSv1.3",
+    "staticAssetCount": 2,
+    "semanticDifferenceCount": 0
   },
   "acceptance": {
     "sameCommissionedRuntimeRequired": true,
@@ -83,7 +102,7 @@
     "httpsRequired": true,
     "semanticDifferenceCountRequired": 0,
     "productionMutationCountRequired": 0,
-    "r2_6Complete": false,
+    "r2_6Complete": true,
     "cutoverReady": false,
     "cutoverAuthorized": false,
     "nextRequiredCut": "R2.7 — Cutover Readiness"
