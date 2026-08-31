@@ -1,5 +1,7 @@
 import r1CompletionJson from '../../docs/editorial/R1.9-completion.v0.json';
 import r20CompletionJson from '../../docs/editorial/R2.0-completion.v0.json';
+import r23CompletionJson from '../../docs/editorial/R2.3-completion.v0.json';
+import redirectAdapterManifestJson from '../../docs/editorial/compatibility-redirect-adapter.v0.json';
 import registryManifestJson from '../../docs/editorial/record-registry.v0.json';
 import routeManifestJson from '../../docs/editorial/route-runtime.v0.json';
 import languageManifestJson from '../../docs/editorial/language-runtime.v0.json';
@@ -48,6 +50,11 @@ import {
   type PublicationShellBoundaryManifest,
   type PublicationShellPlan,
 } from './publication-shell-boundary';
+import {
+  reconstructCompatibilityRedirectAdapter,
+  type CompatibilityRedirectAdapterManifest,
+  type CompatibilityRedirectState,
+} from './compatibility-redirect-adapter';
 
 export const R2_RENDERER_INPUT_SCHEMA_VERSION = 'editorial-renderer-input/v0' as const;
 
@@ -76,6 +83,16 @@ interface R20CompletionSeal {
   };
 }
 
+interface R23CompletionSeal {
+  status: 'frozen';
+  normative: true;
+  acceptance: {
+    r2_3Complete: true;
+    cutoverReady: false;
+    cutoverAuthorized: false;
+  };
+}
+
 export interface AcceptedRendererInput {
   schemaVersion: typeof R2_RENDERER_INPUT_SCHEMA_VERSION;
   source: {
@@ -90,11 +107,13 @@ export interface AcceptedRendererInput {
   documents: EditorialDocumentDto[];
   shellPlan: PublicationShellPlan;
   legacy: LegacyPreservationState;
+  redirects: CompatibilityRedirectState;
 }
 
 export function materializeAcceptedRendererInput(): AcceptedRendererInput {
   const r1Completion = r1CompletionJson as R1CompletionSeal;
   const r20Completion = r20CompletionJson as R20CompletionSeal;
+  const r23Completion = r23CompletionJson as R23CompletionSeal;
   if (
     r1Completion.status !== 'frozen'
     || r1Completion.normative !== true
@@ -114,6 +133,15 @@ export function materializeAcceptedRendererInput(): AcceptedRendererInput {
     || r20Completion.acceptance.cutoverAuthorized !== false
   ) {
     throw new Error('renderer-input-r2-boundary-unavailable');
+  }
+  if (
+    r23Completion.status !== 'frozen'
+    || r23Completion.normative !== true
+    || r23Completion.acceptance.r2_3Complete !== true
+    || r23Completion.acceptance.cutoverReady !== false
+    || r23Completion.acceptance.cutoverAuthorized !== false
+  ) {
+    throw new Error('renderer-input-r2-3-acceptance-unavailable');
   }
 
   const registryManifest = registryManifestJson as RecordRegistryManifest;
@@ -160,6 +188,15 @@ export function materializeAcceptedRendererInput(): AcceptedRendererInput {
   }
 
   const legacy = materializeLegacyPreservationState(shell.plan);
+  const distributedCanonicalPaths = new Set(distribution.bundle.pages.map((page) => page.canonicalPath));
+  const redirectRuntime = reconstructCompatibilityRedirectAdapter(
+    redirectAdapterManifestJson as CompatibilityRedirectAdapterManifest,
+    shell.plan,
+    distributedCanonicalPaths,
+  );
+  if (redirectRuntime.state !== 'ready' || !redirectRuntime.adapter) {
+    throw new Error(`renderer-input-redirect-conflict:${redirectRuntime.errors.join(',')}`);
+  }
 
   const documents = surfaceState.documents
     .filter((entry): entry is Extract<(typeof surfaceState.documents)[number], { state: 'document' }> => entry.state === 'document')
@@ -179,5 +216,6 @@ export function materializeAcceptedRendererInput(): AcceptedRendererInput {
     documents,
     shellPlan: shell.plan,
     legacy,
+    redirects: redirectRuntime.adapter,
   };
 }
