@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "editorial-legacy-preservation-runtime/v0",
+  "contractId": "PORTFOLIO-R2.3-2026-08-31",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "ab9564a065d5bbd721e242a3b98e47a31fa2f80f",
+  "preconditions": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "legacyCompatibilityComplete": true,
+    "legacyFreezeId": "PORTFOLIO-R0.0-2026-08-30",
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "authority": {
+    "routeAdmissionSource": "r1.8-legacy-compatibility-via-r2.0-shell-plan",
+    "semanticSource": "r0.0-frozen-legacy-source-blobs",
+    "projectsBlobSha": "df6fe680cd96ede69b3ff7e1f0a6b3b498b16c9f",
+    "architectureBlobSha": "377fd24faab1be39ba135b8d1cd62379e97f403a",
+    "legacyMeaningRewriteAllowed": false,
+    "canonicalRecordBindingAllowed": false,
+    "successorInferenceAllowed": false,
+    "runtimeSanitizationAllowed": false
+  },
+  "preservation": {
+    "pageCount": 4,
+    "architecturePageCount": 1,
+    "caseStudyPageCount": 3,
+    "languageRealizationCount": 8,
+    "architectureViewCount": 5,
+    "paths": [
+      "/architecture",
+      "/work/agentic-systems",
+      "/work/transactional-support-bot",
+      "/work/verify-systems"
+    ],
+    "languageStorageKey": "portfolio-language",
+    "languageDefault": "en",
+    "legacyLanguageValues": ["en", "pt"],
+    "acceptLanguageInferenceAllowed": false,
+    "architectureQueryViewPreserved": true
+  },
+  "indexing": {
+    "robots": "noindex,follow",
+    "canonicalMetadataCount": 0,
+    "hreflangLinkCount": 0,
+    "sitemapEntryCount": 0,
+    "rssItemCount": 0,
+    "searchEntryCount": 0
+  },
+  "identitySafety": {
+    "agenticSystemRebindingCount": 0,
+    "transactionalSupportPrematureSuccessorCount": 0,
+    "verifySystemsPrematurePublicationBindingCount": 0,
+    "architecturePrematureRepresentationBirthCount": 0
+  },
+  "currentState": {
+    "legacyPreservationRuntimeMaterialized": true,
+    "boundedLegacyStateIncludedInRendererInput": true,
+    "legacyPagesImplementedInAstro": true,
+    "physicalLegacyPagesWitnessed": false,
+    "compatibilityRedirectsEnacted": false,
+    "productionStaticHtmlActivated": false,
+    "legacyPublicSitemapReplaced": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "allPreservedRoutesMaterialized": true,
+    "frozenLegacySourceIntegrityEnforced": true,
+    "historicalMeaningRewriteCount": 0,
+    "canonicalRebindingCount": 0,
+    "legacyDistributionLeakCount": 0,
+    "deploymentMutationCount": 0,
+    "r2_3Complete": false,
+    "nextRequiredCut": "R2.4 — Compatibility Redirect Adapter"
+  }
+}
