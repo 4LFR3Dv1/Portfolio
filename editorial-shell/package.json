@@ -15,7 +15,8 @@
     "verify:commissioned": "node scripts/verify-commissioned-runtime.mjs",
     "preview:runtime": "node runtime/preview-runtime.mjs",
     "verify:preview-entrypoint": "node scripts/verify-preview-entrypoint.mjs",
-    "verify:preview": "node scripts/verify-preview-invariance.mjs"
+    "verify:preview": "node scripts/verify-preview-invariance.mjs",
+    "verify:cutover-readiness": "node scripts/verify-cutover-readiness.mjs"
   },
   "dependencies": {
     "astro": "7.2.9",
