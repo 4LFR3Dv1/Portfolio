@@ -1,6 +1,109 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
+interface CutoverTransaction {
+  strategy: string;
+  runtimeMutationAllowed: boolean;
+  repositoryProductionConfigMutationAllowed: boolean;
+  dnsMutationScope: string[];
+  apexMutationAllowed: boolean;
+  wildcardMutationAllowed: boolean;
+  wwwMutationAllowed: boolean;
+  oldProductionRuntimeMustRemainAvailable: boolean;
+  rollbackBeforeDestructiveCleanup: boolean;
+}
+
+interface ReadinessContract {
+  status: string;
+  baseline: string;
+  acceptedTarget: {
+    origin: string;
+    deploymentId: string;
+    semanticRuntimeReplacementAllowed: boolean;
+    redeployRequiredForCutover: boolean;
+  };
+  cutoverTransaction: CutoverTransaction;
+  authorizationBoundary: {
+    domainOrDnsWriteAllowedInR2_7: boolean;
+    r2_7MayAuthorizeCutover: boolean;
+    r2_8RequiresExplicitAuthorization: boolean;
+  };
+  currentState: {
+    freshTargetWitnessed: boolean;
+    productionDnsSnapshotCaptured: boolean;
+    productionHttpFingerprintCaptured: boolean;
+    rollbackBaselineCaptured: boolean;
+    railwayCustomProductionDomainAttached: boolean;
+    productionMutationCount: number;
+  };
+  acceptance: {
+    r2_7Complete: boolean;
+    cutoverReady: boolean;
+    cutoverAuthorized: boolean;
+  };
+}
+
+interface R26Completion {
+  acceptedPreviewSpecimen: {
+    origin: string;
+    deploymentId: string;
+  };
+  acceptance: {
+    r2_6Complete: boolean;
+  };
+}
+
+interface R27Completion {
+  status: string;
+  acceptedTarget: {
+    deploymentId: string;
+    freshSemanticDifferenceCount: number;
+    freshTlsAuthorized: boolean;
+    customProductionDomainAttached: boolean;
+  };
+  productionBaseline: {
+    dns: {
+      cname: string[];
+      a: Array<{ address: string; ttl: number }>;
+      aaaa: string[];
+    };
+    http: {
+      root: {
+        status: number;
+        server: string;
+        bodySha256: string;
+      };
+    };
+  };
+  rollback: {
+    exactCnameToRestore: string;
+    observedTtlSeconds: number;
+  };
+  productionBoundary: {
+    productionDnsChanged: boolean;
+    productionDomainChanged: boolean;
+    railwayCustomProductionDomainAttached: boolean;
+    vercelConfigurationChanged: boolean;
+    rootBuildScriptChanged: boolean;
+    productionMutationCount: number;
+  };
+  acceptance: {
+    r2_7Complete: boolean;
+    cutoverReady: boolean;
+    cutoverAuthorized: boolean;
+    cutoverEnacted: boolean;
+    nextRequiredCut: string;
+  };
+}
+
+interface RootPackage {
+  scripts: { build: string };
+}
+
+interface VercelConfig {
+  rewrites: Array<{ source: string; destination: string }>;
+}
+
 function readRepoFile(path: string): string {
   return readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 }
@@ -9,11 +112,11 @@ function readJson<T>(path: string): T {
   return JSON.parse(readRepoFile(path)) as T;
 }
 
-const contract = readJson<any>('docs/editorial/cutover-readiness.v0.json');
-const completion = readJson<any>('docs/editorial/R2.7-completion.v0.json');
-const r26 = readJson<any>('docs/editorial/R2.6-completion.v0.json');
-const rootPackage = readJson<any>('package.json');
-const vercel = readJson<any>('vercel.json');
+const contract = readJson<ReadinessContract>('docs/editorial/cutover-readiness.v0.json');
+const completion = readJson<R27Completion>('docs/editorial/R2.7-completion.v0.json');
+const r26 = readJson<R26Completion>('docs/editorial/R2.6-completion.v0.json');
+const rootPackage = readJson<RootPackage>('package.json');
+const vercel = readJson<VercelConfig>('vercel.json');
 const readinessScript = readRepoFile('editorial-shell/scripts/verify-cutover-readiness.mjs');
 const workflow = readRepoFile('.github/workflows/editorial-cutover-readiness.yml');
 const doc = readRepoFile('docs/editorial/R2.7-cutover-readiness.md');
