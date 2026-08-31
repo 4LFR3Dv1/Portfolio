@@ -85,7 +85,7 @@ R1-A2 was opened after direct inspection of the R2.6 preview demonstrated that t
 
 R1-A2.1 reobserved the connected corpus and exact repository HEADs. R1-A2.2 reconciled all 28 existing System identities without replacement Birth. R1-A2.3 produced 27 generation-1 current System revisions against those same RecordIds; one historical System remains explicitly deferred.
 
-R1-A2.4 reconstructs 48 current-head observations across those 27 successors and admits eight maturity classifications without translating implementation state into editorial maturity. Its first green specimen incorrectly minted a replacement maturity governance Record for XS Wallet even though R1.6 already established the same logical governance lineage. That specimen and its CI runs remain historical evidence, but current A2.4 acceptance is reopened until the corrected form is freshly witnessed:
+R1-A2.4 reconstructs 48 current-head observations across those 27 successors and admits eight maturity classifications without translating implementation state into editorial maturity. Its first green specimen incorrectly minted a replacement maturity governance Record for XS Wallet even though R1.6 already established the same logical governance lineage. That specimen and its CI runs remain historical evidence. The corrected A2.4 specimen preserves the existing XS Wallet maturity governance identity and materializes exactly seven new maturity Births plus one successor Revision:
 
 ```text
 7 new governance.maturity Births
@@ -96,7 +96,9 @@ XS Wallet maturity governance identity preserved
 rec_3a926254f23e4a0c89102c3fbfe636d6
 ```
 
-No current disclosure policy is inherited merely because a semantic or maturity successor exists. R1-A2.5 remains blocked until the corrected A2.4 specimen is accepted.
+The corrected candidate passed Verify #286, Editorial Shell Build #121 and Cutover Readiness #52. A2.4 is therefore accepted again with zero maturity identity replacement, zero silent inheritance and zero disclosure/route/surface/production mutation.
+
+No current disclosure policy is inherited merely because a semantic or maturity successor exists. R1-A2.5 now becomes the next explicit authority boundary.
 
 The amendment is intentionally non-destructive:
 
@@ -127,11 +129,11 @@ R1_9_COMPLETE=true
 R1_COMPLETE=true
 R1_A2_ACTIVE=true
 R1_A2_3_COMPLETE=true
-R1_A2_4_COMPLETE=false
+R1_A2_4_COMPLETE=true
 CURRENT_REVISION_MATERIALIZATION_COMPLETE=true
-EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=false
-EVIDENCE_MATURITY_CORRECTION_ACTIVE=true
+EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=true
+EVIDENCE_MATURITY_CORRECTION_ACTIVE=false
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
-NEXT=R1-A2.4 — Governance Lineage Correction CI
+NEXT=R1-A2.5 — Public Disclosure Reauthorization
 ```
