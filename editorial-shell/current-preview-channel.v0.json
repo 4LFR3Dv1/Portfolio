@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "editorial-current-preview-channel/v0",
+  "channel": "r2-6-preview",
+  "status": "candidate",
+  "source": {
+    "acceptedPublicationDigest": "sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32",
+    "rendererInputDigest": "sha256_4b2bc45e2127befd4f7be0aaf7b4a2cebe0ad7ab9da7a7fa774414af155d73e6",
+    "distributionDigest": "sha256_b7813fa7400b1ad205cd82bf32ecad86d4c9790d7d03630033dcc68c6d8dc308",
+    "validatedParent": "9cba62b5a188da81a73b0035a082d4276a9faa73"
+  },
+  "hosting": {
+    "service": "r2-6-preview",
+    "origin": "https://r2-6-preview-production.up.railway.app",
+    "dockerfile": "editorial-shell/current-preview.Dockerfile",
+    "reuseExistingService": true,
+    "reuseExistingDomain": true
+  },
+  "boundary": {
+    "productionOriginChanged": false,
+    "productionDnsChanged": false,
+    "rootVercelConfigurationChanged": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "productionMutationCount": 0
+  }
+}

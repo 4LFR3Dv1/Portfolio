@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "editorial-r2-a1-0-completion/v0",
+  "contractId": "PORTFOLIO-R2-A1.0-COMPLETION-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "81f6d8d5b5c5bd0d3ef52d038eaa4337ad9df84f",
+  "contract": "docs/editorial/R2-A1-reemission-constitution.v0.json",
+  "candidateWitness": {
+    "branchHead": "8b98b32d2016822c56201fcb21cc3376e2ec7c0c",
+    "verifyRunId": 33430379096,
+    "verifyRunNumber": 347,
+    "verifyConclusion": "success",
+    "editorialShellBuildRunId": 33430379078,
+    "editorialShellBuildRunNumber": 182,
+    "editorialShellBuildConclusion": "success",
+    "cutoverReadinessRunId": 33430379143,
+    "cutoverReadinessRunNumber": 113,
+    "cutoverReadinessConclusion": "success"
+  },
+  "sourceIdentity": {
+    "r1_a2_8Complete": true,
+    "r1_a2Complete": true,
+    "currentPublicationValid": true,
+    "acceptedPublicationDigest": "sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32"
+  },
+  "historicalWitnessBoundary": {
+    "r2_6HistoricalComplete": true,
+    "r2_7HistoricalComplete": true,
+    "historicalWitnessesRemainEvidence": true,
+    "historicalWitnessesAuthorizeCurrentSpecimen": false
+  },
+  "productionBoundary": {
+    "productionOriginChanged": false,
+    "productionDnsChanged": false,
+    "rootVercelConfigChanged": false,
+    "incumbentPublicRuntimeChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "acceptedPublicationDigestIsPhysicalSourceIdentity": true,
+    "historicalTransportAuthorityRevokedForCurrentSpecimen": true,
+    "semanticMutationAllowed": false,
+    "productionMutationAllowed": false,
+    "r2_a1_0Complete": true,
+    "r2_a1Complete": false,
+    "currentPhysicalPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "nextRequiredCut": "R2-A1.1 — Current Renderer Input Re-emission"
+  }
+}

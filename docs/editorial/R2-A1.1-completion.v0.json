@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "editorial-r2-a1-1-completion/v0",
+  "contractId": "PORTFOLIO-R2-A1.1-COMPLETION-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "sourceIdentity": {
+    "acceptedPublicationDigest": "sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32",
+    "rendererInputDigest": "sha256_4b2bc45e2127befd4f7be0aaf7b4a2cebe0ad7ab9da7a7fa774414af155d73e6",
+    "generatedByteDigest": "sha256_43021b2d7007c3452ec7bbc8654fc0b3e9fdc8b9efc15e97f02eb88a627a3c36"
+  },
+  "candidateWitness": {
+    "branchHead": "c1ada26b0391ec65fde78de9c8e930dd60211499",
+    "verifyRunId": 33431168384,
+    "verifyRunNumber": 359,
+    "verifyConclusion": "success",
+    "editorialShellBuildRunId": 33431168369,
+    "editorialShellBuildRunNumber": 194,
+    "editorialShellBuildConclusion": "success",
+    "cutoverReadinessRunId": 33431168499,
+    "cutoverReadinessRunNumber": 125,
+    "cutoverReadinessConclusion": "success"
+  },
+  "physicalWitness": {
+    "surfaceCount": 12,
+    "documentCount": 54,
+    "englishDocumentCount": 27,
+    "portugueseDocumentCount": 27,
+    "artifactId": 9772638124,
+    "artifactZipSha256": "9ae2f952c4d2d45a874b5ae92946baccb5866be61252c6013153e42af89c9211",
+    "historicalShellControlStillPassed": true,
+    "historicalPreviewControlStillPassed": true
+  },
+  "productionBoundary": {
+    "distributionSwitchedToCurrentInput": false,
+    "staticRuntimeRecommissionedForCurrentInput": false,
+    "previewRedeployedForCurrentInput": false,
+    "productionOriginChanged": false,
+    "productionDnsChanged": false,
+    "rootVercelConfigChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "r2_a1_0Complete": true,
+    "r2_a1_1Complete": true,
+    "currentSpecimenReemitted": true,
+    "currentDistributionEmitted": false,
+    "currentPhysicalPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "nextRequiredCut": "R2-A1.2 — Current Distribution Emission"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "editorial-current-distribution-admission/v0",
+  "contractId": "PORTFOLIO-R2-A1.2-2026-08-31",
+  "status": "materialized-awaiting-ci",
+  "normative": true,
+  "baseline": "6d2b21d77f841e352c8013c3515f7ddda74da2fd",
+  "preconditions": {
+    "r2_a1_0Complete": true,
+    "r2_a1_1Complete": true,
+    "currentPublicationValid": true,
+    "acceptedPublicationDigest": "sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32",
+    "rendererInputDigest": "sha256_4b2bc45e2127befd4f7be0aaf7b4a2cebe0ad7ab9da7a7fa774414af155d73e6"
+  },
+  "laws": {
+    "distributionConsumesAcceptedRendererInputOnly": true,
+    "manualPageRegistryAllowed": false,
+    "crossLanguageFallbackAllowed": false,
+    "lastModifiedInferenceAllowed": false,
+    "priorityInferenceAllowed": false,
+    "publicationChronologyInferenceAllowed": false,
+    "xDefaultInferenceAllowed": false,
+    "surfaceAndDocumentOrderMayBeReinterpreted": false,
+    "historicalDistributionManifestIsAuthority": false,
+    "semanticMutationAllowed": false,
+    "productionMutationAllowed": false
+  },
+  "expectedMaterialization": {
+    "surfacePageCount": 12,
+    "documentPageCount": 54,
+    "canonicalPageCount": 66,
+    "metadataEntryCount": 66,
+    "hreflangClusterCount": 33,
+    "hreflangLinkCount": 66,
+    "sitemapEntryCount": 66,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 54,
+    "distributionDigest": null
+  },
+  "physicalOutput": {
+    "root": "editorial-shell/current-emission",
+    "bundle": "editorial-shell/current-emission/distribution.json",
+    "sitemap": "editorial-shell/current-emission/sitemap.xml",
+    "englishRss": "editorial-shell/current-emission/en/rss.xml",
+    "portugueseRss": "editorial-shell/current-emission/pt-br/rss.xml",
+    "search": "editorial-shell/current-emission/search-index.json",
+    "witness": "editorial-shell/r2-a1-2-current-distribution-witness.json",
+    "committed": false,
+    "witnessProducedByCi": false
+  },
+  "acceptance": {
+    "allCurrentCanonicalPagesDistributed": true,
+    "allCurrentSemanticDocumentsSearchable": true,
+    "rssChronologyInferenceCount": 0,
+    "crossLanguageFallbackCount": 0,
+    "historicalDistributionAuthorityCount": 0,
+    "semanticMutationCount": 0,
+    "productionMutationCount": 0,
+    "r2_a1_2Complete": false,
+    "currentSpecimenReemitted": true,
+    "currentDistributionEmitted": false,
+    "currentStaticRuntimeRecommissioned": false,
+    "currentPhysicalPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "nextRequiredAction": "CI must emit the exact current distribution, freeze its digest and byte witnesses, and leave the historical Astro/runtime control untouched"
+  }
+}

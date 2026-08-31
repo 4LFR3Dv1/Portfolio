@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "editorial-r2-a1-reemission-constitution/v0",
+  "contractId": "PORTFOLIO-R2-A1-2026-08-31",
+  "status": "active",
+  "normative": true,
+  "baseline": "81f6d8d5b5c5bd0d3ef52d038eaa4337ad9df84f",
+  "preconditions": {
+    "r1_a2Complete": true,
+    "r1_a2_8Complete": true,
+    "currentPublicationValid": true,
+    "acceptedPublicationDigestFrozen": true,
+    "acceptedPublicationDigest": "sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32"
+  },
+  "sources": {
+    "semanticSeal": "docs/editorial/R1-A2.8-completion.v0.json",
+    "currentSurfaceContract": "docs/editorial/R1-A2.7-current-editorial-surfaces.v0.json",
+    "currentSurfaceRuntime": "src/editorial/current-surface-runtime.ts",
+    "currentRendererInputSeal": "docs/editorial/R2-A1.1-completion.v0.json",
+    "historicalRendererInput": "src/editorial/renderer-input.ts",
+    "historicalShell": "editorial-shell/",
+    "productionAdapter": "vercel.json"
+  },
+  "laws": {
+    "acceptedPublicationDigestIsPhysicalSourceIdentity": true,
+    "physicalArtifactMustBindAcceptedPublicationDigest": true,
+    "historicalRendererInputMayBeUsedAsCurrentAuthority": false,
+    "historicalDistributionDigestMayBeUsedAsCurrentAuthority": false,
+    "historicalR2_6WitnessMayAuthorizeCurrentSpecimen": false,
+    "historicalR2_7WitnessMayAuthorizeCurrentSpecimen": false,
+    "semanticRepairAllowed": false,
+    "recordMutationAllowed": false,
+    "governanceMutationAllowed": false,
+    "routeMutationAllowed": false,
+    "surfaceSelectionMutationAllowed": false,
+    "rendererMayInferMissingCurrentMeaning": false,
+    "productionDeploymentMutationAllowed": false,
+    "productionDnsMutationAllowed": false,
+    "vercelConfigurationMutationAllowed": false,
+    "incumbentPublicRuntimeMutationAllowed": false,
+    "cutoverAuthorizationIncluded": false,
+    "cutoverEnactmentIncluded": false
+  },
+  "program": [
+    {"cut":"R2-A1.0","purpose":"Physical Re-emission Constitution","status":"complete"},
+    {"cut":"R2-A1.1","purpose":"Current Renderer Input Re-emission","status":"complete"},
+    {"cut":"R2-A1.2","purpose":"Current Distribution Emission","status":"next"},
+    {"cut":"R2-A1.3","purpose":"Compatibility + Static Runtime Recommissioning","status":"not-started"},
+    {"cut":"R2-A1.4","purpose":"Isolated Current Preview Deployment","status":"not-started"},
+    {"cut":"R2-A1.5","purpose":"External Environmental Invariance + Current Readiness","status":"not-started"}
+  ],
+  "historicalWitnessBoundary": {
+    "r2_6HistoricalComplete": true,
+    "r2_7HistoricalComplete": true,
+    "historicalWitnessesRemainEvidence": true,
+    "historicalWitnessesBindAcceptedCurrentDigest": false,
+    "historicalPreviewMayBePromotedWithoutRedeploy": false
+  },
+  "productionBoundary": {
+    "productionOrigin": "https://renan.snelabs.space",
+    "productionOriginMayBeContactedForReadOnlyObservation": true,
+    "productionOriginMayBeMutated": false,
+    "rootVercelConfigBlobSha": "6cbd184abd237d0922e5c4fd3a8d98881d5e99a3",
+    "rootVercelConfigChanged": false,
+    "productionMutationCount": 0
+  },
+  "currentState": {
+    "currentSpecimenReemitted": true,
+    "currentRendererInputDigest": "sha256_4b2bc45e2127befd4f7be0aaf7b4a2cebe0ad7ab9da7a7fa774414af155d73e6",
+    "currentDistributionEmitted": false,
+    "currentCompatibilityReconciled": false,
+    "currentStaticRuntimeRecommissioned": false,
+    "currentPreviewRedeployed": false,
+    "currentPreviewExternallyWitnessed": false,
+    "currentCutoverReadinessReevaluated": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "r2_a1_0Complete": true,
+    "r2_a1_1Complete": true,
+    "r2_a1Complete": false,
+    "currentPublicationValid": true,
+    "currentPhysicalPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "nextRequiredAction": "R2-A1.2 — Current Distribution Emission"
+  }
+}

@@ -35,6 +35,26 @@ jobs:
         working-directory: editorial-shell
         run: npm ci
 
+      - name: Materialize A2.8 current renderer input
+        working-directory: editorial-shell
+        run: npm run materialize:current-input
+
+      - name: Emit A2.8 current distribution
+        working-directory: editorial-shell
+        run: npm run materialize:current-distribution
+
+      - name: Build A2.8 current static editorial shell
+        working-directory: editorial-shell
+        run: npm run build:current
+
+      - name: Commission A2.8 current static runtime
+        working-directory: editorial-shell
+        run: npm run verify:current-commissioned
+
+      - name: Verify A2.8 current isolated preview binding
+        working-directory: editorial-shell
+        run: npm run verify:current-preview-entrypoint
+
       - name: Build static editorial shell
         working-directory: editorial-shell
         run: npm run build
@@ -57,27 +77,32 @@ jobs:
 
       - name: Freeze accepted public preview provenance
         run: |
-          echo "preview_origin=$R2_6_PREVIEW_ORIGIN"
-          echo "deployment_commit=$R2_6_DEPLOYMENT_COMMIT"
-          echo "deployment_id=$R2_6_DEPLOYMENT_ID"
+          echo "historical_r2_6_preview_origin=$R2_6_PREVIEW_ORIGIN"
+          echo "historical_r2_6_deployment_commit=$R2_6_DEPLOYMENT_COMMIT"
+          echo "historical_r2_6_deployment_id=$R2_6_DEPLOYMENT_ID"
           test "$R2_6_PREVIEW_ORIGIN" != "https://renan.snelabs.space"
           test "$R2_6_PREVIEW_ORIGIN" != "https://www.renan.snelabs.space"
 
-      - name: Witness real Internet TLS hosting invariance
+      - name: Witness real Internet TLS hosting invariance — current A2.8 specimen
         working-directory: editorial-shell
         env:
           PREVIEW_ORIGIN: ${{ env.R2_6_PREVIEW_ORIGIN }}
-          R2_6_WITNESS_PATH: r2-6-preview-witness.json
-        run: npm run verify:preview
+          R2_A1_CURRENT_WITNESS_PATH: r2-a1-current-preview-witness.json
+        run: npm run verify:current-preview
 
       - name: Preserve shell and environmental witness
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: r2-6-editorial-preview-${{ github.sha }}
+          name: editorial-physical-witness-${{ github.sha }}
           path: |
             editorial-shell/package-lock.json
             editorial-shell/dist
-            editorial-shell/r2-6-preview-witness.json
+            editorial-shell/current-dist
+            editorial-shell/current-emission
+            editorial-shell/r2-a1-current-preview-witness.json
+            editorial-shell/r2-a1-1-current-renderer-input-witness.json
+            editorial-shell/r2-a1-2-current-distribution-witness.json
+            editorial-shell/r2-a1-3-current-shell-input-witness.json
           if-no-files-found: warn
           retention-days: 30

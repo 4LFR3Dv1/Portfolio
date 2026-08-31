@@ -8,11 +8,17 @@ import type { PublicationShellPlan } from '../../../src/editorial/publication-sh
 import type { CoreSurfaceDto } from '../../../src/editorial/surface-runtime';
 
 export interface RenderablePublicationState {
-  schemaVersion: 'editorial-renderer-input/v0';
+  schemaVersion: 'editorial-renderer-input/v0' | 'editorial-current-publication-state/v0';
   source: {
-    r1CompletionContractId: string;
-    r20CompletionContractId: string;
     distributionDigest: `sha256_${string}`;
+    r1CompletionContractId?: string;
+    r20CompletionContractId?: string;
+    semanticCompletionContractId?: string;
+    physicalBoundaryCompletionContractId?: string;
+    acceptedPublicationDigest?: `sha256_${string}`;
+    rendererInputDigest?: `sha256_${string}`;
+    compatibilitySourceContractId?: string;
+    historicalTransportUsedAsSemanticAuthority?: false;
   };
   pages: DistributionPage[];
   distribution: DistributionBundle;
