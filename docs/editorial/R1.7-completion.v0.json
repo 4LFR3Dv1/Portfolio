@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "editorial-distribution-foundation-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R1.7-2026-08-30",
+  "materialization": {
+    "commit": "4da7771915225a46484bf1ce7d983061ecd396fd",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33347509760,
+      "conclusion": "success"
+    },
+    "manifestPath": "docs/editorial/distribution-foundation.v0.json",
+    "manifestBlobSha": "b81c71811490e59834ac361ca383be68071b4b3a"
+  },
+  "effectiveDistribution": {
+    "surfacePageCount": 12,
+    "documentPageCount": 6,
+    "indexablePageCount": 18,
+    "metadataEntryCount": 18,
+    "hreflangClusterCount": 9,
+    "hreflangLinkCount": 18,
+    "sitemapEntryCount": 18,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "searchEntryCount": 6,
+    "unprojectedRecordIndexCount": 0,
+    "omittedDocumentIndexCount": 0,
+    "crossLanguageFallbackCount": 0,
+    "manualPageRegistryAllowed": false,
+    "lastModifiedInferenceAllowed": false,
+    "priorityInferenceAllowed": false,
+    "publicationChronologyInferenceAllowed": false,
+    "xDefaultInferenceAllowed": false,
+    "legacyPublicSitemapReplaced": false,
+    "staticHtmlRenderingEnacted": false,
+    "frameworkCutoverEnacted": false,
+    "vercelConfigurationChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1_6Complete": true,
+    "r1_7Complete": true,
+    "distributionRuntimeMaterialized": true,
+    "distributionConsumesAuthorizedOutputsOnly": true,
+    "metadataEntryCount": 18,
+    "sitemapEntryCount": 18,
+    "searchEntryCount": 6,
+    "rssFeedCount": 2,
+    "rssItemCount": 0,
+    "nextRequiredCut": "R1.8 — Legacy Compatibility"
+  }
+}
