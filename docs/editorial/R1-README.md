@@ -1,6 +1,6 @@
 # R1 — Editorial Foundation
 
-Status: **COMPLETE / FROZEN** — POST-FREEZE RECONCILIATION ACTIVE
+Status: **COMPLETE / FROZEN** — POST-FREEZE RECONCILIATION COMPLETE
 
 Effective constitutional preconditions:
 
@@ -69,57 +69,57 @@ R1.9 reconstructs the entire R1.0–R1.8 chain from canonical manifests and all 
 R1.9 freezes the terminal distinction:
 
 ```text
-FOUNDATION READY=true
-CUTOVER READY=false
-CUTOVER AUTHORIZED=false
-DEPLOYED RUNTIME CHANGED=false
+FOUNDATION_READY=true
+CUTOVER_READY=false
+CUTOVER_AUTHORIZED=false
+DEPLOYED_RUNTIME_CHANGED=false
 ```
 
-Therefore `R1_COMPLETE=true` means the editorial foundation was coherent at its accepted historical basis. It does not mean that its public representations remain temporally current forever. The R1.9 terminal program marker remains historically preserved as `NEXT=R2 — Editorial Publication Shell & Cutover`; the current amendment frontier is tracked separately below.
+`R1_COMPLETE=true` therefore means the original editorial foundation was coherent at its accepted historical basis. It does not mean its public representations remain temporally current forever.
 
-## Post-freeze amendments
+## Post-freeze amendment — R1-A2 Current Corpus Reconciliation
 
-### R1-A2 — Current Corpus Reconciliation
+R1-A2 was opened after direct inspection of the R2.6 preview demonstrated that the structurally valid R1/R2 pipeline was still projecting R0.8-era public selection and generation-zero summaries. The amendment preserved R1 identity and historical completion while reconstructing current semantic authority from the connected corpus.
 
-R1-A2 was opened after direct inspection of the R2.6 preview demonstrated that the structurally valid R1/R2 pipeline was still projecting R0.8-era public selection and generation-zero summaries. R1-A2 preserves all R1 identities and completion seals while reopening temporal reconciliation of revisions, evidence, maturity, disclosure, routes and surfaces.
+R1-A2.1 reobserved 54 connected repositories and exact default-branch HEADs. R1-A2.2 reconciled all 28 existing System identities without replacement Birth. R1-A2.3 produced 27 generation-1 current System revisions against the same RecordIds; Transactional Support Bot remains explicitly deferred because no current successor is admitted.
 
-R1-A2.1 reobserved the connected corpus and exact repository HEADs. R1-A2.2 reconciled all 28 existing System identities without replacement Birth. R1-A2.3 produced 27 generation-1 current System revisions against those same RecordIds; one historical System remains explicitly deferred.
+R1-A2.4 reconstructed 48 current-head evidence observations and admitted eight maturity classifications while leaving 19 Systems explicitly unclassified. Existing governance lineage is preserved, including the corrected XS Wallet maturity successor rather than a replacement governance Birth.
 
-R1-A2.4 reconstructs 48 current-head observations across those 27 successors and admits eight maturity classifications without translating implementation state into editorial maturity. Its first green specimen incorrectly minted a replacement maturity governance Record for XS Wallet even though R1.6 already established the same logical governance lineage. The corrected A2.4 specimen preserves the existing XS Wallet maturity governance identity and materializes exactly seven new maturity Births plus one successor Revision, with zero maturity identity replacement.
+R1-A2.5 reauthorized disclosure against exact current heads. All 27 current bounded System payloads are public/full editorial Records while source and evidence availability remain independent. Private source and private evidence are never made public merely because the editorial Record is public.
 
-R1-A2.5 reauthorizes disclosure against the exact current generation-1 heads rather than reusing R0.8 policy. All 27 current System payloads are explicitly admitted as public/full bounded editorial Records. Source and evidence availability remain independent: 13 current Systems retain private source, two have partial source, and private source is never promoted merely because the Record is public.
+R1-A2.6 admitted exact-current bilingual realization and routing for all 27 current Systems: 54 current LanguageBindings and 54 current route-language pairs. All ten historical R1.3 route identities remain preserved; the two Transactional Support Bot paths remain historical and `head-unavailable`.
 
-Four historical disclosure-governance identities continue by successor Revision rather than replacement Birth:
+R1-A2.7 rebuilt renderer-neutral current surfaces from the current semantic chain. All 27 current Systems appear on Systems in EN and PT-BR. Home explicitly selects seven Systems and five Research subjects. Research membership is authored explicitly rather than derived from maturity. Archive, Essays and Notes remain empty instead of being fabricated from repository age, naming or historical prose.
+
+R1-A2.8 then reconstructed A2.1–A2.7 as one complete semantic specimen, proved every acceptance zero, and froze the exact current publication identity:
 
 ```text
-Foundry Pay  rec_31d32647a6fc43c1b1bc5257aefaf367
-SNE-OS       rec_2821df1a24244689ab76bb5fb697018b
-VIRA         rec_fe675b13970843099b802b2b6d03daf1
-XS Wallet    rec_5bc3c1113cfe4c14b79aaa63f2515d79
+CURRENT_PUBLICATION_DIGEST=
+sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
 ```
 
-The other 23 current Systems receive new disclosure-governance Births. Transactional Support Bot remains historical only because it has no admitted current successor. The A2.5 terminal state passed Verify #306, Editorial Shell Build #141 and Cutover Readiness #72.
+Its accepted candidate passed:
 
-R1-A2.6 then admits exact-current bilingual language realizations and routes for all 27 current Systems: 54 current language bindings and 54 current route-language pairs. It preserves all ten historical R1.3 routes without path drop, reassignment or admission-basis rewrite. Eight historical paths now resolve to current heads; the two Transactional Support Bot paths remain preserved but `head-unavailable`. The terminal A2.6 head passed Verify #320, Editorial Shell Build #155 and Cutover Readiness #86.
+```text
+Verify #335                    SUCCESS
+Editorial Shell Build #170     SUCCESS
+Cutover Readiness #101         SUCCESS
+64 test files / 424 tests      PASS
+```
 
-R1-A2.7 reconstructs the current renderer-neutral semantic surfaces instead of treating R1.6's historical R0.8 selection as perpetual authority. Fifty-four exact-current public projections produce 54 semantic bilingual EditorialDocuments with zero generic Birth-summary emission. The Systems surface explicitly contains all 27 current Systems in both languages; Home explicitly selects seven Systems plus five Research subjects; Research contains five explicit subjects including WER-ESK despite its current maturity remaining unclassified. Archive, Essays and Notes remain empty rather than being inferred from names, repo age or System prose. The accepted A2.7 candidate passed Verify #325, Editorial Shell Build #160 and Cutover Readiness #91.
+A2.8 changes semantic validity, not physical publication state. Historical R2.6/R2.7 witnesses remain valid for their old specimen but cannot be inherited by the new digest. Therefore the current publication is semantically accepted while physical cutover readiness remains false until the accepted digest is re-emitted, recommissioned, redeployed to an isolated preview and externally witnessed.
 
-A2.7 therefore reconstructs current meaning and placement but still does not declare the whole publication valid. R1-A2.8 is the terminal reconciliation cut that must reconstruct A2.1–A2.7 as one coherent current specimen before `CURRENT_PUBLICATION_VALID` can change.
-
-The amendment is intentionally non-destructive:
+The amendment remains non-destructive:
 
 ```text
 R1 Birth identity        preserved
 R1 completion history    preserved
-R2.6 transport witness   preserved
-R2.7 infra witness       preserved
-
-current publication validity   still gated by A2.8
-current cutover eligibility    revoked
-production mutation            zero
+R2.6 transport witness   preserved as historical evidence
+R2.7 infra witness       preserved as historical evidence
+production mutation      zero
 ```
 
-See `docs/editorial/R1-A2-current-corpus-reconciliation.md` and `docs/editorial/R1-A2-reconciliation-constitution.v0.json`.
+See `docs/editorial/R1-A2-current-corpus-reconciliation.md`, `docs/editorial/R1-A2-reconciliation-constitution.v0.json`, and `docs/editorial/R1-A2.8-completion.v0.json`.
 
 ```text
 R1_0_COMPLETE=true
@@ -133,12 +133,17 @@ R1_7_COMPLETE=true
 R1_8_COMPLETE=true
 R1_9_COMPLETE=true
 R1_COMPLETE=true
-R1_A2_ACTIVE=true
+
+R1_A2_1_COMPLETE=true
+R1_A2_2_COMPLETE=true
 R1_A2_3_COMPLETE=true
 R1_A2_4_COMPLETE=true
 R1_A2_5_COMPLETE=true
 R1_A2_6_COMPLETE=true
 R1_A2_7_COMPLETE=true
+R1_A2_8_COMPLETE=true
+R1_A2_COMPLETE=true
+
 CURRENT_REVISION_MATERIALIZATION_COMPLETE=true
 EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=true
 CURRENT_DISCLOSURE_REAUTHORIZATION_COMPLETE=true
@@ -149,7 +154,11 @@ CURRENT_ROUTE_LANGUAGE_PAIR_COUNT=54
 CURRENT_PUBLIC_PROJECTION_COUNT=54
 CURRENT_EDITORIAL_DOCUMENT_COUNT=54
 CURRENT_SYSTEMS_PER_LANGUAGE=27
-CURRENT_PUBLICATION_VALID=false
+CURRENT_PUBLICATION_VALID=true
+CURRENT_PUBLICATION_DIGEST=sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32
 CUTOVER_READY=false
-NEXT=R1-A2.8 — Current Publication Acceptance
+CUTOVER_AUTHORIZED=false
+CUTOVER_ENACTED=false
+PRODUCTION_MUTATION_COUNT=0
+NEXT=R2-A1 — Current Publication Re-emission & Physical Revalidation
 ```
