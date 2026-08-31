@@ -13,6 +13,10 @@ const canonicalUrl = new URL('/editorial/', Astro.site).toString();
     <p class="kicker">EDITORIAL // RENAN MELO</p>
     <h1>Ideias que aparecem enquanto construo.</h1>
     <p class="dek">Reflexões sobre tecnologia, computação, software, hardware e as abstrações que normalmente só ficam visíveis quando alguma coisa precisa funcionar de verdade.</p>
+    <div class="index-actions" aria-label="Navegação do Editorial">
+      <a class="index-action primary" href="/">← VOLTAR AO PORTFÓLIO</a>
+      <a class="index-action" href="/#selected-work">VER TRABALHOS</a>
+    </div>
   </section>
 
   <div class="publication-list">
@@ -28,3 +32,68 @@ const canonicalUrl = new URL('/editorial/', Astro.site).toString();
     ))}
   </div>
 </PublicationLayout>
+
+<style>
+  .index-header {
+    gap: 14px;
+    margin-bottom: 38px;
+  }
+
+  .index-header h1 {
+    max-width: 780px;
+    margin: 12px 0 8px;
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+
+  .index-header .dek {
+    max-width: 760px;
+    font-size: clamp(17px, 1.7vw, 22px);
+    line-height: 1.55;
+  }
+
+  .index-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .index-action {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    border: 1px solid var(--line);
+    padding: 0 13px;
+    color: var(--muted);
+    font: 600 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .08em;
+    text-decoration: none;
+  }
+
+  .index-action:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .index-action.primary {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  @media (max-width: 760px) {
+    .index-header h1 {
+      font-size: clamp(34px, 11vw, 48px);
+    }
+
+    .index-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .index-action {
+      justify-content: center;
+    }
+  }
+</style>
