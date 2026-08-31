@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / A2.4 GOVERNANCE LINEAGE CORRECTION AWAITING CI**
+Status: **IN PROGRESS / A2.4 CORRECTED AND ACCEPTED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -48,8 +48,8 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | R1-A2.1 | Current GitHub Census + HEAD Observation | **COMPLETE** |
 | R1-A2.2 | Existing Identity Reconciliation | **COMPLETE** |
 | R1-A2.3 | Current Revision Materialization | **COMPLETE** |
-| R1-A2.4 | Evidence + Maturity Reconciliation | **CORRECTION / AWAITING CI** |
-| R1-A2.5 | Public Disclosure Reauthorization | **NOT STARTED** |
+| R1-A2.4 | Evidence + Maturity Reconciliation | **COMPLETE / CORRECTED** |
+| R1-A2.5 | Public Disclosure Reauthorization | **NEXT** |
 | R1-A2.6 | Current Route Admission | **NOT STARTED** |
 | R1-A2.7 | Current Editorial Surface Reconstruction | **NOT STARTED** |
 | R1-A2.8 | Current Publication Acceptance | **NOT STARTED** |
@@ -137,7 +137,7 @@ default branch + exact observed HEAD + observedAt + visibility
 current System Revision
 ```
 
-The ledger contains 48 observations across all 27 current successors:
+The accepted ledger contains 48 observations across all 27 current successors:
 
 ```text
 supports       29
@@ -178,7 +178,7 @@ stage = pre-beta
 
 R0.6 makes `targetRef.recordId` constitutive for a maturity-governance lineage. A changed `basisRef`, stage or rationale therefore produces a successor Revision of that governance Record, not a replacement governance Record.
 
-The corrected A2.4 materialization is:
+The accepted corrected A2.4 materialization is:
 
 ```text
 7 new governance.maturity Births
@@ -194,14 +194,22 @@ basisRef=exact current XS Wallet System generation-1 Revision
 stage=pre-beta
 ```
 
-The prior green campaigns remain historical witnesses of their exact prior specimens:
+The prior green campaigns remain historical witnesses of their exact superseded specimens:
 
 ```text
 candidate f0d3f13...   Verify #268 / Shell #103 / Cutover #34   SUCCESS
 terminal  302dda87...  Verify #276 / Shell #111 / Cutover #42  SUCCESS
 ```
 
-They do **not** authorize the corrected specimen. A2.4 is reopened until fresh CI witnesses the corrected governance lineage.
+The corrected specimen itself was then physically witnessed at `13cbb9855c102f823b59c83433a275730c414412`:
+
+```text
+Verify #286                    SUCCESS
+Editorial Shell Build #121     SUCCESS
+Cutover Readiness #52          SUCCESS
+```
+
+The old witnesses remain historical evidence but do not authorize the corrected specimen; the #286/#121/#52 campaign is the acceptance basis for the corrected lineage.
 
 ```text
 CURRENT_EVIDENCE_OBSERVATION_COUNT=48
@@ -269,8 +277,8 @@ CURRENT_SUCCESSOR_REVISION_COUNT=27
 DEFERRED_CURRENT_REVISION_COUNT=1
 GENERIC_BIRTH_SUMMARY_SUCCESSOR_COUNT=0
 
-EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=false
-EVIDENCE_MATURITY_CORRECTION_ACTIVE=true
+EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=true
+EVIDENCE_MATURITY_CORRECTION_ACTIVE=false
 CURRENT_EVIDENCE_OBSERVATION_COUNT=48
 CURRENT_MATURITY_CLASSIFIED_COUNT=8
 CURRENT_MATURITY_UNCLASSIFIED_COUNT=19
@@ -289,7 +297,7 @@ R1_A2_0_MATERIALIZED=true
 R1_A2_1_COMPLETE=true
 R1_A2_2_COMPLETE=true
 R1_A2_3_COMPLETE=true
-R1_A2_4_COMPLETE=false
+R1_A2_4_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.4 — Governance Lineage Correction CI
+NEXT=R1-A2.5 — Public Disclosure Reauthorization
 ```
