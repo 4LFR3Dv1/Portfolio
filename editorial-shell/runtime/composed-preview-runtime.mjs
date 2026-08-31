@@ -1,3 +1,5 @@
+/* global URL, process, console */
+
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize, resolve } from 'node:path';
@@ -5,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const runtimeDir = fileURLToPath(new URL('.', import.meta.url));
 const distDir = resolve(runtimeDir, '../../dist');
+const distPrefix = `${distDir}/`;
 const port = Number(process.env.PORT || 8080);
 
 const mimeTypes = new Map([
@@ -24,10 +27,16 @@ const mimeTypes = new Map([
 ]);
 
 function safeCandidate(pathname) {
-  const decoded = decodeURIComponent(pathname);
+  let decoded;
+  try {
+    decoded = decodeURIComponent(pathname);
+  } catch {
+    return null;
+  }
+
   const normalized = normalize(decoded).replace(/^([/\\])+/, '');
   const candidate = resolve(distDir, normalized);
-  return candidate.startsWith(distDir) ? candidate : null;
+  return candidate === distDir || candidate.startsWith(distPrefix) ? candidate : null;
 }
 
 function resolveStatic(pathname) {
