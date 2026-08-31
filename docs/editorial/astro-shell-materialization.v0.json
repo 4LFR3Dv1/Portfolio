@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "editorial-astro-shell-materialization/v0",
+  "contractId": "PORTFOLIO-R2.1-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "b2fad19a962c7cee304d165d7bbeead5118fd27e",
+  "preconditions": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "foundationReady": true,
+    "shellBoundaryReady": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "packageGraph": {
+    "workspace": "editorial-shell",
+    "isolatedFromLegacyRootBuild": true,
+    "nodeMinimum": "22.12.0",
+    "astroVersion": "7.2.9",
+    "viteVersion": "8.2.2",
+    "dependencyLockPath": "editorial-shell/package-lock.json",
+    "dependencyLockRequired": true
+  },
+  "rendererInput": {
+    "schemaVersion": "editorial-renderer-input/v0",
+    "materializer": "src/editorial/renderer-input.ts",
+    "buildAdapter": "editorial-shell/scripts/materialize-input.mjs",
+    "generatedPath": "editorial-shell/src/generated/accepted-publication-state.json",
+    "generatedStateCommitted": false,
+    "rendererDirectRegistryReadAllowed": false,
+    "rendererDirectEvidenceReadAllowed": false,
+    "rendererDirectGovernanceReadAllowed": false,
+    "runtimeSemanticRepairAllowed": false,
+    "runtimeSanitizationAllowed": false,
+    "languageFallbackAllowed": false
+  },
+  "rendering": {
+    "framework": "astro-static",
+    "canonicalPageSource": "bounded-r1.7-distribution",
+    "canonicalStaticPageCount": 18,
+    "surfacePageCount": 12,
+    "documentPageCount": 6,
+    "explicit404": true,
+    "unknownRouteOutcome": "404",
+    "legacyPreservedPagesRendered": 0,
+    "compatibilityRedirectsEnacted": false,
+    "distributionArtifactsEmitted": false,
+    "reactIslandsMaterialized": false
+  },
+  "currentState": {
+    "astroDependencyMaterialized": true,
+    "dependencyLockMaterialized": true,
+    "boundedRendererInputMaterialized": true,
+    "astroBuildCommissionedInCi": true,
+    "staticHtmlRenderingEnactedInBuild": true,
+    "productionStaticHtmlActivated": false,
+    "legacyFallbackRendererEnacted": false,
+    "compatibilityRedirectsEnacted": false,
+    "editorialSitemapDeployed": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "rendererConsumesBoundedPublicStateOnly": true,
+    "canonicalStaticPageCount": 18,
+    "publicSemanticDocumentCount": 6,
+    "sanitizedSemanticLeakCount": 0,
+    "rendererDirectInstitutionalReadCount": 0,
+    "legacyScopeLeakCount": 0,
+    "unknownRouteOutcome": "404",
+    "rootRuntimePreserved": true,
+    "r2_1Complete": false,
+    "nextRequiredCut": "R2.2 — Distribution Emission"
+  }
+}

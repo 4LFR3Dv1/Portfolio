@@ -6,14 +6,8 @@ import {
   reconstructRecordRegistry,
   type RecordRegistryManifest,
 } from './record-registry';
-import {
-  reconstructRouteRuntime,
-  type RouteRuntimeManifest,
-} from './route-runtime';
-import {
-  reconstructLanguageRuntime,
-  type LanguageRuntimeManifest,
-} from './language-runtime';
+import { reconstructRouteRuntime, type RouteRuntimeManifest } from './route-runtime';
+import { reconstructLanguageRuntime, type LanguageRuntimeManifest } from './language-runtime';
 import {
   materializeSurfaceDocuments,
   reconstructCoreSurfaceRuntime,
@@ -36,11 +30,7 @@ interface PublicationShellBoundaryCompletion {
   contractId: 'PORTFOLIO-R2.0-2026-08-30';
   materialization: {
     commit: string;
-    verify: {
-      workflow: 'Verify';
-      runId: number;
-      conclusion: 'success';
-    };
+    verify: { workflow: 'Verify'; runId: number; conclusion: 'success' };
     manifestPath: string;
     manifestBlobSha: string;
   };
@@ -117,11 +107,7 @@ describe('R2.0 terminal completion seal', () => {
     expect(completion.contractId).toBe('PORTFOLIO-R2.0-2026-08-30');
     expect(completion.materialization).toEqual({
       commit: '64f617adc9e3de6ec98ead7dc1d814f9ba1d6934',
-      verify: {
-        workflow: 'Verify',
-        runId: 33350672725,
-        conclusion: 'success',
-      },
+      verify: { workflow: 'Verify', runId: 33350672725, conclusion: 'success' },
       manifestPath: 'docs/editorial/publication-shell-boundary.v0.json',
       manifestBlobSha: '6be4d50585de0fe3b62619ee6333ff9a31c5caad',
     });
@@ -138,7 +124,7 @@ describe('R2.0 terminal completion seal', () => {
     expect(shell.plan?.unknownRouteOutcome).toBe('404');
   });
 
-  it('advances R2 to physical Astro materialization without claiming cutover', () => {
+  it('preserves the historical next-cut decision without freezing later R2 progress', () => {
     expect(completion.acceptance).toEqual({
       r1Complete: true,
       r2_0Complete: true,
@@ -149,11 +135,9 @@ describe('R2.0 terminal completion seal', () => {
       nextRequiredCut: 'R2.1 — Astro Shell Materialization & Editorial Renderer',
     });
     expect(r2Readme).toContain('| R2.0 | Publication Shell Boundary | **COMPLETE** |');
-    expect(r2Readme).toContain('| R2.1 | Astro Shell Materialization & Editorial Renderer | **NEXT** |');
     expect(r2Readme).toContain('R2_0_COMPLETE=true');
     expect(r20Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r20Doc).toContain('Materialization `Verify` run `33350672725`: **SUCCESS**.');
-    expect(r20Doc).toContain('R2_0_COMPLETE                                    true');
     expect(completion.effectivePlan.astroDependencyMaterialized).toBe(false);
     expect(completion.effectivePlan.vercelCutoverEnacted).toBe(false);
     expect(completion.effectivePlan.deployedRuntimeChanged).toBe(false);

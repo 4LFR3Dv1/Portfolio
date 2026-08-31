@@ -1,0 +1,79 @@
+---
+import EditorialLayout from '../layouts/EditorialLayout.astro';
+import { publicationState } from '../lib/publication-state';
+import type { DistributionPage } from '../../../src/editorial/distribution-runtime';
+
+interface Props { page: DistributionPage; }
+
+export function getStaticPaths() {
+  return publicationState.pages.map((page) => ({
+    params: { path: page.canonicalPath.slice(1) },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props as Props;
+const surface = page.source === 'surface'
+  ? publicationState.surfaces.find((entry) => entry.path === page.canonicalPath) ?? null
+  : null;
+const document = page.source === 'document'
+  ? publicationState.documents.find((entry) => entry.canonicalPath === page.canonicalPath) ?? null
+  : null;
+
+if (page.source === 'surface' && !surface) throw new Error(`editorial-shell-surface-missing:${page.canonicalPath}`);
+if (page.source === 'document' && !document) throw new Error(`editorial-shell-document-missing:${page.canonicalPath}`);
+
+const isPt = page.language === 'pt-BR';
+const eyebrow = page.source === 'surface'
+  ? (isPt ? 'SUPERFÍCIE EDITORIAL' : 'EDITORIAL SURFACE')
+  : (isPt ? 'SISTEMA ADMITIDO' : 'ADMITTED SYSTEM');
+const emptyCopy = isPt ? 'Nenhuma publicação admitida nesta superfície ainda.' : 'No admitted publications on this surface yet.';
+const maturity = document?.maturity.state === 'classified' ? document.maturity.stage : document?.maturity.state ?? 'unclassified';
+---
+<EditorialLayout title={page.title} description={page.description} language={page.language}>
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{page.title}</h1>
+  <p class="lede">{page.description}</p>
+
+  {surface && (
+    <div class="section-grid">
+      {surface.sections.map((section) => (
+        <section class="section-block" aria-labelledby={`${surface.id}-${section.id}`}>
+          <div class="section-heading">
+            <h2 id={`${surface.id}-${section.id}`}>{section.id}</h2>
+            <span class="meta">{section.count}</span>
+          </div>
+          {section.items.length > 0 ? (
+            <div class="record-list">
+              {section.items.map((item) => (
+                <a class="record-card" href={item.canonicalPath}>
+                  <span>
+                    <h3>{item.title ?? item.kind}</h3>
+                    {item.summary && <p>{item.summary}</p>}
+                  </span>
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          ) : <p class="empty">{emptyCopy}</p>}
+        </section>
+      ))}
+    </div>
+  )}
+
+  {document?.content.type === 'knowledge.system' && (
+    <section class="system-body">
+      <div class="system-copy">
+        <p>{document.content.summary}</p>
+        {document.content.thesis && <><p class="meta">{isPt ? 'TESE' : 'THESIS'}</p><p>{document.content.thesis}</p></>}
+      </div>
+      <dl class="facts">
+        <div><dt>{isPt ? 'Identidade' : 'Identity'}</dt><dd>{document.targetRef.recordId}</dd></div>
+        <div><dt>{isPt ? 'Revisão' : 'Revision'}</dt><dd>{document.targetRef.revisionId}</dd></div>
+        <div><dt>{isPt ? 'Maturidade' : 'Maturity'}</dt><dd>{maturity}</dd></div>
+        <div><dt>{isPt ? 'Divulgação' : 'Disclosure'}</dt><dd>{document.disclosure.mode}</dd></div>
+        <div><dt>{isPt ? 'Realização' : 'Realization'}</dt><dd>{document.realization?.role ?? 'none'}</dd></div>
+      </dl>
+    </section>
+  )}
+</EditorialLayout>

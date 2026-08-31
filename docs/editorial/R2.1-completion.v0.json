@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "editorial-astro-shell-materialization-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R2.1-2026-08-30",
+  "materialization": {
+    "commit": "aba73fded99f85adc0da762086a5ff16dc0271cc",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33352417378,
+      "conclusion": "success"
+    },
+    "shellBuild": {
+      "workflow": "Editorial Shell Build",
+      "runId": 33352417376,
+      "conclusion": "success",
+      "artifactId": 9744058666,
+      "artifactDigest": "sha256:c5e81ed5a434325b55d49d2e299b3d0506c7b7639346e0625b9169c434eba6ec"
+    },
+    "manifestPath": "docs/editorial/astro-shell-materialization.v0.json",
+    "manifestBlobSha": "95414c51a72b407d022d1d6af8cb4774e2a73a58"
+  },
+  "effectiveShell": {
+    "astroVersion": "7.2.9",
+    "viteVersion": "8.2.2",
+    "dependencyLockMaterialized": true,
+    "boundedRendererInputMaterialized": true,
+    "rendererDirectInstitutionalReadCount": 0,
+    "canonicalStaticPageCount": 18,
+    "surfacePageCount": 12,
+    "publicSemanticDocumentCount": 6,
+    "explicit404Materialized": true,
+    "sanitizedSemanticLeakCount": 0,
+    "legacyPreservedPagesRendered": 0,
+    "compatibilityRedirectsEnacted": false,
+    "distributionArtifactsEmitted": false,
+    "reactIslandsMaterialized": false,
+    "productionStaticHtmlActivated": false,
+    "legacyFallbackRendererEnacted": false,
+    "editorialSitemapDeployed": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "shellPhysicallyMaterialized": true,
+    "rendererAuthorityPreserved": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "deploymentMutationCount": 0,
+    "nextRequiredCut": "R2.2 — Distribution Emission"
+  }
+}
