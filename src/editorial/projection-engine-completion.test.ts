@@ -135,7 +135,7 @@ describe('R1.2 terminal completion seal', () => {
     });
   });
 
-  it('advances R1 to Route Runtime only after the projection boundary is CI witnessed', () => {
+  it('preserves the R1.2 terminal seal after later R1 cuts advance the program', () => {
     expect(completion.acceptance).toEqual({
       r1_1Complete: true,
       r1_2Complete: true,
@@ -146,7 +146,7 @@ describe('R1.2 terminal completion seal', () => {
       nextRequiredCut: 'R1.3 — Route Runtime',
     });
     expect(r1Readme).toContain('| R1.2 | Projection Engine | **COMPLETE** |');
-    expect(r1Readme).toContain('| R1.3 | Route Runtime | **NEXT** |');
+    expect(r1Readme).toMatch(/\| R1\.3 \| Route Runtime \| \*\*(?:NEXT|COMPLETE)\*\* \|/);
     expect(r1Readme).toContain('R1_2_COMPLETE=true');
     expect(r12Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r12Doc).toContain('Verify run 33342868125');
