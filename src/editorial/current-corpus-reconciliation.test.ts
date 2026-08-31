@@ -98,11 +98,14 @@ const a24 = readJson<Completion>('docs/editorial/R1-A2.4-completion.v0.json');
 const a25 = readJson<Completion>('docs/editorial/R1-A2.5-completion.v0.json');
 const a26 = readJson<Completion>('docs/editorial/R1-A2.6-completion.v0.json');
 const a27 = readJson<Completion>('docs/editorial/R1-A2.7-completion.v0.json');
+const a28 = readJson<Completion>('docs/editorial/R1-A2.8-completion.v0.json');
 const r1A2Doc = readRepoFile('docs/editorial/R1-A2-current-corpus-reconciliation.md');
 const r2Readme = readRepoFile('docs/editorial/R2-README.md');
 
+const acceptedDigest = 'sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32';
+
 describe('R1-A2 current corpus reconciliation', () => {
-  it('preserves historical R1/R2 completion while revoking current cutover eligibility', () => {
+  it('preserves historical R1/R2 completion while current cutover remains physically blocked', () => {
     expect(constitution.baseline).toBe('1ad9128328ed702d0c160be5acca5a4874674d25');
     expect(constitution.historicalState).toEqual({
       r1Complete: true,
@@ -119,13 +122,13 @@ describe('R1-A2 current corpus reconciliation', () => {
       cutoverEnacted: false,
     });
     expect(constitution.currentState).toMatchObject({
-      currentPublicationValid: false,
+      currentPublicationValid: true,
       cutoverReady: false,
       cutoverAuthorized: false,
       cutoverEnacted: false,
       productionMutationCount: 0,
     });
-    expect(r2Readme).toContain('CURRENT_PUBLICATION_VALID=false');
+    expect(r2Readme).toContain('CURRENT_PUBLICATION_VALID=true');
     expect(r2Readme).toContain('CUTOVER_READY=false');
   });
 
@@ -201,7 +204,7 @@ describe('R1-A2 current corpus reconciliation', () => {
     ]);
   });
 
-  it('treats every earlier completion seal as monotonic history rather than global NEXT authority', () => {
+  it('treats every completion seal as monotonic history rather than future-program authority', () => {
     expect(a21.status).toBe('complete');
     expect(a21.acceptance).toMatchObject({ r1_a2_1Complete: true, nextRequiredCut: 'R1-A2.2 — Existing Identity Reconciliation' });
     expect(a22.status).toBe('complete');
@@ -216,9 +219,16 @@ describe('R1-A2 current corpus reconciliation', () => {
     expect(a26.acceptance).toMatchObject({ r1_a2_6Complete: true, nextRequiredCut: 'R1-A2.7 — Current Editorial Surface Reconstruction' });
     expect(a27.status).toBe('complete');
     expect(a27.acceptance).toMatchObject({ r1_a2_7Complete: true, nextRequiredCut: 'R1-A2.8 — Current Publication Acceptance' });
+    expect(a28.status).toBe('complete');
+    expect(a28.acceptance).toMatchObject({
+      r1_a2_8Complete: true,
+      r1_a2Complete: true,
+      currentPublicationValid: true,
+      nextRequiredProgram: 'R2-A1 — Current Publication Re-emission & Physical Revalidation',
+    });
   });
 
-  it('advances the current constitution through A2.7 while leaving publication validity for A2.8', () => {
+  it('closes the current constitution through A2.8 while keeping physical revalidation separate', () => {
     expect(constitution.currentState).toMatchObject({
       currentCorpusCensusComplete: true,
       currentRepositoryCount: 54,
@@ -267,8 +277,12 @@ describe('R1-A2 current corpus reconciliation', () => {
       currentGenericBirthSummaryEmissionCount: 0,
       currentCrossLanguageSurfaceDriftCount: 0,
       currentRankingInferenceCount: 0,
-      currentPublicationValid: false,
+      currentPublicationAcceptanceComplete: true,
+      currentPublicationSpecimenDeterministic: true,
+      currentPublicationValid: true,
       cutoverReady: false,
+      cutoverAuthorized: false,
+      cutoverEnacted: false,
       productionMutationCount: 0,
     });
     expect(constitution.acceptance).toMatchObject({
@@ -279,11 +293,13 @@ describe('R1-A2 current corpus reconciliation', () => {
       r1_a2_5Complete: true,
       r1_a2_6Complete: true,
       r1_a2_7Complete: true,
-      r1_a2Complete: false,
-      currentPublicationValid: false,
+      r1_a2_8Complete: true,
+      r1_a2Complete: true,
+      currentPublicationValid: true,
+      acceptedPublicationDigest: acceptedDigest,
       cutoverReady: false,
       cutoverAuthorized: false,
-      nextRequiredCut: 'R1-A2.8 — Current Publication Acceptance',
+      nextRequiredProgram: 'R2-A1 — Current Publication Re-emission & Physical Revalidation',
     });
     expect(constitution.laws).toMatchObject({
       existingRecordIdentityMustBePreserved: true,
@@ -300,7 +316,9 @@ describe('R1-A2 current corpus reconciliation', () => {
       historicalRouteIdentityMustBePreserved: true,
       currentPublicationValidityGatesCutover: true,
     });
-    expect(r1A2Doc).toContain('R1_A2_7_COMPLETE=true');
-    expect(r1A2Doc).toContain('NEXT=R1-A2.8 — Current Publication Acceptance');
+    expect(r1A2Doc).toContain('R1_A2_8_COMPLETE=true');
+    expect(r1A2Doc).toContain('R1_A2_COMPLETE=true');
+    expect(r1A2Doc).toContain('CURRENT_PUBLICATION_VALID=true');
+    expect(r1A2Doc).toContain('NEXT=R2-A1 — Current Publication Re-emission & Physical Revalidation');
   });
 });
