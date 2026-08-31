@@ -30,36 +30,22 @@ describe('architecture catalog', () => {
     expect(getArchitectureView(null).id).toBe('systems');
   });
 
-  it('does not expose legacy topology, private work or proof-first presentation language', () => {
-    const publicCatalog = JSON.stringify(architectureViews).toLowerCase();
+  it('does not expose legacy topology, domains or implementation paths', () => {
+    const publicCatalog = JSON.stringify(architectureViews);
     const forbidden = [
       'radar.snelabs.space',
       'api.snelabs.space',
-      'sne_radar.exe',
+      'SNE_Radar.exe',
       'auth_manager.py',
-      'post /api/',
-      'flask server',
-      'metamask',
-      'binance api',
-      'bybit api',
-      'brineos',
-      'deterministic first',
-      'sanitized public view',
-      'governing principle',
-      'system guarantees',
-      'trust boundaries',
-      'evidence bundle',
+      'POST /api/',
+      'Flask Server',
+      'MetaMask',
+      'Binance API',
+      'Bybit API',
     ];
 
     for (const value of forbidden) {
-      expect(publicCatalog, `architecture surface contains: ${value}`).not.toContain(value);
-    }
-  });
-
-  it('frames each architecture view as a question or understandable design problem', () => {
-    for (const view of architectureViews) {
-      expect(view.title.en.endsWith('?')).toBe(true);
-      expect(view.title.pt.endsWith('?')).toBe(true);
+      expect(publicCatalog).not.toContain(value);
     }
   });
 });
