@@ -15,6 +15,7 @@
     "semanticSeal": "docs/editorial/R1-A2.8-completion.v0.json",
     "currentSurfaceContract": "docs/editorial/R1-A2.7-current-editorial-surfaces.v0.json",
     "currentSurfaceRuntime": "src/editorial/current-surface-runtime.ts",
+    "currentRendererInputSeal": "docs/editorial/R2-A1.1-completion.v0.json",
     "historicalRendererInput": "src/editorial/renderer-input.ts",
     "historicalShell": "editorial-shell/",
     "productionAdapter": "vercel.json"
@@ -40,36 +41,12 @@
     "cutoverEnactmentIncluded": false
   },
   "program": [
-    {
-      "cut": "R2-A1.0",
-      "purpose": "Physical Re-emission Constitution",
-      "status": "complete"
-    },
-    {
-      "cut": "R2-A1.1",
-      "purpose": "Current Renderer Input Re-emission",
-      "status": "next"
-    },
-    {
-      "cut": "R2-A1.2",
-      "purpose": "Current Distribution Emission",
-      "status": "not-started"
-    },
-    {
-      "cut": "R2-A1.3",
-      "purpose": "Compatibility + Static Runtime Recommissioning",
-      "status": "not-started"
-    },
-    {
-      "cut": "R2-A1.4",
-      "purpose": "Isolated Current Preview Deployment",
-      "status": "not-started"
-    },
-    {
-      "cut": "R2-A1.5",
-      "purpose": "External Environmental Invariance + Current Readiness",
-      "status": "not-started"
-    }
+    {"cut":"R2-A1.0","purpose":"Physical Re-emission Constitution","status":"complete"},
+    {"cut":"R2-A1.1","purpose":"Current Renderer Input Re-emission","status":"complete"},
+    {"cut":"R2-A1.2","purpose":"Current Distribution Emission","status":"next"},
+    {"cut":"R2-A1.3","purpose":"Compatibility + Static Runtime Recommissioning","status":"not-started"},
+    {"cut":"R2-A1.4","purpose":"Isolated Current Preview Deployment","status":"not-started"},
+    {"cut":"R2-A1.5","purpose":"External Environmental Invariance + Current Readiness","status":"not-started"}
   ],
   "historicalWitnessBoundary": {
     "r2_6HistoricalComplete": true,
@@ -87,7 +64,8 @@
     "productionMutationCount": 0
   },
   "currentState": {
-    "currentSpecimenReemitted": false,
+    "currentSpecimenReemitted": true,
+    "currentRendererInputDigest": "sha256_4b2bc45e2127befd4f7be0aaf7b4a2cebe0ad7ab9da7a7fa774414af155d73e6",
     "currentDistributionEmitted": false,
     "currentCompatibilityReconciled": false,
     "currentStaticRuntimeRecommissioned": false,
@@ -101,12 +79,13 @@
   },
   "acceptance": {
     "r2_a1_0Complete": true,
+    "r2_a1_1Complete": true,
     "r2_a1Complete": false,
     "currentPublicationValid": true,
     "currentPhysicalPublicationValid": false,
     "cutoverReady": false,
     "cutoverAuthorized": false,
     "cutoverEnacted": false,
-    "nextRequiredAction": "R2-A1.1 — Current Renderer Input Re-emission"
+    "nextRequiredAction": "R2-A1.2 — Current Distribution Emission"
   }
 }
