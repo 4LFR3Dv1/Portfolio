@@ -1,0 +1,12 @@
+---
+import CompatibilityRedirectLayout from '../layouts/CompatibilityRedirectLayout.astro';
+import { publicationState } from '../lib/publication-state';
+
+const entry = publicationState.redirects.entries.find((candidate) => candidate.legacyPath === '/');
+if (!entry) throw new Error('editorial-shell-root-redirect-entry-missing');
+---
+<CompatibilityRedirectLayout
+  entry={entry}
+  endpoint={publicationState.redirects.http.endpoint}
+  storageKey={publicationState.redirects.language.storageKey}
+/>
