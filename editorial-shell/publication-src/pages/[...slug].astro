@@ -1,5 +1,6 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
+import { getPublicationEditorialContext } from '../data/editorial';
 import { publications, type EditorialPublication } from '../data/publications';
 
 export function getStaticPaths() {
@@ -21,6 +22,7 @@ linkedInShareUrl.searchParams.set('v', publication.publishedAt.replaceAll('-', '
 const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(linkedInShareUrl.toString())}`;
 const publishedAt = `${publication.publishedAt}T12:00:00-03:00`;
 const ogImagePath = `/editorial/og/${publication.slug}.png`;
+const editorialContext = getPublicationEditorialContext(publication.slug);
 ---
 <PublicationLayout
   title={`${title} — Renan Melo`}
@@ -40,6 +42,21 @@ const ogImagePath = `/editorial/og/${publication.slug}.png`;
     <span>{publication.dateLabel.pt}</span>
     <span>{publication.readTime.pt}</span>
   </div>
+
+  {editorialContext && (
+    <section class="article-context" aria-labelledby="article-context-title">
+      <div class="article-context-label">DA INVESTIGAÇÃO</div>
+      <div>
+        <h2 id="article-context-title">{editorialContext.inquiry.question.pt}</h2>
+        <p>Este ensaio registra uma resposta dentro de uma investigação que continua ativa.</p>
+      </div>
+      <div class="article-context-threads">
+        <span>LINHAS</span>
+        {editorialContext.threads.map((thread) => <strong>{thread.title.pt}</strong>)}
+        <a href={`/editorial/#${editorialContext.inquiry.anchor}`}>VER PERGUNTA →</a>
+      </div>
+    </section>
+  )}
 
   <div class="article-grid">
     <article>
@@ -63,6 +80,67 @@ const ogImagePath = `/editorial/og/${publication.slug}.png`;
     </aside>
   </div>
 </PublicationLayout>
+
+<style>
+  .article-context {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr) 220px;
+    gap: 28px;
+    align-items: start;
+    margin-top: 48px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .article-context-label,
+  .article-context-threads {
+    color: var(--muted);
+    font: 600 9px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  .article-context h2 {
+    max-width: 680px;
+    margin: 0;
+    color: var(--text);
+    font: 700 clamp(19px, 2.4vw, 28px)/1.18 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: -.025em;
+    text-transform: none;
+  }
+
+  .article-context p {
+    max-width: 650px;
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .article-context-threads {
+    display: grid;
+    gap: 8px;
+  }
+
+  .article-context-threads strong {
+    color: var(--purple);
+    font-weight: 600;
+  }
+
+  .article-context-threads a {
+    margin-top: 10px;
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  @media (max-width: 760px) {
+    .article-context {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+</style>
 
 <script>
   document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((button) => {
