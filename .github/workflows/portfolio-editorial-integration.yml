@@ -28,17 +28,16 @@ jobs:
           set -euo pipefail
           test -f dist/index.html
           test -f dist/editorial/index.html
-          test -f dist/editorial/systems/genesis/index.html
-          test -f dist/editorial/systems/brineos/index.html
-          test -f dist/editorial/systems/wer-esk/index.html
-          test -f dist/editorial/systems/foundry/index.html
-          test -f dist/editorial/systems/sne-fde/index.html
-          test -f dist/editorial/systems/lisa/index.html
-          grep -F 'https://renan.snelabs.space/editorial/systems/genesis/' dist/editorial/systems/genesis/index.html
-          grep -F 'og:title' dist/editorial/systems/genesis/index.html
-          grep -F 'www.linkedin.com/sharing/share-offsite' dist/editorial/systems/genesis/index.html
-          grep -R -F 'Computing Systems Engineer' dist/assets
-          echo 'PORTFOLIO + EDITORIAL COMPOSED BUILD: PASS'
+          test -f dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
+          test -f dist/editorial/onde-existe-uma-rede/index.html
+          test -f dist/editorial/o-passado-de-um-sistema-nao-existe/index.html
+          test ! -e dist/editorial/systems/brineos
+          test ! -e dist/editorial/systems/genesis
+          grep -F 'https://renan.snelabs.space/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/' dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
+          grep -F 'og:title' dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
+          grep -F 'www.linkedin.com/sharing/share-offsite' dist/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/index.html
+          grep -R -F 'Projeto e construo sistemas de software.' dist/assets
+          echo 'PORTFOLIO + ESSAY EDITORIAL COMPOSED BUILD: PASS'
       - name: Witness composed preview routing
         shell: bash
         run: |
@@ -57,7 +56,7 @@ jobs:
           curl -fsS http://127.0.0.1:4173/architecture >/tmp/architecture.html
           curl -fsS http://127.0.0.1:4173/work/vira >/tmp/work.html
           curl -fsS http://127.0.0.1:4173/editorial/ >/tmp/editorial.html
-          curl -fsS http://127.0.0.1:4173/editorial/systems/genesis/ >/tmp/genesis.html
+          curl -fsS http://127.0.0.1:4173/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/ >/tmp/essay.html
 
           root_sha=$(sha256sum /tmp/root.html | cut -d' ' -f1)
           architecture_sha=$(sha256sum /tmp/architecture.html | cut -d' ' -f1)
@@ -66,15 +65,17 @@ jobs:
           test "$root_sha" = "$work_sha"
 
           grep -F 'EDITORIAL // RENAN MELO' /tmp/editorial.html
-          grep -F 'Genesis — Renan Melo' /tmp/genesis.html
-          grep -F 'og:title' /tmp/genesis.html
+          grep -F 'Quando um navegador deixa de ser uma ferramenta?' /tmp/essay.html
+          grep -F 'og:title' /tmp/essay.html
 
+          brine_status=$(curl -sS -o /tmp/brine.html -w '%{http_code}' http://127.0.0.1:4173/editorial/systems/brineos/)
+          test "$brine_status" = '404'
           missing_status=$(curl -sS -o /tmp/missing.html -w '%{http_code}' http://127.0.0.1:4173/editorial/does-not-exist/)
           test "$missing_status" = '404'
-          grep -F 'Not Found' /tmp/missing.html
 
           echo "react_spa_root_sha256=sha256:$root_sha"
           echo 'editorial_index_status=200'
-          echo 'editorial_genesis_status=200'
+          echo 'editorial_essay_status=200'
+          echo 'editorial_brine_status=404'
           echo 'editorial_missing_status=404'
           echo 'PORTFOLIO + EDITORIAL ROUTING: PASS'
