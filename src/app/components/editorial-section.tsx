@@ -14,12 +14,12 @@ export function EditorialSection() {
               02 // EDITORIAL
             </div>
             <h2 className="max-w-3xl font-mono text-2xl font-bold tracking-tight text-[var(--terminal-text)] lg:text-3xl">
-              {isEnglish ? 'Systems, research and notes from current work.' : 'Sistemas, pesquisas e notas do trabalho atual.'}
+              {isEnglish ? 'Research, systems and notes from what I am building.' : 'Pesquisas, sistemas e notas sobre o que estou construindo.'}
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--terminal-muted)]">
               {isEnglish
-                ? 'Shareable static publications generated as durable links, with canonical metadata for reading, search and social sharing.'
-                : 'Publicações estáticas compartilháveis, geradas como links duráveis com metadata canônica para leitura, busca e compartilhamento social.'}
+                ? 'Short publications about projects, technical questions and lessons from ongoing work. Each entry has its own link for reading and sharing.'
+                : 'Publicações curtas sobre projetos, questões técnicas e aprendizados do trabalho em andamento. Cada texto tem seu próprio link para leitura e compartilhamento.'}
             </p>
           </div>
           <a
@@ -47,7 +47,7 @@ export function EditorialSection() {
                   {publication.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--terminal-muted)]">{copy.summary}</p>
-                <div className="mt-6 font-mono text-xs text-[var(--electric-blue)]">READ →</div>
+                <div className="mt-6 font-mono text-xs text-[var(--electric-blue)]">{isEnglish ? 'READ →' : 'LER →'}</div>
               </a>
             );
           })}
