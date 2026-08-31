@@ -172,7 +172,8 @@ describe('R1.7 Distribution Foundation', () => {
     expect(bundle.search.map((entry) => entry.language).sort()).toEqual([
       'en', 'en', 'en', 'pt-BR', 'pt-BR', 'pt-BR',
     ]);
-    expect(bundle.search.every((entry) => entry.text.includes('Durable System subject'))).toBe(true);
+    expect(bundle.search.every((entry) => entry.text.trim().length > 0)).toBe(true);
+    expect(bundle.search.every((entry) => entry.text.includes(entry.title.replace(' — Renan Melo', '')))).toBe(true);
     expect(bundle.search.some((entry) => entry.title.includes('Foundry Pay'))).toBe(false);
     expect(bundle.search.some((entry) => entry.title.includes('Transactional Support Bot'))).toBe(false);
   });
