@@ -17,6 +17,24 @@
     "cutoverReadinessRunNumber": 76,
     "cutoverReadinessConclusion": "success"
   },
+  "rejectedSealAttempt": {
+    "branchHead": "d567b7b6a1076bcd14d706910696e5bed8c1650d",
+    "verifyRunId": 33425719473,
+    "verifyRunNumber": 318,
+    "verifyConclusion": "failure",
+    "workflowHeadSha": "d567b7b6a1076bcd14d706910696e5bed8c1650d",
+    "checkedOutMergeRefSha": "f37a05866812ef81efa6fbd46067bf8c6cecbd70",
+    "reason": "pull-request synthetic merge ref had not refreshed to include the head correction; the runner therefore executed the superseded TypeScript acceptance type",
+    "semanticContractFailure": false,
+    "acceptedAsTerminalWitness": false
+  },
+  "terminalWitnessPolicy": {
+    "freshMergeRefRequired": true,
+    "headMustContainAcceptanceTypingCorrection": true,
+    "verifyMustPass": true,
+    "editorialShellBuildMustPass": true,
+    "cutoverReadinessMustPass": true
+  },
   "materialization": {
     "currentSuccessorSystemCount": 27,
     "currentRoutedSystemCount": 27,
