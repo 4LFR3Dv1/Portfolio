@@ -452,7 +452,7 @@ describe('R1-A2 current corpus reconciliation', () => {
     expect(identity.laws.unresolvedRelationMayBePreservedWithoutIdentityReplacement).toBe(true);
   });
 
-  it('preserves earlier seals while reopening only A2.4 current acceptance for governance-lineage correction', () => {
+  it('preserves earlier seals while accepting corrected A2.4 without governance identity replacement', () => {
     expect(identity.currentState).toMatchObject({
       existingBirthRecordCount: 28,
       reconciledRecordCount: 28,
@@ -507,8 +507,8 @@ describe('R1-A2 current corpus reconciliation', () => {
       recordIdChangeCount: 0,
       newRecordBirthCount: 0,
       currentRevisionMaterializationComplete: true,
-      evidenceMaturityReconciliationComplete: false,
-      evidenceMaturityCorrectionActive: true,
+      evidenceMaturityReconciliationComplete: true,
+      evidenceMaturityCorrectionActive: false,
       currentEvidenceObservationCount: 48,
       currentMaturityClassifiedCount: 8,
       currentMaturityUnclassifiedCount: 19,
@@ -524,9 +524,9 @@ describe('R1-A2 current corpus reconciliation', () => {
       r1_a2_1Complete: true,
       r1_a2_2Complete: true,
       r1_a2_3Complete: true,
-      r1_a2_4Complete: false,
+      r1_a2_4Complete: true,
       r1_a2Complete: false,
-      nextRequiredCut: 'R1-A2.4 — Governance Lineage Correction CI',
+      nextRequiredCut: 'R1-A2.5 — Public Disclosure Reauthorization',
     });
     expect(constitution.laws).toMatchObject({
       existingRecordIdentityMustBePreserved: true,
@@ -544,6 +544,7 @@ describe('R1-A2 current corpus reconciliation', () => {
     });
     expect(r1A2Doc).toContain('R1_A2_2_COMPLETE=true');
     expect(r1A2Doc).toContain('R1_A2_3_COMPLETE=true');
-    expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=false');
+    expect(r1A2Doc).toContain('R1_A2_4_COMPLETE=true');
+    expect(r1A2Doc).toContain('NEXT=R1-A2.5 — Public Disclosure Reauthorization');
   });
 });
