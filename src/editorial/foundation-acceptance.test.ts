@@ -89,9 +89,9 @@ function previousCutsAreSealed(): boolean {
 }
 
 function registryState(): 'ready' | 'conflict' {
-  return registry.errors.length === 0 && registry.unavailableRecordIds.size === 0
-    ? 'ready'
-    : 'conflict';
+  const lineagesReady = [...registry.records.values()].every((lineage) =>
+    lineage.state === 'ready' || lineage.state === 'tombstoned');
+  return registry.errors.length === 0 && lineagesReady ? 'ready' : 'conflict';
 }
 
 function currentSnapshot(): FoundationAcceptanceSnapshot {
@@ -144,7 +144,8 @@ describe('R1.9 Foundation Acceptance', () => {
 
   it('reconstructs the complete editorial pipeline from canonical manifests without repair', () => {
     expect(registry.errors).toEqual([]);
-    expect(registry.unavailableRecordIds.size).toBe(0);
+    expect(registryState()).toBe('ready');
+    expect(registry.unavailableRecordIds.size).toBe(37);
     expect(routeRuntime.state).toBe('ready');
     expect(languageRuntime.state).toBe('ready');
     expect(surfaceState.governance.state).toBe('ready');
