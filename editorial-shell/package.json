@@ -24,6 +24,7 @@
     "verify:preview-entrypoint": "node scripts/verify-preview-entrypoint.mjs",
     "verify:current-preview-entrypoint": "node scripts/verify-current-preview-entrypoint.mjs",
     "verify:preview": "node scripts/verify-preview-invariance.mjs",
+    "verify:current-preview": "node scripts/verify-current-preview-invariance.mjs",
     "verify:cutover-readiness": "node scripts/verify-cutover-readiness.mjs"
   },
   "dependencies": {
