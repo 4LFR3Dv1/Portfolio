@@ -14,7 +14,11 @@ const { publication } = Astro.props as Props;
 const copy = publication.copy.pt;
 const title = publication.title.pt;
 const canonicalUrl = new URL(`/editorial/${publication.slug}/`, Astro.site).toString();
-const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`;
+const linkedInShareUrl = new URL(canonicalUrl);
+linkedInShareUrl.searchParams.set('utm_source', 'linkedin');
+linkedInShareUrl.searchParams.set('utm_medium', 'social');
+linkedInShareUrl.searchParams.set('v', publication.publishedAt.replaceAll('-', ''));
+const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(linkedInShareUrl.toString())}`;
 const publishedAt = `${publication.publishedAt}T12:00:00-03:00`;
 const ogImagePath = `/editorial/og/${publication.slug}.png`;
 ---
