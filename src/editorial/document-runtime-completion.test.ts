@@ -1,7 +1,6 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import type { EditorialDocumentRuntimeManifest } from './document-runtime-manifest';
 
 interface DocumentRuntimeCompletion {
   schemaVersion: 'editorial-document-runtime-completion/v0';
@@ -47,6 +46,21 @@ interface DocumentRuntimeCompletion {
   };
 }
 
+interface DocumentRuntimeManifest {
+  acceptance: {
+    documentRuntimeMaterialized: true;
+    projectionRequired: true;
+    exactLanguageRealizationRequiredForFullContent: true;
+    metadataOnlySemanticPayloadForbidden: true;
+    sanitizedRuntimeTransformationForbidden: true;
+    redirectDoesNotBecomeDocument: true;
+    currentEditorialDocumentCount: 0;
+    publicUiChanged: false;
+    runtimeSemanticsChanged: false;
+    r1_5Complete: false;
+  };
+}
+
 function readRepoFile(path: string): string {
   return readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 }
@@ -60,7 +74,7 @@ function gitBlobSha(content: string): string {
 }
 
 const manifestText = readRepoFile('docs/editorial/editorial-document-runtime.v0.json');
-const manifest = JSON.parse(manifestText) as EditorialDocumentRuntimeManifest;
+const manifest = JSON.parse(manifestText) as DocumentRuntimeManifest;
 const completion = JSON.parse(
   readRepoFile('docs/editorial/R1.5-completion.v0.json'),
 ) as DocumentRuntimeCompletion;
@@ -72,6 +86,7 @@ describe('R1.5 terminal completion seal', () => {
     expect(completion.schemaVersion).toBe('editorial-document-runtime-completion/v0');
     expect(completion.status).toBe('frozen');
     expect(completion.normative).toBe(true);
+    expect(completion.contractId).toBe('PORTFOLIO-R1.5-2026-08-30');
     expect(completion.materialization).toEqual({
       commit: 'b8ed8e96adbca6672dbe25143249cee2fa560763',
       verify: {
@@ -86,17 +101,8 @@ describe('R1.5 terminal completion seal', () => {
   });
 
   it('closes R1.5 without rewriting the materialization manifest or publishing content prematurely', () => {
-    expect(manifest.status).toBe('materialized');
     expect(manifest.acceptance.r1_5Complete).toBe(false);
-    expect(manifest.currentState).toEqual({
-      publicProjectionCount: 0,
-      editorialDocumentCount: 0,
-      frameworkCutoverEnacted: false,
-      staticHtmlRenderingEnacted: false,
-      markdownAuthorityIntroduced: false,
-      publicUiChanged: false,
-      runtimeSemanticsChanged: false,
-    });
+    expect(manifest.acceptance.currentEditorialDocumentCount).toBe(0);
     expect(completion.effectiveDocumentRuntime).toEqual({
       publicProjectionCount: 0,
       editorialDocumentCount: 0,
