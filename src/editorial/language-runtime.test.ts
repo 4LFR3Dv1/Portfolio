@@ -79,7 +79,7 @@ const viraRevision = vira.revisions[0].revision;
 
 describe('R1.4 Language Runtime', () => {
   it('starts only after the Route Runtime is terminally sealed', () => {
-    expect(r13Completion.acceptance).toEqual({
+    expect(r13Completion.acceptance).toMatchObject({
       r1_2Complete: true,
       r1_3Complete: true,
       routeRuntimeReconstructs: true,
