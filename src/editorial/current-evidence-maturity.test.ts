@@ -13,9 +13,11 @@ const materialized = materializeCurrentEvidenceMaturity();
 const revisions = materializeCurrentSystemRevisions();
 const coreSurfaces = coreEditorialSurfacesJson as {
   governanceAssignments: Array<{
+    governanceRecordId: string;
     kind: string;
     targetRecordId: string;
     basisRevisionId: string;
+    stage?: string;
   }>;
 };
 
@@ -72,9 +74,11 @@ describe('R1-A2.4 current Evidence + Maturity reconciliation', () => {
     });
   });
 
-  it('materializes exactly eight maturity authorities against the exact current System revisions', () => {
+  it('materializes seven new maturity births plus one successor while classifying exactly eight current heads', () => {
     expect(materialized.maturityRecords).toHaveLength(8);
     expect(new Set(materialized.maturityRecords.map((entry) => entry.governanceRecordId)).size).toBe(8);
+    expect(materialized.maturityRecords.filter((entry) => entry.materializationKind === 'birth')).toHaveLength(7);
+    expect(materialized.maturityRecords.filter((entry) => entry.materializationKind === 'successor')).toHaveLength(1);
 
     const expected = new Map([
       ['brineos', 'research'],
@@ -96,16 +100,32 @@ describe('R1-A2.4 current Evidence + Maturity reconciliation', () => {
       expect(record.targetRef.revisionId).toBe(successor?.revision.revisionId);
       expect(record.payload.basisRef).toEqual(record.targetRef);
       expect(record.payload.targetRef.recordId).toBe(record.targetRef.recordId);
-      expect(record.revision.generation).toBe(0);
       expect(record.revision.kind).toBe('governance.maturity');
       expect(record.revision.lifecycle).toBe('active');
+
+      if (record.subjectKey === 'xs-wallet') {
+        expect(record.materializationKind).toBe('successor');
+        expect(record.governanceRecordId).toBe('rec_3a926254f23e4a0c89102c3fbfe636d6');
+        expect(record.revision.generation).toBe(1);
+        expect(record.revision.previousRevisionId).toBe(record.previousGovernanceRevisionId);
+        expect(record.previousGovernanceRevisionId).toMatch(/^rev_sha256_[0-9a-f]{64}$/);
+      } else {
+        expect(record.materializationKind).toBe('birth');
+        expect(record.revision.generation).toBe(0);
+        expect(record.revision.previousRevisionId).toBeNull();
+        expect(record.previousGovernanceRevisionId).toBeNull();
+      }
     }
 
-    expect(manifest.materialization.maturityStageCounts).toEqual({
-      research: 4,
-      'pre-beta': 1,
-      beta: 1,
-      production: 2,
+    expect(manifest.materialization).toMatchObject({
+      maturityGovernanceBirthCount: 7,
+      maturityGovernanceSuccessorCount: 1,
+      maturityStageCounts: {
+        research: 4,
+        'pre-beta': 1,
+        beta: 1,
+        production: 2,
+      },
     });
   });
 
@@ -132,7 +152,7 @@ describe('R1-A2.4 current Evidence + Maturity reconciliation', () => {
     });
   });
 
-  it('does not silently inherit the R0.8/R1.6 XS Wallet maturity authority across the generation-1 revision boundary', () => {
+  it('continues the historical XS Wallet maturity governance identity instead of replacing it or silently inheriting its old basis', () => {
     const xs = revisions.successors.find((entry) => entry.subjectKey === 'xs-wallet');
     expect(xs).toBeDefined();
 
@@ -140,21 +160,30 @@ describe('R1-A2.4 current Evidence + Maturity reconciliation', () => {
       entry.kind === 'governance.maturity' && entry.targetRecordId === xs?.recordId,
     );
     expect(historicalXs).toBeDefined();
+    expect(historicalXs?.governanceRecordId).toBe('rec_3a926254f23e4a0c89102c3fbfe636d6');
     expect(historicalXs?.basisRevisionId).not.toBe(xs?.revision.revisionId);
+    expect(historicalXs?.stage).toBe('pre-beta');
 
     const currentXs = materialized.maturityRecords.find((entry) => entry.subjectKey === 'xs-wallet');
+    expect(currentXs?.governanceRecordId).toBe(historicalXs?.governanceRecordId);
+    expect(currentXs?.materializationKind).toBe('successor');
     expect(currentXs?.stage).toBe('pre-beta');
     expect(currentXs?.targetRef.revisionId).toBe(xs?.revision.revisionId);
+    expect(currentXs?.revision.generation).toBe(1);
+    expect(currentXs?.revision.previousRevisionId).toBe(currentXs?.previousGovernanceRevisionId);
     expect(manifest.acceptance.staleMaturityInheritanceCount).toBe(0);
+    expect(manifest.acceptance.maturityIdentityReplacementCount).toBe(0);
     expect(manifest.laws.historicalGovernanceSilentInheritance).toBe(false);
+    expect(manifest.laws.existingMaturityGovernanceIdentityMustContinue).toBe(true);
   });
 
-  it('accepts A2.4 without changing disclosure, routes, public surfaces or production', () => {
-    expect(manifest.status).toBe('complete');
+  it('keeps corrected A2.4 isolated from disclosure, routes, public surfaces and production until CI reacceptance', () => {
+    expect(manifest.status).toBe('materialized-awaiting-ci');
     expect(manifest.acceptance).toMatchObject({
       allCurrentSuccessorsReconciled: true,
       allObservationSourcesTemporallyBound: true,
       staleMaturityInheritanceCount: 0,
+      maturityIdentityReplacementCount: 0,
       maturityConflictCount: 0,
       maturityClassifiedCount: 8,
       maturityUnclassifiedCount: 19,
@@ -162,8 +191,8 @@ describe('R1-A2.4 current Evidence + Maturity reconciliation', () => {
       routeMutationCount: 0,
       publicSurfaceMutationCount: 0,
       productionMutationCount: 0,
-      r1_a2_4Complete: true,
-      nextRequiredAction: 'R1-A2.5 — Public Disclosure Reauthorization',
+      r1_a2_4Complete: false,
     });
+    expect(manifest.acceptance.nextRequiredAction).toContain('generation-1 successor');
   });
 });
