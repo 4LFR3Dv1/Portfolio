@@ -22,8 +22,8 @@ R1 materializes the editorial world already defined by R0 and grounded across th
 | R1.2 | Projection Engine | **COMPLETE** |
 | R1.3 | Route Runtime | **COMPLETE** |
 | R1.4 | Language Runtime | **COMPLETE** |
-| R1.5 | Editorial Document Runtime | **NEXT** |
-| R1.6 | Core Editorial Surfaces | NOT STARTED |
+| R1.5 | Editorial Document Runtime | **COMPLETE** |
+| R1.6 | Core Editorial Surfaces | **NEXT** |
 | R1.7 | Distribution Foundation | NOT STARTED |
 | R1.8 | Legacy Compatibility | NOT STARTED |
 | R1.9 | Foundation Acceptance | NOT STARTED |
@@ -56,11 +56,14 @@ R1.3 materialized the Record-route runtime from explicit, already-frozen migrati
 
 R1.4 materialized exact-revision language realization. All 28 born System revisions receive an explicit canonical EN binding to their exact R1.1 payload bytes, while only five Systems receive PT-BR translations because only those effective R0.8 plans explicitly admit PT-BR realization. Route existence does not imply content existence, stale realizations do not survive a Record head change, and missing translations return `language-unavailable` without implicit fallback. Language authority remains separate from disclosure, public projection and document rendering.
 
+R1.5 materialized the renderer-neutral Editorial Document DTO boundary. Documents require an upstream public projection; full semantic content requires the exact R1.4 realization for the projected Record revision and language; metadata-only never carries semantic payload; sanitized content is never derived by runtime redaction. The current effective document count remains zero because no disclosure authority has yet made the new editorial substrate public. No Astro rendering or framework cutover is enacted by this cut.
+
 ```text
 R1_0_COMPLETE=true
 R1_1_COMPLETE=true
 R1_2_COMPLETE=true
 R1_3_COMPLETE=true
 R1_4_COMPLETE=true
-NEXT=R1.5 — Editorial Document Runtime
+R1_5_COMPLETE=true
+NEXT=R1.6 — Core Editorial Surfaces
 ```
