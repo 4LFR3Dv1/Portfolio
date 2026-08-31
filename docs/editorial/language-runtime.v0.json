@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "editorial-language-runtime/v0",
+  "contractId": "PORTFOLIO-R1.4-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "2a0d93abbdf66e175175031d6ef2c1158e02a302",
+  "preconditions": {
+    "r1_3Complete": true,
+    "r1_2Complete": true,
+    "r1_1Complete": true,
+    "r0EffectiveComplete": true
+  },
+  "admission": {
+    "canonicalSource": "r1.1-exact-birth-payload",
+    "translationAuthority": "r0.8-explicit-language-plan",
+    "translationInferenceAllowed": false,
+    "implicitFallbackAllowed": false,
+    "canonicalAssignmentCount": 28,
+    "translationAssignmentCount": 5,
+    "languageBindingCount": 33
+  },
+  "canonicalAssignments": [
+    {"targetRecordId":"rec_5eeb93bd8811b6c0fbecf3cc733cbd2e","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_6822adfb4aaf3520816ff305f6b4e572","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_4515d2eb7d17e9a876ff890f7b90d6a8","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_286639cfc48e0fac9065fe4e3258a916","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_1fe061f491894efe1e0b1674448b7501","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_66057eae80fabfa4478a600481d755f0","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_10d864e055b79f67dce52412083e6763","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_0e6beb6a5f17831616af328fe8f2afb2","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_38f6f81328b9ccd007127d1071f8cc02","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_43dd086ef220193d441943461e8863f0","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_6bd4d56023990c25879daecf2ff34b55","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_0db35eb308dd8da06948dcde9666a6df","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_499f928363217da10f93cd54aead0101","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_553b9088a5b22a51a44679f582de47f5","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_b1afa6a6409eff3f0c4d55f88b2112b2","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_5c9f2ece90fb6528b9b317a5181d5336","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_10610fee4c64c6463ccbb745deaf1a92","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_c844725e35cf61830221efc597612017","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_724d518ee338e32eb06e79077ad01f3d","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_f941765df0d17315570234ddb6df2c24","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_358fbaec4b74b7f1739ea5943c4a4ca0","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_eb671d4728bb44327b1a0b832006f320","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_c2af8a986e38518d716f397320072368","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_757fe2f771ef44acc68af55ce9313c95","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_e8947ad40f9a202dc9413a1bb91199f1","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_b9dc85a2002a434fdb540b53496c99f2","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_ad5db27acd07f0934b47ae313e9e812f","language":"en","source":"r1.1-canonical-payload"},
+    {"targetRecordId":"rec_c5a75fd5ecae0565aaa0c96f0ad53227","language":"en","source":"r1.1-canonical-payload"}
+  ],
+  "translationAssignments": [
+    {"targetRecordId":"rec_c844725e35cf61830221efc597612017","language":"pt-BR","translatedFrom":"en","source":"r0.8-explicit-language-plan","summary":"Sujeito durável de sistema admitido a partir do grounding do corpus conectado do GitHub."},
+    {"targetRecordId":"rec_724d518ee338e32eb06e79077ad01f3d","language":"pt-BR","translatedFrom":"en","source":"r0.8-explicit-language-plan","summary":"Sujeito durável de sistema admitido a partir do grounding do corpus conectado do GitHub."},
+    {"targetRecordId":"rec_c5a75fd5ecae0565aaa0c96f0ad53227","language":"pt-BR","translatedFrom":"en","source":"r0.8-explicit-language-plan","summary":"Sujeito durável de sistema admitido a partir do grounding do corpus conectado do GitHub."},
+    {"targetRecordId":"rec_499f928363217da10f93cd54aead0101","language":"pt-BR","translatedFrom":"en","source":"r0.8-explicit-language-plan","summary":"Sujeito durável de sistema admitido a partir do grounding do corpus conectado do GitHub."},
+    {"targetRecordId":"rec_0e6beb6a5f17831616af328fe8f2afb2","language":"pt-BR","translatedFrom":"en","source":"r0.8-explicit-language-plan","summary":"Sujeito durável de sistema admitido a partir do grounding do corpus conectado do GitHub."}
+  ],
+  "deferred": {
+    "documentRenderingEnacted": false,
+    "disclosureRecordsAdmitted": false,
+    "legacyClientLanguageNegotiationEnacted": false,
+    "frameworkCutoverEnacted": false
+  },
+  "acceptance": {
+    "languageRuntimeMaterialized": true,
+    "exactRevisionBindingRequired": true,
+    "canonicalLanguageCount": 28,
+    "translationCount": 5,
+    "languageBindingCount": 33,
+    "routedLanguagePairCount": 10,
+    "missingTranslationPreserved": true,
+    "staleTranslationInheritanceAllowed": false,
+    "implicitFallbackAllowed": false,
+    "publicProjectionCountChanged": false,
+    "publicUiChanged": false,
+    "runtimeSemanticsChanged": false,
+    "r1_4Complete": false
+  }
+}
