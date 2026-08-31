@@ -1,6 +1,6 @@
 # R1-A2 — Current Corpus Reconciliation
 
-Status: **IN PROGRESS / CURRENT REVISIONS MATERIALIZED**
+Status: **IN PROGRESS / EVIDENCE + MATURITY RECONCILED**
 
 Baseline: `main@1ad9128328ed702d0c160be5acca5a4874674d25`
 
@@ -47,8 +47,8 @@ R2.7 remains historical evidence about the exact specimen it witnessed. It is no
 | R1-A2.1 | Current GitHub Census + HEAD Observation | **COMPLETE** |
 | R1-A2.2 | Existing Identity Reconciliation | **COMPLETE** |
 | R1-A2.3 | Current Revision Materialization | **COMPLETE** |
-| R1-A2.4 | Evidence + Maturity Reconciliation | **NEXT** |
-| R1-A2.5 | Public Disclosure Reauthorization | **NOT STARTED** |
+| R1-A2.4 | Evidence + Maturity Reconciliation | **COMPLETE** |
+| R1-A2.5 | Public Disclosure Reauthorization | **NEXT** |
 | R1-A2.6 | Current Route Admission | **NOT STARTED** |
 | R1-A2.7 | Current Editorial Surface Reconstruction | **NOT STARTED** |
 | R1-A2.8 | Current Publication Acceptance | **NOT STARTED** |
@@ -113,7 +113,7 @@ Twenty-seven Systems now have generation-1 current successors. Transactional Sup
 
 Every successor also resolves its repository realization through the exact R1-A2.1 census, inheriting repository, visibility, default branch, observed HEAD and `observedAt`. Repository names therefore cannot act as free-floating evidence locators.
 
-The candidate was witnessed by successful `Verify` run `33411967644` / run number `255` at branch head `a38d185184d437a71bd9de7f71b6f59267ebd5e1`. The accepted contract is `docs/editorial/R1-A2.3-current-system-revisions.v0.json`; the witness seal is `docs/editorial/R1-A2.3-completion.v0.json`.
+The candidate was witnessed by successful `Verify` run `33411967644` / run number `255`; the terminal accepted branch state later passed `Verify` run `33412743780` / run number `264`. The accepted contract is `docs/editorial/R1-A2.3-current-system-revisions.v0.json`; the witness seal is `docs/editorial/R1-A2.3-completion.v0.json`.
 
 ```text
 BORN_SYSTEM_RECORD_COUNT=28
@@ -126,6 +126,72 @@ GENERIC_BIRTH_SUMMARY_SUCCESSOR_COUNT=0
 ```
 
 A2.3 deliberately does **not** reauthorize disclosure, inherit maturity, admit routes or reconstruct public surfaces. Under R0.6, those policies are revision-bound. Advancing a System head therefore makes stale generation-zero maturity/disclosure insufficient for the new current head until a new policy decision is admitted.
+
+## R1-A2.4 Evidence + Maturity reconciliation
+
+A2.4 separates observation from governance rather than turning repository implementation into an editorial status shortcut.
+
+The existing R0.4 `evidence.binding` contract targets `knowledge.claim` and `knowledge.experiment`; it does not authorize a direct formal EvidenceBinding against `knowledge.system`. A2.4 therefore does not mint artificial Claims or widen that contract. Instead it freezes current-head observations as a temporal reconciliation ledger and uses them only as the declared basis for separate `governance.maturity` decisions.
+
+Every observation resolves through the same temporal basis already attached to its generation-1 System successor:
+
+```text
+sourceRef
+   ↓
+repository realization
+   ↓
+R1-A2.1 census entry
+   ↓
+default branch + exact observed HEAD + observedAt + visibility
+   ↓
+current System Revision
+```
+
+The accepted ledger contains 48 observations across all 27 current successors:
+
+```text
+supports       29
+qualifies      16
+contradicts     3
+```
+
+Contradictions are preserved for SNE-FDE, SNE Radar and ViewCounter instead of being flattened into a positive project status.
+
+Maturity is admitted only when the current corpus provides a defensible R0.6 stage without lossy translation. Eight current heads receive exact-revision `governance.maturity` births:
+
+```text
+BrineOS            research
+Factory            production
+Foundry Channels   beta
+SNE Trading        research
+VIRA               production
+XS Wallet / Domini pre-beta
+ORDM               research
+SNE Observatorio   research
+```
+
+The remaining nineteen current successors are explicitly `unclassified`. Terms such as `pre-alpha`, `experimental`, `scaffold`, launch-critical architecture, implemented code or a testnet deployment are not automatically translated into `prototype`, `beta` or `production`.
+
+`production` remains a maturity classification only. It does not prove uptime, runtime health, test success, security, custody safety, SLA or network readiness; those statements require their own evidence.
+
+The historical R1.6 XS Wallet maturity Record remains reconstructable, but its Birth-era `basisRevisionId` does not match the generation-1 current head. A2.4 witnesses zero silent historical maturity inheritance and materializes a new current-head `pre-beta` authority explicitly.
+
+No formal Evidence Record or EvidenceBinding is minted by this cut, because doing so against Systems would widen R0.4 semantics. No disclosure, route or public-surface decision is made here.
+
+The A2.4 candidate at `f0d3f13f0e92b3188a2dd122a30da5ea72b162bc` passed `Verify` run `33414303736` / run number `268`, `Editorial Shell Build` run `33414303712` / run number `103`, and `Editorial Cutover Readiness` run `33414303710` / run number `34`. The contract is `docs/editorial/R1-A2.4-current-evidence-maturity.v0.json`; the terminal seal is `docs/editorial/R1-A2.4-completion.v0.json`.
+
+```text
+CURRENT_EVIDENCE_OBSERVATION_COUNT=48
+SUPPORT_OBSERVATION_COUNT=29
+QUALIFICATION_OBSERVATION_COUNT=16
+CONTRADICTION_OBSERVATION_COUNT=3
+CURRENT_MATURITY_CLASSIFIED_COUNT=8
+CURRENT_MATURITY_UNCLASSIFIED_COUNT=19
+CURRENT_MATURITY_CONFLICT_COUNT=0
+STALE_MATURITY_INHERITANCE_COUNT=0
+FORMAL_EVIDENCE_RECORD_BIRTH_COUNT=0
+FORMAL_EVIDENCE_BINDING_BIRTH_COUNT=0
+```
 
 ## Direction of authority
 
@@ -177,7 +243,13 @@ CURRENT_SUCCESSOR_REVISION_COUNT=27
 DEFERRED_CURRENT_REVISION_COUNT=1
 GENERIC_BIRTH_SUMMARY_SUCCESSOR_COUNT=0
 
-EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=false
+EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=true
+CURRENT_EVIDENCE_OBSERVATION_COUNT=48
+CURRENT_MATURITY_CLASSIFIED_COUNT=8
+CURRENT_MATURITY_UNCLASSIFIED_COUNT=19
+CURRENT_MATURITY_CONFLICT_COUNT=0
+STALE_MATURITY_INHERITANCE_COUNT=0
+
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
 CUTOVER_AUTHORIZED=false
@@ -187,6 +259,7 @@ R1_A2_0_MATERIALIZED=true
 R1_A2_1_COMPLETE=true
 R1_A2_2_COMPLETE=true
 R1_A2_3_COMPLETE=true
+R1_A2_4_COMPLETE=true
 R1_A2_COMPLETE=false
-NEXT=R1-A2.4 — Evidence + Maturity Reconciliation
+NEXT=R1-A2.5 — Public Disclosure Reauthorization
 ```
