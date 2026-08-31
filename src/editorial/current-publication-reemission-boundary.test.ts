@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import reemissionConstitutionJson from '../../docs/editorial/R2-A1-reemission-constitution.v0.json';
+import reemissionCompletionJson from '../../docs/editorial/R2-A1.0-completion.v0.json';
 import semanticCompletionJson from '../../docs/editorial/R1-A2.8-completion.v0.json';
 import historicalPreviewCompletionJson from '../../docs/editorial/R2.6-completion.v0.json';
 
@@ -23,6 +24,13 @@ const constitution = reemissionConstitutionJson as {
   };
   currentState: Record<string, boolean | number>;
   acceptance: Record<string, boolean | string>;
+};
+const completion = reemissionCompletionJson as {
+  status: string;
+  candidateWitness: Record<string, string | number>;
+  sourceIdentity: Record<string, string | boolean>;
+  productionBoundary: Record<string, boolean | number>;
+  acceptance: Record<string, string | boolean>;
 };
 const semanticCompletion = semanticCompletionJson as {
   status: string;
@@ -60,6 +68,12 @@ describe('R2-A1.0 current publication physical re-emission boundary', () => {
       acceptedPublicationDigestFrozen: true,
       acceptedPublicationDigest: ACCEPTED_DIGEST,
     });
+    expect(completion.sourceIdentity).toMatchObject({
+      r1_a2_8Complete: true,
+      r1_a2Complete: true,
+      currentPublicationValid: true,
+      acceptedPublicationDigest: ACCEPTED_DIGEST,
+    });
   });
 
   it('preserves historical R2.6 as evidence without allowing it to authorize the new specimen', () => {
@@ -83,6 +97,9 @@ describe('R2-A1.0 current publication physical re-emission boundary', () => {
       historicalDistributionDigestMayBeUsedAsCurrentAuthority: false,
       historicalR2_6WitnessMayAuthorizeCurrentSpecimen: false,
       historicalR2_7WitnessMayAuthorizeCurrentSpecimen: false,
+    });
+    expect(completion.acceptance).toMatchObject({
+      historicalTransportAuthorityRevokedForCurrentSpecimen: true,
     });
   });
 
@@ -116,16 +133,23 @@ describe('R2-A1.0 current publication physical re-emission boundary', () => {
       rootVercelConfigChanged: false,
       productionMutationCount: 0,
     });
+    expect(completion.productionBoundary).toEqual({
+      productionOriginChanged: false,
+      productionDnsChanged: false,
+      rootVercelConfigChanged: false,
+      incumbentPublicRuntimeChanged: false,
+      productionMutationCount: 0,
+    });
     expect(JSON.parse(vercelText)).toEqual({
       rewrites: [{ source: '/((?!.*\\.).*)', destination: '/index.html' }],
     });
   });
 
-  it('opens only the bounded physical program while leaving cutover closed', () => {
-    expect(constitution.status).toBe('materialized-awaiting-ci');
+  it('closes A1.0 and advances only to current renderer input re-emission', () => {
+    expect(constitution.status).toBe('active');
     expect(constitution.program.map((entry) => [entry.cut, entry.status])).toEqual([
-      ['R2-A1.0', 'materialized-awaiting-ci'],
-      ['R2-A1.1', 'not-started'],
+      ['R2-A1.0', 'complete'],
+      ['R2-A1.1', 'next'],
       ['R2-A1.2', 'not-started'],
       ['R2-A1.3', 'not-started'],
       ['R2-A1.4', 'not-started'],
@@ -144,13 +168,24 @@ describe('R2-A1.0 current publication physical re-emission boundary', () => {
       productionMutationCount: 0,
     });
     expect(constitution.acceptance).toMatchObject({
-      r2_a1_0Complete: false,
+      r2_a1_0Complete: true,
       r2_a1Complete: false,
       currentPublicationValid: true,
       currentPhysicalPublicationValid: false,
       cutoverReady: false,
       cutoverAuthorized: false,
       cutoverEnacted: false,
+      nextRequiredAction: 'R2-A1.1 — Current Renderer Input Re-emission',
+    });
+    expect(completion.status).toBe('complete');
+    expect(completion.candidateWitness).toMatchObject({
+      branchHead: '8b98b32d2016822c56201fcb21cc3376e2ec7c0c',
+      verifyRunNumber: 347,
+      verifyConclusion: 'success',
+      editorialShellBuildRunNumber: 182,
+      editorialShellBuildConclusion: 'success',
+      cutoverReadinessRunNumber: 113,
+      cutoverReadinessConclusion: 'success',
     });
   });
 });
