@@ -83,6 +83,8 @@ Therefore `R1_COMPLETE=true` means the editorial foundation was coherent at its 
 
 R1-A2 was opened after direct inspection of the R2.6 preview demonstrated that the structurally valid R1/R2 pipeline was still projecting R0.8-era public selection and generation-zero summaries. R1-A2 preserves all R1 identities and completion seals while reopening temporal reconciliation of revisions, evidence, maturity, disclosure, routes and surfaces.
 
+R1-A2.1 reobserved the connected corpus and exact repository HEADs. R1-A2.2 reconciled all 28 existing System identities without replacement Birth. R1-A2.3 then produced 27 generation-1 current System revisions against those same RecordIds; one historical System remains explicitly deferred. No current disclosure or maturity policy is inherited merely because a semantic successor now exists.
+
 The amendment is intentionally non-destructive:
 
 ```text
@@ -110,7 +112,9 @@ R1_8_COMPLETE=true
 R1_9_COMPLETE=true
 R1_COMPLETE=true
 R1_A2_ACTIVE=true
+R1_A2_3_COMPLETE=true
+CURRENT_REVISION_MATERIALIZATION_COMPLETE=true
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
-NEXT=R1-A2.3 — Current Revision Materialization
+NEXT=R1-A2.4 — Evidence + Maturity Reconciliation
 ```
