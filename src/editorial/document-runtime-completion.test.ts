@@ -137,7 +137,7 @@ describe('R1.5 terminal completion seal', () => {
     expect(r1Readme).toContain('| R1.6 | Core Editorial Surfaces | **NEXT** |');
     expect(r1Readme).toContain('R1_5_COMPLETE=true');
     expect(r15Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
-    expect(r15Doc).toContain('Verify run 33346253580');
+    expect(r15Doc).toContain('Materialization `Verify` run `33346253580`: **SUCCESS**.');
     expect(r15Doc).toContain('R1_5_COMPLETE                                       true');
   });
 });
