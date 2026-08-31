@@ -1,0 +1,33 @@
+---
+import LegacyCaseStudy from '../../components/LegacyCaseStudy.astro';
+import LegacyLayout from '../../layouts/LegacyLayout.astro';
+import { publicationState } from '../../lib/publication-state';
+import type { LegacyPreservedPage } from '../../../../src/editorial/legacy-preservation-runtime';
+
+type LegacyCaseStudyPage = Extract<LegacyPreservedPage, { kind: 'legacy-case-study' }>;
+interface Props { page: LegacyCaseStudyPage; }
+
+export function getStaticPaths() {
+  return publicationState.legacy.pages
+    .filter((entry): entry is LegacyCaseStudyPage => entry.kind === 'legacy-case-study')
+    .map((page) => ({
+      params: { legacy: page.path.slice('/work/'.length) },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props as Props;
+---
+<LegacyLayout
+  title={page.languages.en.seoTitle}
+  description={page.languages.en.seoDescription}
+  historicalMeaning={page.historicalMeaning}
+  blocker={page.blocker}
+>
+  <div data-legacy-language-panel="en">
+    <LegacyCaseStudy study={page.languages.en} language="en" />
+  </div>
+  <div data-legacy-language-panel="pt" hidden>
+    <LegacyCaseStudy study={page.languages.pt} language="pt" />
+  </div>
+</LegacyLayout>
