@@ -1,4 +1,4 @@
-import { getProject } from '../data/projects';
+import { getPortfolioProject } from '../data/current-case-studies';
 import { useLanguage } from '../context/language-context';
 import { Button } from './button';
 
@@ -10,7 +10,7 @@ interface CaseStudyTemplateProps {
 
 export function CaseStudyTemplate({ projectId, onBack, onArchitecture }: CaseStudyTemplateProps) {
   const { language } = useLanguage();
-  const project = getProject(projectId);
+  const project = getPortfolioProject(projectId);
   const copy = language === 'en'
     ? {
         back: 'BACK TO PORTFOLIO',
