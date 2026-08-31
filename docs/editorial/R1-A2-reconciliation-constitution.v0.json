@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "editorial-r1-a2-reconciliation-constitution/v0",
+  "contractId": "PORTFOLIO-R1-A2-2026-08-31",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "1ad9128328ed702d0c160be5acca5a4874674d25",
+  "discovery": {
+    "acceptedPreviewWasStructurallyCoherent": true,
+    "acceptedPreviewWasCurrentPublicationCorrect": false,
+    "stalePublicSemanticSource": [
+      "docs/editorial/migration-acceptance.v0.json",
+      "docs/editorial/route-runtime.v0.json",
+      "docs/editorial/core-editorial-surfaces.v0.json"
+    ],
+    "genericBirthSummary": "Durable System subject admitted from the connected GitHub corpus grounding.",
+    "bornSystemCount": 28,
+    "routedSystemCount": 5,
+    "bornSystemsWithoutRouteCount": 23,
+    "systemsPerLanguageOnAcceptedSurface": 3
+  },
+  "historicalState": {
+    "r1Complete": true,
+    "r1HistoryRewritten": false,
+    "r2_6HistoricalComplete": true,
+    "r2_7HistoricalComplete": true,
+    "r2_7InfrastructureWitnessPreserved": true
+  },
+  "laws": {
+    "existingRecordIdentityMustBePreserved": true,
+    "currentChangeProducesRevisionByDefault": true,
+    "repositoryIdentityIsSystemIdentity": false,
+    "repositoryMutationMayMintSystemAutomatically": false,
+    "temporalRepositoryHeadBindingRequired": true,
+    "groundingImpliesDisclosure": false,
+    "birthImpliesRoute": false,
+    "historicalMigrationPlanIsPerpetualPublicAuthority": false,
+    "genericBirthSummaryAllowedAsCurrentPublicSummary": false,
+    "privateEvidencePublicByDefault": false,
+    "currentPublicationValidityGatesCutover": true
+  },
+  "requiredTemporalObservation": {
+    "repository": true,
+    "defaultBranch": true,
+    "observedHead": true,
+    "observedAt": true,
+    "visibility": true,
+    "installationScope": true
+  },
+  "program": [
+    {"cut":"R1-A2.0","purpose":"Reconciliation Constitution + Cutover Eligibility Revocation","status":"materialized"},
+    {"cut":"R1-A2.1","purpose":"Current GitHub Census + HEAD Observation","status":"in-progress"},
+    {"cut":"R1-A2.2","purpose":"Existing Identity Reconciliation","status":"not-started"},
+    {"cut":"R1-A2.3","purpose":"Current Revision Materialization","status":"not-started"},
+    {"cut":"R1-A2.4","purpose":"Evidence + Maturity Reconciliation","status":"not-started"},
+    {"cut":"R1-A2.5","purpose":"Public Disclosure Reauthorization","status":"not-started"},
+    {"cut":"R1-A2.6","purpose":"Current Route Admission","status":"not-started"},
+    {"cut":"R1-A2.7","purpose":"Current Editorial Surface Reconstruction","status":"not-started"},
+    {"cut":"R1-A2.8","purpose":"Current Publication Acceptance","status":"not-started"}
+  ],
+  "currentState": {
+    "currentPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "r1_a2_0Materialized": true,
+    "r1_a2Complete": false,
+    "currentPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "nextRequiredCut": "R1-A2.1 — Current GitHub Census + HEAD Observation"
+  }
+}
