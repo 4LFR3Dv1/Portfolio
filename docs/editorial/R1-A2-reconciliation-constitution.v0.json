@@ -57,7 +57,7 @@
     {"cut":"R1-A2.5","purpose":"Public Disclosure Reauthorization","status":"complete"},
     {"cut":"R1-A2.6","purpose":"Current Route Admission","status":"complete"},
     {"cut":"R1-A2.7","purpose":"Current Editorial Surface Reconstruction","status":"complete"},
-    {"cut":"R1-A2.8","purpose":"Current Publication Acceptance","status":"next"}
+    {"cut":"R1-A2.8","purpose":"Current Publication Acceptance","status":"complete"}
   ],
   "currentState": {
     "currentCorpusCensusComplete": true,
@@ -120,7 +120,9 @@
     "currentGenericBirthSummaryEmissionCount": 0,
     "currentCrossLanguageSurfaceDriftCount": 0,
     "currentRankingInferenceCount": 0,
-    "currentPublicationValid": false,
+    "currentPublicationAcceptanceComplete": true,
+    "currentPublicationSpecimenDeterministic": true,
+    "currentPublicationValid": true,
     "cutoverReady": false,
     "cutoverAuthorized": false,
     "cutoverEnacted": false,
@@ -135,10 +137,12 @@
     "r1_a2_5Complete": true,
     "r1_a2_6Complete": true,
     "r1_a2_7Complete": true,
-    "r1_a2Complete": false,
-    "currentPublicationValid": false,
+    "r1_a2_8Complete": true,
+    "r1_a2Complete": true,
+    "currentPublicationValid": true,
+    "acceptedPublicationDigest": "sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32",
     "cutoverReady": false,
     "cutoverAuthorized": false,
-    "nextRequiredCut": "R1-A2.8 — Current Publication Acceptance"
+    "nextRequiredProgram": "R2-A1 — Current Publication Re-emission & Physical Revalidation"
   }
 }
