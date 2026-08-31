@@ -1,7 +1,11 @@
 import type { Language } from '../context/language-context';
-import type { ProjectId } from './projects';
 
 type Localized = Record<Language, string>;
+
+export interface SelectedWorkLink {
+  href: string;
+  label: Localized;
+}
 
 export interface SelectedWorkItem {
   id: string;
@@ -9,9 +13,8 @@ export interface SelectedWorkItem {
   year: string;
   description: Localized;
   topics: Localized[];
-  caseStudyId?: ProjectId;
-  href?: string;
-  linkLabel?: Localized;
+  caseStudyId?: string;
+  links?: SelectedWorkLink[];
 }
 
 const local = (en: string, pt: string): Localized => ({ en, pt });
@@ -26,18 +29,24 @@ export const selectedWork: SelectedWorkItem[] = [
       'Um navegador experimental que estou construindo para explorar como IA pode trabalhar dentro de software real sem reduzir a web a uma sequência de cliques automatizados.',
     ),
     topics: [local('Browser', 'Navegador'), local('AI', 'IA'), local('Systems', 'Sistemas')],
-    href: 'https://github.com/SNE-Labs/Genesis-CP',
-    linkLabel: local('View project', 'Ver projeto'),
+    caseStudyId: 'genesis',
+    links: [
+      {
+        href: 'https://github.com/SNE-Labs/Genesis-CP',
+        label: local('Public research', 'Pesquisa pública'),
+      },
+    ],
   },
   {
-    id: 'foundry',
-    title: 'Foundry',
+    id: 'factory',
+    title: 'Factory',
     year: '2026',
     description: local(
-      'A workspace for organizing software work done with AI: planning tasks, running agents, reviewing results and keeping the work understandable over time.',
-      'Um ambiente para organizar trabalho de software feito com IA: planejar tarefas, executar agentes, revisar resultados e manter o trabalho compreensível ao longo do tempo.',
+      'A production system for turning software decisions into controlled work carried out by AI agents across multiple repositories, with independent checks before changes are accepted.',
+      'Um sistema de produção para transformar decisões de software em trabalho controlado executado por agentes de IA em múltiplos repositórios, com verificações independentes antes de aceitar mudanças.',
     ),
-    topics: [local('Developer tools', 'Ferramentas'), local('AI', 'IA'), local('Workflow', 'Fluxo de trabalho')],
+    topics: [local('Software production', 'Produção de software'), local('AI', 'IA'), local('Automation', 'Automação')],
+    caseStudyId: 'factory',
   },
   {
     id: 'lisa',
@@ -48,6 +57,16 @@ export const selectedWork: SelectedWorkItem[] = [
       'Um produto de IA construído em torno de conversa, contexto e ações úteis, com o objetivo de funcionar como uma presença digital coerente em vez de mais uma assistente genérica.',
     ),
     topics: [local('Product', 'Produto'), local('AI', 'IA'), local('Interaction', 'Interação')],
+    links: [
+      {
+        href: 'https://assistentelisa.online/',
+        label: local('Visit Lisa', 'Conhecer Lisa'),
+      },
+      {
+        href: 'https://app.assistentelisa.online/',
+        label: local('Open app', 'Abrir app'),
+      },
+    ],
   },
   {
     id: 'vira',
@@ -59,20 +78,31 @@ export const selectedWork: SelectedWorkItem[] = [
     ),
     topics: [local('Product', 'Produto'), local('Real time', 'Tempo real'), local('Multiplayer', 'Multiplayer')],
     caseStudyId: 'vira',
-    href: 'https://vira.snelabs.space/?lang=pt',
-    linkLabel: local('Open product', 'Abrir produto'),
+    links: [
+      {
+        href: 'https://vira.snelabs.space/?lang=pt',
+        label: local('Open product', 'Abrir produto'),
+      },
+    ],
   },
   {
-    id: 'xs-wallet',
-    title: 'XS Wallet',
+    id: 'foundry-pay-channels',
+    title: 'Foundry Pay / Foundry Channels',
     year: '2026',
     description: local(
-      'A desktop self-custody wallet experiment spanning Bitcoin, Liquid and Lightning, with critical operations kept local and a Go core separated from the interface.',
-      'Um experimento de wallet desktop self-custody para Bitcoin, Liquid e Lightning, com operações críticas mantidas localmente e um core em Go separado da interface.',
+      'Two connected experiments around stablecoin payments: one explores how software and AI systems can request payments without becoming unrestricted wallets; the other turns that foundation into persistent payment channels people can open, share and reuse.',
+      'Dois experimentos conectados em pagamentos com stablecoins: um explora como software e sistemas de IA podem solicitar pagamentos sem virar wallets irrestritas; o outro transforma essa base em canais persistentes que pessoas podem abrir, compartilhar e reutilizar.',
     ),
-    topics: [local('Desktop', 'Desktop'), local('Bitcoin', 'Bitcoin'), local('Security', 'Segurança')],
-    caseStudyId: 'xs-wallet',
-    href: 'https://github.com/4LFR3Dv1/XSWallet',
-    linkLabel: local('View code', 'Ver código'),
+    topics: [local('Payments', 'Pagamentos'), local('Stablecoins', 'Stablecoins'), local('Solana', 'Solana')],
+    links: [
+      {
+        href: 'https://github.com/4LFR3Dv1/Foundry-Pay',
+        label: local('Foundry Pay', 'Foundry Pay'),
+      },
+      {
+        href: 'https://github.com/4LFR3Dv1/Foundry-Channels',
+        label: local('Foundry Channels', 'Foundry Channels'),
+      },
+    ],
   },
 ];
