@@ -1,4 +1,4 @@
-/* global URL, Headers, Response, console, process */
+/* global URL, console, process */
 import http from 'node:http';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize, relative, resolve } from 'node:path';
