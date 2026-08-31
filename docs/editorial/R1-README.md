@@ -83,7 +83,20 @@ Therefore `R1_COMPLETE=true` means the editorial foundation was coherent at its 
 
 R1-A2 was opened after direct inspection of the R2.6 preview demonstrated that the structurally valid R1/R2 pipeline was still projecting R0.8-era public selection and generation-zero summaries. R1-A2 preserves all R1 identities and completion seals while reopening temporal reconciliation of revisions, evidence, maturity, disclosure, routes and surfaces.
 
-R1-A2.1 reobserved the connected corpus and exact repository HEADs. R1-A2.2 reconciled all 28 existing System identities without replacement Birth. R1-A2.3 produced 27 generation-1 current System revisions against those same RecordIds; one historical System remains explicitly deferred. R1-A2.4 then reconciled 48 current-head observations across those 27 successors and admitted only eight exact-revision maturity authorities, leaving nineteen Systems explicitly unclassified rather than translating implementation state into editorial maturity. No current disclosure policy is inherited merely because a semantic or maturity successor now exists.
+R1-A2.1 reobserved the connected corpus and exact repository HEADs. R1-A2.2 reconciled all 28 existing System identities without replacement Birth. R1-A2.3 produced 27 generation-1 current System revisions against those same RecordIds; one historical System remains explicitly deferred.
+
+R1-A2.4 reconstructs 48 current-head observations across those 27 successors and admits eight maturity classifications without translating implementation state into editorial maturity. Its first green specimen incorrectly minted a replacement maturity governance Record for XS Wallet even though R1.6 already established the same logical governance lineage. That specimen and its CI runs remain historical evidence, but current A2.4 acceptance is reopened until the corrected form is freshly witnessed:
+
+```text
+7 new governance.maturity Births
++
+1 governance.maturity successor
+        ↓
+XS Wallet maturity governance identity preserved
+rec_3a926254f23e4a0c89102c3fbfe636d6
+```
+
+No current disclosure policy is inherited merely because a semantic or maturity successor exists. R1-A2.5 remains blocked until the corrected A2.4 specimen is accepted.
 
 The amendment is intentionally non-destructive:
 
@@ -92,6 +105,7 @@ R1 Birth identity        preserved
 R1 completion history    preserved
 R2.6 transport witness   preserved
 R2.7 infra witness       preserved
+prior A2.4 CI witnesses  preserved as historical specimen evidence
 
 current publication validity   reopened
 current cutover eligibility    revoked
@@ -113,10 +127,11 @@ R1_9_COMPLETE=true
 R1_COMPLETE=true
 R1_A2_ACTIVE=true
 R1_A2_3_COMPLETE=true
-R1_A2_4_COMPLETE=true
+R1_A2_4_COMPLETE=false
 CURRENT_REVISION_MATERIALIZATION_COMPLETE=true
-EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=true
+EVIDENCE_MATURITY_RECONCILIATION_COMPLETE=false
+EVIDENCE_MATURITY_CORRECTION_ACTIVE=true
 CURRENT_PUBLICATION_VALID=false
 CUTOVER_READY=false
-NEXT=R1-A2.5 — Public Disclosure Reauthorization
+NEXT=R1-A2.4 — Governance Lineage Correction CI
 ```
