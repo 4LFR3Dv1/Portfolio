@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-current-system-revisions/v0",
   "contractId": "PORTFOLIO-R1-A2.3-2026-08-31",
-  "status": "materialized-awaiting-ci",
+  "status": "complete",
   "normative": true,
   "baseline": "1ad9128328ed702d0c160be5acca5a4874674d25",
   "preconditions": {
@@ -46,7 +46,7 @@
     "routeMutationCount": 0,
     "publicSurfaceMutationCount": 0,
     "productionMutationCount": 0,
-    "r1_a2_3Complete": false,
-    "nextRequiredAction": "CI must recompute every generation-1 successor and temporal census binding"
+    "r1_a2_3Complete": true,
+    "nextRequiredAction": "R1-A2.4 — Evidence + Maturity Reconciliation"
   }
 }
