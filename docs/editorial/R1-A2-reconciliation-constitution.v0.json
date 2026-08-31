@@ -50,8 +50,8 @@
     {"cut":"R1-A2.0","purpose":"Reconciliation Constitution + Cutover Eligibility Revocation","status":"materialized"},
     {"cut":"R1-A2.1","purpose":"Current GitHub Census + HEAD Observation","status":"complete"},
     {"cut":"R1-A2.2","purpose":"Existing Identity Reconciliation","status":"complete"},
-    {"cut":"R1-A2.3","purpose":"Current Revision Materialization","status":"next"},
-    {"cut":"R1-A2.4","purpose":"Evidence + Maturity Reconciliation","status":"not-started"},
+    {"cut":"R1-A2.3","purpose":"Current Revision Materialization","status":"complete"},
+    {"cut":"R1-A2.4","purpose":"Evidence + Maturity Reconciliation","status":"next"},
     {"cut":"R1-A2.5","purpose":"Public Disclosure Reauthorization","status":"not-started"},
     {"cut":"R1-A2.6","purpose":"Current Route Admission","status":"not-started"},
     {"cut":"R1-A2.7","purpose":"Current Editorial Surface Reconstruction","status":"not-started"},
@@ -67,7 +67,11 @@
     "preservedRecordIdCount": 28,
     "recordIdChangeCount": 0,
     "newRecordBirthCount": 0,
-    "currentRevisionMaterializationComplete": false,
+    "currentRevisionMaterializationComplete": true,
+    "currentSystemSuccessorRevisionCount": 27,
+    "deferredCurrentRevisionCount": 1,
+    "genericBirthSummarySuccessorCount": 0,
+    "evidenceMaturityReconciliationComplete": false,
     "currentPublicationValid": false,
     "cutoverReady": false,
     "cutoverAuthorized": false,
@@ -78,10 +82,11 @@
     "r1_a2_0Materialized": true,
     "r1_a2_1Complete": true,
     "r1_a2_2Complete": true,
+    "r1_a2_3Complete": true,
     "r1_a2Complete": false,
     "currentPublicationValid": false,
     "cutoverReady": false,
     "cutoverAuthorized": false,
-    "nextRequiredCut": "R1-A2.3 — Current Revision Materialization"
+    "nextRequiredCut": "R1-A2.4 — Evidence + Maturity Reconciliation"
   }
 }
