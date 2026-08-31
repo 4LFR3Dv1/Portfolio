@@ -22,7 +22,7 @@ R2 turns the accepted editorial foundation into a physical publication runtime w
 | R2.0 | Publication Shell Boundary | **COMPLETE** |
 | R2.1 | Astro Shell Materialization & Editorial Renderer | **COMPLETE** |
 | R2.2 | Distribution Emission | **COMPLETE** |
-| R2.3 | Legacy Preservation Runtime | **NEXT** |
+| R2.3 | Legacy Preservation Runtime | **MATERIALIZED** |
 | R2.4 | Compatibility Redirect Adapter | **NOT STARTED** |
 | R2.5 | Static Runtime Commissioning | **NOT STARTED** |
 | R2.6 | Shadow / Preview Deployment | **NOT STARTED** |
@@ -42,13 +42,15 @@ bounded renderer input
 Astro static renderer
       ↓
 HTML + emitted distribution artifacts
+      +
+bounded historical compatibility pages
       ↓
 optional React islands
 ```
 
 The renderer is a consumer. It cannot mint Records, rewrite Evidence, change disclosure, infer translations, invent routes or reinterpret legacy identities.
 
-R2.0 froze the renderer-facing shell boundary. R2.1 physically materialized an isolated Astro 7.2.9 shell with a committed dependency lock and a prebuild adapter that passes only bounded public DTOs into Astro. R2.2 now physically emits canonical/robots/hreflang metadata for all 18 canonical pages plus the accepted sitemap, two empty language RSS feeds and the six-entry semantic search index. The production React/Vite runtime and legacy public sitemap remain unchanged.
+R2.0 froze the renderer-facing shell boundary. R2.1 physically materialized an isolated Astro 7.2.9 shell with a committed dependency lock and a prebuild adapter that passes only bounded public DTOs into Astro. R2.2 physically emits canonical/robots/hreflang metadata for all 18 canonical pages plus the accepted sitemap, two empty language RSS feeds and the six-entry semantic search index. R2.3 now materializes the four R1.8 historical-preservation exceptions from the exact frozen R0.0 source blobs, keeps their legacy EN/PT client-state behavior and quarantines them from canonical distribution. The production React/Vite runtime and legacy public sitemap remain unchanged.
 
 ## Deployment rule
 
@@ -58,6 +60,8 @@ R2 separates physical readiness from activation:
 shell materialized
       !=
 distribution emitted in build
+      !=
+legacy compatibility rendered in build
       !=
 preview commissioned
       !=
@@ -74,5 +78,6 @@ The current React/Vite deploy remains authoritative until an explicit R2 cutover
 R2_0_COMPLETE=true
 R2_1_COMPLETE=true
 R2_2_COMPLETE=true
-NEXT=R2.3 — Legacy Preservation Runtime
+R2_3_MATERIALIZED=true
+NEXT=R2.3 — Dual CI Acceptance
 ```
