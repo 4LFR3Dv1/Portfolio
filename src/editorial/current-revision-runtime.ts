@@ -2,6 +2,10 @@ import currentRevisionManifestJson from '../../docs/editorial/R1-A2.3-current-sy
 import currentCensusJson from '../../docs/editorial/R1-A2.1-current-github-census.v0.json';
 import registryManifestJson from '../../docs/editorial/record-registry.v0.json';
 import {
+  CURRENT_SYSTEM_REVISION_ASSIGNMENTS,
+  CURRENT_SYSTEM_REVISION_DEFERRED,
+} from './current-system-revision-candidates';
+import {
   KNOWLEDGE_REGISTRY_CODECS,
   codecMap,
   computeRegistryPayloadDigest,
@@ -20,7 +24,7 @@ import type { SystemPayload } from '../app/data/editorial-knowledge-ontology';
 
 export const CURRENT_REVISION_MANIFEST_SCHEMA_VERSION = 'editorial-current-system-revisions/v0' as const;
 
-interface CurrentCensusRepository {
+export interface CurrentCensusRepository {
   repo: string;
   visibility: 'public' | 'private';
   defaultBranch: string;
@@ -28,7 +32,7 @@ interface CurrentCensusRepository {
   state: 'material' | 'empty';
 }
 
-interface CurrentCensus {
+export interface CurrentCensusManifest {
   contractId: string;
   observedAt: string;
   repositories: CurrentCensusRepository[];
@@ -50,10 +54,16 @@ export interface CurrentRevisionAssignment {
   };
 }
 
+export interface DeferredCurrentRevision {
+  subjectKey: string;
+  recordId: `rec_${string}`;
+  reason: string;
+}
+
 export interface CurrentRevisionManifest {
   schemaVersion: typeof CURRENT_REVISION_MANIFEST_SCHEMA_VERSION;
   contractId: string;
-  status: 'materialized';
+  status: 'materialized-awaiting-ci' | 'complete';
   normative: true;
   baseline: string;
   preconditions: {
@@ -61,43 +71,78 @@ export interface CurrentRevisionManifest {
     r1_a2_2Complete: true;
     identityContinuityPreserved: true;
   };
+  sources: {
+    registry: string;
+    census: string;
+    assignments: string;
+    runtime: string;
+  };
   laws: {
     replaceBirthRevisionAllowed: false;
     successorGeneration: 1;
     payloadSchemaVersion: 'knowledge.system/v0';
+    repositoryReferenceMustResolveInCurrentCensus: true;
+    temporalObservationInheritedFromCensus: true;
     evidenceFieldsAllowedInsidePayload: false;
+    genericBirthSummaryAllowedAsSuccessor: false;
     disclosureDecisionImplied: false;
     routeDecisionImplied: false;
+    publicSurfaceDecisionImplied: false;
   };
-  assignments: CurrentRevisionAssignment[];
-  deferred: Array<{
-    subjectKey: string;
-    recordId: `rec_${string}`;
-    reason: string;
-  }>;
+  materialization: {
+    bornSystemRecordCount: number;
+    successorRevisionCount: number;
+    deferredRevisionCount: number;
+    deferredSubjectKeys: string[];
+    recordIdChangeCount: 0;
+    newRecordBirthCount: 0;
+    genericBirthSummarySuccessorCount: 0;
+  };
   acceptance: {
     successorRevisionCount: number;
     deferredRevisionCount: number;
     genericBirthSummarySuccessorCount: 0;
     recordIdChangeCount: 0;
+    newRecordBirthCount: 0;
     publicDisclosureDecisionCount: 0;
     routeMutationCount: 0;
     publicSurfaceMutationCount: 0;
+    productionMutationCount: 0;
     r1_a2_3Complete: boolean;
+    nextRequiredAction: string;
   };
+}
+
+export interface ResolvedTemporalRepository extends CurrentCensusRepository {
+  observedAt: string;
+  censusContractId: string;
+}
+
+export interface MaterializedCurrentRevision {
+  subjectKey: string;
+  recordId: string;
+  revision: RecordRevision;
+  payload: SystemPayload;
+  temporalBasis: ResolvedTemporalRepository[];
 }
 
 export interface CurrentRevisionMaterialization {
   records: RegistryRecordEntry[];
-  successorRevisionIds: string[];
+  successors: MaterializedCurrentRevision[];
   deferredRecordIds: string[];
   errors: string[];
+}
+
+function unique(values: readonly string[]): boolean {
+  return new Set(values).size === values.length;
 }
 
 export function materializeCurrentSystemRevisions(
   manifest: CurrentRevisionManifest = currentRevisionManifestJson as CurrentRevisionManifest,
   registryManifest: RecordRegistryManifest = registryManifestJson as RecordRegistryManifest,
-  census: CurrentCensus = currentCensusJson as CurrentCensus,
+  assignments: readonly CurrentRevisionAssignment[] = CURRENT_SYSTEM_REVISION_ASSIGNMENTS,
+  deferred: readonly DeferredCurrentRevision[] = CURRENT_SYSTEM_REVISION_DEFERRED,
+  census: CurrentCensusManifest = currentCensusJson as CurrentCensusManifest,
 ): CurrentRevisionMaterialization {
   const errors: string[] = [];
   const records = materializeRegistryRecords(registryManifest).map((record) => ({
@@ -110,11 +155,24 @@ export function materializeCurrentSystemRevisions(
   const codec = codecMap(KNOWLEDGE_REGISTRY_CODECS).get('knowledge.system');
   if (!codec) throw new Error('current-revision-system-codec-missing');
 
+  if (manifest.schemaVersion !== CURRENT_REVISION_MANIFEST_SCHEMA_VERSION) {
+    errors.push('manifest-schema-version');
+  }
+  if (manifest.materialization.bornSystemRecordCount !== records.length) {
+    errors.push('born-system-count-contract');
+  }
+  if (manifest.laws.successorGeneration !== 1) {
+    errors.push('successor-generation-contract');
+  }
+  if (manifest.laws.payloadSchemaVersion !== 'knowledge.system/v0') {
+    errors.push('payload-schema-contract');
+  }
+
   const assignedRecordIds = new Set<string>();
   const assignedSubjectKeys = new Set<string>();
-  const successorRevisionIds: string[] = [];
+  const successors: MaterializedCurrentRevision[] = [];
 
-  for (const assignment of manifest.assignments) {
+  for (const assignment of assignments) {
     if (assignedRecordIds.has(assignment.recordId)) {
       errors.push(`duplicate-record:${assignment.recordId}`);
       continue;
@@ -125,18 +183,6 @@ export function materializeCurrentSystemRevisions(
     }
     assignedRecordIds.add(assignment.recordId);
     assignedSubjectKeys.add(assignment.subjectKey);
-
-    if (assignment.temporalBasis.censusContractId !== census.contractId) {
-      errors.push(`census-contract-mismatch:${assignment.subjectKey}`);
-    }
-    if (assignment.temporalBasis.repositoryRefs.length === 0) {
-      errors.push(`repository-basis-empty:${assignment.subjectKey}`);
-    }
-    for (const repositoryRef of assignment.temporalBasis.repositoryRefs) {
-      if (!censusByRepo.has(repositoryRef)) {
-        errors.push(`repository-basis-unobserved:${assignment.subjectKey}:${repositoryRef}`);
-      }
-    }
 
     const record = byRecordId.get(assignment.recordId);
     const subjectRecord = bySubjectKey.get(assignment.subjectKey);
@@ -156,6 +202,61 @@ export function materializeCurrentSystemRevisions(
       errors.push(`unexpected-birth-lineage:${assignment.recordId}`);
       continue;
     }
+    if (assignment.payload.summary === registryManifest.birthProfile.summary) {
+      errors.push(`generic-birth-summary:${assignment.recordId}`);
+      continue;
+    }
+    if (assignment.payload.schemaVersion !== manifest.laws.payloadSchemaVersion) {
+      errors.push(`payload-schema:${assignment.recordId}`);
+      continue;
+    }
+    if (assignment.temporalBasis.censusContractId !== census.contractId) {
+      errors.push(`census-contract:${assignment.recordId}`);
+      continue;
+    }
+    if (assignment.temporalBasis.repositoryRefs.length === 0 || !unique(assignment.temporalBasis.repositoryRefs)) {
+      errors.push(`repository-refs:${assignment.recordId}`);
+      continue;
+    }
+    if (assignment.grounding.summaryBasis.length === 0) {
+      errors.push(`summary-grounding:${assignment.recordId}`);
+      continue;
+    }
+    if (assignment.payload.thesis !== null && assignment.grounding.thesisBasis.length === 0) {
+      errors.push(`thesis-grounding:${assignment.recordId}`);
+      continue;
+    }
+    if (assignment.grounding.privateEvidenceMayBePublished !== false) {
+      errors.push(`private-evidence-publication:${assignment.recordId}`);
+      continue;
+    }
+
+    const resolvedTemporalBasis: ResolvedTemporalRepository[] = [];
+    let temporalResolutionFailed = false;
+    for (const repositoryRef of assignment.temporalBasis.repositoryRefs) {
+      const observed = censusByRepo.get(repositoryRef);
+      if (!observed) {
+        errors.push(`repository-not-in-census:${assignment.recordId}:${repositoryRef}`);
+        temporalResolutionFailed = true;
+        continue;
+      }
+      if (observed.state === 'material' && !/^[0-9a-f]{40}$/.test(observed.observedHead ?? '')) {
+        errors.push(`invalid-observed-head:${assignment.recordId}:${repositoryRef}`);
+        temporalResolutionFailed = true;
+        continue;
+      }
+      if (observed.state === 'empty' && observed.observedHead !== null) {
+        errors.push(`empty-repository-with-head:${assignment.recordId}:${repositoryRef}`);
+        temporalResolutionFailed = true;
+        continue;
+      }
+      resolvedTemporalBasis.push({
+        ...observed,
+        observedAt: census.observedAt,
+        censusContractId: census.contractId,
+      });
+    }
+    if (temporalResolutionFailed) continue;
 
     const current = record.revisions[0].revision;
     const payloadDigest = computeRegistryPayloadDigest(codec, assignment.payload);
@@ -178,30 +279,69 @@ export function materializeCurrentSystemRevisions(
     }
 
     record.revisions.push({ revision: successor, payload: assignment.payload });
-    successorRevisionIds.push(successor.revisionId);
+    successors.push({
+      subjectKey: assignment.subjectKey,
+      recordId: assignment.recordId,
+      revision: successor,
+      payload: assignment.payload,
+      temporalBasis: resolvedTemporalBasis,
+    });
   }
 
-  const deferredRecordIds = manifest.deferred.map((entry) => entry.recordId);
-  for (const deferred of manifest.deferred) {
-    const record = byRecordId.get(deferred.recordId);
-    if (!record || record.subjectKey !== deferred.subjectKey) {
-      errors.push(`invalid-deferred-record:${deferred.subjectKey}`);
+  const deferredRecordIds: string[] = [];
+  const deferredSubjectKeys = new Set<string>();
+  for (const entry of deferred) {
+    if (deferredRecordIds.includes(entry.recordId) || deferredSubjectKeys.has(entry.subjectKey)) {
+      errors.push(`duplicate-deferred:${entry.recordId}`);
+      continue;
     }
-    if (assignedRecordIds.has(deferred.recordId)) {
-      errors.push(`assigned-and-deferred:${deferred.recordId}`);
+    deferredRecordIds.push(entry.recordId);
+    deferredSubjectKeys.add(entry.subjectKey);
+
+    const record = byRecordId.get(entry.recordId);
+    if (!record || record.subjectKey !== entry.subjectKey) {
+      errors.push(`invalid-deferred-record:${entry.subjectKey}`);
+    }
+    if (assignedRecordIds.has(entry.recordId) || assignedSubjectKeys.has(entry.subjectKey)) {
+      errors.push(`assigned-and-deferred:${entry.recordId}`);
     }
   }
 
-  if (manifest.assignments.length !== manifest.acceptance.successorRevisionCount) {
-    errors.push('successor-count-contract');
+  const coveredRecordIds = new Set([...assignedRecordIds, ...deferredRecordIds]);
+  const coveredSubjectKeys = new Set([...assignedSubjectKeys, ...deferredSubjectKeys]);
+  for (const record of records) {
+    if (!coveredRecordIds.has(record.recordId)) errors.push(`uncovered-record:${record.recordId}`);
+    if (!coveredSubjectKeys.has(record.subjectKey)) errors.push(`uncovered-subject:${record.subjectKey}`);
   }
-  if (manifest.deferred.length !== manifest.acceptance.deferredRevisionCount) {
-    errors.push('deferred-count-contract');
+
+  if (assignments.length !== manifest.materialization.successorRevisionCount) {
+    errors.push('successor-count-materialization');
+  }
+  if (assignments.length !== manifest.acceptance.successorRevisionCount) {
+    errors.push('successor-count-acceptance');
+  }
+  if (deferred.length !== manifest.materialization.deferredRevisionCount) {
+    errors.push('deferred-count-materialization');
+  }
+  if (deferred.length !== manifest.acceptance.deferredRevisionCount) {
+    errors.push('deferred-count-acceptance');
+  }
+  if (!unique(assignments.map((assignment) => assignment.recordId))) {
+    errors.push('duplicate-assignment-record-id');
+  }
+  if (!unique(assignments.map((assignment) => assignment.subjectKey))) {
+    errors.push('duplicate-assignment-subject-key');
+  }
+  if (coveredRecordIds.size !== records.length) {
+    errors.push('record-coverage-count');
+  }
+  if (coveredSubjectKeys.size !== records.length) {
+    errors.push('subject-coverage-count');
   }
 
   return {
     records,
-    successorRevisionIds,
+    successors,
     deferredRecordIds,
     errors,
   };
