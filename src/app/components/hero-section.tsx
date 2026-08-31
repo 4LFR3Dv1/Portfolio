@@ -13,23 +13,27 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
   const copy = language === 'en'
     ? {
         role: 'Computing Systems Engineer',
-        author: 'SNE Labs // Computing Research',
-        description: 'I build computing systems, agent-native runtimes and experimental infrastructure — from bare-metal and network primitives to governed software surfaces.',
-        focus: ['Agent-native systems', 'Bare-metal research', 'Computing infrastructure', 'Applied research'],
+        author: 'SNE Labs',
+        description: 'I design and build software systems, developer tools and experimental computing projects, with a current focus on AI, browsers and infrastructure.',
+        focus: ['Browser and web systems', 'Tools for working with AI', 'Developer infrastructure', 'Applied computing research'],
         quick: 'CURRENT SURFACES',
         portfolio: 'PERSONAL GITHUB',
         editorial: 'EDITORIAL',
         lab: 'SNE LABS',
+        current: 'CURRENT WORK',
+        currentDescription: 'I am currently focused on Genesis, Foundry and SNE Labs projects that explore better ways for AI to work inside real software systems.',
       }
     : {
         role: 'Engenheiro de Sistemas Computacionais',
-        author: 'SNE Labs // Pesquisa em Computação',
-        description: 'Construo sistemas computacionais, runtimes agent-native e infraestrutura experimental — de primitivas bare-metal e de rede a superfícies de software governadas.',
-        focus: ['Sistemas agent-native', 'Pesquisa bare-metal', 'Infraestrutura computacional', 'Pesquisa aplicada'],
+        author: 'SNE Labs',
+        description: 'Projeto e construo sistemas de software, ferramentas para desenvolvimento e projetos experimentais de computação, com foco atual em IA, navegadores e infraestrutura.',
+        focus: ['Sistemas para navegador e web', 'Ferramentas para trabalhar com IA', 'Infraestrutura para desenvolvimento', 'Pesquisa aplicada em computação'],
         quick: 'SUPERFÍCIES ATUAIS',
         portfolio: 'GITHUB PESSOAL',
         editorial: 'EDITORIAL',
         lab: 'SNE LABS',
+        current: 'TRABALHO ATUAL',
+        currentDescription: 'Hoje estou focado em Genesis, Foundry e projetos da SNE Labs que exploram formas melhores de integrar IA a sistemas de software reais.',
       };
 
   return (
@@ -61,9 +65,9 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
 
           <div className="flex flex-wrap gap-3">
             <Badge variant="green">COMPUTING SYSTEMS</Badge>
-            <Badge variant="blue">AGENT-NATIVE</Badge>
+            <Badge variant="blue">AI + SOFTWARE</Badge>
             <Badge variant="purple">RESEARCH + ENGINEERING</Badge>
-            <Badge variant="amber">LOCAL-FIRST</Badge>
+            <Badge variant="amber">PRODUCT + INFRASTRUCTURE</Badge>
           </div>
 
           <div className="flex flex-wrap gap-4 pt-4">
@@ -86,19 +90,17 @@ export function HeroSection({ onViewProjects, onArchitecture, onContact }: HeroS
         <aside className="border border-[var(--border-default)] bg-[var(--surface-1)] lg:sticky lg:top-24">
           <div className="border-b border-[var(--border-default)] px-6 py-4 bg-[var(--surface-2)]">
             <div className="font-mono text-xs uppercase tracking-wider" style={{ color: '#a855f7' }}>
-              CURRENT FOCUS // SYSTEMS IN MOTION
+              {copy.current}
             </div>
           </div>
           <div className="p-6 space-y-5">
             <p className="text-sm leading-relaxed" style={{ color: 'var(--terminal-text)' }}>
-              {language === 'en'
-                ? 'Current work spans governed web runtimes, bare-metal AI-native computing and field systems that turn research into executable infrastructure.'
-                : 'O trabalho atual atravessa runtimes web governados, computação AI-native bare-metal e sistemas de campo que transformam pesquisa em infraestrutura executável.'}
+              {copy.currentDescription}
             </p>
             <div className="grid gap-3">
-              <FocusRow label="GENESIS" value={language === 'en' ? 'ACTIVE R&D' : 'P&D ATIVO'} />
-              <FocusRow label="BRINEOS" value={language === 'en' ? 'BARE-METAL RESEARCH' : 'PESQUISA BARE-METAL'} />
-              <FocusRow label="SNE-FDE" value={language === 'en' ? 'FIELD SYSTEM' : 'SISTEMA DE CAMPO'} />
+              <FocusRow label="GENESIS" value={language === 'en' ? 'BROWSER + AI' : 'NAVEGADOR + IA'} />
+              <FocusRow label="FOUNDRY" value={language === 'en' ? 'AI DEVELOPMENT TOOLS' : 'FERRAMENTAS PARA IA'} />
+              <FocusRow label="SNE LABS" value={language === 'en' ? 'APPLIED COMPUTING' : 'COMPUTAÇÃO APLICADA'} />
             </div>
           </div>
         </aside>
