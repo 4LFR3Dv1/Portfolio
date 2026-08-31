@@ -52,14 +52,25 @@ try {
   const server = serveWith(distributed);
   const address = await listen(server);
   if (!address || typeof address === 'string') throw new Error('redirect-adapter-address-unavailable');
+  let witnessedRedirects = 0;
   try {
-    const en = await request(address.port, '/_compat/redirect?from=%2Fwork%2Fvira&lang=en');
-    if (en.status !== 302) throw new Error(`redirect-adapter-en-status:${en.status}`);
-    if (en.headers.get('location') !== '/en/systems/vira') throw new Error(`redirect-adapter-en-location:${en.headers.get('location')}`);
-
-    const pt = await request(address.port, '/_compat/redirect?from=%2Fwork%2Fvira&lang=pt');
-    if (pt.status !== 302) throw new Error(`redirect-adapter-pt-status:${pt.status}`);
-    if (pt.headers.get('location') !== '/pt-br/systems/vira') throw new Error(`redirect-adapter-pt-location:${pt.headers.get('location')}`);
+    for (const entry of adapter.entries) {
+      for (const [legacyLanguage, canonicalLanguage] of [['en', 'en'], ['pt', 'pt-BR']]) {
+        const expectedLocation = entry.successors[canonicalLanguage];
+        const params = new URLSearchParams({ from: entry.legacyPath, lang: legacyLanguage });
+        const result = await request(address.port, `${adapter.http.endpoint}?${params.toString()}`);
+        if (result.status !== 302) {
+          throw new Error(`redirect-adapter-status:${entry.legacyPath}:${legacyLanguage}:${result.status}`);
+        }
+        if (result.headers.get('location') !== expectedLocation) {
+          throw new Error(`redirect-adapter-location:${entry.legacyPath}:${legacyLanguage}:${result.headers.get('location')}`);
+        }
+        if (result.headers.get('cache-control') !== 'no-store') {
+          throw new Error(`redirect-adapter-cache-control:${entry.legacyPath}:${legacyLanguage}`);
+        }
+        witnessedRedirects += 1;
+      }
+    }
 
     const acceptLanguage = await request(
       address.port,
@@ -87,8 +98,11 @@ try {
     await new Promise((resolve, reject) => failClosedServer.close((error) => error ? reject(error) : resolve()));
   }
 
+  if (witnessedRedirects !== 8) throw new Error(`redirect-adapter-witness-count:${witnessedRedirects}`);
+
   console.log('R2.4 COMPATIBILITY REDIRECT HTTP ADAPTER: PASS');
   console.log(`redirect_routes=${adapter.entries.length}`);
+  console.log(`redirect_targets_witnessed=${witnessedRedirects}`);
   console.log('redirect_status=302');
   console.log('language_source=portfolio-language');
   console.log('accept_language_inference=0');
