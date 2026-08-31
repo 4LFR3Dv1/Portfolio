@@ -57,18 +57,22 @@ export function SelectedWorkSection({ onCaseStudy, onOpen }: SelectedWorkSection
               {item.topics.map((topic) => <span key={topic[language]}>{topic[language]}</span>)}
             </div>
 
-            {(item.caseStudyId || item.href) && (
+            {(item.caseStudyId || item.links?.length) && (
               <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--border-subtle)] pt-5">
                 {item.caseStudyId && (
                   <Button variant="ghost" onClick={() => onCaseStudy?.(item.caseStudyId!)}>
                     {copy.caseStudy}
                   </Button>
                 )}
-                {item.href && item.linkLabel && (
-                  <Button variant="secondary" onClick={() => onOpen?.(item.href!)}>
-                    {item.linkLabel[language]} ↗
+                {item.links?.map((link, linkIndex) => (
+                  <Button
+                    key={link.href}
+                    variant={item.caseStudyId || linkIndex > 0 ? 'secondary' : 'primary'}
+                    onClick={() => onOpen?.(link.href)}
+                  >
+                    {link.label[language]} ↗
                   </Button>
-                )}
+                ))}
               </div>
             )}
           </article>
