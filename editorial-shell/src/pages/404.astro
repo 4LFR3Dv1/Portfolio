@@ -1,0 +1,29 @@
+---
+const language = 'en';
+---
+<!doctype html>
+<html lang={language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>404 · Renan Melo</title>
+  </head>
+  <body>
+    <main>
+      <p>404</p>
+      <h1>Unresolved route.</h1>
+      <p>The editorial runtime has no admitted public page for this path.</p>
+      <a href="/en">Return to the editorial index</a>
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(:root) { color-scheme: dark; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #0b0d10; color: #ece9e2; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; }
+  main { width: min(680px, calc(100% - 40px)); }
+  p { color: #8f938f; line-height: 1.6; }
+  h1 { font: 500 clamp(42px, 8vw, 88px)/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: -.05em; }
+  a { color: #ece9e2; }
+</style>
