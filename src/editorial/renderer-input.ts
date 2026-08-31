@@ -29,9 +29,14 @@ import {
 } from './surface-runtime';
 import {
   reconstructDistributionRuntime,
+  type DistributionBundle,
   type DistributionFoundationManifest,
   type DistributionPage,
 } from './distribution-runtime';
+import {
+  reconstructDistributionEmission,
+  type DistributionEmission,
+} from './distribution-emission';
 import type { EditorialDocumentDto } from './document-runtime';
 import type { LegacyCompatibilityManifest } from './legacy-compatibility';
 import {
@@ -75,6 +80,8 @@ export interface AcceptedRendererInput {
     distributionDigest: `sha256_${string}`;
   };
   pages: DistributionPage[];
+  distribution: DistributionBundle;
+  emission: DistributionEmission;
   surfaces: CoreSurfaceDto[];
   documents: EditorialDocumentDto[];
   shellPlan: PublicationShellPlan;
@@ -133,6 +140,11 @@ export function materializeAcceptedRendererInput(): AcceptedRendererInput {
     throw new Error(`renderer-input-distribution-conflict:${distribution.errors.join(',')}`);
   }
 
+  const emission = reconstructDistributionEmission(distribution.bundle, distribution.digest);
+  if (emission.state !== 'ready' || !emission.emission) {
+    throw new Error(`renderer-input-distribution-emission-conflict:${emission.errors.join(',')}`);
+  }
+
   const shell = reconstructPublicationShellBoundary(
     shellManifestJson as PublicationShellBoundaryManifest,
     distribution.bundle,
@@ -154,6 +166,8 @@ export function materializeAcceptedRendererInput(): AcceptedRendererInput {
       distributionDigest: distribution.digest,
     },
     pages: distribution.bundle.pages,
+    distribution: distribution.bundle,
+    emission: emission.emission,
     surfaces: surfaces.surfaces,
     documents,
     shellPlan: shell.plan,
