@@ -1,6 +1,6 @@
 # R1 — Editorial Foundation
 
-Status: **COMPLETE / FROZEN**
+Status: **COMPLETE / FROZEN — POST-FREEZE RECONCILIATION ACTIVE**
 
 Effective constitutional preconditions:
 
@@ -75,7 +75,27 @@ CUTOVER AUTHORIZED=false
 DEPLOYED RUNTIME CHANGED=false
 ```
 
-Therefore `R1_COMPLETE=true` means the editorial foundation is coherent and ready to be consumed by a publication shell. It does not mean `renan.snelabs.space` has already migrated.
+Therefore `R1_COMPLETE=true` means the editorial foundation was coherent at its accepted historical basis. It does not mean that its public representations remain temporally current forever.
+
+## Post-freeze amendments
+
+### R1-A2 — Current Corpus Reconciliation
+
+R1-A2 was opened after direct inspection of the R2.6 preview demonstrated that the structurally valid R1/R2 pipeline was still projecting R0.8-era public selection and generation-zero summaries. R1-A2 preserves all R1 identities and completion seals while reopening temporal reconciliation of revisions, evidence, maturity, disclosure, routes and surfaces.
+
+The amendment is intentionally non-destructive:
+
+```text
+R1 Birth identity        preserved
+R1 completion history    preserved
+R2.6 transport witness   preserved
+R2.7 infra witness       preserved
+
+current publication validity   reopened
+current cutover eligibility    revoked
+```
+
+See `docs/editorial/R1-A2-current-corpus-reconciliation.md` and `docs/editorial/R1-A2-reconciliation-constitution.v0.json`.
 
 ```text
 R1_0_COMPLETE=true
@@ -89,5 +109,8 @@ R1_7_COMPLETE=true
 R1_8_COMPLETE=true
 R1_9_COMPLETE=true
 R1_COMPLETE=true
-NEXT=R2 — Editorial Publication Shell & Cutover
+R1_A2_ACTIVE=true
+CURRENT_PUBLICATION_VALID=false
+CUTOVER_READY=false
+NEXT=R1-A2.1 — Current GitHub Census + HEAD Observation
 ```
