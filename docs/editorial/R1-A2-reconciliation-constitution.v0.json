@@ -48,8 +48,8 @@
   },
   "program": [
     {"cut":"R1-A2.0","purpose":"Reconciliation Constitution + Cutover Eligibility Revocation","status":"materialized"},
-    {"cut":"R1-A2.1","purpose":"Current GitHub Census + HEAD Observation","status":"in-progress"},
-    {"cut":"R1-A2.2","purpose":"Existing Identity Reconciliation","status":"not-started"},
+    {"cut":"R1-A2.1","purpose":"Current GitHub Census + HEAD Observation","status":"complete"},
+    {"cut":"R1-A2.2","purpose":"Existing Identity Reconciliation","status":"next"},
     {"cut":"R1-A2.3","purpose":"Current Revision Materialization","status":"not-started"},
     {"cut":"R1-A2.4","purpose":"Evidence + Maturity Reconciliation","status":"not-started"},
     {"cut":"R1-A2.5","purpose":"Public Disclosure Reauthorization","status":"not-started"},
@@ -58,6 +58,11 @@
     {"cut":"R1-A2.8","purpose":"Current Publication Acceptance","status":"not-started"}
   ],
   "currentState": {
+    "currentCorpusCensusComplete": true,
+    "currentRepositoryCount": 54,
+    "materialHeadCount": 52,
+    "emptyRepositoryCount": 2,
+    "identityReconciliationComplete": false,
     "currentPublicationValid": false,
     "cutoverReady": false,
     "cutoverAuthorized": false,
@@ -66,10 +71,11 @@
   },
   "acceptance": {
     "r1_a2_0Materialized": true,
+    "r1_a2_1Complete": true,
     "r1_a2Complete": false,
     "currentPublicationValid": false,
     "cutoverReady": false,
     "cutoverAuthorized": false,
-    "nextRequiredCut": "R1-A2.1 — Current GitHub Census + HEAD Observation"
+    "nextRequiredCut": "R1-A2.2 — Existing Identity Reconciliation"
   }
 }
