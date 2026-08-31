@@ -37,6 +37,10 @@ jobs:
         working-directory: editorial-shell
         run: node scripts/verify-output.mjs
 
+      - name: Verify compatibility redirect HTTP adapter
+        working-directory: editorial-shell
+        run: node scripts/verify-redirect-adapter.mjs
+
       - name: Preserve shell witness
         uses: actions/upload-artifact@v4
         with:

@@ -20,10 +20,12 @@ try {
   const input = module.materializeAcceptedRendererInput();
   mkdirSync(dirname(output), { recursive: true });
   writeFileSync(output, `${JSON.stringify(input, null, 2)}\n`, 'utf8');
-  console.log('R2.2 RENDERER + DISTRIBUTION INPUT MATERIALIZATION: PASS');
+  console.log('R2.4 ACCEPTED PUBLICATION + REDIRECT INPUT MATERIALIZATION: PASS');
   console.log(`pages=${input.pages.length}`);
   console.log(`surfaces=${input.surfaces.length}`);
   console.log(`documents=${input.documents.length}`);
+  console.log(`legacy_pages=${input.legacy.pages.length}`);
+  console.log(`redirects=${input.redirects.entries.length}`);
   console.log(`metadata=${input.emission.metadata.length}`);
   console.log(`hreflang_clusters=${input.emission.hreflang.length}`);
   console.log(`artifacts=${input.emission.artifacts.length}`);

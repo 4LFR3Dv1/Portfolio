@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "editorial-compatibility-redirect-adapter/v0",
+  "contractId": "PORTFOLIO-R2.4-2026-08-31",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "13b53a9874185eb63667e82f5504865693b36e27",
+  "preconditions": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "r2_3Complete": true,
+    "cutoverReady": false,
+    "cutoverAuthorized": false
+  },
+  "negotiation": {
+    "storageKey": "portfolio-language",
+    "acceptedStoredValues": ["en", "pt"],
+    "defaultWhenMissing": "en",
+    "serverCanReadLocalStorage": false,
+    "clientHandshakeRequired": true,
+    "acceptLanguageInferenceAllowed": false,
+    "navigatorLanguageInferenceAllowed": false,
+    "requestLanguageParameter": "lang",
+    "requestSourceParameter": "from"
+  },
+  "http": {
+    "endpoint": "/_compat/redirect",
+    "redirectStatus": 302,
+    "blockedStatus": 503,
+    "invalidRequestStatus": 400,
+    "unknownPathStatus": 404,
+    "cacheControl": "no-store"
+  },
+  "expected": {
+    "redirectCount": 4,
+    "distributedTargetCount": 8,
+    "handshakePageCount": 4
+  },
+  "currentState": {
+    "redirectAdapterMaterialized": true,
+    "handshakePagesMaterialized": true,
+    "physicalHttpWitnessed": false,
+    "productionAdapterActivated": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "allRedirectTargetsDistributed": true,
+    "directServerLanguageInferenceCount": 0,
+    "crossLanguageFallbackCount": 0,
+    "successorAbsenceRedirectCount": 0,
+    "deploymentMutationCount": 0,
+    "r2_4Complete": false,
+    "nextRequiredCut": "R2.5 — Static Runtime Commissioning"
+  }
+}

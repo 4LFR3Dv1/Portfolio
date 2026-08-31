@@ -15,7 +15,7 @@ function walk(directory) {
 if (!existsSync(rootPath)) throw new Error('editorial-shell-dist-missing');
 
 const files = walk(rootPath);
-const indexHtml = files.filter((path) => path.endsWith('/index.html'));
+const indexHtml = files.filter((path) => path.endsWith('/index.html') || path === join(rootPath, 'index.html'));
 const canonicalHtml = indexHtml.filter((path) => {
   const normalized = relative(rootPath, path).replaceAll('\\', '/');
   return normalized.startsWith('en/') || normalized.startsWith('pt-br/');
@@ -26,7 +26,14 @@ const legacyPaths = [
   'work/transactional-support-bot/index.html',
   'work/verify-systems/index.html',
 ];
+const redirectPaths = [
+  'index.html',
+  'work/vira/index.html',
+  'work/xs-wallet/index.html',
+  'work/sne-os/index.html',
+];
 const legacyHtml = legacyPaths.filter((path) => existsSync(join(rootPath, path)));
+const redirectHtml = redirectPaths.filter((path) => existsSync(join(rootPath, path)));
 
 if (canonicalHtml.length !== 18) {
   throw new Error(`editorial-shell-canonical-html-count:${canonicalHtml.length}`);
@@ -34,7 +41,10 @@ if (canonicalHtml.length !== 18) {
 if (legacyHtml.length !== 4) {
   throw new Error(`editorial-shell-legacy-html-count:${legacyHtml.length}`);
 }
-if (indexHtml.length !== 22) {
+if (redirectHtml.length !== 4) {
+  throw new Error(`editorial-shell-redirect-handshake-count:${redirectHtml.length}`);
+}
+if (indexHtml.length !== 26) {
   throw new Error(`editorial-shell-index-html-count:${indexHtml.length}`);
 }
 
@@ -50,6 +60,7 @@ const required = [
   'en/systems/sne-os/index.html',
   'pt-br/systems/sne-os/index.html',
   ...legacyPaths,
+  ...redirectPaths,
   '404.html',
   'sitemap.xml',
   'en/rss.xml',
@@ -58,16 +69,6 @@ const required = [
 ];
 for (const path of required) {
   if (!existsSync(join(rootPath, path))) throw new Error(`editorial-shell-required-output-missing:${path}`);
-}
-
-const forbidden = [
-  'index.html',
-  'work/vira/index.html',
-  'work/xs-wallet/index.html',
-  'work/sne-os/index.html',
-];
-for (const path of forbidden) {
-  if (existsSync(join(rootPath, path))) throw new Error(`editorial-shell-r2-redirect-premature:${path}`);
 }
 
 const vira = readFileSync(join(rootPath, 'en/systems/vira/index.html'), 'utf8');
@@ -97,6 +98,18 @@ for (const [path, body] of legacyBodies) {
   if (body.includes('rel="canonical"')) throw new Error(`editorial-shell-legacy-canonical-invented:${path}`);
   if (body.includes('hreflang=')) throw new Error(`editorial-shell-legacy-hreflang-invented:${path}`);
   if (!body.includes('portfolio-language')) throw new Error(`editorial-shell-legacy-language-state-missing:${path}`);
+}
+
+const redirectBodies = new Map(redirectPaths.map((path) => [path, readFileSync(join(rootPath, path), 'utf8')]));
+for (const [path, body] of redirectBodies) {
+  if (!body.includes('data-compatibility-redirect-handshake')) throw new Error(`editorial-shell-redirect-handshake-marker-missing:${path}`);
+  if (!body.includes('name="robots" content="noindex,follow"')) throw new Error(`editorial-shell-redirect-robots-missing:${path}`);
+  if (!body.includes('portfolio-language')) throw new Error(`editorial-shell-redirect-language-state-missing:${path}`);
+  if (!body.includes('/_compat/redirect')) throw new Error(`editorial-shell-redirect-endpoint-missing:${path}`);
+  if (!body.includes('URLSearchParams')) throw new Error(`editorial-shell-redirect-explicit-query-handshake-missing:${path}`);
+  if (body.includes('navigator.language') || body.includes('Accept-Language')) throw new Error(`editorial-shell-redirect-language-inference-leak:${path}`);
+  if (body.includes('rel="canonical"')) throw new Error(`editorial-shell-redirect-canonical-invented:${path}`);
+  if (body.includes('hreflang=')) throw new Error(`editorial-shell-redirect-hreflang-invented:${path}`);
 }
 
 const architecture = legacyBodies.get('architecture/index.html') ?? '';
@@ -138,6 +151,9 @@ if (sitemap.includes('hreflang="x-default"')) throw new Error('editorial-shell-s
 for (const legacyPath of ['/architecture', '/work/agentic-systems', '/work/transactional-support-bot', '/work/verify-systems']) {
   if (sitemap.includes(legacyPath)) throw new Error(`editorial-shell-sitemap-legacy-leak:${legacyPath}`);
 }
+for (const redirectPath of ['/work/vira', '/work/xs-wallet', '/work/sne-os']) {
+  if (sitemap.includes(`https://renan.snelabs.space${redirectPath}`)) throw new Error(`editorial-shell-sitemap-redirect-leak:${redirectPath}`);
+}
 
 for (const rssPath of ['en/rss.xml', 'pt-br/rss.xml']) {
   const rss = readFileSync(join(rootPath, rssPath), 'utf8');
@@ -157,13 +173,18 @@ if (searchPaths.has('/en/systems/foundry-pay') || searchPaths.has('/pt-br/system
 for (const legacyPath of ['/architecture', '/work/agentic-systems', '/work/transactional-support-bot', '/work/verify-systems']) {
   if (searchPaths.has(legacyPath)) throw new Error(`editorial-shell-search-legacy-leak:${legacyPath}`);
 }
+for (const redirectPath of ['/', '/work/vira', '/work/xs-wallet', '/work/sne-os']) {
+  if (searchPaths.has(redirectPath)) throw new Error(`editorial-shell-search-redirect-leak:${redirectPath}`);
+}
 
 const unknown = readFileSync(join(rootPath, '404.html'), 'utf8');
 if (!unknown.includes('Unresolved route')) throw new Error('editorial-shell-404-semantics-missing');
 
-console.log('R2.3 LEGACY PRESERVATION RUNTIME: PASS');
+console.log('R2.4 COMPATIBILITY REDIRECT HANDSHAKES: PASS');
 console.log(`canonical_html=${canonicalHtml.length}`);
 console.log(`legacy_html=${legacyHtml.length}`);
+console.log(`redirect_handshakes=${redirectHtml.length}`);
+console.log(`total_index_html=${indexHtml.length}`);
 console.log(`sitemap_entries=${sitemapEntries.length}`);
 console.log('rss_feeds=2');
 console.log('rss_items=0');

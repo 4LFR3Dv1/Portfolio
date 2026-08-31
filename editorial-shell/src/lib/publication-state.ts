@@ -1,4 +1,5 @@
 import publicationStateJson from '../generated/accepted-publication-state.json';
+import type { CompatibilityRedirectState } from '../../../src/editorial/compatibility-redirect-adapter';
 import type { EditorialDocumentDto } from '../../../src/editorial/document-runtime';
 import type { DistributionBundle, DistributionPage } from '../../../src/editorial/distribution-runtime';
 import type { DistributionEmission } from '../../../src/editorial/distribution-emission';
@@ -20,6 +21,7 @@ export interface RenderablePublicationState {
   documents: EditorialDocumentDto[];
   shellPlan: PublicationShellPlan;
   legacy: LegacyPreservationState;
+  redirects: CompatibilityRedirectState;
 }
 
 export const publicationState = publicationStateJson as RenderablePublicationState;

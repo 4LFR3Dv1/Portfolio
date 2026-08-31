@@ -148,7 +148,7 @@ describe('R2.3 terminal completion seal', () => {
     expect(vercel.rewrites).toEqual([{ source: '/((?!.*\\.).*)', destination: '/index.html' }]);
     expect(r23Doc).toContain('Status: **COMPLETE / DUAL CI WITNESSED**');
     expect(r2Readme).toContain('| R2.3 | Legacy Preservation Runtime | **COMPLETE** |');
-    expect(r2Readme).toContain('| R2.4 | Compatibility Redirect Adapter | **NEXT** |');
+    expect(r2Readme).toContain('| R2.4 | Compatibility Redirect Adapter |');
     expect(r2Readme).toContain('R2_3_COMPLETE=true');
   });
 });

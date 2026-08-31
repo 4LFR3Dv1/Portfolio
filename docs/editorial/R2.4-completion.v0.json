@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "editorial-compatibility-redirect-adapter-completion/v0",
+  "status": "frozen",
+  "normative": true,
+  "contractId": "PORTFOLIO-R2.4-2026-08-31",
+  "materialization": {
+    "commit": "e14f79ab82bc12d5f34e62b6d0c7d9043a77322c",
+    "verify": {
+      "workflow": "Verify",
+      "runId": 33394177204,
+      "conclusion": "success"
+    },
+    "shellBuild": {
+      "workflow": "Editorial Shell Build",
+      "runId": 33394177239,
+      "conclusion": "success",
+      "artifactId": 9758646215,
+      "artifactDigest": "sha256:2db9c5da6f046c96605ac6a84e107f6eb6c63f6f2e20e43e631de78912bd4089"
+    },
+    "manifestPath": "docs/editorial/compatibility-redirect-adapter.v0.json",
+    "manifestBlobSha": "ec087ff3797dfbf8f150cc711280d754c551b2cf"
+  },
+  "effectiveRedirect": {
+    "canonicalStaticPageCount": 18,
+    "legacyPreservedPageCount": 4,
+    "redirectHandshakePageCount": 4,
+    "totalStaticPageCount": 26,
+    "redirectRouteCount": 4,
+    "distributedTargetCount": 8,
+    "physicallyWitnessed302Count": 8,
+    "redirectStatus": 302,
+    "failClosedStatus": 503,
+    "invalidRequestStatus": 400,
+    "unknownPathStatus": 404,
+    "acceptLanguageInferenceCount": 0,
+    "navigatorLanguageInferenceCount": 0,
+    "directServerLocalStorageReadCount": 0,
+    "successorAbsenceRedirectCount": 0,
+    "preservedLegacyRedirectCount": 0,
+    "redirectCanonicalMetadataCount": 0,
+    "redirectHreflangLinkCount": 0,
+    "redirectSitemapEntryCount": 0,
+    "redirectRssItemCount": 0,
+    "redirectSearchEntryCount": 0,
+    "productionAdapterActivated": false,
+    "vercelConfigurationChanged": false,
+    "rootBuildScriptChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "r1Complete": true,
+    "r2_0Complete": true,
+    "r2_1Complete": true,
+    "r2_2Complete": true,
+    "r2_3Complete": true,
+    "r2_4Complete": true,
+    "redirectAdapterPhysicallyMaterialized": true,
+    "http302PhysicallyWitnessed": true,
+    "distributedSuccessorsRevalidated": true,
+    "failClosedSuccessorLossWitnessed": true,
+    "productionRedirectsActivated": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "deploymentMutationCount": 0,
+    "nextRequiredCut": "R2.5 — Static Runtime Commissioning"
+  }
+}
