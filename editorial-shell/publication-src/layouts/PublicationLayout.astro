@@ -20,23 +20,68 @@ const {
   ogImageAlt = title,
   topics = [],
 } = Astro.props;
-const ogImage = new URL(ogImagePath, Astro.site).toString();
 const isArticle = Boolean(kind);
+const ogImageUrl = new URL(ogImagePath, Astro.site);
+if (publishedAt) ogImageUrl.searchParams.set('v', publishedAt.slice(0, 10).replaceAll('-', ''));
+const ogImage = ogImageUrl.toString();
+const structuredData = isArticle
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      image: [ogImage],
+      datePublished: publishedAt,
+      dateModified: publishedAt,
+      mainEntityOfPage: canonicalUrl,
+      articleSection: 'Editorial',
+      keywords: topics,
+      author: {
+        '@type': 'Person',
+        name: 'Renan Melo',
+        url: 'https://renan.snelabs.space/',
+      },
+      publisher: {
+        '@type': 'Person',
+        name: 'Renan Melo',
+        url: 'https://renan.snelabs.space/',
+      },
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: title,
+      description,
+      url: canonicalUrl,
+      author: {
+        '@type': 'Person',
+        name: 'Renan Melo',
+        url: 'https://renan.snelabs.space/',
+      },
+    };
 ---
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="author" content="Renan Melo" />
+    <meta name="theme-color" content="#08090d" />
     <link rel="canonical" href={canonicalUrl} />
 
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <meta property="og:type" content={isArticle ? 'article' : 'website'} />
+    <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Renan Melo" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="627" />
@@ -52,6 +97,8 @@ const isArticle = Boolean(kind);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     <title>{title}</title>
   </head>
   <body>
