@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "editorial-legacy-compatibility/v0",
+  "contractId": "PORTFOLIO-R1.8-2026-08-30",
+  "status": "materialized",
+  "normative": true,
+  "baseline": "67cf446ca1482ed7b8fae77e8aa5a7b8182fe10a",
+  "preconditions": {
+    "r1_7Complete": true,
+    "r1_6Complete": true,
+    "r0EffectiveComplete": true,
+    "legacyFreezeId": "PORTFOLIO-R0.0-2026-08-30"
+  },
+  "legacyRuntime": {
+    "routeCount": 8,
+    "sharedLanguagePaths": true,
+    "languageStorageKey": "portfolio-language",
+    "languageDefault": "en",
+    "spaUnknownPathBehavior": "landing-fallback",
+    "spaRewriteSource": "/((?!.*\\.).*)",
+    "spaRewriteDestination": "/index.html",
+    "deployedSitemapPath": "public/sitemap.xml"
+  },
+  "admission": {
+    "source": "R0.0 + R0.8 + R0-A1",
+    "legacyExceptionRegistryAllowed": true,
+    "canonicalSuccessorInferenceAllowed": false,
+    "undistributedSuccessorRedirectAllowed": false,
+    "crossLanguageFallbackAllowed": false,
+    "legacyMeaningRewriteAllowed": false,
+    "unknownPathFallbackAllowedAfterCutover": false
+  },
+  "languageNegotiation": {
+    "input": "legacy-client-state",
+    "storageKey": "portfolio-language",
+    "mapping": {
+      "en": "en",
+      "pt": "pt-BR"
+    },
+    "defaultWhenMissing": "en",
+    "acceptLanguageInferenceAllowed": false,
+    "redirectStatus": 302
+  },
+  "entries": [
+    {
+      "path": "/",
+      "legacyRole": "service-home",
+      "disposition": "language-negotiated-redirect",
+      "successors": {
+        "en": "/en",
+        "pt-BR": "/pt-br"
+      },
+      "blocker": null,
+      "historicalMeaning": "Legacy landing service route whose visible language was selected by client state.",
+      "source": "R0.8 route reconciliation"
+    },
+    {
+      "path": "/architecture",
+      "legacyRole": "service-architecture",
+      "disposition": "preserve-legacy-representation",
+      "successors": null,
+      "blocker": "architecture-representations-not-born",
+      "historicalMeaning": "Legacy bilingual Architecture Explorer service route.",
+      "source": "R0.8 route reconciliation"
+    },
+    {
+      "path": "/work/vira",
+      "legacyRole": "case-study",
+      "disposition": "language-negotiated-redirect",
+      "successors": {
+        "en": "/en/systems/vira",
+        "pt-BR": "/pt-br/systems/vira"
+      },
+      "blocker": null,
+      "historicalMeaning": "Legacy bilingual VIRA case-study entry point.",
+      "source": "R0.8 projectMappings:vira"
+    },
+    {
+      "path": "/work/xs-wallet",
+      "legacyRole": "case-study",
+      "disposition": "language-negotiated-redirect",
+      "successors": {
+        "en": "/en/systems/xs-wallet",
+        "pt-BR": "/pt-br/systems/xs-wallet"
+      },
+      "blocker": null,
+      "historicalMeaning": "Legacy bilingual XS Wallet case-study entry point.",
+      "source": "R0.8 projectMappings:xs-wallet"
+    },
+    {
+      "path": "/work/agentic-systems",
+      "legacyRole": "case-study",
+      "disposition": "preserve-legacy-representation",
+      "successors": null,
+      "blocker": "no-canonical-system-successor",
+      "historicalMeaning": "Frozen Agentic Systems & Foundry representation; R0-A1 forbids rebinding it to Foundry, Factory or AgentHub.",
+      "source": "R0-A1 legacy agentic amendment"
+    },
+    {
+      "path": "/work/transactional-support-bot",
+      "legacyRole": "case-study",
+      "disposition": "preserve-legacy-representation",
+      "successors": {
+        "en": "/en/systems/transactional-support-bot",
+        "pt-BR": "/pt-br/systems/transactional-support-bot"
+      },
+      "blocker": "sanitized-content-authority-unavailable",
+      "historicalMeaning": "Legacy sanitized case study remains the public representation until an independently admitted disclosure-safe document exists.",
+      "source": "R0.8 projectMappings:transactional-support-bot"
+    },
+    {
+      "path": "/work/sne-os",
+      "legacyRole": "case-study",
+      "disposition": "language-negotiated-redirect",
+      "successors": {
+        "en": "/en/systems/sne-os",
+        "pt-BR": "/pt-br/systems/sne-os"
+      },
+      "blocker": null,
+      "historicalMeaning": "Legacy bilingual SNE-OS case-study entry point.",
+      "source": "R0.8 projectMappings:sne-os"
+    },
+    {
+      "path": "/work/verify-systems",
+      "legacyRole": "case-study",
+      "disposition": "preserve-legacy-representation",
+      "successors": {
+        "en": "/en/research/verify-systems",
+        "pt-BR": "/pt-br/research/verify-systems"
+      },
+      "blocker": "publication-record-not-born",
+      "historicalMeaning": "Legacy VERIFY SYSTEMS case-study representation remains until the planned Publication identity is Born and distributed.",
+      "source": "R0.8 projectMappings:verify-systems"
+    }
+  ],
+  "currentState": {
+    "legacyRouteCount": 8,
+    "redirectReadyCount": 4,
+    "legacyRepresentationPreservedCount": 4,
+    "unknownFutureResolution": "unresolved",
+    "compatibilityRedirectsEnacted": false,
+    "legacyFallbackRenderingEnacted": false,
+    "legacyPublicSitemapReplaced": false,
+    "vercelConfigurationChanged": false,
+    "publicUiChanged": false,
+    "deployedRuntimeChanged": false
+  },
+  "acceptance": {
+    "allFrozenPublicRoutesCovered": true,
+    "historicalMeaningRewriteCount": 0,
+    "canonicalSuccessorInferenceCount": 0,
+    "undistributedRedirectCount": 0,
+    "agenticLegacyRebindingCount": 0,
+    "unknownPathWillResolveToLandingAfterCutover": false,
+    "legacyLanguageStatePreserved": true,
+    "r1_8Complete": false
+  }
+}
