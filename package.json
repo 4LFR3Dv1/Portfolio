@@ -4,13 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "vite",
-    "build:app": "vite build",
+    "build": "vite build",
     "build:editorial": "npm ci --prefix editorial-shell --ignore-scripts && npm --prefix editorial-shell run build:portfolio",
-    "build": "npm run build:app && npm run build:editorial",
+    "build:composed": "npm run build && npm run build:editorial",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",

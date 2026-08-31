@@ -1,0 +1,41 @@
+name: Portfolio Editorial Integration
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-composed-site:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install portfolio dependencies
+        run: npm ci
+      - name: Verify existing portfolio
+        run: npm run verify
+      - name: Build composed portfolio + editorial
+        run: npm run build:composed
+      - name: Verify composed output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f dist/index.html
+          test -f dist/editorial/index.html
+          test -f dist/editorial/systems/genesis/index.html
+          test -f dist/editorial/systems/brineos/index.html
+          test -f dist/editorial/systems/wer-esk/index.html
+          test -f dist/editorial/systems/foundry/index.html
+          test -f dist/editorial/systems/sne-fde/index.html
+          test -f dist/editorial/systems/lisa/index.html
+          grep -F 'https://renan.snelabs.space/editorial/systems/genesis/' dist/editorial/systems/genesis/index.html
+          grep -F 'og:title' dist/editorial/systems/genesis/index.html
+          grep -F 'www.linkedin.com/sharing/share-offsite' dist/editorial/systems/genesis/index.html
+          grep -F 'RENAN MELO' dist/index.html
+          echo 'PORTFOLIO + EDITORIAL COMPOSED BUILD: PASS'

@@ -129,13 +129,16 @@ describe('R0.0 current surface freeze', () => {
     }
   });
 
-  it('freezes the current public identity claims without making them future constitutional claims', () => {
-    const hero = readRepoFile('src/app/components/hero-section.tsx');
+  it('freezes historical public identity claims without owning future Hero copy', () => {
     const index = readRepoFile('index.html');
 
-    expect(hero).toContain(manifest.identityClaims.name);
-    expect(hero).toContain(manifest.identityClaims.role);
-    expect(hero).toContain(manifest.identityClaims.author);
+    expect(manifest.identityClaims).toEqual({
+      name: 'RENAN MELO',
+      role: 'Blockchain & Agentic Systems Engineer',
+      author: 'Author of VERIFY SYSTEMS',
+      siteName: 'Renan Melo',
+    });
+    expect(manifest.sourceBlobs['src/app/components/hero-section.tsx']).toMatch(/^[0-9a-f]{40}$/);
     expect(index).toContain(manifest.identityClaims.siteName);
   });
 
