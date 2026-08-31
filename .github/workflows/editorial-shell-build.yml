@@ -8,6 +8,7 @@ on:
       - 'src/app/data/editorial-*.ts'
       - 'docs/editorial/**'
       - '.github/workflows/editorial-shell-build.yml'
+      - '.github/workflows/editorial-preview-witness.yml'
   workflow_dispatch:
 
 permissions:
@@ -44,6 +45,10 @@ jobs:
       - name: Commission full static runtime
         working-directory: editorial-shell
         run: npm run verify:commissioned
+
+      - name: Verify isolated preview binding
+        working-directory: editorial-shell
+        run: npm run verify:preview-entrypoint
 
       - name: Preserve shell witness
         uses: actions/upload-artifact@v4
