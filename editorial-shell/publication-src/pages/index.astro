@@ -3,10 +3,49 @@ import PublicationLayout from '../layouts/PublicationLayout.astro';
 import { publications } from '../data/publications';
 
 const canonicalUrl = new URL('/editorial/', Astro.site).toString();
+
+const currentStudies = [
+  {
+    id: 'estudo-navegador-agentes',
+    source: 'GENESIS',
+    workState: 'EM DESENVOLVIMENTO',
+    studyState: 'ENSAIO PUBLICADO',
+    title: 'Quando um navegador deixa de ser uma ferramenta?',
+    description: 'A relação entre agentes de IA e o navegador continua sendo investigada enquanto o sistema muda. Este texto registra uma das perguntas que já saiu da implementação.',
+    href: '/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/',
+  },
+  {
+    id: 'estudo-software-agentes',
+    source: 'FACTORY',
+    workState: 'EM DESENVOLVIMENTO',
+    studyState: 'ESTUDO ABERTO',
+    title: 'O que muda quando produzir software deixa de ser o gargalo?',
+    description: 'Quando agentes conseguem implementar mudanças rapidamente, a pergunta passa a ser como decidir, delimitar, revisar e absorver trabalho sem transformar velocidade em ruído.',
+    href: null,
+  },
+  {
+    id: 'estudo-rede',
+    source: 'COMPUTAÇÃO EXPERIMENTAL',
+    workState: 'PESQUISA ATIVA',
+    studyState: 'ENSAIO PUBLICADO',
+    title: 'Onde existe uma rede?',
+    description: 'Uma investigação sobre o que chamamos de rede quando mudamos o observador: aplicação, sistema operacional, controlador, meio físico ou protocolo.',
+    href: '/editorial/onde-existe-uma-rede/',
+  },
+  {
+    id: 'estudo-estado-tempo',
+    source: 'COMPUTAÇÃO EXPERIMENTAL',
+    workState: 'PESQUISA ATIVA',
+    studyState: 'ENSAIO PUBLICADO',
+    title: 'O passado de um sistema não existe',
+    description: 'Um estudo sobre estado, memória e a diferença entre guardar o passado e preservar rastros suficientes para reconstruí-lo.',
+    href: '/editorial/o-passado-de-um-sistema-nao-existe/',
+  },
+];
 ---
 <PublicationLayout
   title="Editorial — Renan Melo"
-  description="Ensaios sobre tecnologia, computação, software, hardware e as abstrações que aparecem enquanto construo."
+  description="Ensaios e estudos atuais sobre tecnologia, computação, software, hardware e as abstrações que aparecem enquanto construo."
   canonicalUrl={canonicalUrl}
 >
   <section class="index-header">
@@ -19,24 +58,57 @@ const canonicalUrl = new URL('/editorial/', Astro.site).toString();
     </div>
   </section>
 
-  <div class="publication-list">
-    {publications.map((publication) => (
-      <a class="publication-row" href={`/editorial/${publication.slug}/`}>
-        <span class="type">{publication.kind}<br />{publication.dateLabel.pt}<br />{publication.readTime.pt}</span>
-        <span>
-          <h2>{publication.title.pt}</h2>
-          <p>{publication.copy.pt.dek}</p>
-        </span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
-    ))}
-  </div>
+  <section class="current-studies" id="estudos-atuais" aria-labelledby="current-studies-title">
+    <div class="section-heading">
+      <div>
+        <p class="kicker">AGORA // ESTUDOS ATUAIS</p>
+        <h2 id="current-studies-title">Perguntas que ainda estão em movimento.</h2>
+      </div>
+      <p>Nem toda investigação abaixo já virou ensaio. O estado mostra o que continua aberto e o que já ganhou uma publicação.</p>
+    </div>
+
+    <div class="study-grid">
+      {currentStudies.map((study, index) => (
+        <article class="study-card" id={study.id}>
+          <div class="study-meta">
+            <span>{String(index + 1).padStart(2, '0')} · {study.source}</span>
+            <span class="work-state">{study.workState}</span>
+          </div>
+          <h3>{study.title}</h3>
+          <p>{study.description}</p>
+          <div class="study-footer">
+            <span class:list={['study-state', { open: !study.href }]}>{study.studyState}</span>
+            {study.href ? <a href={study.href}>LER →</a> : <span class="open-label">EM ANDAMENTO</span>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="published" aria-labelledby="published-title">
+    <div class="publication-heading">
+      <p class="kicker">PUBLICAÇÕES</p>
+      <h2 id="published-title">Ensaios publicados.</h2>
+    </div>
+    <div class="publication-list">
+      {publications.map((publication) => (
+        <a class="publication-row" href={`/editorial/${publication.slug}/`}>
+          <span class="type">{publication.kind}<br />{publication.dateLabel.pt}<br />{publication.readTime.pt}</span>
+          <span>
+            <h2>{publication.title.pt}</h2>
+            <p>{publication.copy.pt.dek}</p>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
 </PublicationLayout>
 
 <style>
   .index-header {
     gap: 14px;
-    margin-bottom: 38px;
+    margin-bottom: 52px;
   }
 
   .index-header h1 {
@@ -82,6 +154,119 @@ const canonicalUrl = new URL('/editorial/', Astro.site).toString();
     color: var(--blue);
   }
 
+  .current-studies {
+    scroll-margin-top: 92px;
+    margin-bottom: 64px;
+    border-top: 1px solid var(--line);
+    padding-top: 30px;
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr);
+    gap: 32px;
+    align-items: end;
+    margin-bottom: 24px;
+  }
+
+  .section-heading h2,
+  .publication-heading h2 {
+    margin: 8px 0 0;
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.12;
+    letter-spacing: -.025em;
+  }
+
+  .section-heading > p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .study-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--line);
+    background: var(--line);
+    gap: 1px;
+  }
+
+  .study-card {
+    scroll-margin-top: 92px;
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    background: var(--bg);
+    padding: 24px;
+  }
+
+  .study-meta,
+  .study-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font: 600 9px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .08em;
+  }
+
+  .study-meta {
+    color: var(--muted);
+  }
+
+  .work-state {
+    color: #00e985;
+  }
+
+  .study-card h3 {
+    max-width: 620px;
+    margin: 30px 0 0;
+    font-size: clamp(19px, 2vw, 25px);
+    line-height: 1.25;
+  }
+
+  .study-card > p {
+    max-width: 650px;
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .study-footer {
+    margin-top: auto;
+    padding-top: 28px;
+  }
+
+  .study-state {
+    color: #a855f7;
+  }
+
+  .study-state.open {
+    color: #f5b942;
+  }
+
+  .study-footer a,
+  .open-label {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .open-label {
+    color: var(--muted);
+  }
+
+  .published {
+    border-top: 1px solid var(--line);
+    padding-top: 30px;
+  }
+
+  .publication-heading {
+    margin-bottom: 20px;
+  }
+
   @media (max-width: 760px) {
     .index-header h1 {
       font-size: clamp(34px, 11vw, 48px);
@@ -94,6 +279,15 @@ const canonicalUrl = new URL('/editorial/', Astro.site).toString();
 
     .index-action {
       justify-content: center;
+    }
+
+    .section-heading,
+    .study-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .study-card {
+      min-height: 0;
     }
   }
 </style>
