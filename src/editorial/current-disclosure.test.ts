@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import currentDisclosureManifestJson from '../../docs/editorial/R1-A2.5-current-disclosure.v0.json';
+import currentDisclosureCompletionJson from '../../docs/editorial/R1-A2.5-completion.v0.json';
 import coreEditorialSurfacesJson from '../../docs/editorial/core-editorial-surfaces.v0.json';
 import routeRuntimeJson from '../../docs/editorial/route-runtime.v0.json';
 import { CURRENT_DISCLOSURE_CANDIDATES } from './current-disclosure-candidates';
@@ -11,6 +12,16 @@ import { materializeCurrentSystemRevisions } from './current-revision-runtime';
 import { materializeCurrentEvidenceMaturity } from './current-evidence-maturity-runtime';
 
 const manifest = currentDisclosureManifestJson as CurrentDisclosureManifest;
+const completion = currentDisclosureCompletionJson as {
+  status: string;
+  candidateWitness: { branchHead: string; verifyRunNumber: number; verifyConclusion: string };
+  acceptance: {
+    r1_a2_5Complete: boolean;
+    currentPublicationValid: boolean;
+    cutoverReady: boolean;
+    nextRequiredCut: string;
+  };
+};
 const materialized = materializeCurrentDisclosure();
 const revisions = materializeCurrentSystemRevisions();
 const evidenceMaturity = materializeCurrentEvidenceMaturity();
@@ -174,10 +185,10 @@ describe('R1-A2.5 current public disclosure reauthorization', () => {
     expect(manifest.acceptance.maturityDerivedDisclosureCount).toBe(0);
   });
 
-  it('does not mutate routes, semantic surfaces or production while A2.5 is awaiting CI', () => {
+  it('seals A2.5 while keeping routes, semantic surfaces and production unchanged', () => {
     expect(routeRuntime.admission.targetRecordCount).toBe(5);
     expect(coreSurfaces.currentState.systemsPerLanguage).toBe(3);
-    expect(manifest.status).toBe('materialized-awaiting-ci');
+    expect(manifest.status).toBe('complete');
     expect(manifest.acceptance).toMatchObject({
       allCurrentSuccessorsClassified: true,
       disclosureConflictCount: 0,
@@ -188,8 +199,20 @@ describe('R1-A2.5 current public disclosure reauthorization', () => {
       routeMutationCount: 0,
       publicSurfaceMutationCount: 0,
       productionMutationCount: 0,
-      r1_a2_5Complete: false,
+      r1_a2_5Complete: true,
+      nextRequiredAction: 'R1-A2.6 — Current Route Admission',
     });
-    expect(manifest.acceptance.nextRequiredAction).toContain('CI must reconstruct');
+    expect(completion.status).toBe('complete');
+    expect(completion.candidateWitness).toMatchObject({
+      branchHead: '41eb785efbe4e274104c228d0efd813a2490d6c9',
+      verifyRunNumber: 298,
+      verifyConclusion: 'success',
+    });
+    expect(completion.acceptance).toMatchObject({
+      r1_a2_5Complete: true,
+      currentPublicationValid: false,
+      cutoverReady: false,
+      nextRequiredCut: 'R1-A2.6 — Current Route Admission',
+    });
   });
 });
