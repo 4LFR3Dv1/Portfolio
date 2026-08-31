@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-current-disclosure/v0",
   "contractId": "PORTFOLIO-R1-A2.5-2026-08-31",
-  "status": "materialized-awaiting-ci",
+  "status": "complete",
   "normative": true,
   "baseline": "9e262854656b9099f1adcd55c77950e42e8151ac",
   "preconditions": {
@@ -67,7 +67,7 @@
     "routeMutationCount": 0,
     "publicSurfaceMutationCount": 0,
     "productionMutationCount": 0,
-    "r1_a2_5Complete": false,
-    "nextRequiredAction": "CI must reconstruct every exact-revision disclosure authority and prove historical governance lineage continuity before acceptance"
+    "r1_a2_5Complete": true,
+    "nextRequiredAction": "R1-A2.6 — Current Route Admission"
   }
 }
