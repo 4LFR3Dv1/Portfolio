@@ -39,3 +39,42 @@ jobs:
           grep -F 'www.linkedin.com/sharing/share-offsite' dist/editorial/systems/genesis/index.html
           grep -R -F 'Computing Systems Engineer' dist/assets
           echo 'PORTFOLIO + EDITORIAL COMPOSED BUILD: PASS'
+      - name: Witness composed preview routing
+        shell: bash
+        run: |
+          set -euo pipefail
+          PORT=4173 node editorial-shell/runtime/composed-preview-runtime.mjs > /tmp/composed-preview.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/tmp/root.html; then
+              break
+            fi
+            sleep 0.2
+          done
+
+          curl -fsS http://127.0.0.1:4173/architecture >/tmp/architecture.html
+          curl -fsS http://127.0.0.1:4173/work/vira >/tmp/work.html
+          curl -fsS http://127.0.0.1:4173/editorial/ >/tmp/editorial.html
+          curl -fsS http://127.0.0.1:4173/editorial/systems/genesis/ >/tmp/genesis.html
+
+          root_sha=$(sha256sum /tmp/root.html | cut -d' ' -f1)
+          architecture_sha=$(sha256sum /tmp/architecture.html | cut -d' ' -f1)
+          work_sha=$(sha256sum /tmp/work.html | cut -d' ' -f1)
+          test "$root_sha" = "$architecture_sha"
+          test "$root_sha" = "$work_sha"
+
+          grep -F 'EDITORIAL // RENAN MELO' /tmp/editorial.html
+          grep -F 'Genesis — Renan Melo' /tmp/genesis.html
+          grep -F 'og:title' /tmp/genesis.html
+
+          missing_status=$(curl -sS -o /tmp/missing.html -w '%{http_code}' http://127.0.0.1:4173/editorial/does-not-exist/)
+          test "$missing_status" = '404'
+          grep -F 'Not Found' /tmp/missing.html
+
+          echo "react_spa_root_sha256=sha256:$root_sha"
+          echo 'editorial_index_status=200'
+          echo 'editorial_genesis_status=200'
+          echo 'editorial_missing_status=404'
+          echo 'PORTFOLIO + EDITORIAL ROUTING: PASS'
