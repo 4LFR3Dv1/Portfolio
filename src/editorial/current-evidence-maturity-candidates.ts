@@ -239,7 +239,7 @@ export const CURRENT_EVIDENCE_MATURITY_CANDIDATES: CurrentEvidenceMaturityCandid
       { relation: 'qualifies', sourceRef: '4LFR3Dv1/XSWallet:README.md', statement: 'The source explicitly says it is not a public release and keeps the XS Wallet / Domini canonical product name unresolved.' },
     ],
     'pre-beta',
-    'rec_3d2cab3596ea8a79c86d87e61ea16905',
+    'rec_3a926254f23e4a0c89102c3fbfe636d6',
     'The current source explicitly states pre-beta and separately disclaims public release status.',
     'high',
   ),
