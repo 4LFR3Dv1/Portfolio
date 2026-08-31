@@ -2,22 +2,22 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { ArchitectureLegend, ArchitectureMap } from './architecture-map';
 import { Button } from './button';
 import { useLanguage } from '../context/language-context';
-import { architectureViews, getArchitectureView, type ArchitectureViewId } from '../data/architecture';
+import { publicArchitectureViews, getPublicArchitectureView, type PublicArchitectureViewId } from '../data/public-architecture';
 
 interface ArchitectureExplorerProps {
   onBack?: () => void;
 }
 
-function initialView(): ArchitectureViewId {
+function initialView(): PublicArchitectureViewId {
   if (typeof window === 'undefined') return 'systems';
-  return getArchitectureView(new URLSearchParams(window.location.search).get('view')).id;
+  return getPublicArchitectureView(new URLSearchParams(window.location.search).get('view')).id;
 }
 
 export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
   const { language } = useLanguage();
-  const [activeViewId, setActiveViewId] = useState<ArchitectureViewId>(initialView);
+  const [activeViewId, setActiveViewId] = useState<PublicArchitectureViewId>(initialView);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const activeView = getArchitectureView(activeViewId);
+  const activeView = getPublicArchitectureView(activeViewId);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -31,12 +31,12 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
     event.preventDefault();
 
     let nextIndex = index;
-    if (event.key === 'ArrowRight') nextIndex = (index + 1) % architectureViews.length;
-    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + architectureViews.length) % architectureViews.length;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % publicArchitectureViews.length;
+    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + publicArchitectureViews.length) % publicArchitectureViews.length;
     if (event.key === 'Home') nextIndex = 0;
-    if (event.key === 'End') nextIndex = architectureViews.length - 1;
+    if (event.key === 'End') nextIndex = publicArchitectureViews.length - 1;
 
-    const nextView = architectureViews[nextIndex];
+    const nextView = publicArchitectureViews[nextIndex];
     setActiveViewId(nextView.id);
     tabRefs.current[nextIndex]?.focus();
   };
@@ -112,7 +112,7 @@ export function ArchitectureExplorer({ onBack }: ArchitectureExplorerProps) {
 
       <nav className="py-8" aria-label={copy.nav}>
         <div role="tablist" aria-label={copy.select} className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-5">
-          {architectureViews.map((view, index) => {
+          {publicArchitectureViews.map((view, index) => {
             const isActive = view.id === activeViewId;
             return (
               <button
