@@ -1,7 +1,7 @@
 {
   "schemaVersion": "editorial-current-publication-acceptance/v0",
   "contractId": "PORTFOLIO-R1-A2.8-2026-08-31",
-  "status": "materialized-awaiting-ci",
+  "status": "complete",
   "normative": true,
   "baseline": "4d1553622ee4b88841e40b0ba0e9981e4f7791c9",
   "preconditions": {
@@ -77,19 +77,19 @@
   "specimen": {
     "canonicalization": "recursive-key-sorted-json-with-array-order-preserved",
     "digestAlgorithm": "sha256",
-    "acceptedPublicationDigest": null
+    "acceptedPublicationDigest": "sha256_f72c807283aa0f2da0a20b3ecaf1ec5f99227fedac47aa9fb988f5c924997d32"
   },
   "acceptance": {
     "allPriorCutsSealed": true,
     "endToEndReconstructionRequired": true,
     "currentPublicationSpecimenDeterministic": true,
     "publicationValidCandidate": true,
-    "r1_a2_8Complete": false,
-    "r1_a2Complete": false,
-    "currentPublicationValid": false,
+    "r1_a2_8Complete": true,
+    "r1_a2Complete": true,
+    "currentPublicationValid": true,
     "cutoverReady": false,
     "cutoverAuthorized": false,
     "cutoverEnacted": false,
-    "nextRequiredAction": "CI must reconstruct A2.1-A2.7, produce a deterministic current publication digest and prove every acceptance zero before A2.8 may seal"
+    "nextRequiredAction": "R2-A1 — Current Publication Re-emission & Physical Revalidation"
   }
 }
