@@ -55,8 +55,8 @@ const nextPublication = publications[(publicationIndex + 1) % publications.lengt
           <a class="essay-origin" href={`/editorial/#${editorialContext.inquiry.anchor}`}>
             <span class="essay-origin-label">NASCEU DESTA INVESTIGAÇÃO</span>
             <strong>{editorialContext.inquiry.question.pt}</strong>
-            <span class="essay-origin-threads">
-              {editorialContext.threads.map((thread) => <span>{thread.title.pt}</span>)}
+            <span class="essay-origin-categories">
+              {editorialContext.categories.map((category) => <span>{category.title.pt}</span>)}
             </span>
           </a>
         )}
