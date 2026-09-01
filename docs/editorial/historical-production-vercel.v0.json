@@ -1,0 +1,10 @@
+{
+  "status": "historical-baseline",
+  "scope": "R1/R2 pre-successor deployed React/Vite runtime",
+  "rewrites": [
+    {
+      "source": "/((?!.*\\.).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
