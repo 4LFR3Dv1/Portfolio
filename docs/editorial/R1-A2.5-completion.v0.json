@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "editorial-r1-a2-5-completion/v0",
+  "contractId": "PORTFOLIO-R1-A2.5-COMPLETION-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "9e262854656b9099f1adcd55c77950e42e8151ac",
+  "contract": "docs/editorial/R1-A2.5-current-disclosure.v0.json",
+  "candidateWitness": {
+    "branchHead": "41eb785efbe4e274104c228d0efd813a2490d6c9",
+    "verifyRunId": 33423943438,
+    "verifyRunNumber": 298,
+    "verifyConclusion": "success",
+    "editorialShellBuildRunId": 33423942997,
+    "editorialShellBuildRunNumber": 133,
+    "editorialShellBuildConclusion": "success",
+    "cutoverReadinessRunId": 33423943043,
+    "cutoverReadinessRunNumber": 64,
+    "cutoverReadinessConclusion": "success"
+  },
+  "materialization": {
+    "currentSuccessorSystemCount": 27,
+    "currentDisclosureDecisionCount": 27,
+    "publicRecordCount": 27,
+    "privateRecordCount": 0,
+    "fullDisclosureCount": 27,
+    "sourcePublicCount": 12,
+    "sourcePartialCount": 2,
+    "sourcePrivateCount": 13,
+    "evidencePublicCount": 13,
+    "evidencePartialCount": 1,
+    "evidencePrivateCount": 13,
+    "disclosureGovernanceBirthCount": 23,
+    "disclosureGovernanceSuccessorCount": 4,
+    "disclosureIdentityReplacementCount": 0,
+    "disclosureConflictCount": 0,
+    "disclosureUnclassifiedCount": 0,
+    "historicalDeferredDisclosureCount": 1
+  },
+  "continuedGovernanceIdentities": [
+    {"subjectKey":"foundry-pay","governanceRecordId":"rec_31d32647a6fc43c1b1bc5257aefaf367"},
+    {"subjectKey":"sne-os","governanceRecordId":"rec_2821df1a24244689ab76bb5fb697018b"},
+    {"subjectKey":"vira","governanceRecordId":"rec_fe675b13970843099b802b2b6d03daf1"},
+    {"subjectKey":"xs-wallet","governanceRecordId":"rec_5bc3c1113cfe4c14b79aaa63f2515d79"}
+  ],
+  "deferredHistoricalAuthority": {
+    "subjectKey": "transactional-support-bot",
+    "governanceRecordId": "rec_d69c49de2cd2457094a71f03fa189a52",
+    "currentSuccessorExists": false,
+    "currentDisclosureReauthorized": false
+  },
+  "productionBoundary": {
+    "publicRuntimeChanged": false,
+    "productionDnsChanged": false,
+    "railwayTargetChanged": false,
+    "vercelConfigurationChanged": false,
+    "routeRuntimeChanged": false,
+    "publicSurfaceChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "allCurrentSuccessorsClassified": true,
+    "repositoryVisibilityUsedAsDisclosureAuthority": false,
+    "maturityUsedAsDisclosureAuthority": false,
+    "privateSourcePromotedToPublic": false,
+    "existingDisclosureGovernanceIdentityPreserved": true,
+    "deferredHistoricalDisclosureInherited": false,
+    "disclosureImpliesRoute": false,
+    "disclosureImpliesSurfaceMembership": false,
+    "r1_a2_5Complete": true,
+    "currentPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "cutoverEnacted": false,
+    "nextRequiredCut": "R1-A2.6 — Current Route Admission"
+  }
+}

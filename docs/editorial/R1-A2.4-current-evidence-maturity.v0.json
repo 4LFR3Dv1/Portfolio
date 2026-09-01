@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "editorial-current-evidence-maturity/v0",
+  "contractId": "PORTFOLIO-R1-A2.4-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "1ad7886793f67531f060976b640e535f5390bfc4",
+  "preconditions": {
+    "r1_a2_3Complete": true,
+    "currentRevisionMaterializationComplete": true,
+    "identityContinuityPreserved": true
+  },
+  "sources": {
+    "currentRevisions": "docs/editorial/R1-A2.3-current-system-revisions.v0.json",
+    "currentCensus": "docs/editorial/R1-A2.1-current-github-census.v0.json",
+    "candidates": "src/editorial/current-evidence-maturity-candidates.ts",
+    "runtime": "src/editorial/current-evidence-maturity-runtime.ts",
+    "governanceContract": "docs/editorial/R0.6-visibility-maturity-disclosure.md",
+    "evidenceContract": "src/app/data/editorial-evidence-contract.ts"
+  },
+  "laws": {
+    "currentSystemHeadBindingRequired": true,
+    "observationSourceMustResolveToCurrentTemporalBasis": true,
+    "observationSourceMustHaveMaterialHead": true,
+    "maturityInferenceFromImplementationForbidden": true,
+    "nonCanonicalStageTranslationForbidden": true,
+    "productionDoesNotProveRuntimeHealth": true,
+    "maturityImpliesDisclosure": false,
+    "observationImpliesDisclosure": false,
+    "historicalGovernanceSilentInheritance": false,
+    "existingMaturityGovernanceIdentityMustContinue": true,
+    "formalEvidenceBindingToSystemMinted": false,
+    "privateEvidencePublicByDefault": false
+  },
+  "materialization": {
+    "currentSuccessorSystemCount": 27,
+    "deferredSystemCount": 1,
+    "deferredSubjectKeys": ["transactional-support-bot"],
+    "evidenceCandidateCount": 27,
+    "observationCount": 48,
+    "supportObservationCount": 29,
+    "qualificationObservationCount": 16,
+    "contradictionObservationCount": 3,
+    "maturityClassifiedCount": 8,
+    "maturityUnclassifiedCount": 19,
+    "maturityStageCounts": {
+      "research": 4,
+      "pre-beta": 1,
+      "beta": 1,
+      "production": 2
+    },
+    "formalEvidenceRecordBirthCount": 0,
+    "formalEvidenceBindingBirthCount": 0,
+    "maturityGovernanceBirthCount": 7,
+    "maturityGovernanceSuccessorCount": 1
+  },
+  "acceptance": {
+    "allCurrentSuccessorsReconciled": true,
+    "allObservationSourcesTemporallyBound": true,
+    "staleMaturityInheritanceCount": 0,
+    "maturityIdentityReplacementCount": 0,
+    "maturityConflictCount": 0,
+    "maturityClassifiedCount": 8,
+    "maturityUnclassifiedCount": 19,
+    "publicDisclosureDecisionCount": 0,
+    "routeMutationCount": 0,
+    "publicSurfaceMutationCount": 0,
+    "productionMutationCount": 0,
+    "r1_a2_4Complete": true,
+    "nextRequiredAction": "R1-A2.5 — Public Disclosure Reauthorization"
+  }
+}
