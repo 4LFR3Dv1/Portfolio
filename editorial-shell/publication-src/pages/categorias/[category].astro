@@ -1,0 +1,112 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import {
+  editorialCategories,
+  getActiveCategories,
+  getCategoryInquiries,
+  getInquiryHref,
+  type EditorialCategory,
+} from '../../data/editorial';
+import { publications } from '../../data/publications';
+import '../../styles/editorial-categories.css';
+
+export function getStaticPaths() {
+  return editorialCategories.map((category) => ({
+    params: { category: category.id },
+    props: { category },
+  }));
+}
+
+interface Props { category: EditorialCategory; }
+const { category } = Astro.props as Props;
+const inquiries = getCategoryInquiries(category.id);
+const publicationSlugs = [...new Set(inquiries.flatMap((inquiry) => inquiry.publicationSlugs))];
+const categoryPublications = publicationSlugs
+  .map((slug) => publications.find((publication) => publication.slug === slug))
+  .filter(Boolean);
+const otherCategories = getActiveCategories().filter((candidate) => candidate.id !== category.id);
+const canonicalUrl = new URL(`/editorial/categorias/${category.id}/`, Astro.site).toString();
+---
+<PublicationLayout
+  title={`${category.title.pt} — Categorias do Editorial`}
+  description={category.description.pt}
+  canonicalUrl={canonicalUrl}
+  ogImagePath="/editorial/og/editorial.png"
+  ogImageAlt={`${category.title.pt} — Categoria do Editorial de Renan Melo`}
+>
+  <div class="category-page category-detail-page">
+    <header class="category-detail-hero">
+      <div class="category-detail-copy">
+        <p class="kicker">CATEGORIA // EDITORIAL</p>
+        <h1>{category.title.pt}</h1>
+        <p>{category.description.pt}</p>
+      </div>
+      <aside class="category-detail-meta">
+        <a href="/editorial/categorias/">← TODAS AS CATEGORIAS</a>
+        <div>
+          <strong>{inquiries.length}</strong><span>{inquiries.length === 1 ? 'PERGUNTA' : 'PERGUNTAS'}</span>
+          <strong>{categoryPublications.length}</strong><span>{categoryPublications.length === 1 ? 'ENSAIO' : 'ENSAIOS'}</span>
+        </div>
+      </aside>
+    </header>
+
+    <section class="category-content-section" aria-labelledby="category-questions-title">
+      <header class="category-section-heading">
+        <span>01</span>
+        <div>
+          <p>PERGUNTAS</p>
+          <h2 id="category-questions-title">O que está sendo investigado aqui.</h2>
+        </div>
+      </header>
+
+      <div class="category-question-list">
+        {inquiries.map((inquiry, index) => (
+          <a class="category-question-row" href={getInquiryHref(inquiry)}>
+            <span class="category-question-index">{String(index + 1).padStart(2, '0')}</span>
+            <span class="category-question-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
+            <div class="category-question-copy">
+              <h3>{inquiry.question.pt}</h3>
+              <p>{inquiry.summary.pt}</p>
+            </div>
+            <span class="category-question-open">{inquiry.publicationSlugs.length ? 'ENSAIO ↗' : 'VER NO EDITORIAL ↗'}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="category-content-section" aria-labelledby="category-essays-title">
+      <header class="category-section-heading">
+        <span>02</span>
+        <div>
+          <p>ENSAIOS</p>
+          <h2 id="category-essays-title">Respostas publicadas dentro desta categoria.</h2>
+        </div>
+      </header>
+
+      {categoryPublications.length > 0 ? (
+        <div class="category-essay-list">
+          {categoryPublications.map((publication, index) => publication && (
+            <a class="category-essay-row" href={`/editorial/${publication.slug}/`}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <small>{publication.kind} · {publication.dateLabel.pt} · {publication.readTime.pt}</small>
+                <h3>{publication.title.pt}</h3>
+                <p>{publication.copy.pt.dek}</p>
+              </div>
+              <strong>LER ↗</strong>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="category-empty-state">Nenhum ensaio foi publicado nesta categoria ainda. A investigação permanece aberta.</p>
+      )}
+    </section>
+
+    <nav class="category-other-list" aria-label="Outras categorias">
+      <span>OUTRAS CATEGORIAS</span>
+      {otherCategories.map((candidate) => (
+        <a href={`/editorial/categorias/${candidate.id}/`}>{candidate.title.pt} ↗</a>
+      ))}
+    </nav>
+  </div>
+</PublicationLayout>
