@@ -64,8 +64,19 @@ describe('R3 editorial redesign acceptance', () => {
     expect(layoutSource).not.toContain('.index-header');
   });
 
-  it('makes navigation surfaces themselves interactive instead of requiring small CTA buttons', () => {
-    expect(indexSource).toContain('class="now-link"');
+  it('gives the primary inquiry one surface instead of repeating it in the queue', () => {
+    expect(indexSource).toContain(
+      'const queuedInquiries = activeInquiries.filter((inquiry) => inquiry.id !== primaryInquiry.id);',
+    );
+    expect(indexSource).toContain('queuedInquiries.map((inquiry, index) =>');
+    expect(indexSource).not.toContain('activeInquiries.map((inquiry, index) =>');
+    expect(indexSource).not.toContain('O que estou tentando entender agora.');
+    expect(indexSource).not.toContain('IR PARA A PERGUNTA');
+    expect(indexSource).toContain('<strong>OUTRAS PERGUNTAS</strong>');
+    expect(indexSource).toContain('id={primaryInquiry.anchor}');
+  });
+
+  it('makes real destinations interactive at the surface level instead of requiring small CTA buttons', () => {
     expect(indexSource).toContain("['essay-tile', `essay-tile-${index + 1}`]");
     expect(indexSource).toContain('class="inquiry-row inquiry-row-link"');
     expect(indexSource).toContain('<details class="inquiry-row inquiry-row-open"');
@@ -91,6 +102,7 @@ describe('R3 editorial redesign acceptance', () => {
       '/editorial/o-passado-de-um-sistema-nao-existe/',
     ]);
     expect(indexSource).toContain('id="estudos-atuais"');
+    expect(indexSource).toContain('id={primaryInquiry.anchor}');
     expect(indexSource).toContain('id={inquiry.anchor}');
   });
 
