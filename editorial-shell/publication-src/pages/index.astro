@@ -21,6 +21,8 @@ const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
   if (!publication) throw new Error(`Editorial state references unknown publication: ${slug}`);
   return publication;
 });
+const featuredSlugSet = new Set(editorialState.featuredPublicationSlugs);
+const additionalEssays = publications.filter((publication) => !featuredSlugSet.has(publication.slug));
 const primaryCategories = activeCategories.filter((category) => primaryInquiry.categoryIds.includes(category.id));
 const primarySourceHref = primaryInquiry.sourceId === 'genesis'
   ? '/work/genesis'
@@ -47,7 +49,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
         <div class="pulse-status"><span></span> AO VIVO</div>
         <div class="pulse-numbers">
           <strong>{activeInquiries.length}</strong><span>PERGUNTAS ATIVAS</span>
-          <strong>{featuredEssays.length}</strong><span>ENSAIOS</span>
+          <strong>{publications.length}</strong><span>ENSAIOS</span>
           <strong>{activeCategories.length}</strong><span>CATEGORIAS</span>
         </div>
         <nav class="editorial-jump" aria-label="Navegação do Editorial">
@@ -109,6 +111,24 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
           </a>
         ))}
       </div>
+
+      {additionalEssays.length > 0 && (
+        <div class="essay-more" aria-label="Mais ensaios">
+          <div class="essay-more-label"><span>+</span><strong>MAIS ENSAIOS</strong></div>
+          <div class="essay-more-list">
+            {additionalEssays.map((publication, index) => (
+              <a href={`/editorial/${publication.slug}/`}>
+                <span class="essay-more-index">{String(index + featuredEssays.length + 1).padStart(2, '0')}</span>
+                <div>
+                  <small>{publication.kind} · {publication.readTime.pt}</small>
+                  <h3>{publication.title.pt}</h3>
+                </div>
+                <span>LER ↗</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
 
     <section class="inquiry-stage" id="em-investigacao" aria-labelledby="investigacao-title">
@@ -174,7 +194,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
           const publicationCount = new Set(inquiries.flatMap((inquiry) => inquiry.publicationSlugs)).size;
           return (
             <a class="category-band" href={`/editorial/categorias/${category.id}/`}>
-              <span class="category-index">0{index + 1}</span>
+              <span class="category-index">{String(index + 1).padStart(2, '0')}</span>
               <strong class="category-title">{category.title.pt}</strong>
               <span class="category-description">{category.description.pt}</span>
               <span class="category-count">
@@ -193,15 +213,90 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
       grid-template-columns: 180px minmax(0, 1fr);
     }
 
+    .essay-more {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 28px;
+      margin-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .essay-more-label {
+      display: flex;
+      gap: 10px;
+      padding-top: 22px;
+      color: var(--purple);
+      font: 600 9px/1.4 var(--font-mono);
+      letter-spacing: .1em;
+    }
+
+    .essay-more-label span {
+      color: var(--line-strong);
+    }
+
+    .essay-more-list > a {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      min-height: 116px;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      transition: padding .18s ease, background .18s ease;
+    }
+
+    .essay-more-list > a:hover,
+    .essay-more-list > a:focus-visible {
+      padding-left: 8px;
+      background: rgba(0,217,255,.018);
+    }
+
+    .essay-more-index,
+    .essay-more-list small,
+    .essay-more-list > a > span:last-child {
+      color: var(--muted);
+      font: 500 9px/1.5 var(--font-mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .essay-more-list h3 {
+      margin: 7px 0 0;
+      font: 700 clamp(17px, 1.5vw, 23px)/1.25 var(--font-mono);
+      transition: color .18s ease;
+    }
+
+    .essay-more-list > a:hover h3,
+    .essay-more-list > a:focus-visible h3,
+    .essay-more-list > a:hover > span:last-child,
+    .essay-more-list > a:focus-visible > span:last-child {
+      color: var(--blue);
+    }
+
     @media (max-width: 980px) {
       .inquiry-intro {
         grid-template-columns: 120px minmax(0, 1fr);
       }
+
+      .essay-more {
+        grid-template-columns: 110px minmax(0, 1fr);
+      }
     }
 
     @media (max-width: 700px) {
-      .inquiry-intro {
+      .inquiry-intro,
+      .essay-more {
         grid-template-columns: 1fr;
+      }
+
+      .essay-more-list > a {
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: 12px;
+        padding: 18px 0;
+      }
+
+      .essay-more-list > a > span:last-child {
+        grid-column: 2;
       }
     }
   </style>
