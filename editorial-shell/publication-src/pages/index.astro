@@ -173,18 +173,30 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
     </section>
   </div>
 
-  <script>
+  <script is:inline>
     const root = document.querySelector('.editorial-index');
     const threadBands = document.querySelectorAll('[data-thread]');
+    const inquiryRows = document.querySelectorAll('[data-threads]');
+
+    const clearThreadHighlight = () => {
+      root?.classList.remove('thread-highlighting');
+      inquiryRows.forEach((row) => row.classList.remove('thread-match'));
+    };
 
     for (const band of threadBands) {
       const thread = band.getAttribute('data-thread');
-      const activate = () => root?.setAttribute('data-highlight-thread', thread ?? '');
-      const clear = () => root?.removeAttribute('data-highlight-thread');
+      const activate = () => {
+        if (!thread) return;
+        root?.classList.add('thread-highlighting');
+        inquiryRows.forEach((row) => {
+          const threads = (row.getAttribute('data-threads') ?? '').split(' ');
+          row.classList.toggle('thread-match', threads.includes(thread));
+        });
+      };
       band.addEventListener('mouseenter', activate);
       band.addEventListener('focus', activate);
-      band.addEventListener('mouseleave', clear);
-      band.addEventListener('blur', clear);
+      band.addEventListener('mouseleave', clearThreadHighlight);
+      band.addEventListener('blur', clearThreadHighlight);
     }
   </script>
 </PublicationLayout>
