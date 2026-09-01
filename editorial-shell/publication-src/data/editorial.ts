@@ -6,17 +6,17 @@ export {
 } from '../../../src/app/data/editorial-inquiries';
 
 export {
-  editorialThreads,
-  getEditorialThread,
-} from '../../../src/app/data/editorial-threads';
+  editorialCategories,
+  getEditorialCategory,
+} from '../../../src/app/data/editorial-categories';
 
 export {
   editorialState,
   getActiveInquiries,
-  getActiveThreads,
+  getActiveCategories,
   getPrimaryInquiry,
   getPublicationEditorialContext,
-  getThreadInquiries,
+  getCategoryInquiries,
 } from '../../../src/app/data/editorial-state';
 
 export type {
@@ -26,6 +26,6 @@ export type {
 } from '../../../src/app/data/editorial-inquiries';
 
 export type {
-  EditorialThread,
-  EditorialThreadId,
-} from '../../../src/app/data/editorial-threads';
+  EditorialCategory,
+  EditorialCategoryId,
+} from '../../../src/app/data/editorial-categories';
