@@ -6,6 +6,14 @@ const indexSource = readFileSync(
   new URL('../../../editorial-shell/publication-src/pages/index.astro', import.meta.url),
   'utf8',
 );
+const categoryIndexSource = readFileSync(
+  new URL('../../../editorial-shell/publication-src/pages/categorias/index.astro', import.meta.url),
+  'utf8',
+);
+const categoryDetailSource = readFileSync(
+  new URL('../../../editorial-shell/publication-src/pages/categorias/[category].astro', import.meta.url),
+  'utf8',
+);
 const articleSource = readFileSync(
   new URL('../../../editorial-shell/publication-src/pages/[...slug].astro', import.meta.url),
   'utf8',
@@ -16,6 +24,10 @@ const layoutSource = readFileSync(
 );
 const indexStyles = readFileSync(
   new URL('../../../editorial-shell/publication-src/styles/editorial-index.css', import.meta.url),
+  'utf8',
+);
+const categoryStyles = readFileSync(
+  new URL('../../../editorial-shell/publication-src/styles/editorial-categories.css', import.meta.url),
   'utf8',
 );
 const articleStyles = readFileSync(
@@ -85,18 +97,24 @@ describe('R3 editorial redesign acceptance', () => {
     expect(indexSource).toContain('id={primaryInquiry.anchor}');
   });
 
-  it('models investigation lines as category filters rather than links to the first inquiry', () => {
-    expect(indexSource).toContain('<strong>CATEGORIAS</strong>');
-    expect(indexSource).toContain('data-category-control');
-    expect(indexSource).toContain('data-categories');
-    expect(indexSource).toContain("url.searchParams.set('categoria', selectedCategory)");
-    expect(indexSource).toContain('getCategoryInquiries');
-    expect(indexSource).not.toContain('LINHAS DE INVESTIGAÇÃO');
-    expect(indexSource).not.toContain('getThreadInquiries');
-    expect(indexSource).not.toContain('data-thread');
-    expect(indexStyles).toContain('.category-band');
-    expect(indexStyles).toContain('.category-filtering');
-    expect(indexStyles).not.toContain('.thread-band');
+  it('gives categories their own surfaces instead of mutating the Editorial index state', () => {
+    expect(indexSource).toContain('href="/editorial/categorias/"');
+    expect(indexSource).toContain('href={`/editorial/categorias/${category.id}/`}');
+    expect(indexSource).not.toContain('data-category-control');
+    expect(indexSource).not.toContain('data-categories');
+    expect(indexSource).not.toContain("searchParams.set('categoria'");
+    expect(indexSource).not.toContain('applyCategory');
+
+    expect(categoryIndexSource).toContain('getActiveCategories');
+    expect(categoryIndexSource).toContain('getCategoryInquiries');
+    expect(categoryIndexSource).toContain('class="category-directory-row"');
+    expect(categoryDetailSource).toContain('getStaticPaths');
+    expect(categoryDetailSource).toContain('params: { category: category.id }');
+    expect(categoryDetailSource).toContain('getCategoryInquiries(category.id)');
+    expect(categoryDetailSource).toContain('class="category-question-list"');
+    expect(categoryDetailSource).toContain('class="category-essay-list"');
+    expect(categoryStyles).toContain('.category-directory-row');
+    expect(categoryStyles).toContain('.category-question-row');
   });
 
   it('makes real destinations interactive at the surface level instead of requiring small CTA buttons', () => {
@@ -105,6 +123,7 @@ describe('R3 editorial redesign acceptance', () => {
     expect(indexSource).toContain('class="inquiry-row inquiry-row-link"');
     expect(indexSource).toContain('<details class="inquiry-row inquiry-row-open"');
     expect(indexSource).toContain('class="category-band"');
+    expect(articleSource).toContain('/editorial/categorias/${category.id}/');
   });
 
   it('replaces the Medium-like article grid with an instrumented reading surface', () => {
@@ -134,10 +153,17 @@ describe('R3 editorial redesign acceptance', () => {
     expect(articleSource).toContain('getPublicationEditorialContext');
     expect(articleSource).toContain('NASCEU DESTA INVESTIGAÇÃO');
     expect(articleSource).toContain('editorialContext.categories');
+    expect(articleSource).toContain('/editorial/categorias/${category.id}/');
     expect(articleSource).toContain('www.linkedin.com/sharing/share-offsite');
     expect(articleSource).toContain('ogImagePath');
     expect(layoutSource).toContain('article:published_time');
     expect(layoutSource).toContain('twitter:card');
+  });
+
+  it('keeps categories discoverable without requiring the end of the Editorial index', () => {
+    expect(layoutSource).toContain('href="/editorial/categorias/"');
+    expect(layoutSource).toContain("Astro.url.pathname.startsWith('/editorial/categorias')");
+    expect(categoryIndexSource).toContain('← EDITORIAL');
   });
 
   it('keeps the composed Vite + Astro runtime contract intact', () => {
@@ -155,5 +181,7 @@ describe('R3 editorial redesign acceptance', () => {
   it('does not introduce project-documentation routes under Editorial', () => {
     expect(indexSource).not.toContain('/editorial/systems/');
     expect(articleSource).not.toContain('/editorial/systems/');
+    expect(categoryIndexSource).not.toContain('/editorial/systems/');
+    expect(categoryDetailSource).not.toContain('/editorial/systems/');
   });
 });
