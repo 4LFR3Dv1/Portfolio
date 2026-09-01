@@ -22,6 +22,11 @@ const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
   return publication;
 });
 const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds.includes(thread.id));
+const primarySourceHref = primaryInquiry.sourceId === 'genesis'
+  ? '/work/genesis'
+  : primaryInquiry.sourceId === 'factory'
+    ? '/work/factory'
+    : null;
 ---
 <PublicationLayout
   title="Editorial — Renan Melo"
@@ -60,14 +65,27 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
       <div class="now-link now-focus" data-threads={primaryInquiry.threadIds.join(' ')}>
         <span class="now-live" aria-hidden="true"></span>
         <div class="now-copy">
-          <p class="now-source">{primaryInquiry.sourceLabel.pt} · INVESTIGAÇÃO ATIVA</p>
-          <h2 id="agora-title">{primaryInquiry.question.pt}</h2>
+          <p class="now-source">
+            {primarySourceHref
+              ? <a class="now-source-link" href={primarySourceHref}>{primaryInquiry.sourceLabel.pt}</a>
+              : primaryInquiry.sourceLabel.pt}
+            <span> · INVESTIGAÇÃO ATIVA</span>
+          </p>
+          <h2 id="agora-title">
+            {primarySourceHref
+              ? <a class="now-question-link" href={primarySourceHref}>{primaryInquiry.question.pt}<span aria-hidden="true">↗</span></a>
+              : primaryInquiry.question.pt}
+          </h2>
           <p>{primaryInquiry.summary.pt}</p>
         </div>
-        <div class="now-context">
+        <nav class="now-context" aria-label="Linhas relacionadas ao foco atual">
           <span>LINHAS</span>
-          {primaryThreads.map((thread) => <strong>{thread.title.pt}</strong>)}
-        </div>
+          {primaryThreads.map((thread) => (
+            <a href={`#linha-${thread.id}`} data-thread={thread.id}>
+              <strong>{thread.title.pt}</strong><span aria-hidden="true">↘</span>
+            </a>
+          ))}
+        </nav>
       </div>
     </section>
 
@@ -159,7 +177,7 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
           const inquiries = getThreadInquiries(thread.id);
           const target = inquiries[0]?.anchor ?? 'em-investigacao';
           return (
-            <a class="thread-band" href={`#${target}`} data-thread={thread.id}>
+            <a id={`linha-${thread.id}`} class="thread-band" href={`#${target}`} data-thread={thread.id}>
               <span class="thread-index">0{index + 1}</span>
               <span class="thread-title">{thread.title.pt}</span>
               <span class="thread-description">{thread.description.pt}</span>
@@ -201,11 +219,6 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
   </script>
 
   <style>
-    .now-focus:hover .now-copy h2 {
-      color: var(--text);
-      transform: none;
-    }
-
     .editorial-index.thread-highlighting .now-focus {
       opacity: .22;
       transition: opacity .2s ease;
