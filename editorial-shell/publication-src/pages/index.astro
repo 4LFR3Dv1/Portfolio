@@ -2,11 +2,12 @@
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import {
   editorialState,
+  getActiveCategories,
   getActiveInquiries,
-  getActiveThreads,
+  getCategoryInquiries,
   getInquiryHref,
   getPrimaryInquiry,
-  getThreadInquiries,
+  getPublicationEditorialContext,
 } from '../data/editorial';
 import { publications } from '../data/publications';
 import '../styles/editorial-index.css';
@@ -15,13 +16,17 @@ const canonicalUrl = new URL('/editorial/', Astro.site).toString();
 const primaryInquiry = getPrimaryInquiry();
 const activeInquiries = getActiveInquiries();
 const queuedInquiries = activeInquiries.filter((inquiry) => inquiry.id !== primaryInquiry.id);
-const activeThreads = getActiveThreads();
+const activeCategories = getActiveCategories();
 const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
   const publication = publications.find((candidate) => candidate.slug === slug);
   if (!publication) throw new Error(`Editorial state references unknown publication: ${slug}`);
-  return publication;
+  const context = getPublicationEditorialContext(slug);
+  return {
+    publication,
+    categoryIds: context?.categories.map((category) => category.id) ?? [],
+  };
 });
-const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds.includes(thread.id));
+const primaryCategories = activeCategories.filter((category) => primaryInquiry.categoryIds.includes(category.id));
 const primarySourceHref = primaryInquiry.sourceId === 'genesis'
   ? '/work/genesis'
   : primaryInquiry.sourceId === 'factory'
@@ -48,13 +53,13 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
         <div class="pulse-numbers">
           <strong>{activeInquiries.length}</strong><span>PERGUNTAS ATIVAS</span>
           <strong>{featuredEssays.length}</strong><span>ENSAIOS</span>
-          <strong>{activeThreads.length}</strong><span>LINHAS</span>
+          <strong>{activeCategories.length}</strong><span>CATEGORIAS</span>
         </div>
         <nav class="editorial-jump" aria-label="Navegação do Editorial">
           <a href="#agora">AGORA <span>01</span></a>
           <a href="#ensaios">ENSAIOS <span>02</span></a>
           <a href="#em-investigacao">OUTRAS PERGUNTAS <span>03</span></a>
-          <a href="#linhas-de-investigacao">LINHAS <span>04</span></a>
+          <a href="#categorias">CATEGORIAS <span>04</span></a>
         </nav>
       </aside>
     </header>
@@ -62,7 +67,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
     <section class="now-stage" id="agora" aria-labelledby="agora-title">
       <span id={primaryInquiry.anchor} class="editorial-anchor-alias" aria-hidden="true"></span>
       <div class="section-signal"><span>01</span><strong>AGORA</strong></div>
-      <div class="now-link now-focus" data-threads={primaryInquiry.threadIds.join(' ')}>
+      <div class="now-link now-focus" data-categories={primaryInquiry.categoryIds.join(' ')}>
         <span class="now-live" aria-hidden="true"></span>
         <div class="now-copy">
           <p class="now-source">
@@ -78,14 +83,19 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
           </h2>
           <p>{primaryInquiry.summary.pt}</p>
         </div>
-        <nav class="now-context" aria-label="Linhas relacionadas ao foco atual">
-          <span>LINHAS</span>
-          {primaryThreads.map((thread) => (
-            <a href={`#linha-${thread.id}`} data-thread={thread.id}>
-              <strong>{thread.title.pt}</strong><span aria-hidden="true">↘</span>
-            </a>
+        <div class="now-context" aria-label="Categorias do foco atual">
+          <span>CATEGORIAS</span>
+          {primaryCategories.map((category) => (
+            <button
+              type="button"
+              data-category-control={category.id}
+              data-category-label={category.title.pt}
+              aria-pressed="false"
+            >
+              <strong>{category.title.pt}</strong><span aria-hidden="true">+</span>
+            </button>
           ))}
-        </nav>
+        </div>
       </div>
     </section>
 
@@ -97,8 +107,12 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
       </header>
 
       <div class="essay-composition">
-        {featuredEssays.map((publication, index) => (
-          <a class:list={['essay-tile', `essay-tile-${index + 1}`]} href={`/editorial/${publication.slug}/`}>
+        {featuredEssays.map(({ publication, categoryIds }, index) => (
+          <a
+            class:list={['essay-tile', `essay-tile-${index + 1}`]}
+            href={`/editorial/${publication.slug}/`}
+            data-categories={categoryIds.join(' ')}
+          >
             <span class="essay-position">0{index + 1}</span>
             <div class="essay-tile-copy">
               <span class="essay-meta">{publication.kind} · {publication.dateLabel.pt} · {publication.readTime.pt}</span>
@@ -121,10 +135,10 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
       <div class="inquiry-queue">
         {queuedInquiries.map((inquiry, index) => {
           const publicationSlug = inquiry.publicationSlugs[0];
-          const threadNames = inquiry.threadIds
-            .map((threadId) => activeThreads.find((thread) => thread.id === threadId)?.title.pt)
+          const categoryNames = inquiry.categoryIds
+            .map((categoryId) => activeCategories.find((category) => category.id === categoryId)?.title.pt)
             .filter(Boolean);
-          const threadValue = inquiry.threadIds.join(' ');
+          const categoryValue = inquiry.categoryIds.join(' ');
 
           if (publicationSlug) {
             return (
@@ -132,7 +146,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
                 class="inquiry-row inquiry-row-link"
                 id={inquiry.anchor}
                 href={getInquiryHref(inquiry)}
-                data-threads={threadValue}
+                data-categories={categoryValue}
               >
                 <span class="inquiry-number">{String(index + 2).padStart(2, '0')}</span>
                 <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
@@ -146,7 +160,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
           }
 
           return (
-            <details class="inquiry-row inquiry-row-open" id={inquiry.anchor} data-threads={threadValue}>
+            <details class="inquiry-row inquiry-row-open" id={inquiry.anchor} data-categories={categoryValue}>
               <summary>
                 <span class="inquiry-number">{String(index + 2).padStart(2, '0')}</span>
                 <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
@@ -155,8 +169,8 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
               </summary>
               <div class="inquiry-expanded">
                 <p>{inquiry.summary.pt}</p>
-                <div class="inquiry-thread-names">
-                  {threadNames.map((threadName) => <span>{threadName}</span>)}
+                <div class="inquiry-category-names">
+                  {categoryNames.map((categoryName) => <span>{categoryName}</span>)}
                 </div>
               </div>
             </details>
@@ -165,26 +179,37 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
       </div>
     </section>
 
-    <section class="thread-stage" id="linhas-de-investigacao" aria-labelledby="linhas-title">
-      <header class="thread-intro">
-        <div class="section-signal"><span>04</span><strong>LINHAS DE INVESTIGAÇÃO</strong></div>
-        <h2 id="linhas-title">Territórios que atravessam projetos.</h2>
-        <p>Passe por uma linha para ver quais perguntas pertencem a ela. Clique em qualquer faixa para saltar até a primeira pergunta relacionada.</p>
+    <section class="category-stage" id="categorias" aria-labelledby="categorias-title">
+      <header class="category-intro">
+        <div class="section-signal"><span>04</span><strong>CATEGORIAS</strong></div>
+        <h2 id="categorias-title">Assuntos que conectam o Editorial.</h2>
+        <p>Selecione uma categoria para filtrar perguntas e ensaios. Categorias classificam o conteúdo; não apontam para uma pergunta específica.</p>
       </header>
 
-      <div class="thread-field">
-        {activeThreads.map((thread, index) => {
-          const inquiries = getThreadInquiries(thread.id);
-          const target = inquiries[0]?.anchor ?? 'em-investigacao';
+      <div class="category-filter-state" aria-live="polite">
+        <span>MOSTRANDO</span><strong data-category-status>TODAS</strong>
+        <button type="button" data-category-control="" data-category-label="TODAS" aria-pressed="true">LIMPAR FILTRO</button>
+      </div>
+
+      <div class="category-field">
+        {activeCategories.map((category, index) => {
+          const inquiries = getCategoryInquiries(category.id);
+          const publicationCount = new Set(inquiries.flatMap((inquiry) => inquiry.publicationSlugs)).size;
           return (
-            <a id={`linha-${thread.id}`} class="thread-band" href={`#${target}`} data-thread={thread.id}>
-              <span class="thread-index">0{index + 1}</span>
-              <span class="thread-title">{thread.title.pt}</span>
-              <span class="thread-description">{thread.description.pt}</span>
-              <span class="thread-related">
-                {inquiries.map((inquiry) => <span>{inquiry.question.pt}</span>)}
+            <button
+              type="button"
+              class="category-band"
+              data-category-control={category.id}
+              data-category-label={category.title.pt}
+              aria-pressed="false"
+            >
+              <span class="category-index">0{index + 1}</span>
+              <strong class="category-title">{category.title.pt}</strong>
+              <span class="category-description">{category.description.pt}</span>
+              <span class="category-count">
+                {inquiries.length} {inquiries.length === 1 ? 'PERGUNTA' : 'PERGUNTAS'} · {publicationCount} {publicationCount === 1 ? 'ENSAIO' : 'ENSAIOS'}
               </span>
-            </a>
+            </button>
           );
         })}
       </div>
@@ -193,41 +218,56 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
 
   <script is:inline>
     const root = document.querySelector('.editorial-index');
-    const threadBands = document.querySelectorAll('[data-thread]');
-    const inquiryNodes = document.querySelectorAll('[data-threads]');
+    const categoryControls = [...document.querySelectorAll('[data-category-control]')];
+    const categorizedNodes = [...document.querySelectorAll('[data-categories]')];
+    const categoryStatus = document.querySelector('[data-category-status]');
+    let selectedCategory = '';
 
-    const clearThreadHighlight = () => {
-      root?.classList.remove('thread-highlighting');
-      inquiryNodes.forEach((node) => node.classList.remove('thread-match'));
+    const applyCategory = (category, updateUrl = true) => {
+      selectedCategory = category || '';
+      root?.classList.toggle('category-filtering', Boolean(selectedCategory));
+
+      for (const node of categorizedNodes) {
+        const categories = (node.getAttribute('data-categories') ?? '').split(' ').filter(Boolean);
+        node.classList.toggle('category-match', !selectedCategory || categories.includes(selectedCategory));
+      }
+
+      for (const control of categoryControls) {
+        const controlCategory = control.getAttribute('data-category-control') ?? '';
+        const pressed = controlCategory === selectedCategory;
+        control.setAttribute('aria-pressed', String(pressed));
+      }
+
+      const activeControl = categoryControls.find(
+        (control) => (control.getAttribute('data-category-control') ?? '') === selectedCategory,
+      );
+      if (categoryStatus) {
+        categoryStatus.textContent = activeControl?.getAttribute('data-category-label') || 'TODAS';
+      }
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        if (selectedCategory) url.searchParams.set('categoria', selectedCategory);
+        else url.searchParams.delete('categoria');
+        window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+      }
     };
 
-    for (const band of threadBands) {
-      const thread = band.getAttribute('data-thread');
-      const activate = () => {
-        if (!thread) return;
-        root?.classList.add('thread-highlighting');
-        inquiryNodes.forEach((node) => {
-          const threads = (node.getAttribute('data-threads') ?? '').split(' ');
-          node.classList.toggle('thread-match', threads.includes(thread));
-        });
-      };
-      band.addEventListener('mouseenter', activate);
-      band.addEventListener('focus', activate);
-      band.addEventListener('mouseleave', clearThreadHighlight);
-      band.addEventListener('blur', clearThreadHighlight);
+    for (const control of categoryControls) {
+      control.addEventListener('click', () => {
+        const category = control.getAttribute('data-category-control') ?? '';
+        applyCategory(category === selectedCategory ? '' : category);
+      });
     }
+
+    const initialCategory = new URL(window.location.href).searchParams.get('categoria') ?? '';
+    const knownInitialCategory = categoryControls.some(
+      (control) => control.getAttribute('data-category-control') === initialCategory,
+    );
+    applyCategory(knownInitialCategory ? initialCategory : '', false);
   </script>
 
   <style>
-    .editorial-index.thread-highlighting .now-focus {
-      opacity: .22;
-      transition: opacity .2s ease;
-    }
-
-    .editorial-index.thread-highlighting .now-focus.thread-match {
-      opacity: 1;
-    }
-
     .inquiry-intro {
       grid-template-columns: 180px minmax(0, 1fr);
     }
