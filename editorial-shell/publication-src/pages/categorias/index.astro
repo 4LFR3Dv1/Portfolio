@@ -1,0 +1,50 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { getActiveCategories, getCategoryInquiries } from '../../data/editorial';
+import '../../styles/editorial-categories.css';
+
+const categories = getActiveCategories();
+const canonicalUrl = new URL('/editorial/categorias/', Astro.site).toString();
+---
+<PublicationLayout
+  title="Categorias — Editorial de Renan Melo"
+  description="Categorias que organizam perguntas e ensaios do Editorial de Renan Melo."
+  canonicalUrl={canonicalUrl}
+  ogImagePath="/editorial/og/editorial.png"
+  ogImageAlt="Categorias do Editorial de Renan Melo"
+>
+  <div class="category-page">
+    <header class="category-directory-hero">
+      <div>
+        <p class="kicker">CATEGORIAS // EDITORIAL</p>
+        <h1>Um assunto, várias perguntas.</h1>
+        <p>Categorias organizam o Editorial sem alterar a leitura da página principal. Cada uma abre uma superfície própria com as perguntas e os ensaios que pertencem a ela.</p>
+      </div>
+      <nav class="category-directory-nav" aria-label="Navegação de categorias">
+        <a href="/editorial/">← EDITORIAL</a>
+        <span>{categories.length} CATEGORIAS</span>
+      </nav>
+    </header>
+
+    <section class="category-directory" aria-label="Todas as categorias">
+      {categories.map((category, index) => {
+        const inquiries = getCategoryInquiries(category.id);
+        const publicationCount = new Set(inquiries.flatMap((inquiry) => inquiry.publicationSlugs)).size;
+        return (
+          <a class="category-directory-row" href={`/editorial/categorias/${category.id}/`}>
+            <span class="category-directory-index">{String(index + 1).padStart(2, '0')}</span>
+            <div class="category-directory-copy">
+              <h2>{category.title.pt}</h2>
+              <p>{category.description.pt}</p>
+            </div>
+            <div class="category-directory-counts">
+              <span>{inquiries.length} {inquiries.length === 1 ? 'PERGUNTA' : 'PERGUNTAS'}</span>
+              <span>{publicationCount} {publicationCount === 1 ? 'ENSAIO' : 'ENSAIOS'}</span>
+            </div>
+            <span class="category-directory-open">ABRIR ↗</span>
+          </a>
+        );
+      })}
+    </section>
+  </div>
+</PublicationLayout>
