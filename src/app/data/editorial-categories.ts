@@ -4,7 +4,9 @@ export type EditorialCategoryId =
   | 'agents-interfaces'
   | 'software-production'
   | 'networks'
-  | 'state-time';
+  | 'state-time'
+  | 'authority-execution'
+  | 'payments';
 
 export type EditorialLocalized = Record<Language, string>;
 
@@ -47,6 +49,22 @@ export const editorialCategories: EditorialCategory[] = [
     description: local(
       'State, memory, reconstruction, continuity and the abstractions used to describe change.',
       'Estado, memória, reconstrução, continuidade e as abstrações usadas para descrever mudança.',
+    ),
+  },
+  {
+    id: 'authority-execution',
+    title: local('Authority and execution', 'Autoridade e execução'),
+    description: local(
+      'The difference between being able to perform an action, being allowed to perform it and knowing what effect actually occurred.',
+      'A diferença entre conseguir executar uma ação, estar autorizado a executá-la e saber qual efeito realmente aconteceu.',
+    ),
+  },
+  {
+    id: 'payments',
+    title: local('Payments', 'Pagamentos'),
+    description: local(
+      'Obligations, transfers, settlement and the systems that connect economic intent to network effects.',
+      'Obrigações, transferências, liquidação e os sistemas que conectam intenção econômica a efeitos de rede.',
     ),
   },
 ];
