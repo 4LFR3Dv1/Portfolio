@@ -44,14 +44,23 @@ describe('R3 editorial redesign acceptance', () => {
     expect(threads).toBeGreaterThan(inquiries);
   });
 
-  it('uses the Portfolio typography split instead of monospace for every editorial title', () => {
+  it('uses the canonical Portfolio typography hierarchy and scale', () => {
     expect(layoutSource).toContain('family=Inter');
     expect(layoutSource).toContain('JetBrains+Mono');
     expect(layoutSource).toContain("--font-mono:'JetBrains Mono'");
     expect(layoutSource).toContain("--font-sans:'Inter'");
-    expect(layoutSource).toContain('h1, h2, h3 { font-family:var(--font-sans); }');
-    expect(indexStyles).toContain('var(--font-sans)');
-    expect(articleStyles).toContain('var(--font-sans)');
+    expect(layoutSource).toContain('body {');
+    expect(layoutSource).toContain('font-family:var(--font-sans);');
+    expect(layoutSource).toContain('h1, h2, h3 { font-family:var(--font-mono); }');
+    expect(indexStyles).toContain('.editorial-masthead h1');
+    expect(indexStyles).toContain('var(--font-mono)');
+    expect(articleStyles).toContain('.essay-hero h1');
+    expect(articleStyles).toContain('var(--font-mono)');
+    expect(indexStyles).not.toContain('108px');
+    expect(indexStyles).not.toContain('82px');
+    expect(indexStyles).not.toContain('min-height: 62vh');
+    expect(articleStyles).not.toContain('104px');
+    expect(articleStyles).not.toContain('min-height: 66vh');
   });
 
   it('does not regress to the generation-one card/list or repeated section-heading grammar', () => {
