@@ -2,6 +2,12 @@
 @import './tailwind.css';
 @import './theme.css';
 
+/* Present the public portfolio at the same visual density as browser zoom 80%. */
+html {
+  zoom: 0.8;
+  scroll-behavior: smooth;
+}
+
 /* Grid pattern background for console aesthetic */
 body {
   background-image: 
@@ -9,11 +15,6 @@ body {
     linear-gradient(90deg, rgba(0, 217, 255, 0.02) 1px, transparent 1px);
   background-size: 32px 32px;
   background-position: 0 0, 0 0;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Custom scrollbar */
