@@ -18,6 +18,10 @@ const indexStyles = readFileSync(
   new URL('../../../editorial-shell/publication-src/styles/editorial-index.css', import.meta.url),
   'utf8',
 );
+const articleStyles = readFileSync(
+  new URL('../../../editorial-shell/publication-src/styles/editorial-essay.css', import.meta.url),
+  'utf8',
+);
 const packageJson = JSON.parse(readFileSync(new URL('../../../package.json', import.meta.url), 'utf8')) as {
   scripts: Record<string, string>;
 };
@@ -40,14 +44,44 @@ describe('R3 editorial redesign acceptance', () => {
     expect(threads).toBeGreaterThan(inquiries);
   });
 
-  it('does not regress to the generation-one card and publication-list grammar', () => {
+  it('uses the Portfolio typography split instead of monospace for every editorial title', () => {
+    expect(layoutSource).toContain('family=Inter');
+    expect(layoutSource).toContain('JetBrains+Mono');
+    expect(layoutSource).toContain("--font-mono:'JetBrains Mono'");
+    expect(layoutSource).toContain("--font-sans:'Inter'");
+    expect(layoutSource).toContain('h1, h2, h3 { font-family:var(--font-sans); }');
+    expect(indexStyles).toContain('var(--font-sans)');
+    expect(articleStyles).toContain('var(--font-sans)');
+  });
+
+  it('does not regress to the generation-one card/list or repeated section-heading grammar', () => {
     expect(indexSource).not.toContain('study-grid');
     expect(indexSource).not.toContain('study-card');
     expect(indexSource).not.toContain('publication-list');
     expect(indexSource).not.toContain('publication-row');
+    expect(indexSource).not.toContain('EditorialSectionHeading');
     expect(layoutSource).not.toContain('.publication-list');
     expect(layoutSource).not.toContain('.index-header');
-    expect(indexStyles).not.toContain('grid-template-columns: repeat(2');
+  });
+
+  it('makes navigation surfaces themselves interactive instead of requiring small CTA buttons', () => {
+    expect(indexSource).toContain('class="now-link"');
+    expect(indexSource).toContain("['essay-tile', `essay-tile-${index + 1}`]");
+    expect(indexSource).toContain('class="inquiry-row inquiry-row-link"');
+    expect(indexSource).toContain('<details class="inquiry-row inquiry-row-open"');
+    expect(indexSource).toContain('class="thread-band"');
+  });
+
+  it('replaces the Medium-like article grid with an instrumented reading surface', () => {
+    expect(articleSource).toContain('class="essay-hero"');
+    expect(articleSource).toContain('class="reading-progress"');
+    expect(articleSource).toContain('class="essay-toc"');
+    expect(articleSource).toContain('data-essay-section');
+    expect(articleSource).toContain('IntersectionObserver');
+    expect(articleSource).toContain('class="essay-exit"');
+    expect(layoutSource).not.toContain('.article-grid');
+    expect(layoutSource).not.toContain('.share-actions');
+    expect(articleStyles).toContain('.essay-rail');
   });
 
   it('preserves every published essay route and legacy study anchors', () => {
@@ -60,9 +94,9 @@ describe('R3 editorial redesign acceptance', () => {
     expect(indexSource).toContain('id={inquiry.anchor}');
   });
 
-  it('keeps article metadata and sharing while adding investigation context', () => {
+  it('keeps article metadata and sharing while embedding investigation context', () => {
     expect(articleSource).toContain('getPublicationEditorialContext');
-    expect(articleSource).toContain('DA INVESTIGAÇÃO');
+    expect(articleSource).toContain('NASCEU DESTA INVESTIGAÇÃO');
     expect(articleSource).toContain('www.linkedin.com/sharing/share-offsite');
     expect(articleSource).toContain('ogImagePath');
     expect(layoutSource).toContain('article:published_time');
