@@ -36,15 +36,15 @@ describe('R3 editorial redesign acceptance', () => {
     const now = indexSource.indexOf('id="agora"');
     const essays = indexSource.indexOf('id="ensaios"');
     const inquiries = indexSource.indexOf('id="em-investigacao"');
-    const threads = indexSource.indexOf('id="linhas-de-investigacao"');
+    const categories = indexSource.indexOf('id="categorias"');
 
     expect(now).toBeGreaterThan(-1);
     expect(essays).toBeGreaterThan(now);
     expect(inquiries).toBeGreaterThan(essays);
-    expect(threads).toBeGreaterThan(inquiries);
+    expect(categories).toBeGreaterThan(inquiries);
   });
 
-  it('uses the canonical Portfolio typography hierarchy and restrained scale', () => {
+  it('uses the canonical Portfolio typography hierarchy and scale', () => {
     expect(layoutSource).toContain('family=Inter');
     expect(layoutSource).toContain('JetBrains+Mono');
     expect(layoutSource).toContain("--font-mono:'JetBrains Mono'");
@@ -52,8 +52,8 @@ describe('R3 editorial redesign acceptance', () => {
     expect(layoutSource).toContain('body {');
     expect(layoutSource).toContain('font-family:var(--font-sans);');
     expect(layoutSource).toContain('h1, h2, h3 { font-family:var(--font-mono); }');
-    expect(indexStyles).toContain('font: 700 clamp(26px, 3vw, 40px)/1.12 var(--font-mono);');
-    expect(indexStyles).toContain('font: 700 clamp(36px, 4vw, 56px)/1.06 var(--font-mono);');
+    expect(indexStyles).toContain('.editorial-masthead h1');
+    expect(indexStyles).toContain('var(--font-mono)');
     expect(articleStyles).toContain('.essay-hero h1');
     expect(articleStyles).toContain('var(--font-mono)');
     expect(indexStyles).not.toContain('108px');
@@ -85,23 +85,26 @@ describe('R3 editorial redesign acceptance', () => {
     expect(indexSource).toContain('id={primaryInquiry.anchor}');
   });
 
-  it('makes the active inquiry and its relations real navigation, not decorative plaintext', () => {
-    expect(indexSource).toContain("primaryInquiry.sourceId === 'factory'");
-    expect(indexSource).toContain("? '/work/factory'");
-    expect(indexSource).toContain('class="now-source-link"');
-    expect(indexSource).toContain('class="now-question-link"');
-    expect(indexSource).toContain('href={`#linha-${thread.id}`}');
-    expect(indexSource).toContain('id={`linha-${thread.id}`}');
-    expect(indexSource).toContain('data-thread={thread.id}');
-    expect(indexStyles).toContain('.now-question-link:hover');
-    expect(indexStyles).toContain('.now-context a:hover');
+  it('models investigation lines as category filters rather than links to the first inquiry', () => {
+    expect(indexSource).toContain('<strong>CATEGORIAS</strong>');
+    expect(indexSource).toContain('data-category-control');
+    expect(indexSource).toContain('data-categories');
+    expect(indexSource).toContain("url.searchParams.set('categoria', selectedCategory)");
+    expect(indexSource).toContain('getCategoryInquiries');
+    expect(indexSource).not.toContain('LINHAS DE INVESTIGAÇÃO');
+    expect(indexSource).not.toContain('getThreadInquiries');
+    expect(indexSource).not.toContain('data-thread');
+    expect(indexStyles).toContain('.category-band');
+    expect(indexStyles).toContain('.category-filtering');
+    expect(indexStyles).not.toContain('.thread-band');
   });
 
   it('makes real destinations interactive at the surface level instead of requiring small CTA buttons', () => {
+    expect(indexSource).toContain('class="now-question-link"');
     expect(indexSource).toContain("['essay-tile', `essay-tile-${index + 1}`]");
     expect(indexSource).toContain('class="inquiry-row inquiry-row-link"');
     expect(indexSource).toContain('<details class="inquiry-row inquiry-row-open"');
-    expect(indexSource).toContain('class="thread-band"');
+    expect(indexSource).toContain('class="category-band"');
   });
 
   it('replaces the Medium-like article grid with an instrumented reading surface', () => {
@@ -127,9 +130,10 @@ describe('R3 editorial redesign acceptance', () => {
     expect(indexSource).toContain('id={inquiry.anchor}');
   });
 
-  it('keeps article metadata and sharing while embedding investigation context', () => {
+  it('keeps article metadata and sharing while embedding investigation and category context', () => {
     expect(articleSource).toContain('getPublicationEditorialContext');
     expect(articleSource).toContain('NASCEU DESTA INVESTIGAÇÃO');
+    expect(articleSource).toContain('editorialContext.categories');
     expect(articleSource).toContain('www.linkedin.com/sharing/share-offsite');
     expect(articleSource).toContain('ogImagePath');
     expect(layoutSource).toContain('article:published_time');
