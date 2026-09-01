@@ -21,6 +21,7 @@ const {
   topics = [],
 } = Astro.props;
 const isArticle = Boolean(kind);
+const isCategories = Astro.url.pathname.startsWith('/editorial/categorias');
 const ogImageUrl = new URL(ogImagePath, Astro.site);
 if (publishedAt) ogImageUrl.searchParams.set('v', publishedAt.slice(0, 10).replaceAll('-', ''));
 const ogImage = ogImageUrl.toString();
@@ -112,7 +113,8 @@ const structuredData = isArticle
       </a>
       <nav class="topbar-nav">
         <a href="/">PORTFÓLIO</a>
-        <a class="active" href="/editorial/">EDITORIAL</a>
+        <a class:list={[!isCategories && 'active']} href="/editorial/">EDITORIAL</a>
+        <a class:list={[isCategories && 'active']} href="/editorial/categorias/">CATEGORIAS</a>
       </nav>
     </header>
     <main><slot /></main>
@@ -178,7 +180,7 @@ const structuredData = isArticle
   footer a { color:var(--blue); text-decoration:none; }
   @media (max-width:760px) {
     .topbar { padding:18px 0; align-items:flex-start; }
-    .topbar-nav { padding-top:10px; }
+    .topbar-nav { padding-top:10px; gap:12px; font-size:9px; }
     main { width:min(100% - 32px,1440px); padding-top:48px; }
   }
 </style>
