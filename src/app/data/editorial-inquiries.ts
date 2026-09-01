@@ -1,5 +1,5 @@
 import type { Language } from '../context/language-context';
-import type { EditorialThreadId } from './editorial-threads';
+import type { EditorialCategoryId } from './editorial-categories';
 
 export type EditorialInquiryId =
   | 'browser-as-environment'
@@ -18,7 +18,7 @@ export interface EditorialInquiry {
   question: EditorialLocalized;
   summary: EditorialLocalized;
   state: EditorialInquiryState;
-  threadIds: EditorialThreadId[];
+  categoryIds: EditorialCategoryId[];
   publicationSlugs: string[];
 }
 
@@ -39,7 +39,7 @@ export const editorialInquiries: EditorialInquiry[] = [
       'A relação entre agentes de IA e o navegador continua mudando enquanto o sistema é construído. Esta pergunta investiga o que acontece quando software passa a precisar de um lugar real dentro do ambiente que utiliza.',
     ),
     state: 'active',
-    threadIds: ['agents-interfaces'],
+    categoryIds: ['agents-interfaces'],
     publicationSlugs: ['quando-um-navegador-deixa-de-ser-uma-ferramenta'],
   },
   {
@@ -56,7 +56,7 @@ export const editorialInquiries: EditorialInquiry[] = [
       'Quando agentes conseguem implementar mudanças rapidamente, o trabalho escasso passa a ser decidir o que deve existir, delimitar a tarefa, revisar o resultado e absorvê-lo sem transformar velocidade em ruído.',
     ),
     state: 'active',
-    threadIds: ['software-production', 'agents-interfaces'],
+    categoryIds: ['software-production', 'agents-interfaces'],
     publicationSlugs: [],
   },
   {
@@ -70,7 +70,7 @@ export const editorialInquiries: EditorialInquiry[] = [
       'Uma rede muda de forma dependendo do observador: aplicação, sistema operacional, controlador, protocolo ou meio físico. A investigação continua aberta além do primeiro ensaio.',
     ),
     state: 'active',
-    threadIds: ['networks'],
+    categoryIds: ['networks'],
     publicationSlugs: ['onde-existe-uma-rede'],
   },
   {
@@ -84,7 +84,7 @@ export const editorialInquiries: EditorialInquiry[] = [
       'Sistemas preservam rastros, não o passado em si. A investigação explora o que memória, reconstrução e continuidade significam quando a máquina só expõe um estado presente.',
     ),
     state: 'active',
-    threadIds: ['state-time'],
+    categoryIds: ['state-time'],
     publicationSlugs: ['o-passado-de-um-sistema-nao-existe'],
   },
 ];
