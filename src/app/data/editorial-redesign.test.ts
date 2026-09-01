@@ -22,6 +22,7 @@ const layoutSource = readFileSync(
   new URL('../../../editorial-shell/publication-src/layouts/PublicationLayout.astro', import.meta.url),
   'utf8',
 );
+const rootStyles = readFileSync(new URL('../../styles/index.css', import.meta.url), 'utf8');
 const indexStyles = readFileSync(
   new URL('../../../editorial-shell/publication-src/styles/editorial-index.css', import.meta.url),
   'utf8',
@@ -73,6 +74,11 @@ describe('R3 editorial redesign acceptance', () => {
     expect(indexStyles).not.toContain('min-height: 62vh');
     expect(articleStyles).not.toContain('104px');
     expect(articleStyles).not.toContain('min-height: 66vh');
+  });
+
+  it('presents the complete React and Astro portfolio at 80 percent scale', () => {
+    expect(rootStyles).toContain('zoom: 0.8;');
+    expect(layoutSource).toContain('zoom:0.8;');
   });
 
   it('does not regress to the generation-one card/list or repeated section-heading grammar', () => {
