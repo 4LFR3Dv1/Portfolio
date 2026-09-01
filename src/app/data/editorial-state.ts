@@ -28,6 +28,10 @@ export const editorialState: EditorialState = {
   activeInquiryIds: [
     'software-production-bottleneck',
     'browser-as-environment',
+    'digital-presence-continuity',
+    'shared-now',
+    'payment-obligation',
+    'unknown-outcome-repetition',
     'where-does-a-network-exist',
     'system-past',
   ],
@@ -36,7 +40,14 @@ export const editorialState: EditorialState = {
     'onde-existe-uma-rede',
     'o-passado-de-um-sistema-nao-existe',
   ],
-  activeCategoryIds: ['software-production', 'agents-interfaces', 'networks', 'state-time'],
+  activeCategoryIds: [
+    'software-production',
+    'agents-interfaces',
+    'authority-execution',
+    'payments',
+    'networks',
+    'state-time',
+  ],
 };
 
 export function getPrimaryInquiry(): EditorialInquiry {
