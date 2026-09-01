@@ -14,6 +14,7 @@ import '../styles/editorial-index.css';
 const canonicalUrl = new URL('/editorial/', Astro.site).toString();
 const primaryInquiry = getPrimaryInquiry();
 const activeInquiries = getActiveInquiries();
+const queuedInquiries = activeInquiries.filter((inquiry) => inquiry.id !== primaryInquiry.id);
 const activeThreads = getActiveThreads();
 const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
   const publication = publications.find((candidate) => candidate.slug === slug);
@@ -47,15 +48,16 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
         <nav class="editorial-jump" aria-label="Navegação do Editorial">
           <a href="#agora">AGORA <span>01</span></a>
           <a href="#ensaios">ENSAIOS <span>02</span></a>
-          <a href="#em-investigacao">EM INVESTIGAÇÃO <span>03</span></a>
+          <a href="#em-investigacao">OUTRAS PERGUNTAS <span>03</span></a>
           <a href="#linhas-de-investigacao">LINHAS <span>04</span></a>
         </nav>
       </aside>
     </header>
 
     <section class="now-stage" id="agora" aria-labelledby="agora-title">
+      <span id={primaryInquiry.anchor} class="editorial-anchor-alias" aria-hidden="true"></span>
       <div class="section-signal"><span>01</span><strong>AGORA</strong></div>
-      <a class="now-link" href={`#${primaryInquiry.anchor}`}>
+      <div class="now-link" data-threads={primaryInquiry.threadIds.join(' ')}>
         <span class="now-live" aria-hidden="true"></span>
         <div class="now-copy">
           <p class="now-source">{primaryInquiry.sourceLabel.pt} · INVESTIGAÇÃO ATIVA</p>
@@ -63,11 +65,10 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
           <p>{primaryInquiry.summary.pt}</p>
         </div>
         <div class="now-context">
-          <span>EM MOVIMENTO</span>
+          <span>LINHAS</span>
           {primaryThreads.map((thread) => <strong>{thread.title.pt}</strong>)}
-          <span class="now-arrow">IR PARA A PERGUNTA ↘</span>
         </div>
-      </a>
+      </div>
     </section>
 
     <section class="essay-stage" id="ensaios" aria-labelledby="ensaios-title">
@@ -95,13 +96,12 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
     <section class="inquiry-stage" id="em-investigacao" aria-labelledby="investigacao-title">
       <span id="estudos-atuais" class="editorial-anchor-alias" aria-hidden="true"></span>
       <header class="section-intro inquiry-intro">
-        <div class="section-signal"><span>03</span><strong>EM INVESTIGAÇÃO</strong></div>
-        <h2 id="investigacao-title">A fila não é uma lista de posts.</h2>
-        <p>Itens publicados abrem o ensaio inteiro. O que ainda não virou texto pode ser expandido aqui.</p>
+        <div class="section-signal"><span>03</span><strong>OUTRAS PERGUNTAS</strong></div>
+        <h2 id="investigacao-title">Além do foco atual.</h2>
       </header>
 
       <div class="inquiry-queue">
-        {activeInquiries.map((inquiry, index) => {
+        {queuedInquiries.map((inquiry, index) => {
           const publicationSlug = inquiry.publicationSlugs[0];
           const threadNames = inquiry.threadIds
             .map((threadId) => activeThreads.find((thread) => thread.id === threadId)?.title.pt)
@@ -116,7 +116,7 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
                 href={getInquiryHref(inquiry)}
                 data-threads={threadValue}
               >
-                <span class="inquiry-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="inquiry-number">{String(index + 2).padStart(2, '0')}</span>
                 <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
                 <span class="inquiry-copy">
                   <h3>{inquiry.question.pt}</h3>
@@ -130,7 +130,7 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
           return (
             <details class="inquiry-row inquiry-row-open" id={inquiry.anchor} data-threads={threadValue}>
               <summary>
-                <span class="inquiry-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="inquiry-number">{String(index + 2).padStart(2, '0')}</span>
                 <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
                 <span class="inquiry-copy"><h3>{inquiry.question.pt}</h3></span>
                 <span class="inquiry-destination">ABRIR +</span>
@@ -176,11 +176,11 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
   <script is:inline>
     const root = document.querySelector('.editorial-index');
     const threadBands = document.querySelectorAll('[data-thread]');
-    const inquiryRows = document.querySelectorAll('[data-threads]');
+    const inquiryNodes = document.querySelectorAll('[data-threads]');
 
     const clearThreadHighlight = () => {
       root?.classList.remove('thread-highlighting');
-      inquiryRows.forEach((row) => row.classList.remove('thread-match'));
+      inquiryNodes.forEach((node) => node.classList.remove('thread-match'));
     };
 
     for (const band of threadBands) {
@@ -188,9 +188,9 @@ const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds
       const activate = () => {
         if (!thread) return;
         root?.classList.add('thread-highlighting');
-        inquiryRows.forEach((row) => {
-          const threads = (row.getAttribute('data-threads') ?? '').split(' ');
-          row.classList.toggle('thread-match', threads.includes(thread));
+        inquiryNodes.forEach((node) => {
+          const threads = (node.getAttribute('data-threads') ?? '').split(' ');
+          node.classList.toggle('thread-match', threads.includes(thread));
         });
       };
       band.addEventListener('mouseenter', activate);
