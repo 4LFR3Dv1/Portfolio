@@ -84,7 +84,7 @@ const completion = readJson<R23Completion>('docs/editorial/R2.3-completion.v0.js
 const r23Doc = readRepoFile('docs/editorial/R2.3-legacy-preservation-runtime.md');
 const r2Readme = readRepoFile('docs/editorial/R2-README.md');
 const rootPackage = readJson<{ scripts: Record<string, string> }>('package.json');
-const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('vercel.json');
+const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('docs/editorial/historical-production-vercel.v0.json');
 const input = materializeAcceptedRendererInput();
 
 describe('R2.3 terminal completion seal', () => {
