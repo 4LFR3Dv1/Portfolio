@@ -44,7 +44,7 @@ describe('R3 editorial redesign acceptance', () => {
     expect(threads).toBeGreaterThan(inquiries);
   });
 
-  it('uses the canonical Portfolio typography hierarchy and scale', () => {
+  it('uses the canonical Portfolio typography hierarchy and restrained scale', () => {
     expect(layoutSource).toContain('family=Inter');
     expect(layoutSource).toContain('JetBrains+Mono');
     expect(layoutSource).toContain("--font-mono:'JetBrains Mono'");
@@ -52,8 +52,8 @@ describe('R3 editorial redesign acceptance', () => {
     expect(layoutSource).toContain('body {');
     expect(layoutSource).toContain('font-family:var(--font-sans);');
     expect(layoutSource).toContain('h1, h2, h3 { font-family:var(--font-mono); }');
-    expect(indexStyles).toContain('.editorial-masthead h1');
-    expect(indexStyles).toContain('var(--font-mono)');
+    expect(indexStyles).toContain('font: 700 clamp(26px, 3vw, 40px)/1.12 var(--font-mono);');
+    expect(indexStyles).toContain('font: 700 clamp(36px, 4vw, 56px)/1.06 var(--font-mono);');
     expect(articleStyles).toContain('.essay-hero h1');
     expect(articleStyles).toContain('var(--font-mono)');
     expect(indexStyles).not.toContain('108px');
@@ -83,6 +83,18 @@ describe('R3 editorial redesign acceptance', () => {
     expect(indexSource).not.toContain('IR PARA A PERGUNTA');
     expect(indexSource).toContain('<strong>OUTRAS PERGUNTAS</strong>');
     expect(indexSource).toContain('id={primaryInquiry.anchor}');
+  });
+
+  it('makes the active inquiry and its relations real navigation, not decorative plaintext', () => {
+    expect(indexSource).toContain("primaryInquiry.sourceId === 'factory'");
+    expect(indexSource).toContain("? '/work/factory'");
+    expect(indexSource).toContain('class="now-source-link"');
+    expect(indexSource).toContain('class="now-question-link"');
+    expect(indexSource).toContain('href={`#linha-${thread.id}`}');
+    expect(indexSource).toContain('id={`linha-${thread.id}`}');
+    expect(indexSource).toContain('data-thread={thread.id}');
+    expect(indexStyles).toContain('.now-question-link:hover');
+    expect(indexStyles).toContain('.now-context a:hover');
   });
 
   it('makes real destinations interactive at the surface level instead of requiring small CTA buttons', () => {
