@@ -53,7 +53,7 @@
 
 .essay-origin-label,
 .essay-meta-list,
-.essay-origin-threads {
+.essay-origin-categories {
   font: 500 9px/1.5 var(--font-mono);
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -69,11 +69,17 @@
   letter-spacing: -.01em;
 }
 
-.essay-origin-threads {
+.essay-origin-categories {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 12px;
   color: var(--muted);
+}
+
+.essay-origin-categories span::before {
+  content: '#';
+  color: var(--purple);
+  margin-right: 2px;
 }
 
 .essay-meta-list {
