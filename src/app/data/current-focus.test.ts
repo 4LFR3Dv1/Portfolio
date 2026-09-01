@@ -39,7 +39,7 @@ describe('current work and editorial projection', () => {
     }
 
     expect(currentFocus.find((item) => item.id === 'factory')?.studies[0]?.href).toBe(
-      '/editorial/#estudo-software-agentes',
+      '/editorial/quando-produzir-software-deixa-de-ser-o-gargalo/',
     );
   });
 
