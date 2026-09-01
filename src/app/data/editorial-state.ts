@@ -5,22 +5,22 @@ import {
   type EditorialInquiryId,
 } from './editorial-inquiries';
 import {
-  editorialThreads,
-  getEditorialThread,
-  type EditorialThread,
-  type EditorialThreadId,
-} from './editorial-threads';
+  editorialCategories,
+  getEditorialCategory,
+  type EditorialCategory,
+  type EditorialCategoryId,
+} from './editorial-categories';
 
 export interface EditorialState {
   primaryInquiryId: EditorialInquiryId;
   activeInquiryIds: EditorialInquiryId[];
   featuredPublicationSlugs: string[];
-  activeThreadIds: EditorialThreadId[];
+  activeCategoryIds: EditorialCategoryId[];
 }
 
 export interface PublicationEditorialContext {
   inquiry: EditorialInquiry;
-  threads: EditorialThread[];
+  categories: EditorialCategory[];
 }
 
 export const editorialState: EditorialState = {
@@ -36,7 +36,7 @@ export const editorialState: EditorialState = {
     'onde-existe-uma-rede',
     'o-passado-de-um-sistema-nao-existe',
   ],
-  activeThreadIds: ['software-production', 'agents-interfaces', 'networks', 'state-time'],
+  activeCategoryIds: ['software-production', 'agents-interfaces', 'networks', 'state-time'],
 };
 
 export function getPrimaryInquiry(): EditorialInquiry {
@@ -47,12 +47,12 @@ export function getActiveInquiries(): EditorialInquiry[] {
   return editorialState.activeInquiryIds.map(getEditorialInquiry);
 }
 
-export function getActiveThreads(): EditorialThread[] {
-  return editorialState.activeThreadIds.map(getEditorialThread);
+export function getActiveCategories(): EditorialCategory[] {
+  return editorialState.activeCategoryIds.map(getEditorialCategory);
 }
 
-export function getThreadInquiries(threadId: EditorialThreadId): EditorialInquiry[] {
-  return editorialInquiries.filter((inquiry) => inquiry.threadIds.includes(threadId));
+export function getCategoryInquiries(categoryId: EditorialCategoryId): EditorialInquiry[] {
+  return editorialInquiries.filter((inquiry) => inquiry.categoryIds.includes(categoryId));
 }
 
 export function getPublicationEditorialContext(slug: string): PublicationEditorialContext | null {
@@ -60,13 +60,13 @@ export function getPublicationEditorialContext(slug: string): PublicationEditori
   if (!inquiry) return null;
   return {
     inquiry,
-    threads: inquiry.threadIds.map(getEditorialThread),
+    categories: inquiry.categoryIds.map(getEditorialCategory),
   };
 }
 
 export function assertEditorialStateIntegrity(publicationSlugs: string[]): void {
   const inquiryIds = new Set(editorialInquiries.map((inquiry) => inquiry.id));
-  const threadIds = new Set(editorialThreads.map((thread) => thread.id));
+  const categoryIds = new Set(editorialCategories.map((category) => category.id));
   const knownPublications = new Set(publicationSlugs);
 
   if (!inquiryIds.has(editorialState.primaryInquiryId)) {
@@ -77,13 +77,13 @@ export function assertEditorialStateIntegrity(publicationSlugs: string[]): void 
     if (!inquiryIds.has(id)) throw new Error(`Unknown active inquiry: ${id}`);
   }
 
-  for (const id of editorialState.activeThreadIds) {
-    if (!threadIds.has(id)) throw new Error(`Unknown active thread: ${id}`);
+  for (const id of editorialState.activeCategoryIds) {
+    if (!categoryIds.has(id)) throw new Error(`Unknown active category: ${id}`);
   }
 
   for (const inquiry of editorialInquiries) {
-    for (const threadId of inquiry.threadIds) {
-      if (!threadIds.has(threadId)) throw new Error(`Unknown thread ${threadId} on inquiry ${inquiry.id}`);
+    for (const categoryId of inquiry.categoryIds) {
+      if (!categoryIds.has(categoryId)) throw new Error(`Unknown category ${categoryId} on inquiry ${inquiry.id}`);
     }
     for (const slug of inquiry.publicationSlugs) {
       if (!knownPublications.has(slug)) throw new Error(`Unknown publication ${slug} on inquiry ${inquiry.id}`);
