@@ -1,0 +1,109 @@
+.now-context a {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--purple);
+  text-decoration: none;
+  transition: color .18s ease, padding .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.now-context a strong {
+  font-weight: 600;
+}
+
+.now-context a > span {
+  color: var(--muted);
+}
+
+.now-context a:hover,
+.now-context a:focus-visible {
+  padding-left: 5px;
+  border-color: var(--purple);
+  color: var(--blue);
+  background: rgba(168,85,247,.025);
+}
+
+.now-context a:hover > span,
+.now-context a:focus-visible > span {
+  color: var(--blue);
+}
+
+.inquiry-category-names a {
+  color: var(--purple);
+  text-decoration: none;
+}
+
+.inquiry-category-names a:hover,
+.inquiry-category-names a:focus-visible {
+  color: var(--blue);
+}
+
+.category-band {
+  text-decoration: none;
+}
+
+.category-band:hover,
+.category-band:focus-visible {
+  background: rgba(168,85,247,.035);
+  border-color: var(--purple);
+}
+
+.category-band:hover .category-title,
+.category-band:focus-visible .category-title {
+  color: var(--purple);
+}
+
+.category-directory-link {
+  display: inline-flex;
+  margin-top: 22px;
+  color: var(--blue);
+  font: 600 9px/1.4 var(--font-mono);
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+
+.category-directory-link:hover,
+.category-directory-link:focus-visible {
+  color: var(--purple);
+}
+
+.essay-origin {
+  transition: border-color .18s ease;
+}
+
+.essay-origin:hover {
+  padding-left: 0;
+  border-color: var(--line-strong);
+}
+
+.essay-origin-question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.essay-origin-question > span {
+  color: var(--blue);
+  font: 500 10px/1 var(--font-mono);
+}
+
+.essay-origin-question:hover strong,
+.essay-origin-question:focus-visible strong {
+  color: var(--blue);
+}
+
+.essay-origin-categories a {
+  color: var(--purple);
+  text-decoration: none;
+}
+
+.essay-origin-categories a:hover,
+.essay-origin-categories a:focus-visible {
+  color: var(--blue);
+}

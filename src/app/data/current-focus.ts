@@ -1,8 +1,15 @@
 import type { Language } from '../context/language-context';
+import {
+  getEditorialInquiry,
+  getInquiryHref,
+  getInquiryPublicationState,
+  type EditorialInquiryId,
+} from './editorial-inquiries';
 
 type Localized = Record<Language, string>;
 
 export interface CurrentStudyLink {
+  inquiryId: EditorialInquiryId;
   title: Localized;
   state: Localized;
   href: string;
@@ -13,12 +20,21 @@ export interface CurrentFocusItem {
   name: Localized;
   state: Localized;
   description: Localized;
+  inquiryIds: EditorialInquiryId[];
   studies: CurrentStudyLink[];
+}
+
+interface CurrentFocusDefinition {
+  id: string;
+  name: Localized;
+  state: Localized;
+  description: Localized;
+  inquiryIds: EditorialInquiryId[];
 }
 
 const local = (en: string, pt: string): Localized => ({ en, pt });
 
-export const currentFocus: CurrentFocusItem[] = [
+const currentFocusDefinitions: CurrentFocusDefinition[] = [
   {
     id: 'genesis',
     name: local('Genesis', 'Genesis'),
@@ -27,16 +43,7 @@ export const currentFocus: CurrentFocusItem[] = [
       'An experimental browser exploring how AI can understand pages, act inside real software and continue work without reducing the web to automated clicks.',
       'Um navegador experimental que explora como IA pode compreender páginas, agir dentro de software real e continuar trabalho sem reduzir a web a cliques automatizados.',
     ),
-    studies: [
-      {
-        title: local(
-          'When does a browser stop being a tool?',
-          'Quando um navegador deixa de ser uma ferramenta?',
-        ),
-        state: local('PUBLISHED ESSAY', 'ENSAIO PUBLICADO'),
-        href: '/editorial/quando-um-navegador-deixa-de-ser-uma-ferramenta/',
-      },
-    ],
+    inquiryIds: ['browser-as-environment'],
   },
   {
     id: 'factory',
@@ -46,16 +53,7 @@ export const currentFocus: CurrentFocusItem[] = [
       'A software-production environment for delegating implementation to AI agents while keeping scope, review and integration visible.',
       'Um ambiente de produção de software para delegar implementação a agentes de IA mantendo escopo, revisão e integração visíveis.',
     ),
-    studies: [
-      {
-        title: local(
-          'What changes when producing software stops being the bottleneck?',
-          'O que muda quando produzir software deixa de ser o gargalo?',
-        ),
-        state: local('OPEN STUDY', 'ESTUDO ABERTO'),
-        href: '/editorial/#estudo-software-agentes',
-      },
-    ],
+    inquiryIds: ['software-production-bottleneck'],
   },
   {
     id: 'experimental-computing',
@@ -65,17 +63,19 @@ export const currentFocus: CurrentFocusItem[] = [
       'Networks, state, time and abstraction investigated through concrete software and hardware experiments.',
       'Redes, estado, tempo e abstrações investigados a partir de experimentos concretos em software e hardware.',
     ),
-    studies: [
-      {
-        title: local('Where does a network exist?', 'Onde existe uma rede?'),
-        state: local('PUBLISHED ESSAY', 'ENSAIO PUBLICADO'),
-        href: '/editorial/onde-existe-uma-rede/',
-      },
-      {
-        title: local("A system's past does not exist", 'O passado de um sistema não existe'),
-        state: local('PUBLISHED ESSAY', 'ENSAIO PUBLICADO'),
-        href: '/editorial/o-passado-de-um-sistema-nao-existe/',
-      },
-    ],
+    inquiryIds: ['where-does-a-network-exist', 'system-past'],
   },
 ];
+
+export const currentFocus: CurrentFocusItem[] = currentFocusDefinitions.map((item) => ({
+  ...item,
+  studies: item.inquiryIds.map((inquiryId) => {
+    const inquiry = getEditorialInquiry(inquiryId);
+    return {
+      inquiryId,
+      title: inquiry.question,
+      state: getInquiryPublicationState(inquiry),
+      href: getInquiryHref(inquiry),
+    };
+  }),
+}));

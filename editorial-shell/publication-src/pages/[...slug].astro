@@ -1,6 +1,8 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
+import { getPublicationEditorialContext } from '../data/editorial';
 import { publications, type EditorialPublication } from '../data/publications';
+import '../styles/editorial-essay.css';
 
 export function getStaticPaths() {
   return publications.map((publication) => ({
@@ -21,6 +23,14 @@ linkedInShareUrl.searchParams.set('v', publication.publishedAt.replaceAll('-', '
 const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(linkedInShareUrl.toString())}`;
 const publishedAt = `${publication.publishedAt}T12:00:00-03:00`;
 const ogImagePath = `/editorial/og/${publication.slug}.png`;
+const editorialContext = getPublicationEditorialContext(publication.slug);
+const essaySections = copy.sections.map((section, index) => ({
+  ...section,
+  id: `secao-${String(index + 1).padStart(2, '0')}`,
+  index: String(index + 1).padStart(2, '0'),
+}));
+const publicationIndex = publications.findIndex((candidate) => candidate.slug === publication.slug);
+const nextPublication = publications[(publicationIndex + 1) % publications.length];
 ---
 <PublicationLayout
   title={`${title} — Renan Melo`}
@@ -32,46 +42,133 @@ const ogImagePath = `/editorial/og/${publication.slug}.png`;
   ogImageAlt={`${title} — Editorial de Renan Melo`}
   topics={publication.topics.pt}
 >
-  <p class="kicker">{publication.kind} // EDITORIAL</p>
-  <h1>{title}</h1>
-  <p class="dek">{copy.dek}</p>
-  <div class="meta-row">
-    <span>RENAN MELO</span>
-    <span>{publication.dateLabel.pt}</span>
-    <span>{publication.readTime.pt}</span>
+  <div class="essay-page" data-essay-page>
+    <header class="essay-hero">
+      <div class="essay-hero-copy">
+        <p class="kicker">{publication.kind} // EDITORIAL</p>
+        <h1>{title}</h1>
+        <p class="essay-dek">{copy.dek}</p>
+      </div>
+
+      <aside class="essay-hero-meta">
+        {editorialContext && (
+          <div class="essay-origin">
+            <span class="essay-origin-label">NASCEU DESTA INVESTIGAÇÃO</span>
+            <a class="essay-origin-question" href={`/editorial/#${editorialContext.inquiry.anchor}`}>
+              <strong>{editorialContext.inquiry.question.pt}</strong><span aria-hidden="true">↗</span>
+            </a>
+            <nav class="essay-origin-categories" aria-label="Categorias do ensaio">
+              {editorialContext.categories.map((category) => (
+                <a href={`/editorial/categorias/${category.id}/`}>{category.title.pt} ↗</a>
+              ))}
+            </nav>
+          </div>
+        )}
+        <div class="essay-meta-list">
+          <span>AUTOR</span><strong>RENAN MELO</strong>
+          <span>PUBLICADO</span><strong>{publication.dateLabel.pt}</strong>
+          <span>LEITURA</span><strong>{publication.readTime.pt}</strong>
+          <span>SEÇÕES</span><strong>{String(essaySections.length).padStart(2, '0')}</strong>
+        </div>
+      </aside>
+    </header>
+
+    <div class="essay-shell">
+      <aside class="essay-rail" aria-label="Instrumentos de leitura">
+        <div class="reading-progress">
+          <div class="reading-progress-label"><span>LEITURA</span><span data-reading-percent>0%</span></div>
+          <div class="reading-progress-track"><span data-reading-progress></span></div>
+        </div>
+
+        <nav class="essay-toc" aria-label="Seções do ensaio">
+          {essaySections.map((section) => (
+            <a href={`#${section.id}`} data-toc-target={section.id}>
+              <span>{section.index}</span><span>{section.heading}</span>
+            </a>
+          ))}
+        </nav>
+
+        <div class="essay-share" aria-label="Compartilhar ensaio">
+          <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+          <button type="button" data-copy-link data-url={canonicalUrl}>COPIAR LINK</button>
+        </div>
+      </aside>
+
+      <article class="essay-flow">
+        {essaySections.map((section) => (
+          <section class="essay-section" id={section.id} data-essay-section>
+            <span class="essay-section-index">{section.index}</span>
+            <div class="essay-section-copy">
+              <h2>{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          </section>
+        ))}
+      </article>
+    </div>
+
+    <nav class="essay-exit" aria-label="Continuar no Editorial">
+      {editorialContext && (
+        <a href={`/editorial/#${editorialContext.inquiry.anchor}`}>
+          <span class="essay-exit-label">VOLTAR À PERGUNTA</span>
+          <h3>{editorialContext.inquiry.question.pt}</h3>
+          <p>A investigação continua mesmo depois desta publicação.</p>
+        </a>
+      )}
+      <a href={`/editorial/${nextPublication.slug}/`}>
+        <span class="essay-exit-label">PRÓXIMA LEITURA ↗</span>
+        <h3>{nextPublication.title.pt}</h3>
+        <p>{nextPublication.copy.pt.dek}</p>
+      </a>
+    </nav>
   </div>
 
-  <div class="article-grid">
-    <article>
-      {copy.sections.map((section) => (
-        <section>
-          <h2>{section.heading}</h2>
-          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-        </section>
-      ))}
-      <div class="tags">
-        {publication.topics.pt.map((topic) => <span class="tag">{topic}</span>)}
-      </div>
-    </article>
+  <script is:inline>
+    const page = document.querySelector('[data-essay-page]');
+    const sections = [...document.querySelectorAll('[data-essay-section]')];
+    const tocLinks = [...document.querySelectorAll('[data-toc-target]')];
+    const progress = document.querySelector('[data-reading-progress]');
+    const percent = document.querySelector('[data-reading-percent]');
+    const copyButton = document.querySelector('[data-copy-link]');
 
-    <aside>
-      <div class="share-label">COMPARTILHAR</div>
-      <div class="share-actions">
-        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
-        <button type="button" data-copy-link data-url={canonicalUrl}>COPIAR LINK</button>
-      </div>
-    </aside>
-  </div>
-</PublicationLayout>
+    const setActiveSection = (id) => {
+      for (const link of tocLinks) {
+        link.classList.toggle('active', link.getAttribute('data-toc-target') === id);
+      }
+    };
 
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((button) => {
-    button.addEventListener('click', async () => {
-      const url = button.dataset.url;
+    if (sections.length) {
+      setActiveSection(sections[0].id);
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible?.target?.id) setActiveSection(visible.target.id);
+      }, { rootMargin: '-18% 0px -62% 0px', threshold: 0 });
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    const updateProgress = () => {
+      if (!page || !progress || !percent) return;
+      const rect = page.getBoundingClientRect();
+      const total = page.scrollHeight - window.innerHeight;
+      const travelled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      const value = Math.round((travelled / Math.max(total, 1)) * 100);
+      progress.style.width = `${value}%`;
+      percent.textContent = `${value}%`;
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+
+    copyButton?.addEventListener('click', async () => {
+      const url = copyButton.getAttribute('data-url');
       if (!url) return;
       await navigator.clipboard.writeText(url);
-      button.textContent = 'LINK COPIADO ✓';
-      window.setTimeout(() => { button.textContent = 'COPIAR LINK'; }, 1800);
+      const original = copyButton.textContent;
+      copyButton.textContent = 'COPIADO ✓';
+      window.setTimeout(() => { copyButton.textContent = original; }, 1400);
     });
-  });
-</script>
+  </script>
+</PublicationLayout>

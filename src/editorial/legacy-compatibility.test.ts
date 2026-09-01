@@ -222,7 +222,7 @@ describe('R1.8 Legacy Compatibility', () => {
   });
 
   it('grounds the physical deployed SPA and sitemap without changing either during R1.8', () => {
-    const vercel = JSON.parse(readRepoFile('vercel.json')) as { rewrites: Array<{ source: string; destination: string }> };
+    const vercel = JSON.parse(readRepoFile('docs/editorial/historical-production-vercel.v0.json')) as { rewrites: Array<{ source: string; destination: string }> };
     const sitemap = readRepoFile('public/sitemap.xml');
     expect(vercel.rewrites).toContainEqual({
       source: '/((?!.*\\.).*)',

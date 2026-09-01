@@ -127,7 +127,7 @@ describe('R2.4 compatibility redirect adapter', () => {
 
   it('keeps production deployment untouched while materializing the adapter', () => {
     const packageJson = readJson<{ scripts: Record<string, string> }>('package.json');
-    const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('vercel.json');
+    const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('docs/editorial/historical-production-vercel.v0.json');
     expect(packageJson.scripts.build).toBe('vite build');
     expect(vercel.rewrites).toEqual([{ source: '/((?!.*\\.).*)', destination: '/index.html' }]);
     expect(manifest.currentState.productionAdapterActivated).toBe(false);

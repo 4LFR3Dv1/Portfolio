@@ -146,7 +146,7 @@ const provenanceDoc = readRepoFile('docs/editorial/R2.6-deployment-provenance.md
 const r2Readme = readRepoFile('docs/editorial/R2-README.md');
 const rootPackage = readJson<{ scripts: Record<string, string> }>('package.json');
 const shellPackage = readJson<{ scripts: Record<string, string> }>('editorial-shell/package.json');
-const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('vercel.json');
+const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('docs/editorial/historical-production-vercel.v0.json');
 
 describe('R2.6 shadow preview environmental invariance', () => {
   it('binds the exact R2.5 commissioned specimen without replacing semantic authority', () => {

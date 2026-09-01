@@ -101,7 +101,7 @@ const completion = readJson<R25Completion>('docs/editorial/R2.5-completion.v0.js
 const r25Doc = readRepoFile('docs/editorial/R2.5-static-runtime-commissioning.md');
 const r2Readme = readRepoFile('docs/editorial/R2-README.md');
 const rootPackage = readJson<{ scripts: Record<string, string> }>('package.json');
-const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('vercel.json');
+const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('docs/editorial/historical-production-vercel.v0.json');
 
 describe('R2.5 terminal completion seal', () => {
   it('binds the exact materialization manifest and accepted dual CI witness', () => {

@@ -121,7 +121,7 @@ describe('R2.3 legacy preservation runtime', () => {
 
   it('does not mutate the deployed React/Vite runtime while materializing legacy compatibility HTML', () => {
     const rootPackage = readJson<{ scripts: Record<string, string> }>('package.json');
-    const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('vercel.json');
+    const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('docs/editorial/historical-production-vercel.v0.json');
     expect(rootPackage.scripts.build).toBe('vite build');
     expect(vercel.rewrites).toEqual([{ source: '/((?!.*\\.).*)', destination: '/index.html' }]);
   });
