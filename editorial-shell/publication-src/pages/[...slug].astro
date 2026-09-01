@@ -119,7 +119,7 @@ const nextPublication = publications[(publicationIndex + 1) % publications.lengt
     </nav>
   </div>
 
-  <script>
+  <script is:inline>
     const page = document.querySelector('[data-essay-page]');
     const sections = [...document.querySelectorAll('[data-essay-section]')];
     const tocLinks = [...document.querySelectorAll('[data-toc-target]')];
