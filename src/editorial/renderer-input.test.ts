@@ -19,7 +19,7 @@ const shellLock = readJson<{
   packages: Record<string, { dependencies?: Record<string, string> }>;
 }>('editorial-shell/package-lock.json');
 const rootPackage = readJson<{ scripts: Record<string, string> }>('package.json');
-const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('vercel.json');
+const vercel = readJson<{ rewrites: Array<{ source: string; destination: string }> }>('docs/editorial/historical-production-vercel.v0.json');
 const rendererSource = readRepoFile('editorial-shell/src/pages/[...path].astro');
 const publicationStateSource = readRepoFile('editorial-shell/src/lib/publication-state.ts');
 const materializerSource = readRepoFile('editorial-shell/scripts/materialize-input.mjs');
