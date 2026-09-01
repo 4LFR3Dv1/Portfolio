@@ -1,5 +1,4 @@
 ---
-import EditorialSectionHeading from '../components/EditorialSectionHeading.astro';
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import {
   editorialState,
@@ -21,6 +20,7 @@ const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
   if (!publication) throw new Error(`Editorial state references unknown publication: ${slug}`);
   return publication;
 });
+const primaryThreads = activeThreads.filter((thread) => primaryInquiry.threadIds.includes(thread.id));
 ---
 <PublicationLayout
   title="Editorial — Renan Melo"
@@ -33,120 +33,158 @@ const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
     <header class="editorial-masthead">
       <div class="editorial-masthead-copy">
         <p class="kicker">EDITORIAL // RENAN MELO</p>
-        <h1>Perguntas que continuam mudando enquanto construo.</h1>
-        <p class="dek">O Editorial organiza investigações em andamento e os ensaios que emergem delas. Uma publicação registra uma resposta provisória; a pergunta pode continuar aberta.</p>
+        <h1>O que ainda está em aberto.</h1>
+        <p class="editorial-intro">Perguntas que nasceram enquanto alguma coisa precisava funcionar. Algumas já produziram ensaios; nenhuma precisa terminar porque ganhou texto.</p>
       </div>
-      <nav class="editorial-masthead-nav" aria-label="Navegação do Editorial">
-        <a href="#agora"><span>AGORA</span><span>01</span></a>
-        <a href="#ensaios"><span>ENSAIOS</span><span>02</span></a>
-        <a href="#em-investigacao"><span>EM INVESTIGAÇÃO</span><span>03</span></a>
-        <a href="#linhas-de-investigacao"><span>LINHAS</span><span>04</span></a>
-        <a href="/"><span>PORTFÓLIO</span><span>↗</span></a>
-      </nav>
+
+      <aside class="editorial-pulse" aria-label="Estado atual do Editorial">
+        <div class="pulse-status"><span></span> AO VIVO</div>
+        <div class="pulse-numbers">
+          <strong>{activeInquiries.length}</strong><span>PERGUNTAS ATIVAS</span>
+          <strong>{featuredEssays.length}</strong><span>ENSAIOS</span>
+          <strong>{activeThreads.length}</strong><span>LINHAS</span>
+        </div>
+        <nav class="editorial-jump" aria-label="Navegação do Editorial">
+          <a href="#agora">AGORA <span>01</span></a>
+          <a href="#ensaios">ENSAIOS <span>02</span></a>
+          <a href="#em-investigacao">EM INVESTIGAÇÃO <span>03</span></a>
+          <a href="#linhas-de-investigacao">LINHAS <span>04</span></a>
+        </nav>
+      </aside>
     </header>
 
-    <section class="editorial-section" id="agora" aria-labelledby="agora-title">
-      <EditorialSectionHeading
-        index="01"
-        label="AGORA"
-        title="O que estou tentando entender agora."
-        note="Uma pergunta recebe prioridade editorial sem deixar de pertencer às linhas maiores que continuam em movimento."
-      />
-      <div class="editorial-now">
-        <span class="editorial-now-mark" aria-hidden="true"></span>
-        <div>
-          <h3 class="editorial-now-question" id="agora-title">{primaryInquiry.question.pt}</h3>
-          <p class="editorial-now-summary">{primaryInquiry.summary.pt}</p>
+    <section class="now-stage" id="agora" aria-labelledby="agora-title">
+      <div class="section-signal"><span>01</span><strong>AGORA</strong></div>
+      <a class="now-link" href={`#${primaryInquiry.anchor}`}>
+        <span class="now-live" aria-hidden="true"></span>
+        <div class="now-copy">
+          <p class="now-source">{primaryInquiry.sourceLabel.pt} · INVESTIGAÇÃO ATIVA</p>
+          <h2 id="agora-title">{primaryInquiry.question.pt}</h2>
+          <p>{primaryInquiry.summary.pt}</p>
         </div>
-        <aside class="editorial-now-side">
-          <div class="editorial-now-meta">
-            <span>{primaryInquiry.sourceLabel.pt}</span>
-            <strong>INVESTIGAÇÃO ATIVA</strong>
-            <span>{primaryInquiry.threadIds.length} LINHA{primaryInquiry.threadIds.length === 1 ? '' : 'S'} RELACIONADA{primaryInquiry.threadIds.length === 1 ? '' : 'S'}</span>
-          </div>
-          <a href={`#${primaryInquiry.anchor}`}>VER NA FILA →</a>
-        </aside>
-      </div>
+        <div class="now-context">
+          <span>EM MOVIMENTO</span>
+          {primaryThreads.map((thread) => <strong>{thread.title.pt}</strong>)}
+          <span class="now-arrow">IR PARA A PERGUNTA ↘</span>
+        </div>
+      </a>
     </section>
 
-    <section class="editorial-section" id="ensaios" aria-labelledby="ensaios-title">
-      <EditorialSectionHeading
-        index="02"
-        label="ENSAIOS"
-        title="Respostas que já ganharam forma publicável."
-        note="Ensaios não encerram automaticamente a investigação da qual vieram. Eles registram uma posição que pode continuar evoluindo."
-      />
-      <div class="editorial-essay-list" id="ensaios-title">
-        {featuredEssays.map((publication) => (
-          <a class="editorial-essay" href={`/editorial/${publication.slug}/`}>
-            <span class="editorial-essay-meta">
-              {publication.kind}<br />
-              {publication.dateLabel.pt}<br />
-              {publication.readTime.pt}
-            </span>
-            <span>
-              <h3 class="editorial-essay-title">{publication.title.pt}</h3>
-              <p class="editorial-essay-dek">{publication.copy.pt.dek}</p>
-            </span>
-            <span class="editorial-essay-arrow" aria-hidden="true">↗</span>
+    <section class="essay-stage" id="ensaios" aria-labelledby="ensaios-title">
+      <header class="section-intro essay-intro">
+        <div class="section-signal"><span>02</span><strong>ENSAIOS</strong></div>
+        <h2 id="ensaios-title">Respostas provisórias.</h2>
+        <p>O texto é um estado da investigação, não seu ponto final.</p>
+      </header>
+
+      <div class="essay-composition">
+        {featuredEssays.map((publication, index) => (
+          <a class:list={['essay-tile', `essay-tile-${index + 1}`]} href={`/editorial/${publication.slug}/`}>
+            <span class="essay-position">0{index + 1}</span>
+            <div class="essay-tile-copy">
+              <span class="essay-meta">{publication.kind} · {publication.dateLabel.pt} · {publication.readTime.pt}</span>
+              <h3>{publication.title.pt}</h3>
+              <p>{publication.copy.pt.dek}</p>
+            </div>
+            <span class="essay-open" aria-hidden="true">ABRIR ↗</span>
           </a>
         ))}
       </div>
     </section>
 
-    <section class="editorial-section" id="em-investigacao" aria-labelledby="investigacao-title">
+    <section class="inquiry-stage" id="em-investigacao" aria-labelledby="investigacao-title">
       <span id="estudos-atuais" class="editorial-anchor-alias" aria-hidden="true"></span>
-      <EditorialSectionHeading
-        index="03"
-        label="EM INVESTIGAÇÃO"
-        title="Perguntas que ainda existem."
-        note="Algumas já produziram ensaios. Outras ainda não. O estado da pergunta é independente do estado da publicação."
-      />
-      <div class="editorial-inquiry-list" id="investigacao-title">
+      <header class="section-intro inquiry-intro">
+        <div class="section-signal"><span>03</span><strong>EM INVESTIGAÇÃO</strong></div>
+        <h2 id="investigacao-title">A fila não é uma lista de posts.</h2>
+        <p>Itens publicados abrem o ensaio inteiro. O que ainda não virou texto pode ser expandido aqui.</p>
+      </header>
+
+      <div class="inquiry-queue">
         {activeInquiries.map((inquiry, index) => {
           const publicationSlug = inquiry.publicationSlugs[0];
+          const threadNames = inquiry.threadIds
+            .map((threadId) => activeThreads.find((thread) => thread.id === threadId)?.title.pt)
+            .filter(Boolean);
+          const threadValue = inquiry.threadIds.join(' ');
+
+          if (publicationSlug) {
+            return (
+              <a
+                class="inquiry-row inquiry-row-link"
+                id={inquiry.anchor}
+                href={getInquiryHref(inquiry)}
+                data-threads={threadValue}
+              >
+                <span class="inquiry-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
+                <span class="inquiry-copy">
+                  <h3>{inquiry.question.pt}</h3>
+                  <p>{inquiry.summary.pt}</p>
+                </span>
+                <span class="inquiry-destination">ENSAIO ↗</span>
+              </a>
+            );
+          }
+
           return (
-            <article class="editorial-inquiry" id={inquiry.anchor}>
-              <span class="editorial-inquiry-number">{String(index + 1).padStart(2, '0')}</span>
-              <div class="editorial-inquiry-meta">
-                <span>{inquiry.sourceLabel.pt}</span>
-                <span class="active">ATIVA</span>
-              </div>
-              <div>
-                <h3>{inquiry.question.pt}</h3>
+            <details class="inquiry-row inquiry-row-open" id={inquiry.anchor} data-threads={threadValue}>
+              <summary>
+                <span class="inquiry-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
+                <span class="inquiry-copy"><h3>{inquiry.question.pt}</h3></span>
+                <span class="inquiry-destination">ABRIR +</span>
+              </summary>
+              <div class="inquiry-expanded">
                 <p>{inquiry.summary.pt}</p>
+                <div class="inquiry-thread-names">
+                  {threadNames.map((threadName) => <span>{threadName}</span>)}
+                </div>
               </div>
-              <div class="editorial-inquiry-outcome">
-                {publicationSlug
-                  ? <a href={getInquiryHref(inquiry)}>ENSAIO PUBLICADO ↗</a>
-                  : <span>ESTUDO ABERTO</span>}
-              </div>
-            </article>
+            </details>
           );
         })}
       </div>
     </section>
 
-    <section class="editorial-section" id="linhas-de-investigacao" aria-labelledby="linhas-title">
-      <EditorialSectionHeading
-        index="04"
-        label="LINHAS DE INVESTIGAÇÃO"
-        title="Territórios que conectam perguntas diferentes."
-        note="Linhas não são tags. Elas persistem enquanto novas perguntas, experimentos e ensaios podem aparecer dentro do mesmo território."
-      />
-      <div class="editorial-thread-list" id="linhas-title">
+    <section class="thread-stage" id="linhas-de-investigacao" aria-labelledby="linhas-title">
+      <header class="thread-intro">
+        <div class="section-signal"><span>04</span><strong>LINHAS DE INVESTIGAÇÃO</strong></div>
+        <h2 id="linhas-title">Territórios que atravessam projetos.</h2>
+        <p>Passe por uma linha para ver quais perguntas pertencem a ela. Clique em qualquer faixa para saltar até a primeira pergunta relacionada.</p>
+      </header>
+
+      <div class="thread-field">
         {activeThreads.map((thread, index) => {
           const inquiries = getThreadInquiries(thread.id);
+          const target = inquiries[0]?.anchor ?? 'em-investigacao';
           return (
-            <article class="editorial-thread">
-              <span class="editorial-thread-count">{String(index + 1).padStart(2, '0')}</span>
-              <h3>{thread.title.pt}</h3>
-              <p>{thread.description.pt}</p>
-              <span class="editorial-thread-inquiries">{inquiries.length} PERGUNTA{inquiries.length === 1 ? '' : 'S'}</span>
-            </article>
+            <a class="thread-band" href={`#${target}`} data-thread={thread.id}>
+              <span class="thread-index">0{index + 1}</span>
+              <span class="thread-title">{thread.title.pt}</span>
+              <span class="thread-description">{thread.description.pt}</span>
+              <span class="thread-related">
+                {inquiries.map((inquiry) => <span>{inquiry.question.pt}</span>)}
+              </span>
+            </a>
           );
         })}
       </div>
     </section>
   </div>
+
+  <script>
+    const root = document.querySelector('.editorial-index');
+    const threadBands = document.querySelectorAll('[data-thread]');
+
+    for (const band of threadBands) {
+      const thread = band.getAttribute('data-thread');
+      const activate = () => root?.setAttribute('data-highlight-thread', thread ?? '');
+      const clear = () => root?.removeAttribute('data-highlight-thread');
+      band.addEventListener('mouseenter', activate);
+      band.addEventListener('focus', activate);
+      band.addEventListener('mouseleave', clear);
+      band.addEventListener('blur', clear);
+    }
+  </script>
 </PublicationLayout>
