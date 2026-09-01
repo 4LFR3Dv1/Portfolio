@@ -7,7 +7,6 @@ import {
   getCategoryInquiries,
   getInquiryHref,
   getPrimaryInquiry,
-  getPublicationEditorialContext,
 } from '../data/editorial';
 import { publications } from '../data/publications';
 import '../styles/editorial-index.css';
@@ -20,11 +19,7 @@ const activeCategories = getActiveCategories();
 const featuredEssays = editorialState.featuredPublicationSlugs.map((slug) => {
   const publication = publications.find((candidate) => candidate.slug === slug);
   if (!publication) throw new Error(`Editorial state references unknown publication: ${slug}`);
-  const context = getPublicationEditorialContext(slug);
-  return {
-    publication,
-    categoryIds: context?.categories.map((category) => category.id) ?? [],
-  };
+  return publication;
 });
 const primaryCategories = activeCategories.filter((category) => primaryInquiry.categoryIds.includes(category.id));
 const primarySourceHref = primaryInquiry.sourceId === 'genesis'
@@ -59,7 +54,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
           <a href="#agora">AGORA <span>01</span></a>
           <a href="#ensaios">ENSAIOS <span>02</span></a>
           <a href="#em-investigacao">OUTRAS PERGUNTAS <span>03</span></a>
-          <a href="#categorias">CATEGORIAS <span>04</span></a>
+          <a href="/editorial/categorias/">CATEGORIAS <span>↗</span></a>
         </nav>
       </aside>
     </header>
@@ -67,7 +62,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
     <section class="now-stage" id="agora" aria-labelledby="agora-title">
       <span id={primaryInquiry.anchor} class="editorial-anchor-alias" aria-hidden="true"></span>
       <div class="section-signal"><span>01</span><strong>AGORA</strong></div>
-      <div class="now-link now-focus" data-categories={primaryInquiry.categoryIds.join(' ')}>
+      <div class="now-link now-focus">
         <span class="now-live" aria-hidden="true"></span>
         <div class="now-copy">
           <p class="now-source">
@@ -83,19 +78,14 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
           </h2>
           <p>{primaryInquiry.summary.pt}</p>
         </div>
-        <div class="now-context" aria-label="Categorias do foco atual">
+        <nav class="now-context" aria-label="Categorias do foco atual">
           <span>CATEGORIAS</span>
           {primaryCategories.map((category) => (
-            <button
-              type="button"
-              data-category-control={category.id}
-              data-category-label={category.title.pt}
-              aria-pressed="false"
-            >
-              <strong>{category.title.pt}</strong><span aria-hidden="true">+</span>
-            </button>
+            <a href={`/editorial/categorias/${category.id}/`}>
+              <strong>{category.title.pt}</strong><span aria-hidden="true">↗</span>
+            </a>
           ))}
-        </div>
+        </nav>
       </div>
     </section>
 
@@ -107,12 +97,8 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
       </header>
 
       <div class="essay-composition">
-        {featuredEssays.map(({ publication, categoryIds }, index) => (
-          <a
-            class:list={['essay-tile', `essay-tile-${index + 1}`]}
-            href={`/editorial/${publication.slug}/`}
-            data-categories={categoryIds.join(' ')}
-          >
+        {featuredEssays.map((publication, index) => (
+          <a class:list={['essay-tile', `essay-tile-${index + 1}`]} href={`/editorial/${publication.slug}/`}>
             <span class="essay-position">0{index + 1}</span>
             <div class="essay-tile-copy">
               <span class="essay-meta">{publication.kind} · {publication.dateLabel.pt} · {publication.readTime.pt}</span>
@@ -135,19 +121,13 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
       <div class="inquiry-queue">
         {queuedInquiries.map((inquiry, index) => {
           const publicationSlug = inquiry.publicationSlugs[0];
-          const categoryNames = inquiry.categoryIds
-            .map((categoryId) => activeCategories.find((category) => category.id === categoryId)?.title.pt)
+          const categories = inquiry.categoryIds
+            .map((categoryId) => activeCategories.find((category) => category.id === categoryId))
             .filter(Boolean);
-          const categoryValue = inquiry.categoryIds.join(' ');
 
           if (publicationSlug) {
             return (
-              <a
-                class="inquiry-row inquiry-row-link"
-                id={inquiry.anchor}
-                href={getInquiryHref(inquiry)}
-                data-categories={categoryValue}
-              >
+              <a class="inquiry-row inquiry-row-link" id={inquiry.anchor} href={getInquiryHref(inquiry)}>
                 <span class="inquiry-number">{String(index + 2).padStart(2, '0')}</span>
                 <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
                 <span class="inquiry-copy">
@@ -160,7 +140,7 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
           }
 
           return (
-            <details class="inquiry-row inquiry-row-open" id={inquiry.anchor} data-categories={categoryValue}>
+            <details class="inquiry-row inquiry-row-open" id={inquiry.anchor}>
               <summary>
                 <span class="inquiry-number">{String(index + 2).padStart(2, '0')}</span>
                 <span class="inquiry-source">{inquiry.sourceLabel.pt}<strong>ATIVA</strong></span>
@@ -169,9 +149,11 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
               </summary>
               <div class="inquiry-expanded">
                 <p>{inquiry.summary.pt}</p>
-                <div class="inquiry-category-names">
-                  {categoryNames.map((categoryName) => <span>{categoryName}</span>)}
-                </div>
+                <nav class="inquiry-category-names" aria-label="Categorias da pergunta">
+                  {categories.map((category) => category && (
+                    <a href={`/editorial/categorias/${category.id}/`}>{category.title.pt} ↗</a>
+                  ))}
+                </nav>
               </div>
             </details>
           );
@@ -183,89 +165,28 @@ const primarySourceHref = primaryInquiry.sourceId === 'genesis'
       <header class="category-intro">
         <div class="section-signal"><span>04</span><strong>CATEGORIAS</strong></div>
         <h2 id="categorias-title">Assuntos que conectam o Editorial.</h2>
-        <p>Selecione uma categoria para filtrar perguntas e ensaios. Categorias classificam o conteúdo; não apontam para uma pergunta específica.</p>
+        <p>Cada categoria tem uma superfície própria com suas perguntas e ensaios. Abrir uma categoria não altera o estado desta página.</p>
       </header>
-
-      <div class="category-filter-state" aria-live="polite">
-        <span>MOSTRANDO</span><strong data-category-status>TODAS</strong>
-        <button type="button" data-category-control="" data-category-label="TODAS" aria-pressed="true">LIMPAR FILTRO</button>
-      </div>
 
       <div class="category-field">
         {activeCategories.map((category, index) => {
           const inquiries = getCategoryInquiries(category.id);
           const publicationCount = new Set(inquiries.flatMap((inquiry) => inquiry.publicationSlugs)).size;
           return (
-            <button
-              type="button"
-              class="category-band"
-              data-category-control={category.id}
-              data-category-label={category.title.pt}
-              aria-pressed="false"
-            >
+            <a class="category-band" href={`/editorial/categorias/${category.id}/`}>
               <span class="category-index">0{index + 1}</span>
               <strong class="category-title">{category.title.pt}</strong>
               <span class="category-description">{category.description.pt}</span>
               <span class="category-count">
-                {inquiries.length} {inquiries.length === 1 ? 'PERGUNTA' : 'PERGUNTAS'} · {publicationCount} {publicationCount === 1 ? 'ENSAIO' : 'ENSAIOS'}
+                {inquiries.length} {inquiries.length === 1 ? 'PERGUNTA' : 'PERGUNTAS'} · {publicationCount} {publicationCount === 1 ? 'ENSAIO' : 'ENSAIOS'} · ABRIR ↗
               </span>
-            </button>
+            </a>
           );
         })}
       </div>
+      <a class="category-directory-link" href="/editorial/categorias/">ABRIR DIRETÓRIO DE CATEGORIAS ↗</a>
     </section>
   </div>
-
-  <script is:inline>
-    const root = document.querySelector('.editorial-index');
-    const categoryControls = [...document.querySelectorAll('[data-category-control]')];
-    const categorizedNodes = [...document.querySelectorAll('[data-categories]')];
-    const categoryStatus = document.querySelector('[data-category-status]');
-    let selectedCategory = '';
-
-    const applyCategory = (category, updateUrl = true) => {
-      selectedCategory = category || '';
-      root?.classList.toggle('category-filtering', Boolean(selectedCategory));
-
-      for (const node of categorizedNodes) {
-        const categories = (node.getAttribute('data-categories') ?? '').split(' ').filter(Boolean);
-        node.classList.toggle('category-match', !selectedCategory || categories.includes(selectedCategory));
-      }
-
-      for (const control of categoryControls) {
-        const controlCategory = control.getAttribute('data-category-control') ?? '';
-        const pressed = controlCategory === selectedCategory;
-        control.setAttribute('aria-pressed', String(pressed));
-      }
-
-      const activeControl = categoryControls.find(
-        (control) => (control.getAttribute('data-category-control') ?? '') === selectedCategory,
-      );
-      if (categoryStatus) {
-        categoryStatus.textContent = activeControl?.getAttribute('data-category-label') || 'TODAS';
-      }
-
-      if (updateUrl) {
-        const url = new URL(window.location.href);
-        if (selectedCategory) url.searchParams.set('categoria', selectedCategory);
-        else url.searchParams.delete('categoria');
-        window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
-      }
-    };
-
-    for (const control of categoryControls) {
-      control.addEventListener('click', () => {
-        const category = control.getAttribute('data-category-control') ?? '';
-        applyCategory(category === selectedCategory ? '' : category);
-      });
-    }
-
-    const initialCategory = new URL(window.location.href).searchParams.get('categoria') ?? '';
-    const knownInitialCategory = categoryControls.some(
-      (control) => control.getAttribute('data-category-control') === initialCategory,
-    );
-    applyCategory(knownInitialCategory ? initialCategory : '', false);
-  </script>
 
   <style>
     .inquiry-intro {
