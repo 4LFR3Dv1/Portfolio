@@ -20,7 +20,7 @@ describe('editorial investigation domain', () => {
 
   it('accepts the current editorial taxonomy against every publication slug', () => {
     const slugs = publications.map((publication) => publication.slug);
-    expect(slugs).toHaveLength(8);
+    expect(new Set(slugs).size).toBe(slugs.length);
     expect(() => assertEditorialStateIntegrity(slugs)).not.toThrow();
   });
 
@@ -51,7 +51,9 @@ describe('editorial investigation domain', () => {
   it('keeps the editorial present explicit rather than inferred from chronology', () => {
     expect(editorialState.primaryInquiryId).toBe('software-production-bottleneck');
     expect(editorialState.activeInquiryIds).toContain(editorialState.primaryInquiryId);
-    expect(editorialState.activeInquiryIds).toHaveLength(8);
+    expect(new Set(editorialState.activeInquiryIds)).toEqual(
+      new Set(editorialInquiries.map((inquiry) => inquiry.id)),
+    );
     expect(editorialState.activeCategoryIds).toEqual([
       'software-production',
       'agents-interfaces',
