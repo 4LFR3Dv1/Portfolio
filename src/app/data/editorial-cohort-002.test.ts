@@ -19,7 +19,8 @@ describe('Editorial Cohort 002 — essays derived from selected work', () => {
       'pagar-e-executar-uma-transacao-ou-cumprir-uma-obrigacao',
       'quando-o-resultado-e-desconhecido-repetir-e-uma-nova-acao',
     ]);
-    expect(publications).toHaveLength(8);
+    expect(publications).toEqual(expect.arrayContaining(cohort002Publications));
+    expect(publications.length).toBeGreaterThanOrEqual(8);
   });
 
   it('keeps every essay bilingual and substantial', () => {

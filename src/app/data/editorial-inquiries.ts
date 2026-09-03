@@ -9,7 +9,13 @@ export type EditorialInquiryId =
   | 'digital-presence-continuity'
   | 'shared-now'
   | 'payment-obligation'
-  | 'unknown-outcome-repetition';
+  | 'unknown-outcome-repetition'
+  | 'agent-location'
+  | 'agent-autonomy'
+  | 'software-infrastructure'
+  | 'system-knowledge'
+  | 'state-as-claim'
+  | 'human-end-user';
 
 export type EditorialInquiryState = 'active';
 export type EditorialLocalized = Record<Language, string>;
@@ -24,7 +30,10 @@ export interface EditorialInquiry {
     | 'lisa'
     | 'vira'
     | 'foundry-pay-channels'
-    | 'solana-agent';
+    | 'solana-agent'
+    | 'fde-lastro'
+    | 'causal-substrate'
+    | 'genesis-brineos';
   sourceLabel: EditorialLocalized;
   question: EditorialLocalized;
   summary: EditorialLocalized;
@@ -165,6 +174,105 @@ export const editorialInquiries: EditorialInquiry[] = [
     state: 'active',
     categoryIds: ['authority-execution', 'state-time'],
     publicationSlugs: ['quando-o-resultado-e-desconhecido-repetir-e-uma-nova-acao'],
+  },
+  {
+    id: 'agent-location',
+    anchor: 'estudo-onde-agente-existe',
+    sourceId: 'genesis',
+    sourceLabel: local('GENESIS', 'GENESIS'),
+    question: local('Where does an agent exist?', 'Onde um agente existe?'),
+    summary: local(
+      'A model call, durable state, tools, sandboxes and external effects may all live in different places. This inquiry treats an agent as an operational identity distributed across those boundaries.',
+      'Uma chamada de modelo, estado durável, ferramentas, sandboxes e efeitos externos podem existir em lugares diferentes. Esta investigação trata o agente como uma identidade operacional distribuída entre essas fronteiras.',
+    ),
+    state: 'active',
+    categoryIds: ['agents-interfaces', 'state-time', 'networks'],
+    publicationSlugs: ['onde-um-agente-existe'],
+  },
+  {
+    id: 'agent-autonomy',
+    anchor: 'estudo-autonomia-agente-sistema',
+    sourceId: 'factory',
+    sourceLabel: local('FACTORY', 'FACTORY'),
+    question: local(
+      'Is autonomy a property of the agent or of the system around it?',
+      'Autonomia é uma propriedade do agente ou do sistema ao redor dele?',
+    ),
+    summary: local(
+      'Model capability does not create authority. The amount of independent action a system can safely sustain depends on permissions, transition rules, evidence and acceptance outside the model itself.',
+      'Capacidade do modelo não cria autoridade. A quantidade de ação independente que um sistema consegue sustentar com segurança depende de permissões, regras de transição, evidência e aceitação fora do próprio modelo.',
+    ),
+    state: 'active',
+    categoryIds: ['authority-execution', 'agents-interfaces'],
+    publicationSlugs: ['autonomia-e-uma-propriedade-do-agente-ou-do-sistema'],
+  },
+  {
+    id: 'software-infrastructure',
+    anchor: 'estudo-software-infraestrutura',
+    sourceId: 'factory',
+    sourceLabel: local('FACTORY', 'FACTORY'),
+    question: local(
+      'When does software stop being an application and become infrastructure?',
+      'Quando software deixa de ser aplicação e vira infraestrutura?',
+    ),
+    summary: local(
+      'Software becomes infrastructural when other systems begin depending on its contracts, state models and execution rules as conditions for their own existence.',
+      'Software se torna infraestrutura quando outros sistemas passam a depender de seus contratos, modelos de estado e regras de execução como condições para a própria existência.',
+    ),
+    state: 'active',
+    categoryIds: ['software-production', 'authority-execution'],
+    publicationSlugs: ['quando-software-deixa-de-ser-aplicacao-e-vira-infraestrutura'],
+  },
+  {
+    id: 'system-knowledge',
+    anchor: 'estudo-sistema-sabe-aconteceu',
+    sourceId: 'fde-lastro',
+    sourceLabel: local('SNE-FDE / LASTRO', 'SNE-FDE / LASTRO'),
+    question: local(
+      'How does a system know that something happened?',
+      'Como um sistema sabe que alguma coisa aconteceu?',
+    ),
+    summary: local(
+      'Reliable knowledge requires separating an external event from the observation, preserved evidence, interpretation and admitted claim the system uses to reason about it.',
+      'Conhecimento confiável exige separar um acontecimento externo da observação, evidência preservada, interpretação e claim admitido que o sistema usa para raciocinar sobre ele.',
+    ),
+    state: 'active',
+    categoryIds: ['state-time', 'authority-execution'],
+    publicationSlugs: ['como-um-sistema-sabe-que-alguma-coisa-aconteceu'],
+  },
+  {
+    id: 'state-as-claim',
+    anchor: 'estudo-estado-claim',
+    sourceId: 'causal-substrate',
+    sourceLabel: local('SNE CAUSAL SUBSTRATE', 'SNE CAUSAL SUBSTRATE'),
+    question: local(
+      'Is state a thing or a claim about a thing?',
+      'O estado é uma coisa ou uma afirmação sobre uma coisa?',
+    ),
+    summary: local(
+      'Internal state can be directly material while external state often arrives as claims supported, corrected, contradicted or superseded by evidence and temporal relations.',
+      'Estado interno pode ser diretamente material enquanto estado externo frequentemente chega como claims sustentados, corrigidos, contraditos ou substituídos por evidência e relações temporais.',
+    ),
+    state: 'active',
+    categoryIds: ['state-time', 'authority-execution'],
+    publicationSlugs: ['o-estado-e-uma-coisa-ou-uma-afirmacao-sobre-uma-coisa'],
+  },
+  {
+    id: 'human-end-user',
+    anchor: 'estudo-usuario-final-humano',
+    sourceId: 'genesis-brineos',
+    sourceLabel: local('GENESIS / BRINEOS', 'GENESIS / BRINEOS'),
+    question: local(
+      'Does the end user of a computer need to be human?',
+      'O usuário final de um computador precisa ser humano?',
+    ),
+    summary: local(
+      'Graphical computing encodes a human participant. Agents create pressure for machine-native interfaces to the same underlying capabilities without removing human authority from the system.',
+      'Computação gráfica codifica um participante humano. Agentes criam pressão por interfaces machine-native para as mesmas capacidades subjacentes sem remover autoridade humana do sistema.',
+    ),
+    state: 'active',
+    categoryIds: ['agents-interfaces', 'software-production'],
+    publicationSlugs: ['o-usuario-final-de-um-computador-precisa-ser-humano'],
   },
 ];
 
