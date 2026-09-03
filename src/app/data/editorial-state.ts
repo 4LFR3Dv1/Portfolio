@@ -27,6 +27,12 @@ export const editorialState: EditorialState = {
   primaryInquiryId: 'software-production-bottleneck',
   activeInquiryIds: [
     'software-production-bottleneck',
+    'software-infrastructure',
+    'agent-autonomy',
+    'agent-location',
+    'human-end-user',
+    'system-knowledge',
+    'state-as-claim',
     'browser-as-environment',
     'digital-presence-continuity',
     'shared-now',
