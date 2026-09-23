@@ -235,7 +235,7 @@ describe('R1.9 terminal completion seal', () => {
     });
   });
 
-  it('marks the Editorial Foundation complete without claiming or enacting public cutover', () => {
+  it('marks the Editorial Foundation complete without freezing a later amendment frontier', () => {
     expect(completion.acceptance).toEqual({
       r1_8Complete: true,
       r1_9Complete: true,
@@ -249,10 +249,10 @@ describe('R1.9 terminal completion seal', () => {
     expect(r1Readme).toContain('Status: **COMPLETE / FROZEN**');
     expect(r1Readme).toContain('| R1.9 | Foundation Acceptance | **COMPLETE** |');
     expect(r1Readme).toContain('R1_COMPLETE=true');
-    expect(r1Readme).toContain('NEXT=R2 — Editorial Publication Shell & Cutover');
     expect(r19Doc).toContain('Status: **COMPLETE / CI WITNESSED**');
     expect(r19Doc).toContain('passed `Verify` run `33349903022`: **SUCCESS**');
     expect(r19Doc).toContain('R1_COMPLETE                                       true');
+    expect(completion.acceptance.nextRequiredProgram).toBe('R2 — Editorial Publication Shell & Cutover');
     expect(completion.effectiveFoundation.publicationShellMaterialized).toBe(false);
     expect(completion.effectiveFoundation.vercelCutoverEnacted).toBe(false);
     expect(completion.effectiveFoundation.deployedRuntimeChanged).toBe(false);

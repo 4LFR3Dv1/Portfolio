@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "editorial-r1-a2-2-completion/v0",
+  "contractId": "PORTFOLIO-R1-A2.2-2026-08-31",
+  "status": "complete",
+  "normative": true,
+  "baseline": "1ad9128328ed702d0c160be5acca5a4874674d25",
+  "reconciliation": "docs/editorial/R1-A2.2-identity-reconciliation.v0.json",
+  "materialization": {
+    "existingBirthRecordCount": 28,
+    "reconciledRecordCount": 28,
+    "preservedRecordIdCount": 28,
+    "recordIdChangeCount": 0,
+    "newRecordBirthCount": 0,
+    "repositoryToSystemShortcutCount": 0,
+    "currentRevisionMaterializedCount": 0,
+    "publicDisclosureDecisionCount": 0,
+    "routeMutationCount": 0,
+    "publicSurfaceMutationCount": 0
+  },
+  "explicitlyUnresolved": [
+    "XS Wallet / Domini canonical public name",
+    "ORDM internal PoC/testnet exact continuity",
+    "SNE Vault material migration relationship to SNE-OS",
+    "SNE Observatorio relationship to SNE Radar"
+  ],
+  "productionBoundary": {
+    "publicRuntimeChanged": false,
+    "productionDnsChanged": false,
+    "railwayTargetChanged": false,
+    "vercelConfigurationChanged": false,
+    "productionMutationCount": 0
+  },
+  "acceptance": {
+    "allExistingSystemRecordsReconciled": true,
+    "identityContinuityPreserved": true,
+    "recordIdChangeCount": 0,
+    "newRecordBirthCount": 0,
+    "unresolvedRelationsPreservedExplicitly": true,
+    "r1_a2_2Complete": true,
+    "currentRevisionMaterializationComplete": false,
+    "currentPublicationValid": false,
+    "cutoverReady": false,
+    "cutoverAuthorized": false,
+    "nextRequiredCut": "R1-A2.3 — Current Revision Materialization"
+  }
+}
