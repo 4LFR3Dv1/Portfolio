@@ -15,7 +15,10 @@ export type EditorialInquiryId =
   | 'software-infrastructure'
   | 'system-knowledge'
   | 'state-as-claim'
-  | 'human-end-user';
+  | 'human-end-user'
+  | 'intelligence-periphery'
+  | 'cheap-attempts'
+  | 'company-coordination';
 
 export type EditorialInquiryState = 'active';
 export type EditorialLocalized = Record<Language, string>;
@@ -273,6 +276,57 @@ export const editorialInquiries: EditorialInquiry[] = [
     state: 'active',
     categoryIds: ['agents-interfaces', 'software-production'],
     publicationSlugs: ['o-usuario-final-de-um-computador-precisa-ser-humano'],
+  },
+  {
+    id: 'intelligence-periphery',
+    anchor: 'estudo-inteligencia-periferia',
+    sourceId: 'factory',
+    sourceLabel: local('OPERATOR / FACTORY', 'OPERADOR / FACTORY'),
+    question: local(
+      'Does abundant intelligence eliminate the periphery?',
+      'A abundância de inteligência elimina a periferia?',
+    ),
+    summary: local(
+      'Access to powerful models expands what one person can originate, but it does not automatically redistribute capital, trust, distribution or institutional authority.',
+      'Acesso a modelos poderosos amplia o que uma pessoa consegue originar, mas não redistribui automaticamente capital, confiança, distribuição ou autoridade institucional.',
+    ),
+    state: 'active',
+    categoryIds: ['authority-execution', 'software-production'],
+    publicationSlugs: ['a-abundancia-de-inteligencia-nao-elimina-a-periferia'],
+  },
+  {
+    id: 'cheap-attempts',
+    anchor: 'estudo-custo-tentativa',
+    sourceId: 'factory',
+    sourceLabel: local('FACTORY', 'FACTORY'),
+    question: local(
+      'What changes when the cost of trying approaches zero?',
+      'O que muda quando o custo de tentar tende a zero?',
+    ),
+    summary: local(
+      'Cheap implementation turns code into an experimental probe. The scarce work shifts toward selection, falsification and knowing when another iteration no longer buys useful information.',
+      'Implementação barata transforma código em sonda experimental. O trabalho escasso migra para seleção, falsificação e saber quando outra iteração já não compra informação útil.',
+    ),
+    state: 'active',
+    categoryIds: ['software-production', 'authority-execution'],
+    publicationSlugs: ['o-custo-de-tentar-esta-tendendo-a-zero'],
+  },
+  {
+    id: 'company-coordination',
+    anchor: 'estudo-empresa-coordenacao',
+    sourceId: 'factory',
+    sourceLabel: local('OPERATOR / FACTORY', 'OPERADOR / FACTORY'),
+    question: local(
+      'Are companies a temporary coordination technology?',
+      'Empresas são uma tecnologia de coordenação temporária?',
+    ),
+    summary: local(
+      'Organizations preserve context, authority, obligations and specialization across time. Agentic systems may absorb some coordination functions without replacing the legal and social structures that make commitments binding.',
+      'Organizações preservam contexto, autoridade, obrigações e especialização através do tempo. Sistemas agênticos podem absorver algumas funções de coordenação sem substituir as estruturas jurídicas e sociais que tornam compromissos vinculantes.',
+    ),
+    state: 'active',
+    categoryIds: ['software-production', 'agents-interfaces', 'authority-execution'],
+    publicationSlugs: ['talvez-empresas-sejam-uma-tecnologia-de-coordenacao-temporaria'],
   },
 ];
 
