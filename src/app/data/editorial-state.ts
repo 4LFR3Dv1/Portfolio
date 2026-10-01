@@ -27,6 +27,9 @@ export const editorialState: EditorialState = {
   primaryInquiryId: 'software-production-bottleneck',
   activeInquiryIds: [
     'software-production-bottleneck',
+    'intelligence-periphery',
+    'cheap-attempts',
+    'company-coordination',
     'software-infrastructure',
     'agent-autonomy',
     'agent-location',
