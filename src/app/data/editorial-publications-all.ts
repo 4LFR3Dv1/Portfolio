@@ -5,11 +5,13 @@ import {
 } from './editorial-publications';
 import { cohort002Publications } from './editorial-publications-cohort-002';
 import { cohort003Publications } from './editorial-publications-cohort-003';
+import { cohort004Publications } from './editorial-publications-cohort-004';
 
 export const publications: EditorialPublication[] = [
   ...cohort001Publications,
   ...cohort002Publications,
   ...cohort003Publications,
+  ...cohort004Publications,
 ];
 
 export const featuredPublications = publications.filter((publication) => publication.featured);
